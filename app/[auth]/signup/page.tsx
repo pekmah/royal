@@ -13,16 +13,14 @@ export default function Signup() {
     <main className="py-20 px-16 min-h-screen">
       <section className="min-h-full flex w-full">
         <div
-          className="w-full py-12 px-8"
+          className="w-full py-12 px-8 bg-white"
           style={{
             boxShadow: "0px 4px 15px 1px rgba(0, 0, 0, 0.1)",
             borderRadius: "0 4px 4px 0",
-            background: "#FFFFFF",
           }}
         >
           <h2
-            className={`font-bold text-xl ${barlow.className} font-[700]`}
-            style={{ color: "#2A3698" }}
+            className={`font-bold text-xl ${barlow.className} font-[700] text-blue`}
           >
             Create a new account
           </h2>
@@ -34,37 +32,30 @@ export default function Signup() {
             >
               <label
                 htmlFor="email"
-                className={`${barlow.className}`}
-                style={{ color: "#2A3698" }}
+                className={`${barlow.className} text-blue`}
               >
                 Enter Your Email
               </label>
               <input
-                className="border py-4 px-8"
+                className="border py-4 px-8 border-gray"
                 placeholder="Email"
                 type="email"
                 name="email"
               />
               <div
-                className={`${barlow.className}`}
-                style={{ color: "#888888" }}
+                className={`${barlow.className} text-gray`}
               >
                 Signing up for a Royal Mabati account means you agree to the{" "}
-                <Link style={{ color: "#DC2A25" }} href={""}>
+                <Link className="text-red" href={""}>
                   Privacy Policy
                 </Link>{" "}
                 and{" "}
-                <Link style={{ color: "#DC2A25" }} href={""}>
+                <Link className="text-red" href={""}>
                   Terms of Service
                 </Link>
               </div>
               <button
-                className={`px-8 py-4 ${barlow.className} text-base`}
-                style={{
-                  background: "#DC2A25",
-                  color: "#fff0f0",
-                  borderRadius: "8px",
-                }}
+                className={`button-primary ${barlow.className}`}
                 type="submit"
               >
                 Continue
@@ -83,20 +74,14 @@ export default function Signup() {
           <div className="flex flex-col items-center gap-8">
             <div>
               <h2
-                className={`text-xl font-[700] ${barlow.className}`}
-                style={{ color: "#ffffff" }}
+                className={`text-xl font-[700] ${barlow.className} text-white`}
               >
                 Already have an account?
               </h2>
             </div>
             <div>
               <button
-                className={`px-8 py-4 ${barlow.className} text-base w-full`}
-                style={{
-                  color: "#DC2A25",
-                  background: "#ffffff",
-                  borderRadius: "8px",
-                }}
+                className={`${barlow.className} button-secondary`}
                 type="submit"
               >
                 Sign in instead

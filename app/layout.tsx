@@ -18,7 +18,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <footer className="w-full flex justify-center bottom-0 absolute">
-          <div className="text-center text-[10pt]" style={{ color: "#888888" }}>
+          <div className="text-center text-[10pt] text-fadegray">
             <p>Copyright © 2023 Royal Mabati</p>
             <p>Factory LTD Reserved</p>
           </div>
