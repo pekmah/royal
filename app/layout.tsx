@@ -15,7 +15,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <footer className="w-full flex justify-center bottom-0 absolute">
+          <div className="text-center text-[10pt]" style={{ color: "#888888" }}>
+            <p>Copyright © 2023 Royal Mabati</p>
+            <p>Factory LTD Reserved</p>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }
