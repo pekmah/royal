@@ -1,7 +1,9 @@
-import MutliPartForm from "@/components/MultiPartForm";
+"use client";
+import { FormProps } from "@/components/Form/types/form.types";
+import MultiStepForm from "@/components/MultiStepForm";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
-import { MdOutlineMailOutline } from "react-icons/md";
+import { ReactNode } from "react";
 
 const barlow = Barlow({
   style: "normal",
@@ -9,22 +11,26 @@ const barlow = Barlow({
   subsets: ["latin"],
 });
 
-export default function Signup() {
-  return (
-    <main className="py-20 px-16 min-h-screen">
-      <MutliPartForm
-        forms={[
-          { children: <EmailForm /> },
-          { children: <PasswordForm /> },
-          { children: <InfoForm /> },
-        ]}
-      />
-    </main>
-  );
-}
-
-function PasswordForm() {
-  return (
+const passwordFormProps: FormProps = {
+  fields: {
+    password: {
+      type: "text",
+      htmlType: "password",
+      label: "",
+      placeholder: "Password",
+    },
+    confirmPassword: {
+      type: "text",
+      htmlType: "password",
+      label: "",
+      placeholder: "Confirm Password",
+    },
+  },
+  onSubmit: (data: any) => {
+    console.log(data);
+  },
+  formTitle: "Create Password",
+  Container: ({ children }: { children: ReactNode }) => (
     <section className="min-h-full flex w-full">
       <div
         className="w-full py-12 px-8 bg-white flex justify-center"
@@ -33,45 +39,41 @@ function PasswordForm() {
           borderRadius: "0 4px 4px 0",
         }}
       >
-        <div className="w-[50%]">
-          <h2
-            className={`font-bold text-xl ${barlow.className} font-[700] text-blue`}
-          >
-            Create password
-          </h2>
-          <form>
-            <div
-              className="pt-8"
-              style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
-            >
-              <input
-                className="border py-4 px-8 border-gray"
-                placeholder="Password"
-                type="password"
-                name="password"
-              />
-              <input
-                className="border py-4 px-8 border-gray"
-                placeholder="Confirm Password"
-                type="password"
-                name="password"
-              />
-              <button
-                className={`button-primary ${barlow.className}`}
-                type="submit"
-              >
-                Continue
-              </button>
-            </div>
-          </form>
-        </div>
+        {children}
       </div>
     </section>
-  );
-}
+  ),
+  styling: {
+    formWidth: "w-[50%]",
+  },
+};
 
-function InfoForm() {
-  return (
+const infoFormProps: FormProps = {
+  fields: {
+    firstName: {
+      type: "text",
+      htmlType: "text",
+      label: "",
+      placeholder: "First Name",
+    },
+    lastName: {
+      type: "text",
+      htmlType: "text",
+      label: "",
+      placeholder: "Last Name",
+    },
+    phoneNumber: {
+      type: "text",
+      htmlType: "tel",
+      label: "",
+      placeholder: "Phone Number",
+    },
+  },
+  onSubmit: (data: any) => {
+    console.log(data);
+  },
+  formTitle: "Let's get to know you",
+  Container: ({ children }: { children: ReactNode }) => (
     <section className="min-h-full flex w-full">
       <div
         className="w-full py-12 px-8 bg-white flex justify-center"
@@ -80,97 +82,50 @@ function InfoForm() {
           borderRadius: "0 4px 4px 0",
         }}
       >
-        <div className="w-[50%]">
-          <h2
-            className={`font-bold text-xl ${barlow.className} font-[700] text-blue`}
-          >
-            Let&apos;s get to know you
-          </h2>
-          <form>
-            <div
-              className="pt-8"
-              style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
-            >
-              <input
-                className="border py-4 px-8 border-gray"
-                placeholder="First Name"
-                type="text"
-                name="first-name"
-              />
-              <input
-                className="border py-4 px-8 border-gray"
-                placeholder="Last Name"
-                type="text"
-                name="last-name"
-              />
-              <input
-                className="border py-4 px-8 border-gray"
-                placeholder="Phone Number"
-                type="tel"
-                name="phone-number"
-              />
-              <button
-                className={`button-primary ${barlow.className}`}
-                type="submit"
-              >
-                Finish
-              </button>
-            </div>
-          </form>
-        </div>
+        {children}
       </div>
     </section>
-  );
-}
+  ),
+  styling: {
+    formWidth: "w-[50%]",
+  },
+};
 
-function EmailForm() {
-  return (
+const emailFormProps: FormProps = {
+  fields: {
+    email: {
+      type: "text",
+      htmlType: "email",
+      label: "Enter your email",
+      placeholder: "Email",
+    },
+  },
+  onSubmit: (data) => {
+    console.log(data);
+  },
+  formTitle: "Create a new account",
+  SubmitInfo: (
+    <div className={`${barlow.className} text-gray my-8`}>
+      Signing up for a Royal Mabati account means that you agree to the{" "}
+      <Link className="text-red" href={""}>
+        Privacy Policy
+      </Link>{" "}
+      and{" "}
+      <Link className="text-red" href={""}>
+        Terms of Service
+      </Link>
+    </div>
+  ),
+  Container: ({ children }: { children: ReactNode }) => (
     <section className="min-h-full flex w-full">
       <div
-        className="w-full py-12 px-8 bg-white"
+        className="w-full py-12 px-8 bg-white flex justify-center"
         style={{
           boxShadow: "0px 4px 15px 1px rgba(0, 0, 0, 0.1)",
           borderRadius: "0 4px 4px 0",
         }}
       >
-        <h2
-          className={`font-bold text-xl ${barlow.className} font-[700] text-blue`}
-        >
-          Create a new account
-        </h2>
-
-        <form>
-          <div
-            className="pt-8"
-            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
-          >
-            <label htmlFor="email" className={`${barlow.className} text-blue`}>
-              Enter Your Email
-            </label>
-            <input
-              className="border py-4 px-8 border-gray"
-              placeholder="Email"
-              type="email"
-              name="email"
-            />
-            <div className={`${barlow.className} text-gray`}>
-              Signing up for a Royal Mabati account means you agree to the{" "}
-              <Link className="text-red" href={""}>
-                Privacy Policy
-              </Link>{" "}
-              and{" "}
-              <Link className="text-red" href={""}>
-                Terms of Service
-              </Link>
-            </div>
-            <button
-              className={`button-primary ${barlow.className}`}
-              type="submit"
-            >
-              Continue
-            </button>
-          </div>
-        </form>
+        {children}
       </div>
       <div
         className="w-full min-h-full flex flex-col justify-center items-center"
@@ -197,5 +152,15 @@ function EmailForm() {
         </div>
       </div>
     </section>
+  ),
+};
+
+export default function Signup() {
+  return (
+    <main className={`py-20 px-16 min-h-screen ${barlow.className}`}>
+      <MultiStepForm
+        forms={[emailFormProps, infoFormProps, passwordFormProps]}
+      />
+    </main>
   );
 }
