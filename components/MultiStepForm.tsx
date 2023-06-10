@@ -1,3 +1,5 @@
+"use client";
+
 import useMultiStepForm from "@/hooks/useMultiStepForm";
 import { FormProps } from "./Form/types/form.types";
 import { Form } from "./Form";

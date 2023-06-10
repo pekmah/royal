@@ -133,16 +133,19 @@ export function Form({
 
   return Container ? (
     <Container>
-      {previousStep ? (
-        <button onClick={previousStep} className="top-0 left-0 absolute">
-          <BiArrowBack />
-        </button>
-      ) : null}
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className={`${formWidth ? formWidth : "w-full"}`}
         >
+          {previousStep ? (
+            <button
+              onClick={previousStep}
+              className="top-0 left-0 ml-[-18rem] mt-[-8rem]"
+            >
+              <BiArrowBack />
+            </button>
+          ) : null}
           {formTitle ? (
             <h2 className={` text-xl font-[700] text-blue mb-8`}>
               {formTitle}

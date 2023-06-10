@@ -7,6 +7,7 @@ type FieldSchema = {
 type DefaultProps = {
   label: string;
   placeholder?: string;
+  helperText?: string;
 };
 
 export type TextFieldProps = FieldSchema &

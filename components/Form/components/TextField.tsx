@@ -3,10 +3,13 @@ import { TextFieldProps } from "../types/form.types";
 
 function TextField(props: TextFieldProps & { name: string }) {
   const { register } = useFormContext();
-  const { label, name, htmlType = "text", placeholder } = props;
+  const { label, name, htmlType = "text", placeholder, helperText } = props;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      <p className="font-light text-fadegray">
+        {helperText ? helperText : null}
+      </p>
       <label htmlFor={name} className="text-blue">
         {label}
       </label>

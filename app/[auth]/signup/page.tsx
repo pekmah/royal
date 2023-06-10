@@ -1,8 +1,10 @@
 "use client";
+
 import { FormProps } from "@/components/Form/types/form.types";
 import MultiStepForm from "@/components/MultiStepForm";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 const barlow = Barlow({
@@ -116,43 +118,51 @@ const emailFormProps: FormProps = {
       </Link>
     </div>
   ),
-  Container: ({ children }: { children: ReactNode }) => (
-    <section className="min-h-full flex w-full">
-      <div
-        className="w-full py-12 px-8 bg-white flex justify-center"
-        style={{
-          boxShadow: "0px 4px 15px 1px rgba(0, 0, 0, 0.1)",
-          borderRadius: "0 4px 4px 0",
-        }}
-      >
-        {children}
-      </div>
-      <div
-        className="w-full min-h-full flex flex-col justify-center items-center"
-        style={{
-          background:
-            "linear-gradient(323.54deg, #DC2A25 10.19%, #FF3832 99.32%)",
-          borderRadius: "0 4px 4px 0",
-        }}
-      >
-        <div className="flex flex-col items-center gap-8">
-          <div>
-            <h2 className={`text-xl font-[700] ${barlow.className} text-white`}>
-              Already have an account?
-            </h2>
-          </div>
-          <div>
-            <button
-              className={`${barlow.className} button-secondary`}
-              type="submit"
-            >
-              Sign in instead
-            </button>
+  Container: ({ children }: { children: ReactNode }) => {
+    const { push } = useRouter();
+    return (
+      <section className="min-h-full flex w-full">
+        <div
+          className="w-full py-12 px-8 bg-white flex justify-center"
+          style={{
+            boxShadow: "0px 4px 15px 1px rgba(0, 0, 0, 0.1)",
+            borderRadius: "0 4px 4px 0",
+          }}
+        >
+          {children}
+        </div>
+        <div
+          className="w-full min-h-full flex flex-col justify-center items-center"
+          style={{
+            background:
+              "linear-gradient(323.54deg, #DC2A25 10.19%, #FF3832 99.32%)",
+            borderRadius: "0 4px 4px 0",
+          }}
+        >
+          <div className="flex flex-col items-center gap-8">
+            <div>
+              <h2
+                className={`text-xl font-[700] ${barlow.className} text-white`}
+              >
+                Already have an account?
+              </h2>
+            </div>
+            <div>
+              <button
+                className={`${barlow.className} button-secondary`}
+                type="submit"
+                onClick={() => {
+                  push("/auth/login");
+                }}
+              >
+                Sign in instead
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  ),
+      </section>
+    );
+  },
 };
 
 export default function Signup() {
