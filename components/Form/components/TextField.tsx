@@ -17,35 +17,42 @@ function TextField(props: TextFieldProps & { name: string }) {
       </p>
 
       {htmlType === "email" || htmlType === "password" ? (
-        <div className="w-full flex items-center">
-          <label
-            htmlFor="email"
-            className={`border border-r-0 py-4 px-4 border-gray ${
-              isFocussed ? "border-blue" : ""
-            }`}
-          >
-            {htmlType === "email" ? (
-              <MdOutlineEmail size={"24px"} color="#DBDBDB" />
-            ) : (
-              <LuLock size={"24px"} color="#DBDBDB" />
-            )}
-          </label>
-          <input
-            id={name}
-            type={htmlType}
-            placeholder={placeholder}
-            className={`border py-4 px-4 w-full border-gray focus:outline-none border-l-0 ${
-              isFocussed ? "border-blue" : ""
-            }`}
-            {...register(name)}
-            onFocus={() => {
-              setIsFocussed(true);
-            }}
-            onBlur={() => {
-              setIsFocussed(false);
-            }}
-          />
-        </div>
+        <>
+          <div>
+            <label htmlFor={name} className="text-blue">
+              {label}
+            </label>
+          </div>
+          <div className="w-full flex items-center">
+            <label
+              htmlFor="email"
+              className={`border border-r-0 py-4 px-4 border-gray ${
+                isFocussed ? "border-blue" : ""
+              }`}
+            >
+              {htmlType === "email" ? (
+                <MdOutlineEmail size={"24px"} color="#DBDBDB" />
+              ) : (
+                <LuLock size={"24px"} color="#DBDBDB" />
+              )}
+            </label>
+            <input
+              id={name}
+              type={htmlType}
+              placeholder={placeholder}
+              className={`border py-4 px-4 w-full border-gray focus:outline-none border-l-0 ${
+                isFocussed ? "border-blue" : ""
+              }`}
+              {...register(name)}
+              onFocus={() => {
+                setIsFocussed(true);
+              }}
+              onBlur={() => {
+                setIsFocussed(false);
+              }}
+            />
+          </div>
+        </>
       ) : (
         <>
           <label htmlFor={name} className="text-blue">

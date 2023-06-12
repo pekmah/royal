@@ -59,7 +59,7 @@ const emailFormProps: FormProps = {
             <div>
               <Link
                 className={`${barlow.className} button-secondary`}
-                href={"/auth/login"}
+                href={"/auth/signup"}
               >
                 Sign up instead
               </Link>
@@ -110,14 +110,14 @@ const passwordFormProps: FormProps = {
     formWidth: "w-[50%]",
   },
   SubmitInfo: (
-    <>
+    <div className={`mt-4`}>
       <Link
         href={"/auth/password_reset"}
-        className="text-blue underline font-[700] pt-4"
+        className="text-blue underline font-[700]"
       >
         Forgot Password?
       </Link>
-    </>
+    </div>
   ),
 };
 
