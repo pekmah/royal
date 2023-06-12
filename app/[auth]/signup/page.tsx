@@ -5,6 +5,7 @@ import MultiStepForm from "@/components/MultiStepForm";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { GoPerson } from "react-icons/go";
 
 const barlow = Barlow({
   style: "normal",
@@ -56,12 +57,14 @@ const infoFormProps: FormProps = {
       htmlType: "text",
       label: "",
       placeholder: "First Name",
+      LabelIcon: GoPerson,
     },
     lastName: {
       type: "text",
       htmlType: "text",
       label: "",
       placeholder: "Last Name",
+      LabelIcon: GoPerson,
     },
     phoneNumber: {
       type: "text",

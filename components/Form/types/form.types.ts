@@ -1,5 +1,7 @@
 import { FunctionComponent, HTMLInputTypeAttribute, ReactNode } from "react";
 import { SubmitHandler, FieldValues } from "react-hook-form";
+import { IconType } from "react-icons";
+
 type FieldSchema = {
   type: "text" | "number" | "array" | "object" | "pin";
 };
@@ -8,6 +10,7 @@ type DefaultProps = {
   label: string;
   placeholder?: string;
   helperText?: string;
+  LabelIcon?: IconType;
 };
 
 export type TextFieldProps = FieldSchema &
