@@ -4,7 +4,6 @@ import { FormProps } from "@/components/Form/types/form.types";
 import MultiStepForm from "@/components/MultiStepForm";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 const barlow = Barlow({
@@ -119,7 +118,6 @@ const emailFormProps: FormProps = {
     </div>
   ),
   Container: ({ children }: { children: ReactNode }) => {
-    const { push } = useRouter();
     return (
       <section className="min-h-full flex w-full">
         <div
@@ -148,15 +146,12 @@ const emailFormProps: FormProps = {
               </h2>
             </div>
             <div>
-              <button
+              <Link
                 className={`${barlow.className} button-secondary`}
-                type="submit"
-                onClick={() => {
-                  push("/auth/login");
-                }}
+                href={"/auth/login"}
               >
                 Sign in instead
-              </button>
+              </Link>
             </div>
           </div>
         </div>
