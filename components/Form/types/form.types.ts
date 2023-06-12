@@ -1,7 +1,7 @@
 import { FunctionComponent, HTMLInputTypeAttribute, ReactNode } from "react";
 import { SubmitHandler, FieldValues } from "react-hook-form";
 type FieldSchema = {
-  type: "text" | "number" | "array" | "object";
+  type: "text" | "number" | "array" | "object" | "pin";
 };
 
 type DefaultProps = {
@@ -38,11 +38,17 @@ export type ArrayFieldProps = FieldSchema &
     itemField: Field;
   };
 
+export type PinFieldProps = FieldSchema &
+  DefaultProps & {
+    type: "pin";
+  };
+
 export type Field =
   | TextFieldProps
   | NumberFieldProps
   | ObjectFieldProps
-  | ArrayFieldProps;
+  | ArrayFieldProps
+  | PinFieldProps;
 
 type Fields = Record<string, Field>;
 

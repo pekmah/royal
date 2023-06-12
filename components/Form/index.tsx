@@ -15,6 +15,7 @@ import {
   ObjectFieldProps,
 } from "./types/form.types";
 import { BiArrowBack } from "react-icons/bi";
+import PinField from "./components/PinField";
 
 function ObjectField(props: ObjectFieldProps & { name: string }) {
   const { label, name, properties, styling = {} } = props;
@@ -44,6 +45,7 @@ const appendDefaults = {
   number: 0,
   array: [],
   object: {},
+  pin: 0,
 };
 
 function ArrayField(props: ArrayFieldProps & { name: string }) {
@@ -111,6 +113,9 @@ function renderFields([name, fieldProps]: [string, Field]) {
   }
   if (fieldProps.type === "array") {
     return <ArrayField {...fieldProps} name={name} />;
+  }
+  if (fieldProps.type === "pin") {
+    return <PinField {...fieldProps} name={name} />;
   }
 
   return <div>Unknown type</div>;

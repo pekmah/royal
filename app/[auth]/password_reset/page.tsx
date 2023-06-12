@@ -48,7 +48,7 @@ const resetFormProps: FormProps = {
 const codeFormProps: FormProps = {
   fields: {
     password: {
-      type: "number",
+      type: "pin",
       label: "",
       placeholder: "Code",
       helperText:
