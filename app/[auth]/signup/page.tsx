@@ -169,7 +169,7 @@ export default function Signup() {
   return (
     <main className={`py-20 px-16 min-h-screen ${barlow.className}`}>
       <MultiStepForm
-        forms={[emailFormProps, infoFormProps, passwordFormProps]}
+        forms={[emailFormProps, passwordFormProps, infoFormProps]}
       />
     </main>
   );

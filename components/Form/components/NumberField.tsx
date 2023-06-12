@@ -1,9 +1,11 @@
 import { useFormContext } from "react-hook-form";
 import { NumberFieldProps } from "../types/form.types";
+import { useState } from "react";
 
 function NumberField(props: NumberFieldProps & { name: string }) {
   const { register } = useFormContext();
   const { label, name, placeholder, helperText } = props;
+  const [isFocussed, setIsFocussed] = useState(false);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -17,8 +19,17 @@ function NumberField(props: NumberFieldProps & { name: string }) {
         id={name}
         type="number"
         placeholder={placeholder}
-        className="border py-4 px-8 border-gray active:border-blue"
         {...register(name)}
+        className={`border py-4 px-4 w-full border-gray focus:outline-none border-l-0 ${
+          isFocussed ? "border-blue" : ""
+        }`}
+        {...register(name)}
+        onFocus={() => {
+          setIsFocussed(true);
+        }}
+        onBlur={() => {
+          setIsFocussed(false);
+        }}
       />
     </div>
   );
