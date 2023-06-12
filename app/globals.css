@@ -28,3 +28,17 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+.skeleton-animation {
+  background: linear-gradient(90deg, #dbdbdb, #fff, #dbdbdb);
+  animation: skeleton-pulse 1.5s infinite;
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-position: -100px;
+  }
+  100% {
+    background-position: 100px;
+  }
+}

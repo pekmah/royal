@@ -3,6 +3,7 @@ import { TextFieldProps } from "../types/form.types";
 import { LuLock } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
 import { useState } from "react";
+import dynamic from "next/dynamic";
 
 function TextField(props: TextFieldProps & { name: string }) {
   const { register } = useFormContext();
@@ -71,4 +72,11 @@ function TextField(props: TextFieldProps & { name: string }) {
   );
 }
 
-export default TextField;
+export default dynamic(() => Promise.resolve(TextField), {
+  ssr: false,
+  loading() {
+    return (
+      <div className={"bg-gray h-14 w-full rounded-sm skeleton-animation"} />
+    );
+  },
+});
