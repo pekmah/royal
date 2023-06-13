@@ -2,6 +2,7 @@
 
 import { FormProps } from "@/components/Form/types/form.types";
 import MultiStepForm from "@/components/MultiStepForm";
+import { postRequest } from "@/utils/request";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -21,7 +22,7 @@ const passwordFormProps: FormProps = {
       label: "",
       placeholder: "Password",
     },
-    confirmPassword: {
+    confirm_password: {
       type: "text",
       htmlType: "password",
       label: "",
@@ -29,7 +30,11 @@ const passwordFormProps: FormProps = {
     },
   },
   onSubmit: (data: any) => {
-    console.log(data);
+    if (!data.password || !data.confirm_password) {
+      throw new Error("You must create a password");
+    } else if (data.password !== data.confirm_password) {
+      throw new Error("Passwords do not match");
+    }
   },
   formTitle: "Create Password",
   Container: ({ children }: { children: ReactNode }) => (
@@ -52,21 +57,21 @@ const passwordFormProps: FormProps = {
 
 const infoFormProps: FormProps = {
   fields: {
-    firstName: {
+    first_name: {
       type: "text",
       htmlType: "text",
       label: "",
       placeholder: "First Name",
       LabelIcon: GoPerson,
     },
-    lastName: {
+    last_name: {
       type: "text",
       htmlType: "text",
       label: "",
       placeholder: "Last Name",
       LabelIcon: GoPerson,
     },
-    phoneNumber: {
+    phone_number: {
       type: "text",
       htmlType: "tel",
       label: "",
@@ -74,7 +79,11 @@ const infoFormProps: FormProps = {
     },
   },
   onSubmit: (data: any) => {
-    console.log(data);
+    if (!data.first_name || !data.last_name) {
+      throw new Error("You must fill both names");
+    } else if (!data.phone_number) {
+      throw new Error("Phone number is required");
+    }
   },
   formTitle: "Let's get to know you",
   Container: ({ children }: { children: ReactNode }) => (
@@ -105,7 +114,9 @@ const emailFormProps: FormProps = {
     },
   },
   onSubmit: (data) => {
-    console.log(data);
+    if (!data.email) {
+      throw new Error("Email is required");
+    }
   },
   formTitle: "Create a new account",
   SubmitInfo: (
@@ -168,6 +179,9 @@ export default function Signup() {
     <main className={`py-20 px-16 min-h-screen ${barlow.className}`}>
       <MultiStepForm
         forms={[emailFormProps, passwordFormProps, infoFormProps]}
+        submitHandler={({ data }) =>
+          postRequest("/api/v1/auth/user/register/", data)
+        }
       />
     </main>
   );

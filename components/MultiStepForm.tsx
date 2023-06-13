@@ -3,18 +3,40 @@
 import useMultiStepForm from "@/hooks/useMultiStepForm";
 import { FormProps } from "./Form/types/form.types";
 import { Form } from "./Form";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
-export default function MultiStepForm({ forms }: { forms: Array<FormProps> }) {
+export default function MultiStepForm({
+  forms,
+  submitHandler,
+}: {
+  forms: Array<FormProps>;
+  submitHandler: (data: any) => Promise<any>;
+}) {
   const { next, previous, step, index } = useMultiStepForm(forms);
-  let onSubmit = step.onSubmit;
+  const [formData, setFormData] = useState({});
+  const onSubmit = step.onSubmit;
 
   return (
     <Form
       {...step}
       onSubmit={(data) => {
-        onSubmit(data);
-        if (index !== forms.length - 1) {
-          next();
+        setFormData((prev) => ({ ...prev, data }));
+        try {
+          onSubmit(data);
+          if (index !== forms.length - 1) {
+            next();
+          } else {
+            submitHandler(formData)
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err: any) => {
+                toast.error(err.message);
+              });
+          }
+        } catch (e: any) {
+          toast.error(e.message);
         }
       }}
       submitText={index === forms.length - 1 ? "Finish" : "Continue"}

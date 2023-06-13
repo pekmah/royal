@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
             <p>Factory LTD Reserved</p>
           </div>
         </footer>
+        <Toaster position="bottom-right" reverseOrder={false} />
       </body>
     </html>
   );
