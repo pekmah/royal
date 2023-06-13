@@ -6,6 +6,7 @@ import { postRequest } from "@/utils/request";
 import { setAccessToken } from "@/utils/tokenCookie";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import toast from "react-hot-toast";
 
@@ -129,6 +130,7 @@ const passwordFormProps: FormProps = {
 };
 
 export default function Login() {
+  const { push } = useRouter();
   return (
     <main className={`py-20 px-16 min-h-screen ${barlow.className}`}>
       <MultiStepForm
@@ -138,6 +140,7 @@ export default function Login() {
             const res = await postRequest("/api/v1/auth/user/login/", data);
             setAccessToken(res.data["access-token"]);
             toast.success(res.data.message);
+            push("/");
           } catch (e: any) {
             toast.error(e.message);
           }
