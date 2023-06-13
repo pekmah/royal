@@ -4,11 +4,19 @@ import axios, {
   AxiosError,
   AxiosRequestConfig,
 } from "axios";
+import { getAccessToken } from "./tokenCookie";
 
 // Set base URL for the API
 axios.defaults.baseURL = process.env.BASE_URL;
 axios.interceptors.response.use((response) => response, axiosErrorHandler);
-axios.interceptors.request.use((request) => request, axiosErrorHandler);
+axios.interceptors.request.use((config) => {
+  console.log(config.headers);
+  const accessToken = getAccessToken(config);
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+  return config;
+}, axiosErrorHandler);
 
 type TError = {
   status: number;

@@ -3,6 +3,7 @@
 import { FormProps } from "@/components/Form/types/form.types";
 import MultiStepForm from "@/components/MultiStepForm";
 import { postRequest } from "@/utils/request";
+import { setAccessToken } from "@/utils/tokenCookie";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -135,7 +136,7 @@ export default function Login() {
         submitHandler={async ({ data }) => {
           try {
             const res = await postRequest("/api/v1/auth/user/login/", data);
-            console.log(res.data);
+            setAccessToken(res.data["access-token"]);
             toast.success(res.data.message);
           } catch (e: any) {
             toast.error(e.message);
