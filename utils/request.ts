@@ -7,7 +7,7 @@ import axios, {
 import { getAccessToken } from "./tokenCookie";
 
 // Set base URL for the API
-axios.defaults.baseURL = process.env.BASE_URL;
+axios.defaults.baseURL = "https://royalapis.glitexsolutions.co.ke";
 axios.interceptors.response.use((response) => response, axiosErrorHandler);
 axios.interceptors.request.use((config) => {
   console.log(config.headers);
