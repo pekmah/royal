@@ -21,15 +21,16 @@ export default function MultiStepForm({
     <Form
       {...step}
       onSubmit={(data) => {
-        setFormData((prev) => ({ ...prev, data }));
+        const newData = { ...formData, data };
+        setFormData(newData);
         try {
           onSubmit(data);
           if (index !== forms.length - 1) {
             next();
           } else {
-            submitHandler(formData)
+            submitHandler(newData)
               .then((res) => {
-                console.log(res);
+                // return res.data;
               })
               .catch((err: any) => {
                 toast.error(err.message);

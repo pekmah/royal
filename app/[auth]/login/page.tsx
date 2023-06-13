@@ -2,9 +2,11 @@
 
 import { FormProps } from "@/components/Form/types/form.types";
 import MultiStepForm from "@/components/MultiStepForm";
+import { postRequest } from "@/utils/request";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
 import { ReactNode } from "react";
+import toast from "react-hot-toast";
 
 const barlow = Barlow({
   style: "normal",
@@ -14,7 +16,7 @@ const barlow = Barlow({
 
 const emailFormProps: FormProps = {
   fields: {
-    password: {
+    email: {
       type: "text",
       htmlType: "email",
       label: "Enter your email",
@@ -22,7 +24,9 @@ const emailFormProps: FormProps = {
     },
   },
   onSubmit: (data: any) => {
-    console.log(data);
+    if (!data.email) {
+      throw new Error("Email is required");
+    }
   },
   formTitle: "Sign in to your account",
   SubmitInfo: (
@@ -90,7 +94,9 @@ const passwordFormProps: FormProps = {
     },
   },
   onSubmit: (data: any) => {
-    console.log(data);
+    if (!data.password) {
+      throw new Error("Password is required");
+    }
   },
   formTitle: "Sign in to your account",
   Container: ({ children }: { children: ReactNode }) => (
@@ -124,7 +130,18 @@ const passwordFormProps: FormProps = {
 export default function Login() {
   return (
     <main className={`py-20 px-16 min-h-screen ${barlow.className}`}>
-      <MultiStepForm forms={[emailFormProps, passwordFormProps]} />
+      <MultiStepForm
+        forms={[emailFormProps, passwordFormProps]}
+        submitHandler={async ({ data }) => {
+          try {
+            const res = await postRequest("/api/v1/auth/user/login/", data);
+            console.log(res.data);
+            toast.success(res.data.message);
+          } catch (e: any) {
+            toast.error(e.message);
+          }
+        }}
+      />
     </main>
   );
 }
