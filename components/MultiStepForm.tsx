@@ -16,6 +16,7 @@ export default function MultiStepForm({
   const { next, previous, step, index } = useMultiStepForm(forms);
   const [formData, setFormData] = useState({});
   const onSubmit = step.onSubmit;
+  const [loading, setLoading] = useState(false);
 
   return (
     <Form
@@ -23,6 +24,7 @@ export default function MultiStepForm({
       onSubmit={(data) => {
         const newData = { ...formData, data };
         setFormData(newData);
+        setLoading(true);
         try {
           onSubmit(data);
           if (index !== forms.length - 1) {
@@ -39,11 +41,13 @@ export default function MultiStepForm({
         } catch (e: any) {
           toast.error(e.message);
         }
+        setLoading(false);
       }}
       submitText={index === forms.length - 1 ? "Finish" : "Continue"}
       multistep={{
         previousStep: index !== 0 ? previous : undefined,
       }}
+      isLoading={loading}
     />
   );
 }

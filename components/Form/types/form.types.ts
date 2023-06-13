@@ -67,4 +67,5 @@ export interface FormProps {
   SubmitInfo?: ReactNode;
   Container?: FunctionComponent<{ children: ReactNode }>;
   multistep?: { previousStep?: () => void };
+  isLoading?: boolean;
 }

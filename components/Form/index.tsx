@@ -130,6 +130,7 @@ export function Form({
   SubmitInfo,
   Container,
   multistep = {},
+  isLoading,
 }: FormProps) {
   const form = useForm();
 
@@ -166,9 +167,15 @@ export function Form({
 
           {SubmitInfo ? SubmitInfo : null}
 
-          <button type="submit" className="button-primary w-full mt-4">
-            {submitText ? submitText : "Submit"}
-          </button>
+          {isLoading !== undefined ? (
+            <button type="submit" className="button-primary w-full mt-4">
+              {isLoading ? "Loading..." : submitText ? submitText : "Submit"}
+            </button>
+          ) : (
+            <button type="submit" className="button-primary w-full mt-4">
+              {submitText ? submitText : "Submit"}
+            </button>
+          )}
         </form>
       </FormProvider>
     </Container>

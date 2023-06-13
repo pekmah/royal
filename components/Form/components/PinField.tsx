@@ -3,7 +3,7 @@ import { PinFieldProps } from "../types/form.types";
 import PinInput from "react-pin-input";
 
 function PinField(props: PinFieldProps & { name: string }) {
-  const { register } = useFormContext();
+  const { register, setValue } = useFormContext();
   const { label, name, helperText } = props;
 
   return (
@@ -22,9 +22,11 @@ function PinField(props: PinFieldProps & { name: string }) {
         {label}
       </label>
       <PinInput
-        length={4}
+        length={6}
         initialValue=""
-        onChange={(value, index) => {}}
+        onChange={(value, index) => {
+          setValue(name, value);
+        }}
         type="numeric"
         inputMode="number"
         style={{

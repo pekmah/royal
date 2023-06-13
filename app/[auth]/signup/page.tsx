@@ -6,7 +6,10 @@ import { postRequest } from "@/utils/request";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
 import { ReactNode } from "react";
+import toast from "react-hot-toast";
 import { GoPerson } from "react-icons/go";
+import parseServerErrors from "@/utils/parseServerErrors";
+import { useRouter } from "next/navigation";
 
 const barlow = Barlow({
   style: "normal",
@@ -175,13 +178,21 @@ const emailFormProps: FormProps = {
 };
 
 export default function Signup() {
+  const { push } = useRouter();
   return (
     <main className={`py-20 px-16 min-h-screen ${barlow.className}`}>
       <MultiStepForm
         forms={[emailFormProps, passwordFormProps, infoFormProps]}
-        submitHandler={({ data }) =>
-          postRequest("/api/v1/auth/user/register/", data)
-        }
+        submitHandler={async ({ data }) => {
+          try {
+            await postRequest("/api/v1/auth/user/register/", data);
+            toast.success("Account created successfully.");
+            push("/auth/login");
+          } catch (e: any) {
+            const { data } = e.response;
+            toast.error(parseServerErrors(data));
+          }
+        }}
       />
     </main>
   );
