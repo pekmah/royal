@@ -3,7 +3,6 @@
 import { FormProps } from '@/components/Form/types/form.types';
 import MultiStepForm from '@/components/MultiStepForm';
 import parseServerErrors from '@/utils/parseServerErrors';
-import { setAccessToken } from '@/utils/tokenCookie';
 import { Barlow } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -141,7 +140,6 @@ export default function Login() {
 							toast.error(parseServerErrors(resData));
 						} else {
 							toast.success(resData['message']);
-							setAccessToken(resData['access-token']);
 							push('/');
 						}
 					} catch (e: any) {
