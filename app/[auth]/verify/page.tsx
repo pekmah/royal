@@ -6,7 +6,7 @@ import parseServerErrors from '@/utils/parseServerErrors';
 import { Barlow } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const barlow = Barlow({
 	style: 'normal',
@@ -26,21 +26,9 @@ const emailFormProps: FormProps = {
 	onSubmit: async (data: any) => {
 		if (!data.email) {
 			throw new Error('Email is required');
-		} else {
-			const res = await fetch('/api/auth/password_reset/request', {
-				body: JSON.stringify(data),
-				method: 'POST',
-			});
-			const resData = await res.json();
-
-			if (res.status !== 200) {
-				throw new Error(resData['message']);
-			} else {
-				toast.success(resData['message']);
-			}
 		}
 	},
-	formTitle: 'Reset your password',
+	formTitle: 'Verify your account',
 	Container: ({ children }: { children: ReactNode }) => (
 		<section className='min-h-full flex w-full'>
 			<div
@@ -95,69 +83,29 @@ const codeFormProps: FormProps = {
 	),
 };
 
-const passwordFormProps: FormProps = {
-	fields: {
-		new_password: {
-			type: 'text',
-			htmlType: 'password',
-			label: '',
-			placeholder: 'New Password',
-		},
-		confirm_password: {
-			type: 'text',
-			htmlType: 'password',
-			label: '',
-			placeholder: 'Confirm Password',
-		},
-	},
-	onSubmit: (data: any) => {
-		if (!data.new_password || !data.confirm_password) {
-			throw new Error('You must create a password');
-		} else if (data.new_password !== data.confirm_password) {
-			throw new Error('Passwords do not match');
-		}
-	},
-	formTitle: 'Enter new Password',
-	Container: ({ children }: { children: ReactNode }) => (
-		<section className='min-h-full flex w-full'>
-			<div
-				className='w-full py-12 px-8 bg-white flex justify-center'
-				style={{
-					boxShadow: '0px 4px 15px 1px rgba(0, 0, 0, 0.1)',
-					borderRadius: '0 4px 4px 0',
-				}}>
-				{children}
-			</div>
-		</section>
-	),
-	styling: {
-		formWidth: 'w-[50%]',
-	},
-};
-
-export default function PasswordReset() {
+export default function Verify() {
 	const { push } = useRouter();
 	return (
 		<main className={`${barlow.className} py-20 px-16 min-h-screen`}>
 			<MultiStepForm
-				forms={[emailFormProps, codeFormProps, passwordFormProps]}
+				forms={[emailFormProps, codeFormProps]}
 				submitHandler={async ({ data }) => {
 					try {
-						const res = await fetch('/api/auth/password_reset/reset', {
+						const res = await fetch('/api/auth/verify', {
 							body: JSON.stringify(data),
 							method: 'POST',
 						});
 						const resData = await res.json();
 
-						if (res.status !== 200) {
-							toast.error(parseServerErrors(resData));
+						if (resData.error) {
+							throw new Error(resData.error);
 						} else {
 							toast.success(resData['message']);
 							push('/auth/login');
 						}
 					} catch (e: any) {
-						console.error(JSON.stringify(e));
-						toast.error('Password Reset Failed');
+						console.error('err', e.message);
+						toast.error(e.message);
 					}
 				}}
 			/>

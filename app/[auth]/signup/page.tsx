@@ -188,7 +188,7 @@ export default function Signup() {
 							toast.error(parseServerErrors(resData));
 						} else {
 							toast.success('Account created successfully.');
-							push('/');
+							push('/auth/verify');
 						}
 					} catch (e: any) {
 						console.error(JSON.stringify(e));
