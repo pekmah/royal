@@ -4,7 +4,7 @@ import useMultiStepForm from '@/hooks/useMultiStepForm';
 import { FormProps } from './Form/types/form.types';
 import { Form } from './Form';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 export default function MultiStepForm({
 	forms,
@@ -25,22 +25,20 @@ export default function MultiStepForm({
 				const newData = { ...formData, data };
 				setFormData(newData);
 				setLoading(true);
+
 				try {
 					await onSubmit(data);
 					if (index !== forms.length - 1) {
 						next();
 					} else {
-						submitHandler(newData)
-							.then((res) => {
-								// return res.data;
-							})
-							.catch((err: any) => {
-								toast.error(err.message);
-							});
+						await submitHandler(newData);
 					}
 				} catch (e: any) {
 					toast.error(e.message);
+					setLoading(false);
+					throw new Error(e);
 				}
+
 				setLoading(false);
 			}}
 			submitText={index === forms.length - 1 ? 'Finish' : 'Continue'}
