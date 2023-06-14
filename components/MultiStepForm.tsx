@@ -17,6 +17,7 @@ export default function MultiStepForm({
 	const [formData, setFormData] = useState({});
 	const onSubmit = step.onSubmit;
 	const [loading, setLoading] = useState(false);
+	const [disabled, setDisabled] = useState(false);
 
 	return (
 		<Form
@@ -46,6 +47,7 @@ export default function MultiStepForm({
 				previousStep: index !== 0 ? previous : undefined,
 			}}
 			isLoading={loading}
+			isDisabled={disabled}
 		/>
 	);
 }

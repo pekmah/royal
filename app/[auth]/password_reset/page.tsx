@@ -28,13 +28,16 @@ const emailFormProps: FormProps = {
 		if (!data.email) {
 			throw new Error('Email is required');
 		} else {
-			try {
-				const res = await postRequest('/api/v1/auth/user/password/request/', {
-					email: data.email,
-				});
-				toast.success((res.data as any).message);
-			} catch (e: any) {
-				toast.error(e.message);
+			const res = await fetch('/api/auth/password_reset/request', {
+				body: JSON.stringify(data),
+				method: 'POST',
+			});
+			const resData = await res.json();
+
+			if (res.status !== 200) {
+				throw new Error(resData['message']);
+			} else {
+				toast.success(resData['message']);
 			}
 		}
 	},
@@ -140,17 +143,22 @@ export default function PasswordReset() {
 			<MultiStepForm
 				forms={[emailFormProps, codeFormProps, passwordFormProps]}
 				submitHandler={async ({ data }) => {
-					console.log(data);
 					try {
-						const res = await postRequest(
-							'/api/v1/auth/user/password/reset/',
-							data
-						);
-						toast.success(res.data.message);
-						push('/auth/login');
+						const res = await fetch('/api/auth/password_reset/reset', {
+							body: JSON.stringify(data),
+							method: 'POST',
+						});
+						const resData = await res.json();
+
+						if (res.status !== 200) {
+							toast.error(parseServerErrors(resData));
+						} else {
+							toast.success(resData['message']);
+							push('/auth/login');
+						}
 					} catch (e: any) {
-						const { data } = e.response;
-						toast.error(parseServerErrors(data));
+						console.error(JSON.stringify(e));
+						toast.error('Password Reset Failed');
 					}
 				}}
 			/>
