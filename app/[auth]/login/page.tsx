@@ -2,7 +2,7 @@
 
 import { FormProps } from '@/components/Form/types/form.types';
 import MultiStepForm from '@/components/MultiStepForm';
-import parseServerErrors from '@/utils/parseServerErrors';
+import { signIn } from 'next-auth/react';
 import { Barlow } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -32,14 +32,23 @@ const emailFormProps: FormProps = {
 	formTitle: 'Sign in to your account',
 	SubmitInfo: (
 		<div className={`${barlow.className} text-gray my-8`}>
-			Signing up for a Royal Mabati account means that you agree to the{' '}
-			<Link className='text-red' href={''}>
-				Privacy Policy
-			</Link>{' '}
-			and{' '}
-			<Link className='text-red' href={''}>
-				Terms of Service
-			</Link>
+			<div>
+				Signing up for a Royal Mabati account means that you agree to the{' '}
+				<Link className='text-red' href={''}>
+					Privacy Policy
+				</Link>{' '}
+				and{' '}
+				<Link className='text-red' href={''}>
+					Terms of Service
+				</Link>
+			</div>
+			<div className='w-full flex justify-end mt-8'>
+				<Link
+					href={'/auth/password_reset'}
+					className='text-blue underline font-[700]'>
+					Forgot Password?
+				</Link>
+			</div>
 		</div>
 	),
 	Container: ({ children }: { children: ReactNode }) => {
@@ -130,22 +139,15 @@ export default function Login() {
 			<MultiStepForm
 				forms={[emailFormProps, passwordFormProps]}
 				submitHandler={async ({ data }) => {
-					try {
-						const res = await fetch('/api/auth/login', {
-							body: JSON.stringify(data),
-							method: 'POST',
-						});
-						const resData = await res.json();
-
-						if (res.status !== 200) {
-							toast.error(parseServerErrors(resData));
-						} else {
-							toast.success(resData['message']);
-							push('/');
-						}
-					} catch (e: any) {
-						console.error(JSON.stringify(e));
-						toast.error('Login Failed');
+					const res = await signIn('credentials', {
+						...data,
+						redirect: false,
+					});
+					if (res?.error) {
+						toast.error(res.error);
+					} else {
+						toast.success('Login Successful');
+						push('/');
 					}
 				}}
 			/>
