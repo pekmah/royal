@@ -42,7 +42,7 @@ const passwordFormProps: FormProps = {
 	Container: ({ children }: { children: ReactNode }) => (
 		<section className='min-h-full flex w-full'>
 			<div
-				className='w-full py-12 px-8 bg-white flex justify-center'
+				className='w-full py-12 xl:px-8 md:px-4 lg:px-8 bg-white block px-8 md:flex justify-center'
 				style={{
 					boxShadow: '0px 4px 15px 1px rgba(0, 0, 0, 0.1)',
 					borderRadius: '0 4px 4px 0',
@@ -52,7 +52,7 @@ const passwordFormProps: FormProps = {
 		</section>
 	),
 	styling: {
-		formWidth: 'w-[50%]',
+		formWidth: 'sm:w-[100%] md:w-[75%] xl:w-[50%]',
 	},
 };
 
@@ -90,7 +90,7 @@ const infoFormProps: FormProps = {
 	Container: ({ children }: { children: ReactNode }) => (
 		<section className='min-h-full flex w-full'>
 			<div
-				className='w-full py-12 px-8 bg-white flex justify-center'
+				className='w-full py-12 xl:px-8 md:px-4 lg:px-8 bg-white block px-8 md:flex justify-center'
 				style={{
 					boxShadow: '0px 4px 15px 1px rgba(0, 0, 0, 0.1)',
 					borderRadius: '0 4px 4px 0',
@@ -100,7 +100,7 @@ const infoFormProps: FormProps = {
 		</section>
 	),
 	styling: {
-		formWidth: 'w-[50%]',
+		formWidth: 'sm:w-[100%] md:w-[75%] xl:w-[50%]',
 	},
 };
 
@@ -143,7 +143,7 @@ const emailFormProps: FormProps = {
 					{children}
 				</div>
 				<div
-					className='w-full min-h-full flex flex-col justify-center items-center'
+					className='w-full min-h-full flex-col justify-center items-center hidden md:hidden lg:flex xl:flex'
 					style={{
 						background:
 							'linear-gradient(323.54deg, #DC2A25 10.19%, #FF3832 99.32%)',
@@ -173,7 +173,8 @@ const emailFormProps: FormProps = {
 export default function Signup() {
 	const { push } = useRouter();
 	return (
-		<main className={`py-20 px-16 min-h-screen ${barlow.className}`}>
+		<main
+			className={`md:py-20 md:px-16 sm:py-0 sm:px-0 min-h-screen ${barlow.className}`}>
 			<MultiStepForm
 				forms={[emailFormProps, passwordFormProps, infoFormProps]}
 				submitHandler={async ({ data }) => {

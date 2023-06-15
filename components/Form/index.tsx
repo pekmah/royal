@@ -145,14 +145,12 @@ export function Form({
 					{previousStep ? (
 						<button
 							onClick={previousStep}
-							className='top-0 left-0 ml-[-18rem] mt-[-8rem]'>
+							className={`top-0 left-0 xl:ml-[-18rem] lg:ml-[-6rem] md:ml-[-4rem] sm:ml-[-4rem]`}>
 							<BiArrowBack />
 						</button>
 					) : null}
 					{formTitle ? (
-						<h2 className={` text-xl font-[700] text-blue mb-8`}>
-							{formTitle}
-						</h2>
+						<h2 className={`text-xl font-[700] text-blue mb-8`}>{formTitle}</h2>
 					) : null}
 					<div className='grid gap-2 w-full'>
 						{Object.entries(fields).map((field, idx) => (

@@ -32,7 +32,7 @@ const emailFormProps: FormProps = {
 	Container: ({ children }: { children: ReactNode }) => (
 		<section className='min-h-full flex w-full'>
 			<div
-				className='w-full py-12 px-8 bg-white flex justify-center'
+				className='w-full py-12 xl:px-8 md:px-4 lg:px-8 bg-white block px-8 md:flex justify-center'
 				style={{
 					boxShadow: '0px 4px 15px 1px rgba(0, 0, 0, 0.1)',
 					borderRadius: '0 4px 4px 0',
@@ -42,7 +42,7 @@ const emailFormProps: FormProps = {
 		</section>
 	),
 	styling: {
-		formWidth: 'w-[50%]',
+		formWidth: 'sm:w-[100%] md:w-[75%] xl:w-[50%]',
 	},
 };
 
@@ -64,7 +64,7 @@ const codeFormProps: FormProps = {
 	Container: ({ children }: { children: ReactNode }) => (
 		<section className='min-h-full flex w-full'>
 			<div
-				className='w-full py-12 px-8 bg-white flex justify-center'
+				className='w-full py-12 xl:px-8 md:px-4 lg:px-8 bg-white block px-8 md:flex justify-center'
 				style={{
 					boxShadow: '0px 4px 15px 1px rgba(0, 0, 0, 0.1)',
 					borderRadius: '0 4px 4px 0',
@@ -74,7 +74,7 @@ const codeFormProps: FormProps = {
 		</section>
 	),
 	styling: {
-		formWidth: 'w-[50%]',
+		formWidth: 'sm:w-[100%] md:w-[75%] xl:w-[50%]',
 	},
 	SubmitInfo: (
 		<div className='pt-8'>
@@ -86,7 +86,8 @@ const codeFormProps: FormProps = {
 export default function Verify() {
 	const { push } = useRouter();
 	return (
-		<main className={`${barlow.className} py-20 px-16 min-h-screen`}>
+		<main
+			className={`md:py-20 md:px-16 sm:py-0 sm:px-0 min-h-screen ${barlow.className}`}>
 			<MultiStepForm
 				forms={[emailFormProps, codeFormProps]}
 				submitHandler={async ({ data }) => {
