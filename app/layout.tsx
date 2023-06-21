@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import AuthProvider from '@/components/Provider';
 import NavMenu from '@/components/NavMenu';
 import Image from 'next/image';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,18 +23,9 @@ export default function RootLayout({
 		<html lang='en'>
 			<AuthProvider>
 				<body className={inter.className}>
-					<div className='w-full h-[70px] relative object-cover'>
-						<Image alt={'Offers Banner'} src={'/banner.png'} fill />
-					</div>
 					<Header />
-					<NavMenu />
 					{children}
-					<footer className='w-full flex justify-center bottom-0 pb-8'>
-						<div className='text-center text-[10pt] text-fadegray'>
-							<p>Copyright © 2023 Royal Mabati</p>
-							<p>Factory LTD Reserved</p>
-						</div>
-					</footer>
+					<Footer />
 					<Toaster position='bottom-right' reverseOrder={false} />
 				</body>
 			</AuthProvider>
