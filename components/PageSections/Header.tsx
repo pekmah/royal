@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { RxPerson } from 'react-icons/rx';
 import { BsCart2 } from 'react-icons/bs';
 import { CgMenuLeft } from 'react-icons/cg';
-import SearchInput from './SearchInput';
 import Image from 'next/image';
-import DropdownMenu, { DropdownMenuItem } from './Dropdown';
 import { usePathname } from 'next/navigation';
 import NavMenu from './NavMenu';
+import DropdownMenu, { DropdownMenuItem } from '../Dropdown';
+import SearchInput from '../SearchInput';
 
 export default function Header() {
 	const { status, data } = useSession();

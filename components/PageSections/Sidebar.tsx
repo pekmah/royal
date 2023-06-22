@@ -1,10 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Accordion from './Accordion';
 import { Barlow } from 'next/font/google';
-import MultiRangeSlider from './MultiRangeSlider';
 import { MdOutlineFileUpload } from 'react-icons/md';
+import Accordion from '../Accordion';
+import MultiRangeSlider from '../MultiRangeSlider';
 
 const barlow = Barlow({
 	style: 'normal',

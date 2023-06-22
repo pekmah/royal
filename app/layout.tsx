@@ -1,11 +1,11 @@
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import Header from '@/components/Header';
 import AuthProvider from '@/components/Provider';
-import Footer from '@/components/Footer';
-import Sidebar from '@/components/Sidebar';
-import Container from '@/components/MainContainer';
+import Footer from '@/components/PageSections/Footer';
+import Header from '@/components/PageSections/Header';
+import Sidebar from '@/components/PageSections/Sidebar';
+import Container from '@/components/PageSections/MainContainer';
 
 const inter = Inter({ subsets: ['latin'] });
 
