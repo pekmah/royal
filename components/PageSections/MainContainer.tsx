@@ -1,17 +1,26 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import { usePathname } from 'next/navigation';
+import { useMediaQuery } from 'usehooks-ts';
 
 export default function MainContainer({ children }: { children: ReactNode }) {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 	const path = usePathname();
+	const isMediumDevice = useMediaQuery('(max-width: 1024px)');
+
+	useEffect(() => {
+		if (isMediumDevice) setIsSidebarOpen(false);
+	}, [isMediumDevice]);
 
 	return (
 		<>
-			<Header setIsSidebarOpen={setIsSidebarOpen} isSidebarOpen={isSidebarOpen}/>
+			<Header
+				setIsSidebarOpen={setIsSidebarOpen}
+				isSidebarOpen={isSidebarOpen}
+			/>
 			<main className={`w-screen p-8 flex gap-8 bg-[#fbfbff]`}>
 				<Sidebar isOpen={isSidebarOpen} />
 				{!path.startsWith('/auth') ? (
