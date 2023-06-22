@@ -30,7 +30,7 @@ export default function Home() {
 					style={{ objectFit: 'cover', objectPosition: 'center' }}
 				/>
 			</div>
-			<div className='w-full grid grid-cols-3 gap-6 bg-[#fbfbff] mt-6'>
+			<div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6'>
 				{products.map(({ cost, id, prevCost, title }, idx) => (
 					<ProductCard
 						key={`${id}~${idx}`}
