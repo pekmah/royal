@@ -25,7 +25,7 @@ const navItems = [
 export default function NavMenu() {
 	const pathname = usePathname();
 	return (
-		<div className='w-full bg-[#FBF8F8] py-2 px-8 flex gap-8'>
+		<nav className='w-full bg-[#FBF8F8] py-2 px-8 flex gap-8'>
 			{navItems.map(({ name, path }) => (
 				<Link
 					href={path}
@@ -36,6 +36,6 @@ export default function NavMenu() {
 					{name}
 				</Link>
 			))}
-		</div>
+		</nav>
 	);
 }

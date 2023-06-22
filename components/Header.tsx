@@ -16,7 +16,7 @@ export default function Header() {
 	const path = usePathname();
 
 	return path.startsWith('/auth') ? null : (
-		<>
+		<header>
 			<div className='w-full h-[70px] relative'>
 				<Image
 					alt={'Offers Banner'}
@@ -67,6 +67,6 @@ export default function Header() {
 					) : null}
 				</div>
 			</div>
-		</>
+		</header>
 	);
 }

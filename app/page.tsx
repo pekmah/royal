@@ -21,7 +21,7 @@ const products = Array.from({ length: 15 }, (_, index) => {
 
 export default function Home() {
 	return (
-		<div>
+		<>
 			<div className='w-full relative h-[480px] border border-l-0 border-gray shadow-lg'>
 				<Image
 					alt={'Landing page Banner'}
@@ -40,6 +40,6 @@ export default function Home() {
 					/>
 				))}
 			</div>
-		</div>
+		</>
 	);
 }
