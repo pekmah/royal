@@ -21,7 +21,7 @@ const barlowSemi = Barlow({
 export default function Sidebar() {
 	const path = usePathname();
 	return path.startsWith('/auth') ? null : (
-		<>
+		<aside className='w-[20%] h-fit'>
 			<div className={`rounded-md shadow-lg ${barlow.className} bg-white `}>
 				<div className='p-4'>
 					<h3 className={barlowSemi.className}>Category</h3>
@@ -74,6 +74,6 @@ export default function Sidebar() {
 					</button>
 				</div>
 			</div>
-		</>
+		</aside>
 	);
 }

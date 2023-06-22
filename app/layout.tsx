@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import AuthProvider from '@/components/Provider';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
+import Container from '@/components/MainContainer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,10 +25,8 @@ export default function RootLayout({
 				<body className={`${inter.className}`} style={{ overflowX: 'hidden' }}>
 					<Header />
 					<main className={`w-screen p-8 flex gap-8 bg-[#fbfbff]`}>
-						<aside className='w-[20%] h-fit'>
-							<Sidebar />
-						</aside>
-						<section className='w-[80%]'>{children}</section>
+						<Sidebar />
+						<Container>{children}</Container>
 					</main>
 					<Footer />
 					<Toaster position='bottom-right' reverseOrder={false} />
