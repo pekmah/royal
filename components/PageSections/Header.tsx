@@ -70,13 +70,17 @@ export default function Header({
 								'bg-gray button-secondary py-1 px-4 h-[24px] w-[px] skeleton-animation'
 							}></button>
 					) : status === 'authenticated' ? (
-						<div className='flex items-center gap-4'>
-							<BsCart2 size={'24'} />
+						<div className='flex items-baseline gap-6 h-full'>
+							<div className='flex items-center gap-1 font-medium'>
+								<BsCart2 size={'16'} />
+								<p className='text-sm'>Cart</p>
+							</div>
 							<DropdownMenu
 								buttonText={
-									<>
-										<RxPerson size={'24'} />
-									</>
+									<div className='flex items-center gap-1 font-medium'>
+										<RxPerson size={'16'} />
+										<p className='text-sm'>Account</p>
+									</div>
 								}>
 								<DropdownMenuItem onClick={() => signOut()}>
 									Logout
