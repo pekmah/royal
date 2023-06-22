@@ -10,6 +10,12 @@ const barlow = Barlow({
 	subsets: ['latin'],
 });
 
+const barlowSemi = Barlow({
+	style: 'normal',
+	weight: '600',
+	subsets: ['latin'],
+});
+
 export default function Footer() {
 	const path = usePathname();
 	return path.startsWith('/auth') ? (
@@ -24,65 +30,59 @@ export default function Footer() {
 			className={`bottom-0 bg-blue ${barlow.className} w-full p-8  text-white`}>
 			<div className={`md:flex md:justify-evenly`}>
 				<div className='mb-3'>
-					<h3 className={`text-[14px] font-semibold`}>CONTACT US</h3>
+					<h3 className={`${barlowSemi.className}`}>CONTACT US</h3>
 
 					<div className={`flex-col mt-6`}>
-						<h5 className={`text-[14px] font-semibold`}>Location</h5>
-						<p className={`text-[12px] mt-3 font-medium`}>
+						<h5 className={`${barlowSemi.className}`}>Location</h5>
+						<p className={`text-sm mt-3`}>
 							Nairobi along Mombasa Rd, Mlolongo, Opp Sabaki Stage
 						</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<h5 className={`text-[14px] font-semibold`}>Telephone:</h5>
-						<p className={`text-[12px] mt-3 font-medium`}>0722 638 383</p>
+						<h5 className={`${barlowSemi.className}`}>Telephone:</h5>
+						<p className={`text-sm mt-3`}>0722 638 383</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<h5 className={`text-[14px] font-semibold`}>Email:</h5>
-						<p className={`text-[12px] mt-3 font-medium`}>
-							info@royalmabati.com
-						</p>
+						<h5 className={`${barlowSemi.className}`}>Email:</h5>
+						<p className={`text-sm mt-3`}>info@royalmabati.com</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<h5 className={`text-[14px] font-semibold`}>Mail:</h5>
-						<p className={`text-[12px] mt-3 font-medium`}>
-							P.O. Box 29721 - 00202
-						</p>
+						<h5 className={`${barlowSemi.className}`}>Mail:</h5>
+						<p className={`text-sm mt-3`}>P.O. Box 29721 - 00202</p>
 					</div>
 				</div>
 				<div className='mb-3'>
-					<h3 className={`text-[14px] font-semibold`}>ABOUT US</h3>
+					<h3 className={`${barlowSemi.className}`}>ABOUT US</h3>
 
 					<div className={`flex-col mt-6`}>
-						<p className={`text-[12px] mt-3 font-medium`}>Terms & Contitions</p>
+						<p className={`text-sm mt-3`}>Terms & Contitions</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<p className={`text-[12px] mt-3 font-medium`}>Privacy Policy</p>
+						<p className={`text-sm mt-3`}>Privacy Policy</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<p className={`text-[12px] mt-3 font-medium`}>
-							Return and Refund Policy
-						</p>
+						<p className={`text-sm mt-3`}>Return and Refund Policy</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<p className={`text-[12px] mt-3 font-medium`}>Shipping</p>
+						<p className={`text-sm mt-3`}>Shipping</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<p className={`text-[12px] mt-3 font-medium`}>FAQs</p>
+						<p className={`text-sm mt-3`}>FAQs</p>
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<p className={`text-[12px] mt-3 font-medium`}>Careers</p>
+						<p className={`text-sm mt-3`}>Careers</p>
 					</div>
 				</div>
 				<div className='mb-3'>
-					<h3 className={`text-[14px] font-semibold`}>
+					<h3 className={`${barlowSemi.className}`}>
 						DOWNLOAD THE ROYAL MABATI APP FOR FREE
 					</h3>
 
@@ -97,7 +97,7 @@ export default function Footer() {
 					</div>
 
 					<div className={`flex-col mt-6`}>
-						<h5 className={`text-[14px] font-semibold`}>CONNECT WITH US</h5>
+						<h5 className={`${barlowSemi.className}`}>CONNECT WITH US</h5>
 						<div className={`mt-6`}>
 							<div className='flex gap-4'>
 								<Image
@@ -123,9 +123,9 @@ export default function Footer() {
 					</div>
 				</div>
 			</div>
-			<div className='text-center text-[12px] border-t mt-8 pt-8'>
+			<div className='text-center text-sm border-t mt-8 pt-8'>
 				<p>Copyright © 2023 Royal Mabati Factory LTD Reserved</p>
-				<div className='text-[12px]'>
+				<div className='text-sm'>
 					<span>Designed & Built by</span>
 					<span className='underline text-red'> Glitex Solutions</span>
 				</div>

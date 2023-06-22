@@ -17,8 +17,13 @@ export default function Header() {
 
 	return path.startsWith('/auth') ? null : (
 		<>
-			<div className='w-full h-[70px] relative object-contain'>
-				<Image alt={'Offers Banner'} src={'/banner.png'} fill />
+			<div className='w-full h-[70px] relative'>
+				<Image
+					alt={'Offers Banner'}
+					src={'/banner.png'}
+					fill
+					style={{ objectFit: 'cover', objectPosition: 'center' }}
+				/>
 			</div>
 			<NavMenu />
 			<div className='w-full py-4 px-8 flex justify-between items-center bg-white shadow-sm'>

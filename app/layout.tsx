@@ -34,13 +34,13 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<AuthProvider>
-				<body className={`w-screen ${inter.className}`}>
+				<body className={`${inter.className}`} style={{ overflowX: 'hidden' }}>
 					<Header />
 					<div className={`w-screen p-8 flex gap-8 bg-[#fbfbff]`}>
-						<div className='w-[20%]'>
+						<div className='w-[20%] bg-white'>
 							<Sidebar />
 							<div
-								className={`rounded-md shadow-lg ${barlow.className} text-sm pb-8`}>
+								className={`rounded-md shadow-lg ${barlow.className} text-sm pb-8 mt-4`}>
 								<h3 className={`p-4 text-base ${barlowSemi.className}`}>
 									Upload Plan
 								</h3>
@@ -58,7 +58,7 @@ export default function RootLayout({
 								</div>
 							</div>
 						</div>
-						<div>{children}</div>
+						<div className='w-[80%] bg-white'>{children}</div>
 					</div>
 					<Footer />
 					<Toaster position='bottom-right' reverseOrder={false} />
