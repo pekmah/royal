@@ -22,8 +22,8 @@ export default function Footer() {
 	) : (
 		<footer
 			className={`bottom-0 bg-blue ${barlow.className} w-full p-8  text-white`}>
-			<div className={` flex justify-evenly`}>
-				<div>
+			<div className={`md:flex md:justify-evenly`}>
+				<div className='mb-3'>
 					<h3 className={`text-[14px] font-semibold`}>CONTACT US</h3>
 
 					<div className={`flex-col mt-6`}>
@@ -52,7 +52,7 @@ export default function Footer() {
 						</p>
 					</div>
 				</div>
-				<div>
+				<div className='mb-3'>
 					<h3 className={`text-[14px] font-semibold`}>ABOUT US</h3>
 
 					<div className={`flex-col mt-6`}>
@@ -81,7 +81,7 @@ export default function Footer() {
 						<p className={`text-[12px] mt-3 font-medium`}>Careers</p>
 					</div>
 				</div>
-				<div>
+				<div className='mb-3'>
 					<h3 className={`text-[14px] font-semibold`}>
 						DOWNLOAD THE ROYAL MABATI APP FOR FREE
 					</h3>
