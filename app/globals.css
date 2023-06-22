@@ -3,42 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --foreground: #000000;
-  --background: #ffffff;
+	--foreground: #000000;
+	--background: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
 }
 
 @layer components {
-  .button-primary {
-    @apply px-8 py-4 text-base rounded-lg;
-    background-color: theme("colors.red");
-    color: theme("colors.white");
-  }
+	.button-primary {
+		@apply px-8 py-4 text-base rounded-lg;
+		background-color: theme('colors.red');
+		color: theme('colors.white');
+	}
 
-  .button-secondary {
-    @apply px-8 py-4 text-base rounded-lg;
-    background-color: theme("colors.white");
-    color: theme("colors.red");
-  }
+	.button-secondary {
+		@apply px-8 py-4 text-base rounded-lg;
+		background-color: theme('colors.white');
+		color: theme('colors.red');
+	}
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+	color: var(--foreground);
+	background: var(--background);
 }
 
 .skeleton-animation {
-  background: linear-gradient(90deg, #dbdbdb, #fff, #dbdbdb);
-  animation: skeleton-pulse 1.5s infinite;
+	background: linear-gradient(90deg, #dbdbdb, #fff, #dbdbdb);
+	animation: skeleton-pulse 1.5s infinite;
 }
 
 @keyframes skeleton-pulse {
-  0% {
-    background-position: -100px;
-  }
-  100% {
-    background-position: 100px;
-  }
+	0% {
+		background-position: -100px;
+	}
+	100% {
+		background-position: 100px;
+	}
 }

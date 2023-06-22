@@ -17,7 +17,7 @@ export default function Header() {
 
 	return path.startsWith('/auth') ? null : (
 		<>
-			<div className='w-full h-[70px] relative object-cover'>
+			<div className='w-full h-[70px] relative object-contain'>
 				<Image alt={'Offers Banner'} src={'/banner.png'} fill />
 			</div>
 			<NavMenu />
