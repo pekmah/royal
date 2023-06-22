@@ -5,13 +5,23 @@ import Link from 'next/link';
 import { RxPerson } from 'react-icons/rx';
 import { BsCart2 } from 'react-icons/bs';
 import { CgMenuLeft } from 'react-icons/cg';
+import { IoMdClose } from 'react-icons/io';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import NavMenu from './NavMenu';
 import DropdownMenu, { DropdownMenuItem } from '../Dropdown';
 import SearchInput from '../SearchInput';
+import { Dispatch, SetStateAction } from 'react';
 
-export default function Header() {
+interface HeaderProps {
+	isSidebarOpen: boolean;
+	setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function Header({
+	setIsSidebarOpen,
+	isSidebarOpen,
+}: HeaderProps) {
 	const { status, data } = useSession();
 	const path = usePathname();
 
@@ -28,7 +38,16 @@ export default function Header() {
 			<NavMenu />
 			<div className='w-full py-4 px-8 flex justify-between items-center bg-white shadow-sm'>
 				<div className={`flex gap-8 items-center`}>
-					<CgMenuLeft size={'24'} />
+					<button
+						onClick={() => {
+							setIsSidebarOpen((prev) => !prev);
+						}}>
+						{isSidebarOpen ? (
+							<IoMdClose size={'24'} />
+						) : (
+							<CgMenuLeft size={'24'} />
+						)}
+					</button>
 					<Image
 						src={'/logo.png'}
 						alt='Royal Mabati Logo'
