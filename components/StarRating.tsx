@@ -2,19 +2,14 @@ import { FC } from 'react';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 
 interface StarRatingProps {
-	totalStars: number;
 	rating: number;
-	reviewCount: number;
+	reviewCount?: number;
 }
 
-const StarRating: FC<StarRatingProps> = ({
-	totalStars,
-	rating,
-	reviewCount,
-}) => {
+const StarRating: FC<StarRatingProps> = ({ rating, reviewCount }) => {
 	return (
 		<div className={`flex gap-2 items-center`}>
-			{[...Array(totalStars)].map((_, index) => (
+			{[...Array(5)].map((_, index) => (
 				<div key={index} className={``}>
 					{index >= rating ? (
 						<BsStar />
@@ -23,7 +18,9 @@ const StarRating: FC<StarRatingProps> = ({
 					)}
 				</div>
 			))}
-			<p className='text-sm ml-8 text-fadegray'>{`(${reviewCount} reviews)`}</p>
+			{reviewCount ? (
+				<p className='text-sm ml-8 text-fadegray'>{`(${reviewCount} reviews)`}</p>
+			) : null}
 		</div>
 	);
 };
