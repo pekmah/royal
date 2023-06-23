@@ -7,7 +7,6 @@ type PaginationProps = {
 	count: number;
 	pageSize: number;
 	itemCount: number;
-	canNext: boolean;
 };
 
 const Pagination: FC<PaginationProps> = ({
@@ -55,8 +54,6 @@ const Pagination: FC<PaginationProps> = ({
 
 		return links;
 	};
-
-	console.log(currentPage, totalPages);
 
 	return (
 		<div className='flex shadow-lg rounded-b-md w-full items-center justify-between border-t border-gray bg-white px-4 py-3 sm:px-6'>

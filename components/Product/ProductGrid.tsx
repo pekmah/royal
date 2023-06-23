@@ -21,7 +21,7 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 
 	const queryClient = useQueryClient();
 
-	const { data, isLoading, isPreviousData } = useQuery(
+	const { data, isLoading } = useQuery(
 		['products', page],
 		() => queryFn(pageSize, page),
 		{
@@ -68,7 +68,6 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 						count={count}
 						pageSize={pageSize}
 						itemCount={data.results.length}
-						canNext={!isPreviousData && !!data.next}
 					/>
 				</div>
 			) : null}
