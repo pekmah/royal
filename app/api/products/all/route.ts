@@ -4,7 +4,6 @@ import { getRequest } from '@/utils/request';
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
-	console.log(request.url	);
 
 	const page_size = searchParams.get('page_size');
 	const page = searchParams.get('page');
