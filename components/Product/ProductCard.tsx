@@ -3,7 +3,7 @@ import { Barlow } from 'next/font/google';
 
 interface ProductCardProps {
 	title: string;
-	cost: string | number;
+	cost?: number;
 	prevCost?: string | number;
 }
 
@@ -38,7 +38,7 @@ export default function ProductCard({
 			<div className='w-full p-4'>
 				<p className={`text-lg ${barlow.className}`}>{title}</p>
 				<div className={`flex gap-6 py-2 ${barlowSemi.className}`}>
-					<span>Ksh. {cost}</span>
+					<span>Ksh. {cost ?? '-'}</span>
 					{prevCost ? (
 						<span className='text-red line-through'>Ksh. {prevCost}</span>
 					) : null}
@@ -50,3 +50,9 @@ export default function ProductCard({
 		</div>
 	);
 }
+
+export const ProductCardSkeleton = () => {
+	return (
+		<div className='justify-center rounded-md shadow-lg animate-pulse h-[240px] bg-gray'></div>
+	);
+};
