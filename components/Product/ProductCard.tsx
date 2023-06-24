@@ -1,7 +1,8 @@
-import Image from 'next/image';
 import { Barlow } from 'next/font/google';
+import CardImageLink from './CardImageLink';
 
 interface ProductCardProps {
+	id: number;
 	title: string;
 	cost?: number;
 	prevCost?: string | number;
@@ -20,21 +21,14 @@ const barlowSemi = Barlow({
 });
 
 export default function ProductCard({
+	id,
 	title,
 	cost,
 	prevCost,
 }: ProductCardProps) {
 	return (
 		<div className='bg-white justify-center rounded-md shadow-lg'>
-			<div className='relative w-auto h-[160px]'>
-				<Image
-					alt={'Landing page Banner'}
-					src={'/temp-product-img.png'}
-					fill
-					style={{ objectFit: 'cover', objectPosition: 'center' }}
-					className='rounded-t-md'
-				/>
-			</div>
+			<CardImageLink id={id} />
 			<div className='w-full p-4'>
 				<p className={`text-lg ${barlow.className}`}>{title}</p>
 				<div className={`flex gap-6 py-2 ${barlowSemi.className}`}>

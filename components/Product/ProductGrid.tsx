@@ -55,6 +55,7 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 								key={`${id}~${idx}`}
 								cost={sizes ? sizes[0]?.price : 0}
 								title={name}
+								id={id}
 							/>
 					  ))
 					: null}
