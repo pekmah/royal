@@ -50,13 +50,8 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 					: null}
 
 				{data?.results
-					? data.results.map(({ name, id, sizes }, idx) => (
-							<ProductCard
-								key={`${id}~${idx}`}
-								cost={sizes ? sizes[0]?.price : 0}
-								title={name}
-								id={id}
-							/>
+					? data.results.map((product, idx) => (
+							<ProductCard key={`${product.id}~${idx}`} product={product} />
 					  ))
 					: null}
 			</div>
