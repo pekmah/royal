@@ -6,6 +6,14 @@ const nextConfig = {
 	experimental: {
 		serverActions: true,
 	},
+	images: {
+		remotePatterns: [
+			{
+				hostname: 'royalapis.glitexsolutions.co.ke',
+				protocol: 'http',
+			},
+		],
+	},
 };
 
 module.exports = nextConfig;
