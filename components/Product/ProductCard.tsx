@@ -72,7 +72,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 						<span>Ksh. {activeSize?.price ?? '-'}</span>
 					)}
 				</div>
-				<button className='button-secondary w-full border-2 py-2 px-4 my-2 border-red'>
+				<button className='button-secondary w-full border text-sm py-2 px-4 my-2 border-red'>
 					Add to Cart
 				</button>
 			</div>
