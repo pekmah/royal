@@ -16,7 +16,7 @@ import {
 } from './types/form.types';
 import { BiArrowBack } from 'react-icons/bi';
 import PinField from './components/PinField';
-import Loader from '../Loader';
+import DotsLoader from '../Loaders/DotsLoader';
 
 function ObjectField(props: ObjectFieldProps & { name: string }) {
 	const { label, name, properties, styling = {} } = props;
@@ -166,7 +166,7 @@ export function Form({
 						<button type='submit' className='button-primary w-full mt-4'>
 							{isLoading ? (
 								<div className='w-full flex justify-center'>
-									<Loader />
+									<DotsLoader />
 								</div>
 							) : submitText ? (
 								submitText

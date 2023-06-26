@@ -5,10 +5,15 @@ import { ProductEntity } from '@/types/product/Product';
 
 export default async function getAllProducts(
 	pageSize = 20,
-	page = 1
+	page = 1,
+	category?: number
 ): Promise<PaginatedResponse<ProductEntity>> {
 	const res = await fetch(
-		`${process.env.NEXTAUTH_URL}/api/products/all?page_size=${pageSize}&page=${page}`
+		`${
+			process.env.NEXTAUTH_URL
+		}/api/products/all?page_size=${pageSize}&page=${page}${
+			category ? `&category=${category}` : ''
+		}`
 	);
 	return res.json();
 }

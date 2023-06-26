@@ -6,11 +6,15 @@ import { PaginatedResponse } from '@/types/api/Response';
 import { ProductEntity } from '@/types/product/Product';
 import { useEffect, useState } from 'react';
 import Pagination from '../Pagination';
+import { usePathname, useSearchParams } from 'next/navigation';
+import CircleLoader from '../Loaders/CircleLoader';
+import Breadcrumb from '../BreadCrumb';
 
 interface ProductGridProps {
 	queryFn: (
 		pageSize?: number,
-		page?: number
+		page?: number,
+		category?: number
 	) => Promise<PaginatedResponse<ProductEntity>>;
 }
 
@@ -19,15 +23,24 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 	const [pageSize] = useState(20);
 	const [count, setCount] = useState(0);
 
+	const param = useSearchParams().get('category');
+	const category = param ? parseInt(param) : undefined;
+
+	const pathname = usePathname();
+
 	const queryClient = useQueryClient();
 
-	const { data, isLoading } = useQuery(
-		['products', page],
-		() => queryFn(pageSize, page),
+	const { data, isLoading, isFetching } = useQuery(
+		category ? ['products', category, page] : ['products', 'all', page],
+		() => queryFn(pageSize, page, category),
 		{
 			keepPreviousData: true,
 			onSuccess(data) {
 				setCount(data.count);
+				console.log('data', data);
+			},
+			onError(err) {
+				console.log('err', err);
 			},
 		}
 	);
@@ -42,6 +55,12 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 
 	return (
 		<div className='w-full'>
+			{pathname.startsWith('/products') ? (
+				<div className='w-full min-h-[30px] items-center flex justify-between'>
+					<Breadcrumb />
+					{isFetching ? <CircleLoader /> : null}
+				</div>
+			) : null}
 			<div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6'>
 				{isLoading
 					? Array(4)

@@ -7,12 +7,20 @@ export async function GET(request: Request) {
 
 	const page_size = searchParams.get('page_size');
 	const page = searchParams.get('page');
+	const category = searchParams.get('category');
 
 	try {
-		const res = await getRequest<PaginatedResponse<ProductEntity>>(
-			`/api/v1/core/products?page_size=${page_size}&page=${page}`
-		);
-		return new Response(JSON.stringify(res.data));
+		if (category) {
+			const res = await getRequest<PaginatedResponse<ProductEntity>>(
+				`/api/v1/core/products/category/${category}?page_size=${page_size}&page=${page}`
+			);
+			return new Response(JSON.stringify(res.data));
+		} else {
+			const res = await getRequest<PaginatedResponse<ProductEntity>>(
+				`/api/v1/core/products?page_size=${page_size}&page=${page}`
+			);
+			return new Response(JSON.stringify(res.data));
+		}
 	} catch (e: any) {
 		return new Response(JSON.stringify(e.response.data), {
 			status: e.response.status,
