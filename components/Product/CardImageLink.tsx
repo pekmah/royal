@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 interface Props {
 	id: number;
+	name: string;
 	thumbnail?: string;
 }
 
@@ -22,30 +23,20 @@ const blobToDataURL = (blob: Blob) => {
 };
 
 // TODO: blur images until image load
-export default function CardImageLink({ id, thumbnail }: Props) {
+export default function CardImageLink({ id, thumbnail, name }: Props) {
 	const { push } = useRouter();
-	const [imageUrl, setImageUrl] = useState('');
-
-	useEffect(() => {
-		if (thumbnail) {
-			getRequest(`/api/v1/core/products/thumbnail/${thumbnail}`, {
-				responseType: 'blob',
-			}).then((res) => {
-				const blob = res.data as Blob;
-				blobToDataURL(blob).then((val) => {
-					setImageUrl(val as string);
-				});
-			});
-		}
-	}, [thumbnail]);
 
 	return (
 		<div
 			className='relative w-auto h-[160px] cursor-pointer'
 			onClick={() => push(`/products/${id}`)}>
 			<Image
-				alt={'Product Image'}
-				src={imageUrl ? imageUrl : '/temp-product-img.png'}
+				alt={`Thumbnail for ${name}`}
+				src={
+					thumbnail
+						? `${process.env.BASE_URL}/api/v1/core/products/thumbnail/${thumbnail}`
+						: '/temp-product-img.png'
+				}
 				fill
 				style={{ objectFit: 'cover', objectPosition: 'center' }}
 				className='rounded-t-md'

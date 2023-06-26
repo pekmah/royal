@@ -3,7 +3,7 @@
 import { Barlow } from 'next/font/google';
 import CardImageLink from './CardImageLink';
 import { ProductEntity } from '@/types/product/Product';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface ProductCardProps {
 	product: ProductEntity;
@@ -21,22 +21,21 @@ const barlowSemi = Barlow({
 	subsets: ['latin'],
 });
 
-// TODO: Prefetch the images, construct and cache the image urls
 export default function ProductCard({ product }: ProductCardProps) {
 	const { id, name, sizes, thumbnails } = product;
 	const [activeSize, setActiveSize] = useState(sizes ? sizes[0] : undefined);
-	const [activeThumbnail, setActiveThumbnail] = useState<string | undefined>();
-
-	useEffect(() => {
-		const found = thumbnails?.find((v) => v.id === activeSize?.id);
-		if (found) {
-			setActiveThumbnail(found.thumbnail_code);
-		}
-	}, [activeSize, thumbnails]);
 
 	return (
 		<div className='bg-white justify-center rounded-md shadow-lg'>
-			<CardImageLink id={id} thumbnail={activeThumbnail} />
+			<CardImageLink
+				name={product.name}
+				id={id}
+				thumbnail={
+					thumbnails && thumbnails?.length > 0
+						? thumbnails[0].thumbnail_code
+						: ''
+				}
+			/>
 			<div className='w-full p-4'>
 				<p className={`mb-2 ${barlow.className}`}>{name}</p>
 				<div className='w-full flex justify-between items-center'>
@@ -82,6 +81,6 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 export const ProductCardSkeleton = () => {
 	return (
-		<div className='justify-center rounded-md shadow-lg animate-pulse h-[240px] bg-gray'></div>
+		<div className='justify-center rounded-md shadow-lg animate-pulse h-[240px] bg-gray' />
 	);
 };

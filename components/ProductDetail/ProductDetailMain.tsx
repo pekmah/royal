@@ -16,7 +16,9 @@ interface Props {
 }
 
 export default function ProductDetailMain({ product }: Props) {
-	const { name, average_rating, reviews } = product;
+	const { name, average_rating, reviews, thumbnails } = product;
+	const thumbnail =
+		thumbnails && thumbnails?.length > 0 ? thumbnails[0].thumbnail_code : null;
 
 	return (
 		<div className={`w-full rounded-md shadow-lg bg-white flex gap-6 p-4`}>
@@ -24,7 +26,11 @@ export default function ProductDetailMain({ product }: Props) {
 				<div className='relative h-[240px]'>
 					<Image
 						alt={'Landing page Banner'}
-						src={'/temp-product-img.png'}
+						src={
+							thumbnail
+								? `${process.env.BASE_URL}/api/v1/core/products/thumbnail/${thumbnail}`
+								: '/temp-product-img.png'
+						}
 						fill
 						style={{ objectFit: 'cover', objectPosition: 'center' }}
 						className='rounded-md'
