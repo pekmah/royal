@@ -12,6 +12,10 @@ const nextConfig = {
 				hostname: 'royalapis.glitexsolutions.co.ke',
 				protocol: 'http',
 			},
+			{
+				hostname: 'royalapis.glitexsolutions.co.ke',
+				protocol: 'https',
+			},
 		],
 	},
 };

@@ -65,10 +65,9 @@ export default function Header({
 						</div>
 					) : null}
 					{status === 'loading' ? (
-						<button
-							className={
-								'bg-gray button-secondary py-1 px-4 h-[24px] w-[px] skeleton-animation'
-							}></button>
+						<div
+							className={'bg-gray h-[32px] w-[64px] animate-pulse rounded-md'}
+						/>
 					) : status === 'authenticated' ? (
 						<div className='flex items-baseline gap-6 h-full'>
 							<div className='flex items-center gap-1 font-medium'>

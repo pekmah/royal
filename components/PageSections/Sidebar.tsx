@@ -1,14 +1,11 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Barlow } from 'next/font/google';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import MultiRangeSlider from '../MultiRangeSlider';
 import { Transition } from '@headlessui/react';
-import { useQuery } from 'react-query';
-import getAllProductCategories from '@/services/ProductCategory/getAllProductCategories';
-import Image from 'next/image';
-import { ProductCategoryEntity } from '@/types/product_category/ProductCategory';
+import CategoriesSidebar from '../ProductCategory/CategoriesSidebar';
 
 const barlow = Barlow({
 	style: 'normal',
@@ -36,12 +33,7 @@ const transitionClasses = {
 };
 
 export default function Sidebar({ isOpen }: SidebarProps) {
-	const { data, isLoading } = useQuery(['categories'], () =>
-		getAllProductCategories()
-	);
-
 	const path = usePathname();
-	const { push } = useRouter();
 
 	return path.startsWith('/auth') ? null : (
 		<Transition
@@ -54,45 +46,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
 						<h3 className={barlowSemi.className}>Categories</h3>
 					</div>
 					<hr className='text-gray w-full mb-4' />
-					<div className='text-sm w-full mb-4'>
-						{isLoading && !data
-							? Array(8)
-									.fill(0)
-									.map((v, idx) => (
-										<div
-											key={idx}
-											className={'w-full my-4 h-6 bg-gray animate-pulse'}
-										/>
-									))
-							: null}
-						{data && data.results ? (
-							[
-								{ id: -1, name: 'All' } as ProductCategoryEntity,
-								...data.results,
-							].map(({ id, name, thumbnail }) => (
-								<button
-									onClick={() => push(`/products?category=${id}`)}
-									className={
-										'w-full justify-start flex items-center gap-2 px-4 py-2 hover:bg-gray hover:text-blue'
-									}
-									key={id}>
-									{thumbnail ? (
-										<span>
-											<Image
-												src={thumbnail}
-												width={24}
-												height={24}
-												alt={`Thumbnail for ${name} category.`}
-											/>
-										</span>
-									) : null}
-									{name}
-								</button>
-							))
-						) : !isLoading && !data ? (
-							<p className='text-sm'>Failed to load categories</p>
-						) : null}
-					</div>
+					<CategoriesSidebar />
 					<hr className='text-gray w-full mb-4' />
 					<div className='flex justify-between px-6'>
 						<h3 className={barlowSemi.className}>Price</h3>
