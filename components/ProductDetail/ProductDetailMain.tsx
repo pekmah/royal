@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import ColorSelector from '../ColorSelector';
 import { Barlow } from 'next/font/google';
-import StarRating from '../StarRating';
-import GaugeSelector from '../GaugeSelector';
-import QuantityCount from '../QuantityCount';
+import StarRating from './StarRating';
 import { BsCart2 } from 'react-icons/bs';
+import { ProductEntity } from '@/types/product/Product';
+import ProductOptions from './ProductOptions';
 
 const barlowSemi = Barlow({
 	style: 'normal',
@@ -12,7 +11,13 @@ const barlowSemi = Barlow({
 	subsets: ['latin'],
 });
 
-export default function ProductDetailMain() {
+interface Props {
+	product: ProductEntity;
+}
+
+export default function ProductDetailMain({ product }: Props) {
+	const { name, average_rating, reviews } = product;
+
 	return (
 		<div className={`w-full rounded-md shadow-lg bg-white flex gap-6 p-4`}>
 			<div className='w-[35%]'>
@@ -25,12 +30,13 @@ export default function ProductDetailMain() {
 						className='rounded-md'
 					/>
 				</div>
-				<div className={'py-4'}>
+				{/* TODO: Hide this as it's not applicable on the api yet */}
+				{/* <div className={'py-4'}>
 					<h3 className={`text-base ${barlowSemi.className}`}>
 						Select Finish:
 					</h3>
 					<ColorSelector />
-				</div>
+				</div> */}
 			</div>
 			<div
 				className={'w-[65%] max-h-max'}
@@ -40,18 +46,14 @@ export default function ProductDetailMain() {
 					justifyContent: 'space-between',
 				}}>
 				<div className='w-full'>
-					<h3 className={`text-lg ${barlowSemi.className}`}>
-						Zee Tiles Matte on a Corrugated Finish...
-					</h3>
+					<h3 className={`text-lg ${barlowSemi.className}`}>{name}</h3>
 					<div className='py-4'>
-						<StarRating rating={4} reviewCount={50} />
+						<StarRating
+							rating={average_rating ? average_rating : 0}
+							reviewCount={reviews ? reviews.length : 0}
+						/>
 					</div>
-					<GaugeSelector />
-					<QuantityCount />
-					<div className='flex justify-between items-center'>
-						<p className='font-semibold text-sm'>Cost :</p>
-						<p className='font-semibold'>Ksh. 800</p>
-					</div>
+					<ProductOptions product={product} />
 				</div>
 				<div className={`w-full flex justify-between items-center py-4 gap-8`}>
 					<button className='button-secondary font-medium text-sm border border-red w-full'>

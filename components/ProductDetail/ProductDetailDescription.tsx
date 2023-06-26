@@ -1,4 +1,4 @@
-import { Barlow } from "next/font/google";
+import { Barlow } from 'next/font/google';
 
 const barlowSemi = Barlow({
 	style: 'normal',
@@ -6,35 +6,30 @@ const barlowSemi = Barlow({
 	subsets: ['latin'],
 });
 
+interface Props {
+	description: string;
+}
 
-export default function ProductDetailDescription() {
+// Define an array of delimiters
+const delimiters = ['\r\n', '\t'];
+
+// Function to split the string using any of the delimiters
+const splitString = (str: string, delimiters: Array<string>) => {
+	let regexPattern = delimiters.join('|');
+	return str.split(new RegExp(regexPattern));
+};
+
+export default function ProductDetailDescription({ description }: Props) {
 	return (
 		<div className='bg-white rounded-md shadow-lg w-[50%]'>
-			<h3 className={`${barlowSemi.className} p-4`}>Product Details</h3>
+			<h3 className={`${barlowSemi.className} p-4`}>Description</h3>
 			<hr className='text-gray w-full mb-4' />
-			<div className='px-4 text-sm'>
-				<p className='mb-4'>
-					Zee tiles matte triple refined vegetable oil made from pure vegetable
-					oil. It is cholesterol free that is great for your whole cookery
-					requirements. For a happy, healthy living. fortified with vitamins A &
-					D, good for your vision.
-				</p>
-				<h5 className='mb-4 font-semibold'>Details</h5>
-				<ul className='mb-4 list-disc px-8'>
-					<li>Triple refined vegetable</li>
-					<li>Made from pure vegetable</li>
-					<li>It is cholesterol free</li>
-					<li>Your whole cookery requirements</li>
-					<li>For a happy, healthy living</li>
-				</ul>
-				<h5 className='mb-4 font-semibold'>Our Guarantee</h5>
-				<ul className='mb-4 list-disc px-8'>
-					<li>Triple refined vegetable</li>
-					<li>Made from pure vegetable</li>
-					<li>It is cholesterol free</li>
-					<li>Your whole cookery requirements</li>
-					<li>For a happy, healthy living</li>
-				</ul>
+			<div className='px-4 pb-4 text-sm'>
+				{splitString(description, delimiters).map((line, index) => (
+					<p key={index} className='pb-2'>
+						{line}
+					</p>
+				))}
 			</div>
 		</div>
 	);

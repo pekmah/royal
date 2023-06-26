@@ -9,7 +9,7 @@ export interface ProductEntity {
 	ingredients?: null;
 	recommended: boolean;
 	category: number;
-	reviews?: null;
+	reviews?: Array<any> | null;
 }
 
 export interface ProductSizes {

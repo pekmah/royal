@@ -18,9 +18,7 @@ const StarRating: FC<StarRatingProps> = ({ rating, reviewCount }) => {
 					)}
 				</div>
 			))}
-			{reviewCount ? (
-				<p className='text-sm ml-8 text-fadegray'>{`(${reviewCount} reviews)`}</p>
-			) : null}
+			<p className='text-sm ml-8 text-fadegray'>{`(${reviewCount} reviews)`}</p>
 		</div>
 	);
 };
