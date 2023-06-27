@@ -58,9 +58,9 @@ export default function ProductCard({ product }: ProductCardProps) {
 									onClick={() => setActiveSize(size)}
 									className={`px-2 py-1 ${
 										activeSize?.id === size?.id
-											? 'bg-red text-white'
-											: 'border border-gray text-black'
-									}  text-[10px] rounded-md font-semibold cursor-pointer`}>
+											? 'border-red bg-red text-white'
+											: 'border-gray text-black'
+									}  text-[10px] border rounded-md font-semibold cursor-pointer`}>
 									{size?.size}
 								</div>
 							))}
