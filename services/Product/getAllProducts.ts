@@ -13,7 +13,8 @@ export default async function getAllProducts(
 			process.env.NEXTAUTH_URL
 		}/api/products/all?page_size=${pageSize}&page=${page}${
 			category ? `&category=${category}` : ''
-		}`
+		}`,
+		{ cache: 'no-store' }
 	);
 	return res.json();
 }

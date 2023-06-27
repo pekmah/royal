@@ -10,3 +10,6 @@ export default function Home() {
 		</>
 	);
 }
+
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;

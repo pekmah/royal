@@ -27,15 +27,16 @@ export default function Header({
 
 	return path.startsWith('/auth') ? null : (
 		<header>
-			<div className='w-full h-[70px] relative'>
+			{/* <div className='w-full h-[70px] relative'>
 				<Image
 					alt={'Offers Banner'}
 					src={'/banner.png'}
 					fill
+					priority
 					style={{ objectFit: 'cover', objectPosition: 'center' }}
 				/>
-			</div>
-			<NavMenu />
+			</div> 
+			<NavMenu /> */}
 			<div className='w-full py-4 px-8 flex justify-between items-center bg-white shadow-sm'>
 				<div className={`flex gap-8 items-center`}>
 					<button
@@ -53,6 +54,7 @@ export default function Header({
 						alt='Royal Mabati Logo'
 						height={30}
 						width={120}
+						style={{ width: 'auto' }}
 					/>
 				</div>
 				<div className='w-[50%] flex'>

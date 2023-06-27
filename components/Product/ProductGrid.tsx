@@ -37,10 +37,9 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 			keepPreviousData: true,
 			onSuccess(data) {
 				setCount(data.count);
-				console.log('data', data);
 			},
 			onError(err) {
-				console.log('err', err);
+				console.error('err', err);
 			},
 		}
 	);
@@ -89,3 +88,6 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 		</div>
 	);
 }
+
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
