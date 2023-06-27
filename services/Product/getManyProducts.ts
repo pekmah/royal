@@ -3,7 +3,7 @@
 import { PaginatedResponse } from '@/types/api/Response';
 import { ProductEntity } from '@/types/product/Product';
 
-export default async function getAllProducts(
+export default async function getManyProducts(
 	pageSize = 20,
 	page = 1,
 	category?: number

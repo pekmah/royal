@@ -1,12 +1,12 @@
 import LandingPageBanner from '@/components/LandingPageBanner';
 import ProductGrid from '@/components/Product/ProductGrid';
-import getAllProducts from '@/services/Product/getAllProducts';
+import getManyProducts from '@/services/Product/getManyProducts';
 
 export default function Home() {
 	return (
 		<>
 			<LandingPageBanner />
-			<ProductGrid queryFn={getAllProducts} />
+			<ProductGrid queryFn={getManyProducts} />
 		</>
 	);
 }

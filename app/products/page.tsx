@@ -1,6 +1,6 @@
 import ProductGrid from '@/components/Product/ProductGrid';
-import getAllProducts from '@/services/Product/getAllProducts';
+import getManyProducts from '@/services/Product/getManyProducts';
 
 export default function Page() {
-	return <ProductGrid queryFn={getAllProducts} />;
+	return <ProductGrid queryFn={getManyProducts} />;
 }
