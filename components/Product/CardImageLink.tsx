@@ -1,9 +1,7 @@
 'use client';
 
-import { getRequest } from '@/utils/request';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 interface Props {
 	id: number;
@@ -11,18 +9,11 @@ interface Props {
 	thumbnail?: string;
 }
 
-const blobToDataURL = (blob: Blob) => {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onloadend = () => {
-			resolve(reader.result);
-		};
-		reader.onerror = reject;
-		reader.readAsDataURL(blob);
-	});
+const imageLoader = ({ src }: { src: string }) => {
+	if (src.length === 0) return '/temp-product-img.png';
+	return `${process.env.BASE_URL}/api/v1/core/products/thumbnail/${src}`;
 };
 
-// TODO: blur images until image load
 export default function CardImageLink({ id, thumbnail, name }: Props) {
 	const { push } = useRouter();
 
@@ -32,11 +23,8 @@ export default function CardImageLink({ id, thumbnail, name }: Props) {
 			onClick={() => push(`/products/${id}`)}>
 			<Image
 				alt={`Thumbnail for ${name}`}
-				src={
-					thumbnail
-						? `${process.env.BASE_URL}/api/v1/core/products/thumbnail/${thumbnail}`
-						: '/temp-product-img.png'
-				}
+				loader={imageLoader}
+				src={thumbnail ?? ''}
 				fill
 				style={{ objectFit: 'cover', objectPosition: 'center' }}
 				className='rounded-t-md'
