@@ -8,7 +8,7 @@ const nextConfig = {
 	},
 	images: {
 		domains: ['royalapis.glitexsolutions.co.ke'],
-		minimumCacheTTL: 60,
+		minimumCacheTTL: 3600,
 	},
 };
 
