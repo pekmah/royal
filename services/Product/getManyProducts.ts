@@ -6,8 +6,7 @@ import { ProductEntity } from '@/types/product/Product';
 export default async function getManyProducts(
 	pageSize = 20,
 	page = 1,
-	category?: number,
-	options?: RequestInit
+	category?: number
 ): Promise<PaginatedResponse<ProductEntity>> {
 	const res = await fetch(
 		`${
@@ -15,7 +14,7 @@ export default async function getManyProducts(
 		}/api/products/all?page_size=${pageSize}&page=${page}${
 			category ? `&category=${category}` : ''
 		}`,
-		{ next: { revalidate: 60 } }
+		{ next: { revalidate: 30 } }
 	);
 	return res.json();
 }
