@@ -14,7 +14,7 @@ export default async function getAllProducts(
 		}/api/products/all?page_size=${pageSize}&page=${page}${
 			category ? `&category=${category}` : ''
 		}`,
-		{ cache: 'no-store' }
+		{ cache: 'no-cache' }
 	);
 	return res.json();
 }
