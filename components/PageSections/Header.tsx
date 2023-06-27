@@ -52,8 +52,8 @@ export default function Header({
 					<Image
 						src={'/logo.png'}
 						alt='Royal Mabati Logo'
-						height={30}
-						width={120}
+						height={35}
+						width={140}
 						style={{ width: 'auto' }}
 					/>
 				</div>

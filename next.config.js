@@ -7,16 +7,7 @@ const nextConfig = {
 		serverActions: true,
 	},
 	images: {
-		remotePatterns: [
-			{
-				hostname: 'royalapis.glitexsolutions.co.ke',
-				protocol: 'http',
-			},
-			{
-				hostname: 'royalapis.glitexsolutions.co.ke',
-				protocol: 'https',
-			},
-		],
+		domains: ['royalapis.glitexsolutions.co.ke'],
 	},
 };
 
