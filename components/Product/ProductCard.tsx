@@ -4,6 +4,8 @@ import { Barlow } from 'next/font/google';
 import CardImageLink from './CardImageLink';
 import { ProductEntity } from '@/types/product/Product';
 import { useState } from 'react';
+import Select from '../Select';
+import { BsCart2 } from 'react-icons/bs';
 
 interface ProductCardProps {
 	product: ProductEntity;
@@ -49,22 +51,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 				}}>
 				<div className='w-full'>
 					<p className={`w-full mb-2 ${barlow.className}`}>{name}</p>
-					<p className={`text-sm font-semibold mb-1`}>Sizes</p>
-					<div className='w-full flex justify-between'>
-						<div className='flex gap-1 flex-wrap'>
-							{sizes?.map((size, idx) => (
-								<div
-									key={`${size?.id}~${idx}`}
-									onClick={() => setActiveSize(size)}
-									className={`px-2 py-1 ${
-										activeSize?.id === size?.id
-											? 'border-red bg-red text-white'
-											: 'border-gray text-black'
-									}  text-[10px] border rounded-md font-semibold cursor-pointer`}>
-									{size?.size}
-								</div>
-							))}
-						</div>
+					<div className='w-full flex'>
+						{sizes ? (
+							<Select options={sizes} label='Sizes' onChange={setActiveSize} />
+						) : null}
 					</div>
 				</div>
 
@@ -85,7 +75,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 							<span>Ksh. {activeSize?.price ?? '-'}</span>
 						)}
 					</div>
-					<button className='button-secondary w-full border text-sm py-2 px-4 my-2 border-red'>
+					<button className='button-secondary w-full flex justify-evenly border text-sm py-2 px-4 my-2 border-red'>
+						<BsCart2 size={'16'} color={'#DC2A25'} />
 						Add to Cart
 					</button>
 				</div>
