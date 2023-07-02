@@ -35,22 +35,22 @@ export default function Header({
 					priority
 					style={{ objectFit: 'cover', objectPosition: 'center' }}
 				/>
-			</div> 
-			<NavMenu /> */}
-			<div className='w-full py-4 px-8 flex justify-between items-center bg-white shadow-sm'>
+			</div> */}
+			<NavMenu />
+			<div className='w-full py-4 px-8 flex justify-between items-center bg-blue shadow-sm'>
 				<div className={`flex gap-8 items-center`}>
 					<button
 						onClick={() => {
 							setIsSidebarOpen((prev) => !prev);
 						}}>
 						{isSidebarOpen ? (
-							<IoMdClose size={'24'} />
+							<IoMdClose color='#fff' size={'24'} />
 						) : (
-							<CgMenuLeft size={'24'} />
+							<CgMenuLeft color='#fff' size={'24'} />
 						)}
 					</button>
 					<Image
-						src={'/logo.png'}
+						src={'/logo-2.png'}
 						alt='Royal Mabati Logo'
 						height={35}
 						width={140}
@@ -63,12 +63,16 @@ export default function Header({
 				<div className={`flex gap-4 items-center`}>
 					{status === 'unauthenticated' ? (
 						<div>
-							<Link href={'/auth/login'}>Login</Link>
+							<Link
+								href={'/auth/login'}
+								className='px-4 py-2 flex justify-center rounded-md bg-white text-black border-gray'>
+								Login
+							</Link>
 						</div>
 					) : null}
 					{status === 'loading' ? (
 						<div
-							className={'bg-gray h-[32px] w-[64px] animate-pulse rounded-md'}
+							className={'bg-gray h-[38px] w-[74px] animate-pulse rounded-md'}
 						/>
 					) : status === 'authenticated' ? (
 						<div className='flex items-baseline gap-6 h-full'>
