@@ -77,14 +77,14 @@ export default function Header({
 					) : status === 'authenticated' ? (
 						<div className='flex items-baseline gap-6 h-full'>
 							<div className='flex items-center gap-1 font-medium'>
-								<BsCart2 size={'16'} />
-								<p className='text-sm'>Cart</p>
+								<BsCart2 size={'16'} color={'#fff'} />
+								<p className='text-sm text-white'>Cart</p>
 							</div>
 							<DropdownMenu
 								buttonText={
 									<div className='flex items-center gap-1 font-medium'>
-										<RxPerson size={'16'} />
-										<p className='text-sm'>Account</p>
+										<RxPerson size={'16'} color={'#fff'} />
+										<p className='text-sm text-white'>Account</p>
 									</div>
 								}>
 								<DropdownMenuItem onClick={() => signOut()}>

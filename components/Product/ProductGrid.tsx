@@ -60,6 +60,11 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 					{isFetching ? <CircleLoader /> : null}
 				</div>
 			) : null}
+
+			{data?.results ? (
+				<div className='mt-5'>{`Products (${count})`}</div>
+			) : null}
+
 			<div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6'>
 				{isLoading
 					? Array(4)
