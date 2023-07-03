@@ -1,10 +1,10 @@
 'use client';
 
-import GaugeSelector from './GaugeSelector';
 import { ProductEntity } from '@/types/product/Product';
 import QuantityCount from './QuantityCount';
 import { useState } from 'react';
 import CostDisplay from './CostDisplay';
+import SelectSize from '../SelectSize';
 
 interface Props {
 	product: ProductEntity;
@@ -17,11 +17,13 @@ export default function ProductOptions({ product }: Props) {
 
 	return (
 		<>
-			<GaugeSelector
-				sizes={product.sizes}
-				onActiveSizeChange={setActiveSize}
-				activeSize={activeSize}
-			/>
+			{sizes ? (
+				<SelectSize
+					label='Sizes'
+					options={sizes}
+					onSelectSize={setActiveSize}
+				/>
+			) : null}
 			<QuantityCount quantity={quantity} onQuantityChange={setQuantity} />
 			<CostDisplay activeSize={activeSize} quantity={quantity} />
 		</>

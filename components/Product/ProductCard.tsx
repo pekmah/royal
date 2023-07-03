@@ -4,7 +4,7 @@ import { Barlow } from 'next/font/google';
 import CardImageLink from './CardImageLink';
 import { ProductEntity } from '@/types/product/Product';
 import { useState } from 'react';
-import Select from '../Select';
+import SelectSize from '../SelectSize';
 import { BsCart2 } from 'react-icons/bs';
 
 interface ProductCardProps {
@@ -53,7 +53,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 					<p className={`w-full mb-2 ${barlow.className}`}>{name}</p>
 					<div className='w-full flex'>
 						{sizes ? (
-							<Select options={sizes} label='Sizes' onChange={setActiveSize} />
+							<SelectSize
+								options={sizes}
+								label='Sizes'
+								onSelectSize={setActiveSize}
+							/>
 						) : null}
 					</div>
 				</div>

@@ -3,10 +3,10 @@ import { ProductSizes } from '@/types/product/Product';
 interface Props {
 	label: string;
 	options: (ProductSizes | null)[];
-	onChange: (arg: ProductSizes) => void;
+	onSelectSize: (arg: ProductSizes) => void;
 }
 
-export default function Select({ label, options, onChange }: Props) {
+export default function SelectSize({ label, options, onSelectSize }: Props) {
 	return (
 		<div className='w-full flex items-center gap-2 justify-between'>
 			<label htmlFor={label} className='text-sm font-semibold mb-1'>
@@ -20,14 +20,19 @@ export default function Select({ label, options, onChange }: Props) {
 				) : (
 					<select
 						id={label}
-						className='bg-red text-white text-[12px] font-medium rounded-md w-max p-2'>
+						onChange={(e) => {
+							const size = options.find(
+								(v) => v?.id === parseInt(e.target.value)
+							)!;
+							onSelectSize(size);
+						}}
+						className='bg-red text-white text-[12px] font-medium rounded-md w-max p-2 outline-none'>
 						{options
 							? options.map((option, idx) => (
 									<option
-										value={option?.size}
+										value={option?.id}
 										key={option?.id}
-										onClick={() => onChange(option!)}
-										className='bg-gray'
+										className='bg-white text-black'
 										selected={idx === 0}>
 										{option?.size}
 									</option>
