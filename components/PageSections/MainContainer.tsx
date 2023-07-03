@@ -5,6 +5,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import { usePathname } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';
+import Footer from './Footer';
 
 export default function MainContainer({ children }: { children: ReactNode }) {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -26,8 +27,8 @@ export default function MainContainer({ children }: { children: ReactNode }) {
 				{!path.startsWith('/auth') ? (
 					<section
 						className={`${
-							isSidebarOpen ? 'w-[80%]' : 'w-full'
-						} transition-all duration-300`}>
+							isSidebarOpen ? 'md:w-[80%] hidden md:block' : 'w-full'
+						} transition-all mt-32 md:mt-[0] duration-300`}>
 						{children}
 					</section>
 				) : (
@@ -36,6 +37,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
 					</section>
 				)}
 			</main>
+			{!isSidebarOpen ? <Footer /> : null}
 		</>
 	);
 }

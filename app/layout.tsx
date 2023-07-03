@@ -2,7 +2,6 @@ import { Toaster } from 'react-hot-toast';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import AuthProvider from '@/components/Providers/AuthProvider';
-import Footer from '@/components/PageSections/Footer';
 import MainContainer from '@/components/PageSections/MainContainer';
 import QueryProvider from '@/components/Providers/QueryProvider';
 
@@ -24,7 +23,6 @@ export default function RootLayout({
 				<body className={`${inter.className}`} style={{ overflowX: 'hidden' }}>
 					<QueryProvider>
 						<MainContainer>{children}</MainContainer>
-						<Footer />
 						<Toaster position='bottom-right' reverseOrder={false} />
 					</QueryProvider>
 				</body>

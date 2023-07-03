@@ -2,7 +2,7 @@ import { BiSearch } from 'react-icons/bi';
 
 export default function SearchInput() {
 	return (
-		<div className='flex w-full gap-4'>
+		<div className='hidden md:flex w-full gap-4'>
 			<div className='w-full flex items-center'>
 				<label
 					htmlFor='email'

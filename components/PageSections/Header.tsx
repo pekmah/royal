@@ -26,7 +26,7 @@ export default function Header({
 	const path = usePathname();
 
 	return path.startsWith('/auth') ? null : (
-		<header>
+		<header className='fixed w-screen md:relative z-20'>
 			{/* <div className='w-full h-[70px] relative'>
 				<Image
 					alt={'Offers Banner'}

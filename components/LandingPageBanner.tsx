@@ -16,7 +16,7 @@ const barlow = Barlow({
 
 export default function LandingPageBanner() {
 	return (
-		<div className={'w-full h-max flex shadow-lg rounded-md'}>
+		<div className={'w-full h-max block md:flex shadow-lg rounded-md'}>
 			<div className='min-w-[340px] relative h-[229px]'>
 				<Image
 					alt={'Landing page Banner'}

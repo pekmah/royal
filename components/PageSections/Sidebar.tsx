@@ -39,7 +39,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
 		<Transition
 			show={isOpen}
 			{...transitionClasses}
-			className={'w-[20%] h-fit'}>
+			className={`h-fit w-screen mt-32 md:mt-0 md:w-[20%]`}>
 			<aside className='w-[100%] h-fit'>
 				<div className={`rounded-md shadow-lg ${barlow.className} bg-white `}>
 					<div className='p-4'>
