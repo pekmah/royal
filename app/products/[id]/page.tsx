@@ -34,7 +34,7 @@ export default function Page({ params }: Props) {
 	return (
 		<div className='w-full'>
 			<ProductDetailMain product={data} />
-			<div className={`w-full rounded-md mt-4 flex-col md:flex gap-6`}>
+			<div className={`w-full rounded-md mt-4 flex flex-col md:flex-row gap-6`}>
 				<ProductDetailDescription description={data.description} />
 				<ProductReviews reviews={data.reviews} />
 			</div>

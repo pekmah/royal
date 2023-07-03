@@ -22,7 +22,7 @@ export default function ProductDetailMain({ product }: Props) {
 
 	return (
 		<div
-			className={`w-full rounded-md shadow-lg bg-white flex-col md:flex gap-6 p-4`}>
+			className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4`}>
 			<div className='w-full md:w-[35%]'>
 				<div className='relative h-[240px]'>
 					<Image
