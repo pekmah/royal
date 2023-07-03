@@ -15,7 +15,7 @@ const navItems = [
 export default function NavMenu() {
 	return (
 		<nav
-			className={`w-full bg-red py-2 px-8 flex justify-between text-white ${barlow.className}`}>
+			className={`w-full bg-red py-2 px-8 flex text-sm justify-between text-white ${barlow.className}`}>
 			<div className='flex gap-4'>
 				{navItems.map(({ name, path }) => (
 					<Link href={path} key={path} className={``}>
