@@ -21,8 +21,9 @@ export default function ProductDetailMain({ product }: Props) {
 		thumbnails && thumbnails?.length > 0 ? thumbnails[0].thumbnail_code : null;
 
 	return (
-		<div className={`w-full rounded-md shadow-lg bg-white flex gap-6 p-4`}>
-			<div className='w-[35%]'>
+		<div
+			className={`w-full rounded-md shadow-lg bg-white flex-col md:flex gap-6 p-4`}>
+			<div className='w-full md:w-[35%]'>
 				<div className='relative h-[240px]'>
 					<Image
 						alt={'Landing page Banner'}
@@ -45,7 +46,7 @@ export default function ProductDetailMain({ product }: Props) {
 				</div> */}
 			</div>
 			<div
-				className={'w-[65%] max-h-max'}
+				className={'w-full mt-4 md:mt-0 md:w-[65%] max-h-max'}
 				style={{
 					display: 'flex',
 					flexDirection: 'column',

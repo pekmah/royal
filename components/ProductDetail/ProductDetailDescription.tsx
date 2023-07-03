@@ -21,7 +21,7 @@ const splitString = (str: string, delimiters: Array<string>) => {
 
 export default function ProductDetailDescription({ description }: Props) {
 	return (
-		<div className='bg-white rounded-md shadow-lg w-[50%]'>
+		<div className='bg-white rounded-md shadow-lg w-full md:w-[50%]'>
 			<h3 className={`${barlowSemi.className} p-4`}>Description</h3>
 			<hr className='text-gray w-full mb-4' />
 			<div className='px-4 pb-4 text-sm'>

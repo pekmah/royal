@@ -59,7 +59,7 @@ const SingleReview = ({ name, rating, comment, date }: SingleReviewProps) => {
 
 export default function ProductReviews({ reviews }: Props) {
 	return (
-		<div className='bg-white rounded-md shadow-lg w-[50%]'>
+		<div className='bg-white rounded-md shadow-lg w-full mt-4 md:mt-0 md:w-[50%]'>
 			<div className='flex justify-between w-full p-4 items-center'>
 				<h3 className={`${barlowSemi.className}`}>Customer Reviews</h3>
 				{reviews && reviews.length > 0 ? (
