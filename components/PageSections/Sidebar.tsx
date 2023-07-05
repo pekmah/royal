@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Barlow } from 'next/font/google';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import MultiRangeSlider from '../MultiRangeSlider';
@@ -34,6 +34,7 @@ const transitionClasses = {
 
 export default function Sidebar({ isOpen }: SidebarProps) {
 	const path = usePathname();
+	const { push } = useRouter();
 
 	return path.startsWith('/auth') ? null : (
 		<Transition
@@ -48,16 +49,13 @@ export default function Sidebar({ isOpen }: SidebarProps) {
 					<hr className='text-gray w-full mb-4' />
 					<CategoriesSidebar />
 					<hr className='text-gray w-full mb-4' />
-					<div className='flex justify-between px-6'>
-						<h3 className={barlowSemi.className}>Price</h3>
-						<button className='text-red text-sm'>Apply</button>
-					</div>
 					<MultiRangeSlider
+						name={'Price'}
 						min={0}
-						max={1000}
-						onChange={({ min, max }: { min: number; max: number }) =>
-							console.log(`min = ${min}, max = ${max}`)
-						}
+						max={999999}
+						onChange={({ min, max }: { min: number; max: number }) => {
+							push(`/products?minPrice=${min}&maxPrice=${max}`);
+						}}
 					/>
 				</div>
 				<div
