@@ -5,6 +5,7 @@ import ProductDetailDescription from '@/components/ProductDetail/ProductDetailDe
 import ProductReviews from '@/components/ProductDetail/ProductReviews';
 import { useQuery } from 'react-query';
 import getSingleProduct from '@/services/Product/getSingleProduct';
+import Breadcrumb from '@/components/BreadCrumb';
 
 interface Props {
 	params: { id: string };
@@ -33,6 +34,7 @@ export default function Page({ params }: Props) {
 
 	return (
 		<div className='w-full'>
+			<Breadcrumb replacePath={data.name} />
 			<ProductDetailMain product={data} />
 			<div className={`w-full rounded-md mt-4 flex flex-col md:flex-row gap-6`}>
 				<ProductDetailDescription description={data.description} />

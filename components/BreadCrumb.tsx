@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AiFillHome } from 'react-icons/ai';
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ replacePath }: { replacePath?: string }) => {
 	const pathname = usePathname();
 	const paths = pathname.split('/').filter((p) => p !== '');
 
@@ -21,11 +21,13 @@ const Breadcrumb = () => {
 					<li className='flex items-center h-full' key={path}>
 						<span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
 						<Link
-							href={`/${path}`}
+							href={`${idx !== 0 ? `/${paths[idx - 1]}` : ''}/${path}`}
 							className={`${
 								idx === paths.length - 1 ? 'text-blue underline' : ''
 							}`}>
-							{capitalizeFirstLetter(path)}
+							{replacePath && idx === paths.length - 1
+								? replacePath
+								: capitalizeFirstLetter(path)}
 						</Link>
 					</li>
 				))}
