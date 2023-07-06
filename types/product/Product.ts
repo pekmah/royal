@@ -9,6 +9,8 @@ export interface ProductEntity {
     ingredients?: null;
     recommended: boolean;
     category: number;
+    total_reviews: number;
+    review_summary: number;
     reviews?: Array<any> | null;
 }
 
