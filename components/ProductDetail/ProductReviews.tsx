@@ -46,10 +46,10 @@ const SingleReview = ({
                 <div className="flex-col text-sm justify-between">
                     <p className="flex items-center">
                         <span className="font-semibold">{user}</span>
-                        <span className="mx-4 rounded-full bg-fadegray p-1" />
+                        {/* <span className="mx-4 rounded-full bg-fadegray p-1" />
                         <span className="text-red text-[12px]">
                             Verified Purchase
-                        </span>
+                        </span> */}
                     </p>
                     <p className="text-[12px]">{formatDate(review_date)}</p>
                 </div>

@@ -76,7 +76,7 @@ export default function ProductDetailMain({ product }: Props) {
                     <ProductOptions product={product} />
                 </div>
                 <div
-                    className={`w-full flex justify-between items-center py-4 gap-8`}
+                    className={`w-full flex flex-col sm:flex-row justify-between items-center py-4 gap-8`}
                 >
                     <button className="button-secondary font-medium text-sm border border-red w-full">
                         Buy Now
