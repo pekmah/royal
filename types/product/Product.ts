@@ -28,6 +28,7 @@ export interface ProductSizes {
 export interface ProductThumbnail {
     id: number;
     thumbnail_code: string;
+    color?: string;
 }
 
 export interface ProductReview {

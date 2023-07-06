@@ -38,6 +38,10 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     const params = useSearchParams();
 
     const categoryParam = params.get("category");
+    const maxPriceParam = useSearchParams().get("maxPrice");
+    const minPriceParam = useSearchParams().get("minPrice");
+    const maxPrice = maxPriceParam ? parseInt(maxPriceParam) : undefined;
+    const minPrice = minPriceParam ? parseInt(minPriceParam) : undefined;
 
     return path.startsWith("/auth") ? null : (
         <Transition
@@ -59,7 +63,21 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                         name={"Price"}
                         min={1}
                         max={10000}
-                        onChange={({
+                        initialValues={
+                            maxPrice && minPrice
+                                ? { max: maxPrice, min: minPrice }
+                                : undefined
+                        }
+                        onClear={() => {
+                            push(
+                                `/products?${
+                                    categoryParam
+                                        ? `category=${categoryParam}`
+                                        : ""
+                                }`
+                            );
+                        }}
+                        onApply={({
                             min,
                             max,
                         }: {
@@ -69,9 +87,9 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                             push(
                                 `/products?${
                                     categoryParam
-                                        ? `category=${categoryParam}&`
+                                        ? `category=${categoryParam}`
                                         : ""
-                                }minPrice=${min}&maxPrice=${max}`
+                                }&minPrice=${min}&maxPrice=${max}`
                             );
                         }}
                     />

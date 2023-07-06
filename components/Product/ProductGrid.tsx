@@ -47,7 +47,6 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             keepPreviousData: true,
             onSuccess(data) {
                 setCount(data.count);
-                console.log(data);
             },
             onError(err) {
                 console.error("err", err);

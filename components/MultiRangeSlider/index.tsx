@@ -18,18 +18,26 @@ const barlowSemi = Barlow({
 interface MultiRangeSliderProps {
     min: number;
     max: number;
-    onChange: Function;
+    onApply: Function;
+    onClear: Function;
     name: string;
+    initialValues?: { min: number; max: number };
 }
 
 const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
     min,
     max,
-    onChange,
+    onApply,
+    onClear,
     name,
+    initialValues,
 }) => {
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
+    const [minVal, setMinVal] = useState(
+        initialValues ? initialValues.min : min
+    );
+    const [maxVal, setMaxVal] = useState(
+        initialValues ? initialValues.max : max
+    );
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);
     const range = useRef<HTMLDivElement>(null);
@@ -69,14 +77,24 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         <>
             <div className="flex justify-between px-6">
                 <h3 className={barlowSemi.className}>{name}</h3>
-                <button
-                    className="button-primary px-2 py-1 text-semibold text-sm"
-                    onClick={() => {
-                        onChange({ min: minVal, max: maxVal });
-                    }}
-                >
-                    Apply
-                </button>
+                <div className="gap-2 flex">
+                    <button
+                        className="button-secondary border border-red rounded-md px-2 py-1 text-semibold text-sm"
+                        onClick={() => {
+                            onClear();
+                        }}
+                    >
+                        Clear
+                    </button>
+                    <button
+                        className="button-primary px-2 py-1 text-semibold text-sm"
+                        onClick={() => {
+                            onApply({ min: minVal, max: maxVal });
+                        }}
+                    >
+                        Apply
+                    </button>
+                </div>
             </div>
             <div className="container h-28 pb-8">
                 <input
@@ -107,39 +125,39 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                     }}
                     className="thumb thumb--zindex-4"
                 />
-
                 <div className="slider">
                     <div className="slider__track"></div>
                     <div ref={range} className="slider__range"></div>
-                    {/* <div className="border py-1 px-2 border-gray text-black rounded-md slider__left-value">
-                        {minVal}
-                    </div>
-                    <div className="border py-1 px-2 border-gray text-black rounded-md slider__right-value">
-                        {maxVal}
-                    </div> */}
                     <div className={"w-full flex justify-between"}>
-                        {/* <label htmlFor="min">Min Value:</label> */}
                         <div className="text-black slider__left-value w-fit">
                             <input
                                 className="w-fit border border-gray rounded-md px-2 py-1"
                                 type="number"
                                 id="min"
+                                min={min}
+                                max={maxVal - 1}
                                 value={minVal}
                                 onChange={(e) => {
-                                    setMinVal(parseInt(e.target.value));
+                                    const val = parseInt(e.target.value);
+                                    if (val < maxVal) {
+                                        setMinVal(val);
+                                    }
                                 }}
                             />
                         </div>
-
-                        {/* <label htmlFor="max">Max Value:</label> */}
                         <div className="text-black slider__right-value w-fit">
                             <input
                                 className="w-fit border border-gray rounded-md px-2 py-1"
                                 type="number"
                                 id="max"
+                                min={minVal + 1}
+                                max={max}
                                 value={maxVal}
                                 onChange={(e) => {
-                                    setMaxVal(parseInt(e.target.value));
+                                    const val = parseInt(e.target.value);
+                                    if (val > minVal) {
+                                        setMaxVal(val);
+                                    }
                                 }}
                             />
                         </div>

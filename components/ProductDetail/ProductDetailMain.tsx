@@ -4,6 +4,7 @@ import StarRating from "./StarRating";
 import { BsCart2 } from "react-icons/bs";
 import { ProductEntity } from "@/types/product/Product";
 import ProductOptions from "./ProductOptions";
+import ColorSelector from "./ColorSelector";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -16,18 +17,13 @@ interface Props {
 }
 
 export default function ProductDetailMain({ product }: Props) {
-    const {
-        name,
-        average_rating,
-        reviews,
-        thumbnails,
-        review_summary,
-        total_reviews,
-    } = product;
+    const { name, thumbnails, review_summary, total_reviews } = product;
     const thumbnail =
         thumbnails && thumbnails?.length > 0
             ? thumbnails[0].thumbnail_code
             : null;
+    const color =
+        thumbnails && thumbnails?.length > 0 ? thumbnails[0].color : null;
 
     return (
         <div
@@ -48,12 +44,14 @@ export default function ProductDetailMain({ product }: Props) {
                     />
                 </div>
                 {/* TODO: Hide this as it's not applicable on the api yet */}
-                {/* <div className={'py-4'}>
-					<h3 className={`text-base ${barlowSemi.className}`}>
-						Select Finish:
-					</h3>
-					<ColorSelector />
-				</div> */}
+                {color ? (
+                    <div className={"py-4"}>
+                        <h3 className={`text-base ${barlowSemi.className}`}>
+                            Select Finish:
+                        </h3>
+                        <ColorSelector colors={[color]} />
+                    </div>
+                ) : null}
             </div>
             <div
                 className={"w-full mt-4 md:mt-0 md:w-[65%] max-h-max"}

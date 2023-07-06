@@ -20,8 +20,6 @@ export async function GET(request: Request) {
 
     try {
         if (pricesValid && category) {
-            console.log("pricesValid");
-            // {{baseUrl}}/api/v1/core/products/filter?page_size=10&page=1&category_id=7&min_price=110&max_price=549
             const res = await getRequest<PaginatedResponse<ProductEntity>>(
                 `/api/v1/core/products/filter?page_size=${page_size}&page=${page}&category_id=${category}&min_price=${minPrice}&max_price=${maxPrice}`
             );
