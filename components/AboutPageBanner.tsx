@@ -19,7 +19,7 @@ export default function AboutPageBanner() {
 		<div className={'w-full h-max block md:flex shadow-lg rounded-md'}>
 			<div className='min-w-[340px] relative h-[229px]'>
 				<Image
-					alt={'About page Banner'}
+					alt={'Landing page Banner'}
 					src={'/landing-banner-2.png'}
 					fill
 					priority
@@ -37,11 +37,11 @@ export default function AboutPageBanner() {
 					paddingRight: '8px',
 				}}>
 				<h2 className={`${barlowSemi.className} text-[32px] py-2`}>
-					<span className='text-black'>About</span>
+					<span className='text-black'>Get your</span>
 					<span className='text-blue'> Royal Mabati</span>
 				</h2>
 				<p className={`${barlow.className} text-[12px] text-center py-2 px-2`}>
-                We are customer maniacs. In our years of existence, we have built our culture around attending to our customers to full satisfaction.
+					We are customer maniacs. In our years of existence, we have built our culture around attending to our customers to full satisfaction.
 				</p>
 			</div>
 		</div>
