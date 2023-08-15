@@ -50,7 +50,7 @@ export default function Header({
 						)}
 					</button>
 					<Image
-						src={'/logo-2.png'}
+						src={'/logo-1.png'}
 						alt='Royal Mabati Logo'
 						height={35}
 						width={140}

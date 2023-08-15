@@ -2,8 +2,9 @@ export interface ProductEntity {
     id: number;
     feature?: null[] | null;
     average_rating?: null;
-    sizes?: (ProductSizes | null)[] | null;
+    pricing?: (ProductSizes | null)[] | null;
     thumbnails?: ProductThumbnail[] | null;
+    thumbnail_colors?:string[] | null
     name: string;
     description: string;
     ingredients?: null;
@@ -11,13 +12,16 @@ export interface ProductEntity {
     category: number;
     total_reviews: number;
     review_summary: number;
+    length:string[]
     reviews?: Array<any> | null;
 }
 
 export interface ProductSizes {
     id: number;
-    size: string;
+    gauge_size: string;
     price: number;
+    width:string
+    finish:string
     percentage_discount?: number | null;
     discounted: boolean;
     preparation_time: string;

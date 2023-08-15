@@ -70,10 +70,9 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                         }
                         onClear={() => {
                             push(
-                                `/products?${
-                                    categoryParam
-                                        ? `category=${categoryParam}`
-                                        : ""
+                                `/products?${categoryParam
+                                    ? `category=${categoryParam}`
+                                    : ""
                                 }`
                             );
                         }}
@@ -85,10 +84,9 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                             max: number;
                         }) => {
                             push(
-                                `/products?${
-                                    categoryParam
-                                        ? `category=${categoryParam}`
-                                        : ""
+                                `/products?${categoryParam
+                                    ? `category=${categoryParam}`
+                                    : ""
                                 }&minPrice=${min}&maxPrice=${max}`
                             );
                         }}

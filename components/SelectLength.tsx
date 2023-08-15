@@ -1,18 +1,17 @@
-interface Props<T> {
+
+interface Props {
     label: string;
-    options: (T | null)[];
-    selectedOption: T | null;
-    onSelectOption: (option: T | null) => void;
-    getKey: (option: T | null) => string; // Function to get the display key from the option
+    options: string[]
+    selectedOption: string | null;
+    onSelectOption: (option: string | null) => void;
 }
 
-export default function SelectOption<T>({
+export default function SelectLength({
     label,
     options,
     selectedOption,
     onSelectOption,
-    getKey,
-}: Props<T>) {
+}: Props) {
     return (
         <div className='w-full flex flex-col gap-2'>
             <label htmlFor={label} className='text-sm font-semibold mb-1'>
@@ -21,24 +20,24 @@ export default function SelectOption<T>({
             {options ? (
                 options.length === 1 ? (
                     <span className='border border-gray text-[#888888] text-[12px] font-medium rounded-md w-full p-2'>
-                        {getKey(options[0])}
+                        {options[0]}
                     </span>
                 ) : (
                     <select
                         id={label}
-                        value={selectedOption ? getKey(selectedOption) : ''}
+                        value={selectedOption ? selectedOption : ''}
                         onChange={(e) => {
                             const key = e.target.value;
-                            const option = options.find(opt => getKey(opt) === key) || null;
+                            const option = options.find(opt => opt === key) || null;
                             onSelectOption(option);
                         }}
-                        className='border border-gray text-[#888888] text-[12px] font-medium rounded-md w-full p-2 outline-none'>
+                        className='border border-gray text-[#020202] text-[12px] font-medium rounded-md w-full p-2 outline-none'>
                         {options.map((option, idx) => (
                             <option
-                                value={getKey(option)}
+                                value={option}
                                 key={idx}
                                 className='bg-white text-black'>
-                                {getKey(option)}
+                                {option}
                             </option>
                         ))}
                     </select>
