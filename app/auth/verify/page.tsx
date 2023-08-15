@@ -52,7 +52,7 @@ const codeFormProps: FormProps = {
 			type: 'pin',
 			label: '',
 			placeholder: 'Code',
-			helperText: 'Enter the 6 digit code sent to your number.',
+			helperText: 'Enter the 6 digit code sent to your Email.',
 		},
 	},
 	onSubmit: (data: any) => {

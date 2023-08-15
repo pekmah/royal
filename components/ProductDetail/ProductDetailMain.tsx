@@ -5,6 +5,9 @@ import { BsCart2 } from "react-icons/bs";
 import { ProductEntity } from "@/types/product/Product";
 import ProductOptions from "./ProductOptions";
 import ColorSelector from "./ColorSelector";
+import SelectSize from "../SelectSize";
+import { useState } from "react";
+import SelectOption from "../SelectSize";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -17,19 +20,17 @@ interface Props {
 }
 
 export default function ProductDetailMain({ product }: Props) {
-    const { name, thumbnails, review_summary, total_reviews } = product;
+    const { name, thumbnails, thumbnail_colors, pricing, review_summary, total_reviews } = product;
+    const [activeFinish, setActiveFinish] = useState(pricing ? pricing[0] : undefined);
     const thumbnail =
         thumbnails && thumbnails?.length > 0
             ? thumbnails[0].thumbnail_code
             : null;
-    const color =
-        thumbnails && thumbnails?.length > 0 ? thumbnails[0].color : null;
-
     return (
         <div
             className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4`}
         >
-            <div className="w-full md:w-[35%]">
+            <div className="w-full flex-1">
                 <div className="relative h-[240px]">
                     <Image
                         alt={"Landing page Banner"}
@@ -43,18 +44,29 @@ export default function ProductDetailMain({ product }: Props) {
                         className="rounded-md"
                     />
                 </div>
-                {/* TODO: Hide this as it's not applicable on the api yet */}
-                {color ? (
-                    <div className={"py-4"}>
-                        <h3 className={`text-base ${barlowSemi.className}`}>
-                            Select Finish:
-                        </h3>
-                        <ColorSelector colors={[color]} />
-                    </div>
-                ) : null}
+             
+                <div className="flex gap-10 items-center py-4 ">
+                    {thumbnail_colors ? (
+                        <div className={""}>
+                            <h3 className={`text-base ${barlowSemi.className}`}>
+                                Color:
+                            </h3>
+                            <ColorSelector colors={thumbnail_colors} />
+                        </div>
+                    ) : null}
+                    {pricing ? (
+				<SelectOption
+					label='Finish'
+					options={pricing}
+					selectedOption={activeFinish}
+				    onSelectOption={setActiveFinish}
+                    getKey={(option) => option?.finish || ''}
+				/>
+			) : null}
+                </div>
             </div>
             <div
-                className={"w-full mt-4 md:mt-0 md:w-[65%] max-h-max"}
+                className={"w-full mt-4 md:mt-0 flex-1 max-h-max"}
                 style={{
                     display: "flex",
                     flexDirection: "column",
