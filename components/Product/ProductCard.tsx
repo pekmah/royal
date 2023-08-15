@@ -2,10 +2,10 @@
 
 import { Barlow } from 'next/font/google';
 import CardImageLink from './CardImageLink';
-import { ProductEntity } from '@/types/product/Product';
+import { ProductEntity, ProductSizes } from '@/types/product/Product';
 import { useState } from 'react';
-import SelectSize from '../SelectSize';
 import { BsCart2 } from 'react-icons/bs';
+import SelectOption from '../SelectSize';
 
 interface ProductCardProps {
 	product: ProductEntity;
@@ -24,8 +24,8 @@ const barlowSemi = Barlow({
 });
 
 export default function ProductCard({ product }: ProductCardProps) {
-	const { id, name, sizes, thumbnails } = product;
-	const [activeSize, setActiveSize] = useState(sizes ? sizes[0] : undefined);
+	const { id, name, pricing, thumbnails } = product;
+	const [activeGauge, setActiveGauge] = useState<ProductSizes | null>(null);
 
 	return (
 		<div className='bg-white justify-between h-full rounded-md shadow-lg flex-col'>
@@ -52,31 +52,33 @@ export default function ProductCard({ product }: ProductCardProps) {
 				<div className='w-full'>
 					<p className={`w-full mb-2 ${barlow.className}`}>{name}</p>
 					<div className='w-full flex'>
-						{sizes ? (
-							<SelectSize
-								options={sizes}
-								label='Sizes'
-								onSelectSize={setActiveSize}
-							/>
+						{pricing ? (
+							<SelectOption<ProductSizes>
+							label='Gauge Size'
+							options={pricing}
+							selectedOption={activeGauge}
+							onSelectOption={setActiveGauge}
+							getKey={(option) => option?.gauge_size || ''}
+						/>
 						) : null}
 					</div>
 				</div>
 
 				<div className='h-fit w-full mt-2'>
 					<div className={`flex justify-between py-1 ${barlowSemi.className}`}>
-						{activeSize?.discounted && activeSize?.percentage_discount ? (
+						{activeGauge?.discounted && activeGauge?.percentage_discount ? (
 							<>
 								<span>
 									Ksh.{' '}
-									{activeSize.price *
-										((100 - activeSize?.percentage_discount) / 100)}
+									{activeGauge.price *
+										((100 - activeGauge?.percentage_discount) / 100)}
 								</span>
 								<span className='text-red line-through'>
-									Ksh. {activeSize?.price ?? '-'}
+									Ksh. {activeGauge?.price ?? '-'}
 								</span>
 							</>
 						) : (
-							<span>Ksh. {activeSize?.price ?? '-'}</span>
+							<span>Ksh. {activeGauge?.price ?? '-'}</span>
 						)}
 					</div>
 					<button className='button-secondary w-full flex justify-evenly border text-sm py-2 px-4 my-2 border-red'>
