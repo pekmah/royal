@@ -7,7 +7,7 @@ export default function ColorSelector({ colors }: { colors: string[] }) {
     const [selected, setSelected] = useState(0);
 
     return (
-        <div className="flex gap-4 w-full py-4">
+        <div className="flex gap-4 w-full py-4 ">
             {colors.map((color, idx) => (
                 <button
                     key={color}

@@ -15,7 +15,6 @@ export default function GaugeSelector({
 	onActiveSizeChange,
 }: Props) {
 	if (!pricing || (pricing && pricing.length === 0)) return null;
-	console.log(pricing)
 	return (
 		<div className='w-full flex justify-between items-center'>
 			<p className='font-semibold text-sm'>Size</p>

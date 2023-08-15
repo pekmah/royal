@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Barlow } from "next/font/google";
 import StarRating from "./StarRating";
-import { BsCart2 } from "react-icons/bs";
 import { ProductEntity } from "@/types/product/Product";
 import ProductOptions from "./ProductOptions";
 import ColorSelector from "./ColorSelector";
@@ -84,17 +83,7 @@ export default function ProductDetailMain({ product }: Props) {
                     </div>
                     <ProductOptions product={product} />
                 </div>
-                <div
-                    className={`w-full flex flex-col sm:flex-row justify-between items-center py-4 gap-8`}
-                >
-                    <button className="button-secondary font-medium text-sm border border-red w-full">
-                        Buy Now
-                    </button>
-                    <button className="button-primary font-medium text-sm w-full flex items-center justify-center gap-6">
-                        <BsCart2 size={"20"} />
-                        <span>Add to Cart</span>
-                    </button>
-                </div>
+               
             </div>
         </div>
     );

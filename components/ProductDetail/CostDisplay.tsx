@@ -7,8 +7,8 @@ interface Props {
 
 export default function CostDisplay({ activeSize, quantity }: Props) {
 	return (
-		<div className='flex justify-between items-center h-max'>
-			<p className='font-semibold text-sm py-1'>Cost</p>
+		<div className='flex justify-between flex-1 w-full items-center h-max'>
+			<p className='font-semibold text-sm py-1'>Price:</p>
 			<div className='font-semibold text-sm'>
 				{activeSize?.discounted && activeSize?.percentage_discount ? (
 					<div className='flex gap-4 items-center'>
