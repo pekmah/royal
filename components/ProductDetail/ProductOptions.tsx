@@ -6,6 +6,7 @@ import { useState } from 'react';
 import CostDisplay from './CostDisplay';
 import SelectOption from '../SelectSize';
 import SelectLength from '../SelectLength';
+import { BsCart2 } from "react-icons/bs";
 
 interface Props {
 	product: ProductEntity;
@@ -64,7 +65,15 @@ export default function ProductOptions({ product }: Props) {
 
 			</div>
 			<QuantityCount quantity={quantity} onQuantityChange={setQuantity} />
-			<CostDisplay activeSize={activeOption} quantity={quantity} />
+			<div
+                    className={`w-full flex flex-col sm:flex-row justify-between items-center py-4 gap-20`}
+                >
+					<CostDisplay activeSize={activeOption} quantity={quantity} />
+                    <button className="button-primary font-medium text-sm max-w-xs py-2  flex flex-1 items-center justify-center gap-6">
+                        <BsCart2 size={"20"} />
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
 		</>
 	);
 }
