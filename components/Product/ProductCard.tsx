@@ -51,7 +51,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 				}}>
 				<div className='w-full'>
 					<p className={`w-full mb-2 ${barlow.className}`}>{name}</p>
-					<div className='w-full flex'>
+					<div className='w-full hidden'>
 						{pricing ? (
 							<SelectOption<ProductSizes>
 							label='Gauge Size'
