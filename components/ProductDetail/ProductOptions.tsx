@@ -20,49 +20,49 @@ export default function ProductOptions({ product }: Props) {
 
 	return (
 		<>
-		<div className=' flex gap-4'>
-			{pricing ? (
-				<SelectOption<ProductSizes>
-				label='Gauge Size'
-				options={pricing}
-				selectedOption={activeOption}
-				onSelectOption={setActiveOption}
-				getKey={(option) => option?.gauge_size || ''}
-			/>
-			) : null}
+			<div className=' flex gap-4'>
 				{pricing ? (
-				<SelectOption<ProductSizes>
-				label='Measurement'
-				options={pricing}
-				selectedOption={activeOption}
-				onSelectOption={setActiveOption}
-				getKey={(option) => option?.gauge_size || ''}
-			/>
-			) : null}
+					<SelectOption<ProductSizes>
+						label='Gauge Size'
+						options={pricing}
+						selectedOption={activeOption}
+						onSelectOption={setActiveOption}
+						getKey={(option) => option?.gauge_size || ''}
+					/>
+				) : null}
+				{pricing ? (
+					<SelectOption<ProductSizes>
+						label='Measurement'
+						options={pricing}
+						selectedOption={activeOption}
+						onSelectOption={setActiveOption}
+						getKey={(option) => option?.gauge_size || ''}
+					/>
+				) : null}
 
 
-		</div>
-		<div className=' flex gap-4 pt-4'>
-			{length.length > 0 && (
+			</div>
+			<div className=' flex gap-4 pt-4'>
+				{length.length > 0 && (
 					<SelectLength
-					label='Length'
-					options={length}
-					selectedOption={activeLength}
-					onSelectOption={setActiveLength}
-				/>
-			)}
+						label='Length'
+						options={length}
+						selectedOption={activeLength}
+						onSelectOption={setActiveLength}
+					/>
+				)}
 				{pricing ? (
-				<SelectOption<ProductSizes>
-				label='Width'
-				options={pricing}
-				selectedOption={activeOption}
-				onSelectOption={setActiveOption}
-				getKey={(option) => option?.width || ''}
-			/>
-			) : null}
+					<SelectOption<ProductSizes>
+						label='Width'
+						options={pricing}
+						selectedOption={activeOption}
+						onSelectOption={setActiveOption}
+						getKey={(option) => option?.width || ''}
+					/>
+				) : null}
 
 
-		</div>
+			</div>
 			<QuantityCount quantity={quantity} onQuantityChange={setQuantity} />
 			<CostDisplay activeSize={activeOption} quantity={quantity} />
 		</>

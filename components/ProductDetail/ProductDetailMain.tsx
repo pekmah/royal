@@ -5,7 +5,6 @@ import { BsCart2 } from "react-icons/bs";
 import { ProductEntity } from "@/types/product/Product";
 import ProductOptions from "./ProductOptions";
 import ColorSelector from "./ColorSelector";
-import SelectSize from "../SelectSize";
 import { useState } from "react";
 import SelectOption from "../SelectSize";
 
@@ -44,7 +43,7 @@ export default function ProductDetailMain({ product }: Props) {
                         className="rounded-md"
                     />
                 </div>
-             
+
                 <div className="flex gap-10 items-center py-4 ">
                     {thumbnail_colors ? (
                         <div className={""}>
@@ -55,14 +54,14 @@ export default function ProductDetailMain({ product }: Props) {
                         </div>
                     ) : null}
                     {pricing ? (
-				<SelectOption
-					label='Finish'
-					options={pricing}
-					selectedOption={activeFinish}
-				    onSelectOption={setActiveFinish}
-                    getKey={(option) => option?.finish || ''}
-				/>
-			) : null}
+                        <SelectOption
+                            label='Finish'
+                            options={pricing}
+                            selectedOption={activeFinish}
+                            onSelectOption={setActiveFinish}
+                            getKey={(option) => option?.finish || ''}
+                        />
+                    ) : null}
                 </div>
             </div>
             <div
