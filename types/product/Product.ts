@@ -16,6 +16,16 @@ export interface ProductEntity {
     reviews?: Array<any> | null;
 }
 
+export interface ProductCart {
+    id:number
+    user:string
+    items:Array<any> | null
+    quantity:number
+    length:null | number
+    color:null | string 
+    total_price: number
+}
+
 export interface ProductSizes {
     id: number;
     gauge_size: string;

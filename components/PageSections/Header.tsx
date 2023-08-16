@@ -12,6 +12,7 @@ import NavMenu from './NavMenu';
 import DropdownMenu, { DropdownMenuItem } from '../Dropdown';
 import SearchInput from '../SearchInput';
 import { Dispatch, SetStateAction } from 'react';
+import { useCartContext } from '@/context/CartContext';
 
 interface HeaderProps {
 	isSidebarOpen: boolean;
@@ -24,7 +25,7 @@ export default function Header({
 }: HeaderProps) {
 	const { status, data } = useSession();
 	const path = usePathname();
-
+	const {itemQuantity}= useCartContext()
 	return path.startsWith('/auth') ? null : (
 		<header className='fixed w-screen md:relative z-20'>
 			{/* <div className='w-full h-[70px] relative'>
@@ -37,7 +38,7 @@ export default function Header({
 				/>
 			</div> */}
 			<NavMenu />
-			<div className='w-full py-4 px-8 flex justify-between items-center bg-blue shadow-sm'>
+			<div className= {`${path === '/about' ? 'hidden' : 'flex'} w-full py-4 px-8  justify-between items-center bg-blue shadow-sm`}>
 				<div className={`flex gap-8 items-center`}>
 					<button
 						onClick={() => {
@@ -75,17 +76,22 @@ export default function Header({
 							className={'bg-gray h-[38px] w-[74px] animate-pulse rounded-md'}
 						/>
 					) : status === 'authenticated' ? (
-						<div className='flex items-baseline gap-6 h-full'>
-							<div className='flex items-center gap-1 font-medium'>
-								<BsCart2 size={'16'} color={'#fff'} />
+						<div className='flex relative items-baseline gap-6 h-full'>
+							<Link href={'/cart'} className='flex items-center gap-4 font-medium'>
+								<div className=''>
+									<BsCart2 size={'16'} color={'#fff'} />
+								<div className='absolute -top-3 left-3 opacity-100 bg-red text-white rounded-full px-1'>
+									{itemQuantity}
+								</div>
+								</div>
 								<p className='text-sm text-white'>Cart</p>
-							</div>
+							</Link>
 							<DropdownMenu
 								buttonText={
-									<div className='flex items-center gap-1 font-medium'>
+									<Link href={'/account'} className='flex items-center gap-1 font-medium'>
 										<RxPerson size={'16'} color={'#fff'} />
 										<p className='text-sm text-white'>Account</p>
-									</div>
+									</Link>
 								}>
 								<DropdownMenuItem onClick={() => signOut()}>
 									Logout

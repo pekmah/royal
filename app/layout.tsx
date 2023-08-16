@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import AuthProvider from '@/components/Providers/AuthProvider';
 import MainContainer from '@/components/PageSections/MainContainer';
 import QueryProvider from '@/components/Providers/QueryProvider';
+import CartContextProvider from '@/context/CartContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,8 +23,10 @@ export default function RootLayout({
 			<AuthProvider>
 				<body className={`${inter.className}`} style={{ overflowX: 'hidden' }}>
 					<QueryProvider>
+						<CartContextProvider>
 						<MainContainer>{children}</MainContainer>
 						<Toaster position='bottom-right' reverseOrder={false} />
+						</CartContextProvider>
 					</QueryProvider>
 				</body>
 			</AuthProvider>

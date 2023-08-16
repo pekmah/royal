@@ -7,6 +7,7 @@ import CostDisplay from './CostDisplay';
 import SelectOption from '../SelectSize';
 import SelectLength from '../SelectLength';
 import { BsCart2 } from "react-icons/bs";
+import { useCartContext } from '@/context/CartContext';
 
 interface Props {
 	product: ProductEntity;
@@ -14,6 +15,7 @@ interface Props {
 
 export default function ProductOptions({ product }: Props) {
 	const { pricing, length } = product;
+	const {addToCart} = useCartContext()
 
 	const [activeOption, setActiveOption] = useState<ProductSizes | null>(null);
 	const [activeLength, setActiveLength] = useState<string | null>(null);
@@ -44,7 +46,7 @@ export default function ProductOptions({ product }: Props) {
 
 			</div>
 			<div className=' flex gap-4 pt-4'>
-				{length.length > 0 && (
+				{length?.length > 0 && (
 					<SelectLength
 						label='Length'
 						options={length}
@@ -69,7 +71,7 @@ export default function ProductOptions({ product }: Props) {
                     className={`w-full flex flex-col sm:flex-row justify-between items-center py-4 gap-20`}
                 >
 					<CostDisplay activeSize={activeOption} quantity={quantity} />
-                    <button className="button-primary font-medium text-sm max-w-xs py-2  flex flex-1 items-center justify-center gap-6">
+                    <button  className="button-primary font-medium text-sm max-w-xs py-2  flex flex-1 items-center justify-center gap-6">
                         <BsCart2 size={"20"} />
                         <span>Add to Cart</span>
                     </button>

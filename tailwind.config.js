@@ -20,6 +20,7 @@ module.exports = {
 			black: '#000000',
 			gray: '#DBDBDB',
 			fadegray: '#888888',
+			lightgray: '#333333',
 		},
 		screens: {
 			sm: '640px',
