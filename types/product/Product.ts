@@ -14,6 +14,7 @@ export interface ProductEntity {
     review_summary: number;
     length:string[]
     reviews?: Array<any> | null;
+    qty?:number 
 }
 
 export interface ProductCart {
