@@ -22,12 +22,13 @@ export default function MainContainer({ children }: { children: ReactNode }) {
 				setIsSidebarOpen={setIsSidebarOpen}
 				isSidebarOpen={isSidebarOpen}
 			/>
+			
 			<main className={`w-screen p-8 flex gap-8 bg-[#fbfbff]`}>
 				<Sidebar isOpen={isSidebarOpen} />
-				{!path.startsWith('/auth') ? (
+				{!path.startsWith('/auth') && !path.startsWith('/about') ? (
 					<section
 						className={`${
-							isSidebarOpen ? 'md:w-[80%] hidden md:block' : 'w-full'
+							isSidebarOpen ? 'md:w-[80%] hidden md:block' : 'w-full' 
 						} transition-all mt-32 md:mt-[0] duration-300`}>
 						{children}
 					</section>
