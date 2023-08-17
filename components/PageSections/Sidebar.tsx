@@ -36,14 +36,13 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     const path = usePathname();
     const { push } = useRouter();
     const params = useSearchParams();
-
     const categoryParam = params.get("category");
     const maxPriceParam = useSearchParams().get("maxPrice");
     const minPriceParam = useSearchParams().get("minPrice");
     const maxPrice = maxPriceParam ? parseInt(maxPriceParam) : undefined;
     const minPrice = minPriceParam ? parseInt(minPriceParam) : undefined;
 
-    return path.startsWith("/auth") ? null : (
+    return path.startsWith("/auth") || path.startsWith("/about") ? null : (
         <Transition
             show={isOpen}
             {...transitionClasses}
