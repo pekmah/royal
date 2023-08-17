@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function CostDisplay({ activeSize, quantity, total }: Props) {
-	const {increaseQuantity, decreaseQuantity, cartTotalPrice} = useCartContext()
+	const {increaseQuantity, decreaseQuantity} = useCartContext()
 	return (
 		<div className='flex justify-between flex-1 w-full items-center h-max'>
 			<p className='font-semibold text-sm py-1'>Price:</p>
