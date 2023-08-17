@@ -1,3 +1,4 @@
+import { useCartContext } from '@/context/CartContext';
 import { Dispatch, SetStateAction } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 

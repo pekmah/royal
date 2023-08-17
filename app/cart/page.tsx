@@ -6,6 +6,7 @@ import React from 'react'
 import { useQuery } from 'react-query';
 import { BsArrowRightShort } from 'react-icons/bs'
 import { Barlow } from 'next/font/google';
+import { useRouter } from 'next/navigation';
 
 const barlowSemi = Barlow({
   style: 'normal',
@@ -24,12 +25,16 @@ const barlowNormal = Barlow({
 });
 
 const Cart = () => {
-  const { itemQuantity } = useCartContext()
+  const { itemQuantity, totalPrice } = useCartContext()
   // const { data, isLoading, error } = useQuery(
   //     'cartItems',
   //     () => getCartItems(), // Use an inline function to call getCartItems
   //   );
   //   console.log(data)
+  const router = useRouter()
+
+    const vat = totalPrice * 16/100
+  const total = totalPrice - vat
   return (
     <div>
       {
@@ -45,19 +50,19 @@ const Cart = () => {
                 <h3 className={`${barlowSemi.className} py-4 `}>Order Summary</h3>
                 <div className='flex w-full justify-between'>
                   <span className={`${barlowNormal.className} text-black/60 `}>Total for item(s)</span>
-                  <span className={`${barlowSemi.className} `}>Ksh.200</span>
+                  <span className={`${barlowSemi.className} `}>{totalPrice}</span>
                 </div>
                 <div className='flex w-full justify-between py-2'>
-                  <span className={`${barlowNormal.className} text-black/60 `}>VAT(%)</span>
-                  <span className={`${barlowSemi.className} `}>Ksh.300</span>
+                  <span className={`${barlowNormal.className} text-black/60 `}>VAT( 16% )</span>
+                  <span className={`${barlowSemi.className} `}>{vat}</span>
                 </div>
 
                 <div className='flex w-full justify-between pt-4'>
                   <span className={`${barlowMedium.className} `}>Total</span>
-                  <span className={`${barlowSemi.className} `}>Ksh.2,900</span>
+                  <span className={`${barlowSemi.className} `}>{total}</span>
                 </div>
                 <div className='flex gap-4 py-6 w-full justify-center'>
-                  <button className='button-secondary border border-red py-1.5 font-bold px-4'>Back To shop</button>
+                  <button onClick={()=>router.back()} className='button-secondary border border-red py-1.5 font-bold px-4'>Back To shop</button>
                   <button className="button-primary py-1.5 flex gap-2 items-center ">
                     <span>Checkout</span>
                     <BsArrowRightShort size={25} />

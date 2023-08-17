@@ -12,6 +12,7 @@ export interface ProductEntity {
     category: number;
     total_reviews: number;
     review_summary: number;
+    roof_details:string[]
     length:string[]
     reviews?: Array<any> | null;
     qty?:number 
@@ -29,7 +30,7 @@ export interface ProductCart {
 
 export interface ProductSizes {
     id: number;
-    gauge_size: string;
+    gauge_size: number;
     price: number;
     width:string
     finish:string
@@ -43,6 +44,7 @@ export interface ProductSizes {
 export interface ProductThumbnail {
     id: number;
     thumbnail_code: string;
+    thumbnail_color?:string
     color?: string;
 }
 

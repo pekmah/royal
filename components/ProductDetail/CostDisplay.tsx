@@ -1,11 +1,14 @@
+import { useCartContext } from '@/context/CartContext';
 import { ProductSizes } from '@/types/product/Product';
 
 interface Props {
 	activeSize: ProductSizes | null | undefined;
 	quantity: number;
+	total:number
 }
 
-export default function CostDisplay({ activeSize, quantity }: Props) {
+export default function CostDisplay({ activeSize, quantity, total }: Props) {
+	const {increaseQuantity, decreaseQuantity, cartTotalPrice} = useCartContext()
 	return (
 		<div className='flex justify-between flex-1 w-full items-center h-max'>
 			<p className='font-semibold text-sm py-1'>Price:</p>
@@ -26,7 +29,7 @@ export default function CostDisplay({ activeSize, quantity }: Props) {
 						</span>
 					</div>
 				) : (
-					<span>Ksh. {activeSize ? activeSize.price * quantity : '-'}</span>
+					<span>Ksh. {total}</span>
 				)}
 			</div>
 		</div>

@@ -25,21 +25,23 @@ const CartItem = () => {
   const { cart: { items }, increaseQuantity, decreaseQuantity, removeFromCart } = useCartContext()
   const [activeFinish, setActiveFinish] = useState<string | null>(null);
   const [activeGauge, setActiveGauge] = useState<string | null>(null);
-  // console.log(items)
+  console.log(items)
   const [pricing, setPricing] = useState<ProductSizes[]>([]);
 
   const handleGaugeChange = (id: number, newValue: string) => {
+    // Convert newValue to a number before updating the gauge_size
+    const newGaugeSize = parseFloat(newValue);
+  
     const updatedPricing = pricing.map((p) => {
       if (p.id === id) {
-        return { ...p, gauge_size: newValue };
+        return { ...p, gauge_size: newGaugeSize };
       }
       return p;
     });
-
+  
     setPricing(updatedPricing);
     setActiveGauge(newValue);
   };
-
   const handleFinishChange = (id: number, newValue: string) => {
     const updatedPricing = pricing.map((p) => {
       if (p.id === id) {
@@ -166,7 +168,7 @@ const CartItem = () => {
                       </div>
                     </div>
                   </div>
-                  <span className={`${barlowMedium.className} cursor-pointer` }onClick={()=>removeFromCart(id, name)}>Remove</span>
+                  <span className={`${barlowMedium.className} cursor-pointer` } onClick={()=>removeFromCart(id, name)}>Remove</span>
                 </div>
               </div>
             </div>)
