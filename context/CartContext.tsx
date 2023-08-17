@@ -17,7 +17,11 @@ type Action = {
 
   interface CartContextValue {
     handleSidebar: () => void;
+    cart: {
+      items: CartItem[]; // Use the actual type for cart items
+    };
     sidebar: boolean;
+    
     addToCart: (item: CartItem, id: number) => void;
     itemQuantity:number
     // Add more functions or properties as needed
@@ -150,6 +154,7 @@ const CartContextProvider = ({children}:{children:ReactNode}) => {
     <GlobalContext.Provider value = {{
           handleSidebar,
           sidebar,
+          cart,
           addToCart,
           itemQuantity
                }}>
