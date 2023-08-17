@@ -1,7 +1,15 @@
 import { useCartContext } from '@/context/CartContext'
+import { ProductSizes } from '@/types/product/Product'
 import Image from 'next/image'
 import React from 'react'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+
+interface PricingItem {
+  id: number;
+  finish: string | null;
+  gauge_size: string | null;
+  price: number;
+}
 
 const CartItem = () => {
   const {cart:{items}, } = useCartContext()
@@ -13,7 +21,7 @@ const CartItem = () => {
           items.map(({id, pricing, name, thumbnails,})=>{
             const thumbnail =
             thumbnails && thumbnails?.length > 0
-                ? thumbnails[0].image
+                ? thumbnails[0].thumbnail_code
                 : null;
                 // console.log(thumbnail)
             return(
@@ -31,28 +39,28 @@ const CartItem = () => {
               <div>
                 <h4>{name}</h4>
                 <div>
-                  {pricing.map(({id, finish, gauge_size, price})=>(
-                    <div key={id}>
+                  {pricing && pricing.map((p)=>(
+                    <div key={p?.id}>
                       <div>
-                        {finish !== null &&(
+                        {p?.finish !== null &&(
                           <div>
 
                             <h3>Finish:</h3>
-                            <span>{finish}</span>
+                            <span>{p?.finish}</span>
                           </div>
 
                         )}
-                          {gauge_size !== null &&(
+                          {p?.gauge_size !== null &&(
 
                         <div>
                             <h3>Gauge:</h3>
-                              <span>{gauge_size}</span>
+                              <span>{p?.gauge_size}</span>
                         
                         </div>
                           )}
                         <div>
                           <h4>Cost</h4>
-                          <span>{price}</span>
+                          <span>{p?.price}</span>
                         </div>
                       </div>
                     </div>

@@ -1,4 +1,5 @@
 "use client"
+import { ProductEntity } from '@/types/product/Product';
 import React, {useContext, createContext, useState, useReducer, useEffect, ReactNode} from 'react'
 import  toast  from 'react-hot-toast'
 
@@ -7,33 +8,18 @@ type Action = {
     payload: any; 
   };
   interface CartType {
-    items: Array<CartItem>; 
+    items: Array<ProductEntity>; 
   }
   
-  interface CartItem {
-    id: number;
-    name: string;
-    thumbnails:{
-      thumbnail_code:string
-      image:string
-    }[]
-
-    pricing:{
-      id:number
-      finish:string
-      gauge_size:number
-      price:number
-    }[]
-  }
 
   interface CartContextValue {
     handleSidebar: () => void;
     cart: {
-      items: CartItem[]; // Use the actual type for cart items
+      items: ProductEntity[]; // Use the actual type for cart items
     };
     sidebar: boolean;
     
-    addToCart: (item: CartItem, id: number) => void;
+    addToCart: (item: ProductEntity, id: number) => void;
     itemQuantity:number
     // Add more functions or properties as needed
   }
@@ -136,7 +122,7 @@ const CartContextProvider = ({children}:{children:ReactNode}) => {
     //   setTotalPrice(total)
     // }, [cart])
    
-    const addToCart = (item:CartItem, id:number) =>{
+    const addToCart = (item:ProductEntity, id:number) =>{
       const inCart = cart.items.find((item)=>item.id === id)
       if (inCart){
         toast.success(`Item QTY Increased`)
