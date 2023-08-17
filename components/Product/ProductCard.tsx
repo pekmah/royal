@@ -26,6 +26,7 @@ const barlowSemi = Barlow({
 
 export default function ProductCard({ product }: ProductCardProps) {
 	const { id, name, pricing, thumbnails } = product;
+	// console.log(pricing)
 	const [activeGauge, setActiveGauge] = useState<ProductSizes | null>(null);
 	const { addToCart} = useCartContext()
 
@@ -42,8 +43,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 					}
 				/>
 			</div>
+
+			<h4 className={` text-lightgray text-start px-4 pt-2 ${barlow.className}`}>{name}</h4>
 			<div
-				className='w-full p-4'
+				className='w-full px-4  py-2'
 				style={{
 					display: 'flex',
 					flexDirection: 'column',
@@ -51,8 +54,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 					justifyContent: 'space-between',
 					height: 'calc(100% - 160px)',
 				}}>
-
-				<div className='h-fit w-full mt-2'>
+					
+				<div className='h-fit w-full'>
 					<div className={`flex justify-between py-1 ${barlowSemi.className}`}>
 						{activeGauge?.discounted && activeGauge?.percentage_discount ? (
 							<>

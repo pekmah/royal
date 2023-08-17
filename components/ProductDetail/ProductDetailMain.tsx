@@ -52,13 +52,12 @@ export default function ProductDetailMain({ product }: Props) {
     }, [length]);
     const selectedPricing = pricing?.find(
         (p) =>
-            p?.gauge_size === activeGauge?.gauge_size &&
-            p?.width === activeWidth?.width && p?.finish === activeFinish?.finish
+            p?.gauge_size === activeGauge?.gauge_size
+             && p?.finish === activeFinish?.finish
     );
 
     const unitPrice = selectedPricing?.price || 0;
     const totalPrice = (activeLength || 0) * unitPrice * quantity;
-
     const isAddToCartDisabled = !selectedPricing || activeLength === null;
     const thumbnail = thumbnails && thumbnails?.length > 0
         ? thumbnails.find((t) => t.thumbnail_color === selectedColor)?.thumbnail_code ?? null

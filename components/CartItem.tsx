@@ -25,7 +25,7 @@ const CartItem = () => {
   const { cart: { items }, increaseQuantity, decreaseQuantity, removeFromCart } = useCartContext()
   const [activeFinish, setActiveFinish] = useState<string | null>(null);
   const [activeGauge, setActiveGauge] = useState<string | null>(null);
-  console.log(items)
+  // console.log(items)
   const [pricing, setPricing] = useState<ProductSizes[]>([]);
 
   const handleGaugeChange = (id: number, newValue: string) => {
@@ -130,6 +130,7 @@ const CartItem = () => {
                         </div>
                       )}
                     </div>
+                    
                     <div className='flex w-full justify-between gap-20'>
                       <h4 className={`${barlowSemi.className} text-lightgray`}>
                         Cost
