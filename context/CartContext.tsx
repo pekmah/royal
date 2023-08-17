@@ -13,6 +13,17 @@ type Action = {
   interface CartItem {
     id: number;
     name: string;
+    thumbnails:{
+      thumbnail_code:string
+      image:string
+    }[]
+
+    pricing:{
+      id:number
+      finish:string
+      gauge_size:number
+      price:number
+    }[]
   }
 
   interface CartContextValue {

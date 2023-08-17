@@ -5,19 +5,19 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
 const CartItem = () => {
   const {cart:{items}, } = useCartContext()
-  console.log(items)
+  // console.log(items)
  
   return (
     <div>
         {
-          items.map(({id,pricing, name, thumbnails,})=>{
+          items.map(({id, pricing, name, thumbnails,})=>{
             const thumbnail =
             thumbnails && thumbnails?.length > 0
                 ? thumbnails[0].image
                 : null;
                 // console.log(thumbnail)
             return(
-               <div key={id}>
+               <div key={id} className='flex'>
               <div className='relative h-[173px] w-[226px]'>
               <Image
                         alt={"Landing page Banner"}
