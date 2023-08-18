@@ -15,11 +15,11 @@ export function setAccessToken(token: string): void {
   document.cookie = cookie.serialize(TOKEN_COOKIE_NAME, token, cookieOptions);
 }
 
-
-
-export const getAccessToken = (req?: any): string | undefined => {
+export function getAccessToken(
+  req?: InternalAxiosRequestConfig<any>
+): string | undefined {
   const cookies = cookie.parse(
-    req ? req.headers.cookie || '' : document.cookie
+    req ? req.headers.cookie || "" : document.cookie
   );
   return cookies[TOKEN_COOKIE_NAME];
-};
+}

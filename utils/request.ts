@@ -12,12 +12,12 @@ axios.defaults.baseURL = process.env.BASE_URL;
 axios.interceptors.response.use((response) => response, axiosErrorHandler);
 axios.interceptors.request.use((config) => {
 	// console.log(config.headers);
-	const accessToken = getAccessToken();
+	const accessToken = getAccessToken(config);
 	if (accessToken) {
-	  config.headers.Authorization = `Bearer ${accessToken}`;
+		config.headers.Authorization = `Bearer ${accessToken}`;
 	}
 	return config;
-  }, axiosErrorHandler);
+}, axiosErrorHandler);
 
 type TError = {
 	status: number;

@@ -11,6 +11,7 @@ export async function POST(request: Request) {
 	} catch (e: any) {
 		return new Response(JSON.stringify(e.response.data), {
 			status: e.response.status,
+			
 		});
 	}
 }
