@@ -43,31 +43,51 @@ export default function ProductDetailMain({ product }: Props) {
     const [activeLength, setActiveLength] = useState<number | null>(null);
 
     const [quantity, setQuantity] = useState(1);
-    useEffect(() => {
-        if (!length || length.length === 0) {
-            setActiveLength(null);
-        } else {
-            setActiveLength(Number(length[0])); // Set the default length when available
-        }
-    }, [length]);
-    const selectedPricing = pricing?.find(
-        (p) =>
-            p?.gauge_size === activeGauge?.gauge_size
-             && p?.finish === activeFinish?.finish
-    );
 
-    const unitPrice = selectedPricing?.price || 0;
-    const totalPrice = (activeLength || 0) * unitPrice * quantity;
-    const isAddToCartDisabled = !selectedPricing || activeLength === null;
+    const findPricing = (gauge_size:number, width:string, finish:string) => {
+        for (const model of pricing!) {
+          if (
+            model?.gauge_size === gauge_size &&
+            model.width === width &&
+            model.finish === finish
+          ) {
+            return model.id;
+          }
+        }
+        return null;
+      };
+   
+const calculatePrice = (gauge_size:number, width:string, finish:string, length:number, quantity:number) => {
+    const pricingId = findPricing(gauge_size, width, finish);
+    if (pricingId) {
+      const pricingModel = pricing?.find((model) => model?.id === pricingId);
+      if (pricingModel) {
+        const totalPriceOfProduct = pricingModel.price * length * quantity;
+        return totalPriceOfProduct;
+      }
+    }
+    return null;
+  };
+  const totalPrice = calculatePrice(
+    activeGauge?.gauge_size || 0,
+    activeWidth?.width || '',
+    activeFinish?.finish || '',
+    activeLength || 0,
+    quantity
+  );
+
+    // const unitPrice = selectedPricing?.price || 0;
+    // const totalPrice = (activeLength || 0) * unitPrice * quantity;
+    // const isAddToCartDisabled = !selectedPricing || activeLength === null;
     const thumbnail = thumbnails && thumbnails?.length > 0
         ? thumbnails.find((t) => t.thumbnail_color === selectedColor)?.thumbnail_code ?? null
         : null;
 
-        const handleAddToCart = () => {
-            if (selectedPricing && activeLength !== null) {
-                addToCart(product, id );
-            }
-        };
+    //     const handleAddToCart = () => {
+    //         if (selectedPricing && activeLength !== null) {
+    //             addToCart(product, id );
+    //         }
+    //     };
     
     return (
         <div
@@ -180,8 +200,8 @@ export default function ProductDetailMain({ product }: Props) {
                         <CostDisplay activeSize={activeGauge} quantity={quantity} total={totalPrice} />
                         <button
                             className="button-primary disabled:text-red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
-                            onClick={handleAddToCart}
-                            disabled={isAddToCartDisabled}
+                            // onClick={handleAddToCart}
+                            // disabled={isAddToCartDisabled}
                         >
                             <BsCart2 size={"20"} />
                             <span>Add to Cart</span>

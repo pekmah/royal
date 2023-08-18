@@ -4,7 +4,7 @@ import { ProductSizes } from '@/types/product/Product';
 interface Props {
 	activeSize: ProductSizes | null | undefined;
 	quantity: number;
-	total:number
+	total:number | null
 }
 
 export default function CostDisplay({ activeSize, quantity, total }: Props) {
