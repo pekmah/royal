@@ -33,8 +33,8 @@ interface Props {
 }
 
 export default function ProductDetailMain({ product }: Props) {
-    const {addToCart} = useCartContext()
-    const {id, name, thumbnails, thumbnail_colors, pricing, length, review_summary, total_reviews, roof_details } = product;
+    const { addToCart } = useCartContext()
+    const { id, name, thumbnails, thumbnail_colors, pricing, length, review_summary, total_reviews, roof_details } = product;
     const [activeFinish, setActiveFinish] = useState(pricing ? pricing[0] : undefined);
     const [selectedColor, setSelectedColor] = useState<string | undefined>(thumbnail_colors ? thumbnail_colors[0] : undefined);
 
@@ -44,48 +44,45 @@ export default function ProductDetailMain({ product }: Props) {
 
     const [quantity, setQuantity] = useState(1);
 
-    const findPricing = (gauge_size:number, width:string, finish:string) => {
+    const findPricing = (gauge_size: number, width: string, finish: string) => {
         for (const model of pricing!) {
-          if (
-            model?.gauge_size === gauge_size &&
-            model.width === width &&
-            model.finish === finish
-          ) {
-            return model.id;
-          }
+            if (
+                model?.gauge_size === gauge_size &&
+                model.width === width &&
+                model.finish === finish
+            ) {
+                return model.id;
+            }
         }
         return null;
-      };
-   
-const calculatePrice = (gauge_size:number, width:string, finish:string, length:number, quantity:number) => {
-    const pricingId = findPricing(gauge_size, width, finish);
-    if (pricingId) {
-      const pricingModel = pricing?.find((model) => model?.id === pricingId);
-      if (pricingModel) {
-        const totalPriceOfProduct = pricingModel.price * length * quantity;
-        return totalPriceOfProduct;
-      }
-    }
-    return null;
-  };
-  let totalPrice: number | null = 0;
-  if (activeGauge !== null && activeWidth !== null && activeFinish !== null && activeLength !== null) {
-    totalPrice = calculatePrice(
-    activeGauge?.gauge_size || 0,
-    activeWidth?.width || '',
-    activeFinish?.finish || '',
-    activeLength || 0,
-    quantity
-  );
-  }
+    };
 
-  const isAddToCartDisabled =
-  activeLength === null || 
-  activeGauge === null || 
-  activeFinish === null; 
-    // const unitPrice = selectedPricing?.price || 0;
-    // const totalPrice = (activeLength || 0) * unitPrice * quantity;
-    // const isAddToCartDisabled = !selectedPricing || activeLength === null;
+    const calculatePrice = (gauge_size: number, width: string, finish: string, length: number, quantity: number) => {
+        const pricingId = findPricing(gauge_size, width, finish);
+        if (pricingId) {
+            const pricingModel = pricing?.find((model) => model?.id === pricingId);
+            if (pricingModel) {
+                const totalPriceOfProduct = pricingModel.price * length * quantity;
+                return totalPriceOfProduct;
+            }
+        }
+        return null;
+    };
+    let totalPrice: number | null = 0;
+    if (activeGauge !== null && activeWidth !== null && activeFinish !== null && activeLength !== null) {
+        totalPrice = calculatePrice(
+            activeGauge?.gauge_size || 0,
+            activeWidth?.width || '',
+            activeFinish?.finish || '',
+            activeLength || 0,
+            quantity
+        );
+    }
+
+    const isAddToCartDisabled =
+        activeLength === null ||
+        activeGauge === null ||
+        activeFinish === null;
     const thumbnail = thumbnails && thumbnails?.length > 0
         ? thumbnails.find((t) => t.thumbnail_color === selectedColor)?.thumbnail_code ?? null
         : null;
@@ -95,7 +92,7 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
     //             addToCart(product, id );
     //         }
     //     };
-    
+
     return (
         <div
             className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4`}
@@ -155,7 +152,7 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
                         {name}
                     </h3>
                     {
-                        review_summary > 0 && total_reviews > 0 &&(
+                        review_summary > 0 && total_reviews > 0 && (
 
                             <div className="py-4">
                                 <StarRating
@@ -175,9 +172,9 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
                                 onSelectOption={setActiveGauge}
                                 getKey={(option) => option?.gauge_size || ''}
                             />
-                        
+
                         )}
-                         {length?.length > 0 && length !== null && (
+                        {length?.length > 0 && length !== null && (
                             <SelectLength
                                 label='Length'
                                 options={length}
@@ -188,7 +185,7 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
 
                     </div>
                     <div className=' flex gap-4 pt-4'>
-                       
+
                         {pricing && pricing[0]?.width !== null && (
                             <SelectOption<ProductSizes>
                                 label='Width'

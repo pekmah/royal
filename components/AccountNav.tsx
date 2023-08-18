@@ -4,7 +4,7 @@ import React from 'react'
 import {BsPerson, BsBagCheck, BsFileEarmarkText, BsHeart, BsCreditCard} from 'react-icons/bs'
 import {IoChatbubblesOutline, IoLogOutOutline} from 'react-icons/io5'
 import { Barlow } from 'next/font/google'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from "next-auth/react"
 
 
@@ -31,8 +31,14 @@ const accountLinks = [
   ]
 const AccountNav = () => {
     const pathname = usePathname()
+    const router = useRouter()
     const inactive = "flex items-center gap-4 py-2 px-4 hover:bg-gray";
     const active = `${inactive} bg-gray w-full  rounded-l-xl`;
+
+    const Logout =  () => {
+      signOut()
+      router.push('/')
+    }
   return (
     <aside className='flex relative h-[75vh] w-full bg-white shadow-md min-w-[20vw] max-w-[25vh]  rounded-md'>
     <div>
@@ -48,7 +54,7 @@ const AccountNav = () => {
       }
      <hr className="text-gray w-full mt-8" />
      <div className='absolute bottom-4  '>
-         <button onClick={()=>signOut()} className='flex items-center gap-2 px-4'>
+         <button onClick={Logout} className='flex items-center gap-2 px-4'>
             <IoLogOutOutline size={iconSize} className='text-blue'/>
             <span>Logout</span>
          </button>

@@ -4,9 +4,9 @@ import Link from 'next/link';
 import {BiSolidEditAlt} from 'react-icons/bi'
 
 const details = [
-  {label:'Name', detail:"Evanrobby"},
-  {label:"Email", detail:"evansitoden94@gmail.com"},
-  {label:'Phone Number', detail:"+254 704563123"}
+  {label:'Name', detail:"John Doe"},
+  {label:"Email", detail:"ericpekmah@gmail.com"},
+  {label:'Phone Number', detail:"+254 700 000 000"}
 ]
 const barlowSemi = Barlow({
 	style: 'normal',
