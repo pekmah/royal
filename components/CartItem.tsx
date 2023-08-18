@@ -29,17 +29,19 @@ const CartItem = () => {
   const [pricing, setPricing] = useState<ProductSizes[]>([]);
 
   const handleGaugeChange = (id: number, newValue: string) => {
+    // Convert newValue to a number before updating the gauge_size
+    const newGaugeSize = parseFloat(newValue);
+  
     const updatedPricing = pricing.map((p) => {
       if (p.id === id) {
-        return { ...p, gauge_size: newValue };
+        return { ...p, gauge_size: newGaugeSize };
       }
       return p;
     });
-
+  
     setPricing(updatedPricing);
     setActiveGauge(newValue);
   };
-
   const handleFinishChange = (id: number, newValue: string) => {
     const updatedPricing = pricing.map((p) => {
       if (p.id === id) {
@@ -128,6 +130,7 @@ const CartItem = () => {
                         </div>
                       )}
                     </div>
+                    
                     <div className='flex w-full justify-between gap-20'>
                       <h4 className={`${barlowSemi.className} text-lightgray`}>
                         Cost
@@ -166,7 +169,7 @@ const CartItem = () => {
                       </div>
                     </div>
                   </div>
-                  <span className={`${barlowMedium.className} cursor-pointer` }onClick={()=>removeFromCart(id, name)}>Remove</span>
+                  <span className={`${barlowMedium.className} cursor-pointer` } onClick={()=>removeFromCart(id, name)}>Remove</span>
                 </div>
               </div>
             </div>)

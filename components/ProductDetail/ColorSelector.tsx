@@ -3,8 +3,19 @@
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 
-export default function ColorSelector({ colors }: { colors: string[] }) {
+interface ColorSelectorProps {
+    colors: string[];
+    onSelectColor: (color: string) => void;
+  }
+  
+
+export default function ColorSelector({ colors, onSelectColor }: ColorSelectorProps) {
     const [selected, setSelected] = useState(0);
+
+    const handleColorClick = (color: string, idx: number) => {
+        setSelected(idx);
+        onSelectColor(color);
+      };
 
     return (
         <div className="flex gap-4 w-full py-4 ">
@@ -13,7 +24,7 @@ export default function ColorSelector({ colors }: { colors: string[] }) {
                     key={color}
                     className={`rounded-full w-6 h-6 flex items-center justify-center`}
                     style={{ background: color }}
-                    onClick={() => setSelected(idx)}
+                    onClick={() => handleColorClick(color, idx)}
                     data-hex={color}
                 >
                     {selected === idx ? (

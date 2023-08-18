@@ -13,17 +13,15 @@ interface CartType {
 
 
 interface CartContextValue {
-  handleSidebar: () => void;
   cart: {
     items: ProductEntity[]; // Use the actual type for cart items
   };
-  sidebar: boolean;
-
   addToCart: (item: ProductEntity, id: number) => void;
   itemQuantity: number
   increaseQuantity: (id: number) => void
   decreaseQuantity: (id: number) => void
   removeFromCart: (id:number, name:string) => void
+  totalPrice:number
   // Add more functions or properties as needed
 }
 const GlobalContext = createContext<CartContextValue>({} as CartContextValue);
@@ -106,15 +104,16 @@ const reducer = (cart: CartType, action: Action) => {
 //   return {cart: cart, qty:+1}
 // }
 const CartContextProvider = ({ children }: { children: ReactNode }) => {
-  const [sidebar, setSidebar] = useState(false)
-  const [cart, dispatch] = useReducer(reducer, { items: [] });
+  const initialCartData = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
+  const initialCart = initialCartData ? JSON.parse(initialCartData) : { items: [] };
+
+
+const [cart, dispatch] = useReducer(reducer, initialCart);
   // item quantity toatal
   const [itemQuantity, setItemQuantity] = useState(0)
   // Total cart price
   const [totalPrice, setTotalPrice] = useState(0)
-  const handleSidebar = () => {
-    setSidebar(!sidebar)
-  }
+
   // Total Quanity
   useEffect(() => {
     const total = cart.items.reduce((accumulator: any, currentIndex) =>
@@ -123,11 +122,11 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
     setItemQuantity(total)
   }, [cart])
   // Total cart Price
-  // useEffect (() =>{
-  //   const total = cart.items.reduce((accumulator, currentIndex)=>
-  //   accumulator + currentIndex.qty * currentIndex.price , 0)
-  //   setTotalPrice(total)
-  // }, [cart])
+  useEffect (() =>{
+    const total = cart.items.reduce((accumulator, currentIndex)=>
+    accumulator + currentIndex.qty * currentIndex.pricing[0].price , 0)
+    setTotalPrice(total)
+  }, [cart])
 
   const addToCart = (item: ProductEntity, id: number) => {
     const inCart = cart.items.find((item) => item.id === id)
@@ -151,15 +150,20 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: ACTION.DECREASE_QUANTITY, payload: { id: id } })
 
   }
+  useEffect(() => {
+    // Update localStorage whenever the cart changes
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart]);
   // const removeAll =() =>{
   //   dispatch({type:ACTION.REMOVE_ALL})
   // }
   return (
     <GlobalContext.Provider value={{
-      handleSidebar,
-      sidebar,
       cart,
       addToCart,
+      totalPrice,
       itemQuantity,
       increaseQuantity,
       decreaseQuantity,

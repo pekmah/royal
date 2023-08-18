@@ -4,6 +4,8 @@ import {TbArrowBadgeRight, TbFlagFilled} from 'react-icons/tb'
 import {GiBullseye, GiTorch} from 'react-icons/gi'
 import React from 'react'
 import AboutCorporate from '@/components/AboutCorporate';
+import Breadcrumb from '@/components/BreadCrumb';
+import TermsConditions from '@/components/Conditions';
 
 const barlowSemi = Barlow({
   style: 'normal',
@@ -22,6 +24,7 @@ const corevalues = [
 const about = () => {
   return (
     <div className=''>
+      <Breadcrumb/>
       <AboutPageBanner />
       <div className='flex pt-32 pb-10  justify-between px-4'>
        
@@ -128,7 +131,7 @@ const about = () => {
           </div>
       </div>
       <AboutCorporate/>
-
+      <TermsConditions/>
     </div>
   )
 }

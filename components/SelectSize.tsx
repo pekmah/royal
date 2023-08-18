@@ -1,13 +1,15 @@
 interface Props<T> {
     label: string;
+    explanatoryText?:string
     options: (T | null)[];
     selectedOption: T | null;
     onSelectOption: (option: T | null) => void;
-    getKey: (option: T | null) => string; // Function to get the display key from the option
+    getKey: (option: T | null) => string | number; // Function to get the display key from the option
 }
 
 export default function SelectOption<T>({
     label,
+    explanatoryText,
     options,
     selectedOption,
     onSelectOption,
@@ -16,9 +18,13 @@ export default function SelectOption<T>({
     const uniqueOptions = Array.from(new Set(options.map((option) => getKey(option))));
     return (
         <div className='w-full flex flex-col gap-2'>
+          <div className="flex gap-4 items-center">
             <label htmlFor={label} className='text-sm font-semibold mb-1'>
                 {label}
             </label>
+            {explanatoryText &&  <div className="bg-[#FCC2C0] text-red px-4 text-xs py-1.5 rounded-3xl">{explanatoryText}</div>}
+           
+          </div>
             {options ? (
                 options.length === 1 ? (
                     <span className='border border-gray text-[#888888] text-[12px] font-medium rounded-md w-full p-2'>
@@ -34,6 +40,7 @@ export default function SelectOption<T>({
                       onSelectOption(option);
                     }}
                     className='border border-gray text-[#888888] text-[12px] font-medium rounded-md w-full p-2 outline-none'>
+                    <option value=''>Select</option>
                     {uniqueOptions.map((key) => {
                       const option = options.find((opt) => getKey(opt) === key);
                       if (option) {

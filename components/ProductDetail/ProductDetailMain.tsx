@@ -1,11 +1,17 @@
 import Image from "next/image";
+import { useEffect } from 'react'
 import { Barlow } from "next/font/google";
 import StarRating from "./StarRating";
-import { ProductEntity } from "@/types/product/Product";
-import ProductOptions from "./ProductOptions";
+import { ProductEntity, ProductSizes } from "@/types/product/Product";
 import ColorSelector from "./ColorSelector";
 import { useState } from "react";
 import SelectOption from "../SelectSize";
+import { AiOutlineEye } from 'react-icons/ai'
+import CostDisplay from './CostDisplay';
+import SelectLength from '../SelectLength';
+import { BsCart2 } from "react-icons/bs";
+import QuantityCount from "./QuantityCount";
+import { useCartContext } from "@/context/CartContext";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -13,17 +19,83 @@ const barlowSemi = Barlow({
     subsets: ["latin"],
 });
 
+const barlowMedium = Barlow({
+    style: "normal",
+    weight: "500",
+    subsets: ["latin"],
+});
+
+interface Props {
+    product: ProductEntity;
+}
 interface Props {
     product: ProductEntity;
 }
 
 export default function ProductDetailMain({ product }: Props) {
-    const { name, thumbnails, thumbnail_colors, pricing, review_summary, total_reviews } = product;
+    const {addToCart} = useCartContext()
+    const {id, name, thumbnails, thumbnail_colors, pricing, length, review_summary, total_reviews, roof_details } = product;
     const [activeFinish, setActiveFinish] = useState(pricing ? pricing[0] : undefined);
-    const thumbnail =
-        thumbnails && thumbnails?.length > 0
-            ? thumbnails[0].thumbnail_code
-            : null;
+    const [selectedColor, setSelectedColor] = useState<string | undefined>(thumbnail_colors ? thumbnail_colors[0] : undefined);
+
+    const [activeGauge, setActiveGauge] = useState<ProductSizes | null>(null);
+    const [activeWidth, setActiveWidth] = useState<ProductSizes | null>(null);
+    const [activeLength, setActiveLength] = useState<number | null>(null);
+
+    const [quantity, setQuantity] = useState(1);
+
+    const findPricing = (gauge_size:number, width:string, finish:string) => {
+        for (const model of pricing!) {
+          if (
+            model?.gauge_size === gauge_size &&
+            model.width === width &&
+            model.finish === finish
+          ) {
+            return model.id;
+          }
+        }
+        return null;
+      };
+   
+const calculatePrice = (gauge_size:number, width:string, finish:string, length:number, quantity:number) => {
+    const pricingId = findPricing(gauge_size, width, finish);
+    if (pricingId) {
+      const pricingModel = pricing?.find((model) => model?.id === pricingId);
+      if (pricingModel) {
+        const totalPriceOfProduct = pricingModel.price * length * quantity;
+        return totalPriceOfProduct;
+      }
+    }
+    return null;
+  };
+  let totalPrice: number | null = 0;
+  if (activeGauge !== null && activeWidth !== null && activeFinish !== null && activeLength !== null) {
+    totalPrice = calculatePrice(
+    activeGauge?.gauge_size || 0,
+    activeWidth?.width || '',
+    activeFinish?.finish || '',
+    activeLength || 0,
+    quantity
+  );
+  }
+
+  const isAddToCartDisabled =
+  activeLength === null || 
+  activeGauge === null || 
+  activeFinish === null; 
+    // const unitPrice = selectedPricing?.price || 0;
+    // const totalPrice = (activeLength || 0) * unitPrice * quantity;
+    // const isAddToCartDisabled = !selectedPricing || activeLength === null;
+    const thumbnail = thumbnails && thumbnails?.length > 0
+        ? thumbnails.find((t) => t.thumbnail_color === selectedColor)?.thumbnail_code ?? null
+        : null;
+
+    //     const handleAddToCart = () => {
+    //         if (selectedPricing && activeLength !== null) {
+    //             addToCart(product, id );
+    //         }
+    //     };
+    
     return (
         <div
             className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4`}
@@ -31,7 +103,7 @@ export default function ProductDetailMain({ product }: Props) {
             <div className="w-full flex-1">
                 <div className="relative h-[240px]">
                     <Image
-                        alt={"Landing page Banner"}
+                        alt={"Product Thumbnail"}
                         src={
                             thumbnail
                                 ? `${process.env.BASE_URL}/api/v1/core/products/thumbnail/${thumbnail}`
@@ -41,6 +113,10 @@ export default function ProductDetailMain({ product }: Props) {
                         style={{ objectFit: "cover", objectPosition: "center" }}
                         className="rounded-md"
                     />
+                    {roof_details.length > 0 && <div className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
+                        <AiOutlineEye size={25} />
+                        <p className={`${barlowMedium.className}`}>View Roof</p>
+                    </div>}
                 </div>
 
                 <div className="flex gap-10 items-center py-4 ">
@@ -49,18 +125,21 @@ export default function ProductDetailMain({ product }: Props) {
                             <h3 className={`text-base ${barlowSemi.className}`}>
                                 Color:
                             </h3>
-                            <ColorSelector colors={thumbnail_colors} />
+                            <ColorSelector
+                                colors={thumbnail_colors}
+                                onSelectColor={setSelectedColor}
+                            />
                         </div>
                     ) : null}
-                    {pricing ? (
+                    {pricing && pricing[0]?.finish !== null && (
                         <SelectOption
                             label='Finish'
-                            options={pricing}
+                            options={pricing!}
                             selectedOption={activeFinish}
                             onSelectOption={setActiveFinish}
                             getKey={(option) => option?.finish || ''}
                         />
-                    ) : null}
+                    )}
                 </div>
             </div>
             <div
@@ -72,18 +151,73 @@ export default function ProductDetailMain({ product }: Props) {
                 }}
             >
                 <div className="w-full">
-                    <h3 className={`text-lg ${barlowSemi.className}`}>
+                    <h3 className={`text-lg ${barlowSemi.className} py-4`}>
                         {name}
                     </h3>
-                    <div className="py-4">
-                        <StarRating
-                            rating={review_summary ?? 0}
-                            reviewCount={total_reviews ?? 0}
-                        />
+                    {
+                        review_summary > 0 && total_reviews > 0 &&(
+
+                            <div className="py-4">
+                                <StarRating
+                                    rating={review_summary ?? 0}
+                                    reviewCount={total_reviews ?? 0}
+                                />
+                            </div>
+                        )
+                    }
+                    <div className=' flex gap-4 items-center'>
+                        {pricing && pricing[0]?.gauge_size !== null && (
+                            <SelectOption<ProductSizes>
+                                label='Gauge Size'
+                                explanatoryText="Thicker gauges are stronger"
+                                options={pricing!}
+                                selectedOption={activeGauge}
+                                onSelectOption={setActiveGauge}
+                                getKey={(option) => option?.gauge_size || ''}
+                            />
+                        
+                        )}
+                         {length?.length > 0 && length !== null && (
+                            <SelectLength
+                                label='Length'
+                                options={length}
+                                selectedOption={activeLength}
+                                onSelectOption={setActiveLength}
+                            />
+                        )}
+
                     </div>
-                    <ProductOptions product={product} />
+                    <div className=' flex gap-4 pt-4'>
+                       
+                        {pricing && pricing[0]?.width !== null && (
+                            <SelectOption<ProductSizes>
+                                label='Width'
+                                explanatoryText='Default Width is !000mm, Select Custom for more'
+                                options={pricing!}
+                                selectedOption={activeWidth}
+                                onSelectOption={setActiveWidth}
+                                getKey={(option) => option?.width || ''}
+                            />
+                        )}
+
+
+                    </div>
+                    <QuantityCount quantity={quantity} onQuantityChange={setQuantity} />
+                    <div
+                        className={`w-full flex flex-col sm:flex-row justify-between items-center py-4 gap-20`}
+                    >
+                        <CostDisplay activeSize={activeGauge} quantity={quantity} total={totalPrice} />
+                        <button
+                            className="button-primary disabled:text-red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
+                            // onClick={handleAddToCart}
+                            disabled={isAddToCartDisabled}
+                        >
+                            <BsCart2 size={"20"} />
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
                 </div>
-               
+
             </div>
         </div>
     );

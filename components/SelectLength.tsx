@@ -2,8 +2,8 @@
 interface Props {
     label: string;
     options: string[]
-    selectedOption: string | null;
-    onSelectOption: (option: string | null) => void;
+    selectedOption: number | null;
+    onSelectOption: (option: number | null) => void;
 }
 
 export default function SelectLength({
@@ -29,9 +29,10 @@ export default function SelectLength({
                         onChange={(e) => {
                             const key = e.target.value;
                             const option = options.find(opt => opt === key) || null;
-                            onSelectOption(option);
+                            onSelectOption(Number(option));
                         }}
                         className='border border-gray text-[#020202] text-[12px] font-medium rounded-md w-full p-2 outline-none'>
+                        <option value=''>Select</option>
                         {options.map((option, idx) => (
                             <option
                                 value={option}

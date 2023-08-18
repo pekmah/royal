@@ -10,6 +10,7 @@ const barlowSemi = Barlow({
   });
 const AboutCorporate = () => {
     // console.log(AboutData)
+  
   return (
     <div className='pt-6'>
         <h2  className={`${barlowSemi.className} flex-1 text-[20px] py-6 text-center`}>
