@@ -68,14 +68,21 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
     }
     return null;
   };
-  const totalPrice = calculatePrice(
+  let totalPrice: number | null = 0;
+  if (activeGauge !== null && activeWidth !== null && activeFinish !== null && activeLength !== null) {
+    totalPrice = calculatePrice(
     activeGauge?.gauge_size || 0,
     activeWidth?.width || '',
     activeFinish?.finish || '',
     activeLength || 0,
     quantity
   );
+  }
 
+  const isAddToCartDisabled =
+  activeLength === null || 
+  activeGauge === null || 
+  activeFinish === null; 
     // const unitPrice = selectedPricing?.price || 0;
     // const totalPrice = (activeLength || 0) * unitPrice * quantity;
     // const isAddToCartDisabled = !selectedPricing || activeLength === null;
@@ -158,7 +165,7 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
                             </div>
                         )
                     }
-                    <div className=' flex gap-4'>
+                    <div className=' flex gap-4 items-center'>
                         {pricing && pricing[0]?.gauge_size !== null && (
                             <SelectOption<ProductSizes>
                                 label='Gauge Size'
@@ -168,11 +175,9 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
                                 onSelectOption={setActiveGauge}
                                 getKey={(option) => option?.gauge_size || ''}
                             />
+                        
                         )}
-
-                    </div>
-                    <div className=' flex gap-4 pt-4'>
-                        {length?.length > 0 && length !== null && (
+                         {length?.length > 0 && length !== null && (
                             <SelectLength
                                 label='Length'
                                 options={length}
@@ -180,6 +185,10 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
                                 onSelectOption={setActiveLength}
                             />
                         )}
+
+                    </div>
+                    <div className=' flex gap-4 pt-4'>
+                       
                         {pricing && pricing[0]?.width !== null && (
                             <SelectOption<ProductSizes>
                                 label='Width'
@@ -201,7 +210,7 @@ const calculatePrice = (gauge_size:number, width:string, finish:string, length:n
                         <button
                             className="button-primary disabled:text-red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
                             // onClick={handleAddToCart}
-                            // disabled={isAddToCartDisabled}
+                            disabled={isAddToCartDisabled}
                         >
                             <BsCart2 size={"20"} />
                             <span>Add to Cart</span>
