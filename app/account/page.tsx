@@ -30,19 +30,19 @@ const account = () => {
               <span>Edit</span>
             </Link>
         </div>
-        <hr className="text-gray w-full mb-4" />
+        <hr className="text-grey w-full mb-4" />
 
         <div className={`${barlowNormal.className} py-2 px-6`}>
           {details.map(({label, detail})=>(
               <div key={label} className='flex flex-col py-4 gap-2 text-sm'>
-                <h4 className='text-lightgray'>{label}:</h4>
+                <h4 className='text-lightgrey'>{label}:</h4>
                 <p>{detail}</p>
               </div>
           ))}
         </div>
         <div className="">
           <h3 className={`${barlowSemi.className} p-4 `}>Privacy & Security</h3>
-          <hr className="text-gray w-full mb-4" />
+          <hr className="text-grey w-full mb-4" />
           <div className='flex justify-between w-full items-center pb-4'>
             <h3 className={`${barlowNormal.className} p-4 `}>Your Password</h3>
             <Link href={'/account/change-password'} className='border border-red rounded-md  text-red bg-white px-4 max-w-max py-1.5'>
@@ -51,7 +51,7 @@ const account = () => {
           </div>
         </div>
       </div>
-   
+
   )
 }
 

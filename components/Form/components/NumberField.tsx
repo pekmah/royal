@@ -9,7 +9,7 @@ function NumberField(props: NumberFieldProps & { name: string }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-      <p className="font-light text-fadegray">
+      <p className="font-light text-fadegrey">
         {helperText ? helperText : null}
       </p>
       <label htmlFor={name} className="text-blue">
@@ -20,7 +20,7 @@ function NumberField(props: NumberFieldProps & { name: string }) {
         type="number"
         placeholder={placeholder}
         {...register(name)}
-        className={`border py-4 px-4 w-full border-gray focus:outline-none border-l-0 ${
+        className={`border py-4 px-4 w-full border-grey focus:outline-none border-l-0 ${
           isFocussed ? "border-blue" : ""
         }`}
         {...register(name)}

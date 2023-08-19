@@ -27,22 +27,22 @@ const about = () => {
       <Breadcrumb/>
       <AboutPageBanner />
       <div className='flex pt-32 pb-10  justify-between px-4'>
-       
+
           <h2 className={`${barlowSemi.className} flex-1 text-[20px] py-2`}>
             <span className='text-black'>The Royal Mabati </span>
             <span className='text-red'> Story</span>
           </h2>
-  
+
         <div className='flex-1 w-full '>
-            <p className='text-lightgray text-sm leading-[24px]'>
-              For many years, Royal Mabati Factory Limited has supported many clients succeed through our roofing 
+            <p className='text-lightgrey text-sm leading-[24px]'>
+              For many years, Royal Mabati Factory Limited has supported many clients succeed through our roofing
               solutions and products. We are a multinational company that primarily deals with roofing materials,
-               starting out with a factory in Nairobi since our inception in 2005. Today, we’re one of the leading 
+               starting out with a factory in Nairobi since our inception in 2005. Today, we’re one of the leading
                manufacturers of roofing products with over distribution centers across Kenya and Eastern Africa.
               </p>
 
-              <p className='text-lightgray text-sm pt-6'>
-              The strict implementation of state of the art manufacturing facilities, product testing, organized back 
+              <p className='text-lightgrey text-sm pt-6'>
+              The strict implementation of state of the art manufacturing facilities, product testing, organized back
               office, thorough training, field supervision, research & development allows us to ensure the integrity of
                our product and the satisfaction of our consumers.
 
@@ -73,10 +73,10 @@ const about = () => {
               </div>
               <p className='text-center py-4'>We are a multinational company that primarily deals with roofing materials, starting
                  out with a factory in Nairobi since our inception in 2005.</p>
-                 <p className='w-[477px] h-[311px] bg-gray'>
+                 <p className='w-[477px] h-[311px] bg-grey'>
 
                  </p>
-                 
+
                  <div className='relative'>
               <h4 className="absolute left-20 top-[3rem]">Our Key Milestones</h4>
               <div className='text-white absolute w-[10vw] border top-14 -left-[4.5rem]' />

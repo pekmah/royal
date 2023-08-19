@@ -131,7 +131,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                     <div className={"w-full flex justify-between"}>
                         <div className="text-black slider__left-value w-fit">
                             <input
-                                className="w-fit border border-gray rounded-md px-2 py-1"
+                                className="w-fit border border-grey rounded-md px-2 py-1"
                                 type="number"
                                 id="min"
                                 min={min}
@@ -147,7 +147,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                         </div>
                         <div className="text-black slider__right-value w-fit">
                             <input
-                                className="w-fit border border-gray rounded-md px-2 py-1"
+                                className="w-fit border border-grey rounded-md px-2 py-1"
                                 type="number"
                                 id="max"
                                 min={minVal + 1}

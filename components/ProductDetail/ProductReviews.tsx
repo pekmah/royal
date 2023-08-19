@@ -38,15 +38,15 @@ const SingleReview = ({
     review_date,
 }: ProductReview) => {
     return (
-        <div className="px-4 border-b border-gray mb-4">
+        <div className="px-4 border-b border-grey mb-4">
             <div className="flex items-center gap-2">
-                <div className="flex justify-center font-semibold items-center bg-gray rounded-full p-4">
+                <div className="flex justify-center font-semibold items-center bg-grey rounded-full p-4">
                     {getAbbreviation(user)}
                 </div>
                 <div className="flex-col text-sm justify-between">
                     <p className="flex items-center">
                         <span className="font-semibold">{user}</span>
-                        {/* <span className="mx-4 rounded-full bg-fadegray p-1" />
+                        {/* <span className="mx-4 rounded-full bg-fadegrey p-1" />
                         <span className="text-red text-[12px]">
                             Verified Purchase
                         </span> */}
@@ -91,14 +91,14 @@ export default function ProductReviews({ id }: Props) {
                     </p>
                 ) : null}
             </div>
-            <hr className="text-gray w-full mb-4" />
+            <hr className="text-grey w-full mb-4" />
             <div className="max-h-[500px] overflow-y-auto">
                 {data && data.results && data.results.length > 0 ? (
                     data.results.map((value, idx) => (
                         <SingleReview {...value} key={`${value.id}~${idx}`} />
                     ))
                 ) : (
-                    <div className="px-4 border-b border-gray pb-4">
+                    <div className="px-4 border-b border-grey pb-4">
                         <p className="text-sm">
                             There are no reviews for this product yet.
                         </p>

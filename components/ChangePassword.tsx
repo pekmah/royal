@@ -18,22 +18,22 @@ const ChangePassword = () => {
         <IoArrowBackOutline size={25}/>
             <h3 className={`${barlowSemi.className} p-4 `}>Personal Details</h3>
         </div>
-        <hr className="text-gray w-full mb-4" />
+        <hr className="text-grey w-full mb-4" />
 
         <form className='h-full w-full gap-4' >
             <div className=' flex w-full flex-col gap-2'>
             <label htmlFor="c-password">Current Password</label>
-            <input type="password" id='c-password' placeholder='Enter current password' className='border outline-none  rounded-md border-gray px-4 py-2.5' />
+            <input type="password" id='c-password' placeholder='Enter current password' className='border outline-none  rounded-md border-grey px-4 py-2.5' />
             </div>
             <div className=' flex gap-4 items-center w-full py-4'>
 
                 <div className=' flex w-full flex-col gap-2'>
                     <label htmlFor="newPassword">Confirm Password</label>
-                    <input type="password" id='newPassword' placeholder='Enter new password' className='border outline-none rounded-md border-gray px-4 py-2.5'/>
+                    <input type="password" id='newPassword' placeholder='Enter new password' className='border outline-none rounded-md border-grey px-4 py-2.5'/>
                 </div>
                 <div className=' flex w-full flex-col gap-2'>
                     <label htmlFor="password">Confirm Password</label>
-                    <input type="password" id='password' placeholder='Enter new password' className='border outline-none rounded-md border-gray px-4 py-2.5' />
+                    <input type="password" id='password' placeholder='Enter new password' className='border outline-none rounded-md border-grey px-4 py-2.5' />
                 </div>
             </div>
 

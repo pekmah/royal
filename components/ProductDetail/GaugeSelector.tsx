@@ -26,7 +26,7 @@ export default function GaugeSelector({
 						className={`px-2 py-1 ${
 							activeSize?.id === size?.id
 								? 'bg-red text-white'
-								: 'border border-gray text-black'
+								: 'border border-grey text-black'
 						}  text-[10px] rounded-md font-semibold`}>
 						{size?.gauge_size}
 					</button>

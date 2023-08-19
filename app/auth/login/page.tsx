@@ -31,7 +31,7 @@ const emailFormProps: FormProps = {
 	},
 	formTitle: 'Sign in to your account',
 	SubmitInfo: (
-		<div className={`${barlow.className} text-gray my-8`}>
+		<div className={`${barlow.className} text-grey my-8`}>
 			<div>
 				Signing up for a Royal Mabati account means that you agree to the{' '}
 				<Link className='text-red' href={''}>

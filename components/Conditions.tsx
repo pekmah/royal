@@ -29,20 +29,20 @@ const TermsConditions = () => {
 
     const termsElements = TermsCondition.map(({id, heading, terms})=>(
         <div key={id} className=' px-4 py-3'>
-        <div onClick={()=>handleShowAnswers(id)} className=' flex items-center gap-4 justify-between border-gray-500/30 py-2'>
+        <div onClick={()=>handleShowAnswers(id)} className=' flex items-center gap-4 justify-between border-grey-500/30 py-2'>
             <h2 className={`${barlowMedium.className}`}>{heading}</h2>
             {
                showTerms === id ?  <IoIosArrowUp className=" text-xl text-red cursor-pointer  " /> : <IoIosArrowDown className=" text-xl text-red cursor-pointer " />
             }
-            
-          
+
+
         </div>
-       { 
+       {
         showTerms === id &&
        (<div className="overflow-y-auto  duration-500 ease-in">
-            <p className={` ${barlowSmall.className} text-lightgray leading-[24px]`}>{terms}</p>
+            <p className={` ${barlowSmall.className} text-lightgrey leading-[24px]`}>{terms}</p>
         </div>)
-        
+
     }
     </div>
     ))

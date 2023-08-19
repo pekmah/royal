@@ -32,8 +32,8 @@ const accountLinks = [
 const AccountNav = () => {
     const pathname = usePathname()
     const router = useRouter()
-    const inactive = "flex items-center gap-4 py-2 px-4 hover:bg-gray";
-    const active = `${inactive} bg-gray w-full  rounded-l-xl`;
+    const inactive = "flex items-center gap-4 py-2 px-4 hover:bg-grey";
+    const active = `${inactive} bg-grey w-full  rounded-l-xl`;
 
     const Logout =  () => {
       signOut()
@@ -43,16 +43,16 @@ const AccountNav = () => {
     <aside className='flex relative h-[75vh] w-full bg-white shadow-md min-w-[20vw] max-w-[25vh]  rounded-md'>
     <div>
       <h2 className={`${barlowSemi.className} p-4 `}>My account</h2>
-      <hr className="text-gray w-full mb-4" />
+      <hr className="text-grey w-full mb-4" />
       {
         accountLinks.map(({path, name, icon})=>(
-          <Link key={path} href={path} className={'flex items-center gap-4 p-4 hover:bg-gray'}>
+          <Link key={path} href={path} className={'flex items-center gap-4 p-4 hover:bg-grey'}>
             <div className='text-blue'>{icon}</div>
-            <span className={`${barlowNormal.className} text-lightgray`}>{name}</span>
+            <span className={`${barlowNormal.className} text-lightgrey`}>{name}</span>
           </Link>
         ))
       }
-     <hr className="text-gray w-full mt-8" />
+     <hr className="text-grey w-full mt-8" />
      <div className='absolute bottom-4  '>
          <button onClick={Logout} className='flex items-center gap-2 px-4'>
             <IoLogOutOutline size={iconSize} className='text-blue'/>

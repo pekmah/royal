@@ -15,7 +15,7 @@ export interface ProductEntity {
     roof_details:string[]
     length:string[]
     reviews?: Array<any> | null;
-    qty?:number 
+    qty?:number
 }
 
 export interface ProductCart {
@@ -24,11 +24,11 @@ export interface ProductCart {
     items:Array<any> | null
     quantity:number
     length:null | number
-    color:null | string 
+    color:null | string
     total_price: number
 }
 
-export interface ProductSizes {
+export interface    ProductSizes {
     id: number;
     gauge_size: number;
     price: number;
