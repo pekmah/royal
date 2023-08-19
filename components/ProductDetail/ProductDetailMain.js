@@ -1,13 +1,13 @@
 import Image from "next/image";
-import {useContext, useMemo, useState} from 'react'
-import {Barlow} from "next/font/google";
+import { useContext, useMemo, useState } from 'react'
+import { Barlow } from "next/font/google";
 import StarRating from "./StarRating";
 import ColorSelector from "./ColorSelector";
-import {AiOutlineEye} from 'react-icons/ai'
+import { AiOutlineEye } from 'react-icons/ai'
 import CostDisplay from './CostDisplay';
-import {BsCart2} from "react-icons/bs";
+import { BsCart2 } from "react-icons/bs";
 import QuantityCount from "./QuantityCount";
-import {CContext} from "@/context/CartContext2";
+import { CContext } from "@/context/CartContext2";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -22,9 +22,9 @@ const barlowMedium = Barlow({
 });
 
 
-export default function ProductDetailMain({product}) {
+export default function ProductDetailMain({ product }) {
     // const {addToCart} = useCartContext()
-    const {cart, setCart} = useContext(CContext)
+    const { cart, setCart } = useContext(CContext)
     const {
         id,
         name,
@@ -197,7 +197,7 @@ export default function ProductDetailMain({product}) {
                 {
                     quantity: (currentCartItem?.quantity || 0) + quantity,
                     product: product,
-                    measurements: {length: activeLength, width: activeWidth},
+                    measurements: { length: activeLength, width: activeWidth },
                     // color: product?.thumbnails?.at(currentColor - 1)
                     //   ?.thumbnail_color,
                     color: selectedColor,
@@ -213,7 +213,7 @@ export default function ProductDetailMain({product}) {
                 ...prev,
                 {
                     quantity,
-                    measurements: {length: activeLength, width: activeWidth},
+                    measurements: { length: activeLength, width: activeWidth },
                     color: selectedColor,
                     product: product,
                     total_price: totalProductPrice,
@@ -238,12 +238,12 @@ export default function ProductDetailMain({product}) {
                                 : "/temp-product-img.png"
                         }
                         fill
-                        style={{objectFit: "cover", objectPosition: "center"}}
+                        style={{ objectFit: "cover", objectPosition: "center" }}
                         className="rounded-md"
                     />
                     {roof_details.length > 0 && <div
                         className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
-                        <AiOutlineEye size={25}/>
+                        <AiOutlineEye size={25} />
                         <p className={`${barlowMedium.className}`}>View Roof</p>
                     </div>}
                 </div>
@@ -272,7 +272,7 @@ export default function ProductDetailMain({product}) {
                                 {finishList?.map(item => (
 
                                     <option key={item?.id}
-                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item?.finish}</option>
+                                        className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item?.finish}</option>
                                 ))
 
                                 }
@@ -323,8 +323,8 @@ export default function ProductDetailMain({product}) {
                                     {gaugeList?.map(item => (
 
                                         <option key={item}
-                                                value={item}
-                                                className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
+                                            value={item}
+                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
                                     ))
 
                                     }
@@ -353,7 +353,7 @@ export default function ProductDetailMain({product}) {
                                     {[...length, "Custom"]?.map(item => (
 
                                         <option key={item}
-                                                className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
+                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
                                     ))
 
                                     }
@@ -396,7 +396,7 @@ export default function ProductDetailMain({product}) {
                                     {widthList?.map(item => (
 
                                         <option key={item}
-                                                className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
+                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
                                     ))
 
                                     }
@@ -405,22 +405,22 @@ export default function ProductDetailMain({product}) {
 
                         </div>
                     }
-                    <QuantityCount quantity={quantity} onQuantityChange={setQuantity}/>
+                    <QuantityCount quantity={quantity} onQuantityChange={setQuantity} />
                     <div
                         className={`w-full flex flex-col sm:flex-row justify-between items-center py-4 gap-20`}
                     >
                         <CostDisplay activeSize={activeGauge} quantity={quantity}
-                                     total={Math.ceil(totalProductPrice || 0)}/>
+                            total={Math.ceil(totalProductPrice || 0)} />
                         <button
                             className="button-primary disabled:text-red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
                             onClick={handleAddToCart}
                             disabled={gaugeList?.length === 0 ? quantity === 0 : isAddToCartDisabled}
                         >
 
-                            <BsCart2 size={"20"}/>
+                            <BsCart2 size={"20"} />
 
                             <span>Add to Cart</span>
-                            
+
                         </button>
                     </div>
                 </div>
