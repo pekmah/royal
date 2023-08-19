@@ -9,7 +9,7 @@ interface AccordionItemProps {
 
 const AccordionItem: FC<AccordionItemProps> = ({ title }) => {
 	return (
-		<div className='w-full hover:bg-gray px-4'>
+		<div className='w-full hover:bg-grey px-4'>
 			<p className='mb-1 ml-4 py-1'>{title}</p>
 		</div>
 	);

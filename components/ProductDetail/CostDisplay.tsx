@@ -21,10 +21,10 @@ export default function CostDisplay({ activeSize, quantity, total }: Props) {
 								((100 - activeSize?.percentage_discount) / 100) *
 								quantity}
 						</span>
-						<span className='text-fadegray line-through'>
+						<span className='text-fadegrey line-through'>
 							Ksh. {activeSize ? activeSize.price * quantity : '-'}
 						</span>
-						<span className='px-2 py-1 rounded-md text-red bg-gray'>
+						<span className='px-2 py-1 rounded-md text-red bg-grey'>
 							{`${activeSize?.percentage_discount}% Off`}
 						</span>
 					</div>

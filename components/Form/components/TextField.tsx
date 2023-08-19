@@ -24,7 +24,7 @@ function TextField(props: TextFieldProps & { name: string }) {
         id={name}
         type={htmlType}
         placeholder={placeholder}
-        className={`border py-4 px-4 w-full border-gray focus:outline-none ${
+        className={`border py-4 px-4 w-full border-grey focus:outline-none ${
           !hasIcon ? "border-l-0" : ""
         } `}
         {...register(name)}
@@ -44,7 +44,7 @@ function TextField(props: TextFieldProps & { name: string }) {
     return htmlType === "email" || htmlType === "password" ? (
       <label
         htmlFor="email"
-        className={`border border-r-0 py-4 px-4 border-gray`}
+        className={`border border-r-0 py-4 px-4 border-grey`}
       >
         {htmlType === "email" ? (
           <MdOutlineEmail size={"24px"} color="#DBDBDB" />
@@ -55,7 +55,7 @@ function TextField(props: TextFieldProps & { name: string }) {
     ) : LabelIcon ? (
       <label
         htmlFor="email"
-        className={`border border-r-0 py-4 px-4 border-gray`}
+        className={`border border-r-0 py-4 px-4 border-grey`}
       >
         <LabelIcon size={"24px"} color="#DBDBDB" />
       </label>
@@ -64,7 +64,7 @@ function TextField(props: TextFieldProps & { name: string }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-      <p className="font-light text-fadegray">
+      <p className="font-light text-fadegrey">
         {helperText ? helperText : null}
       </p>
       <div>
@@ -82,7 +82,7 @@ export default dynamic(() => Promise.resolve(TextField), {
   ssr: false,
   loading() {
     return (
-      <div className={"bg-gray h-14 w-full rounded-sm skeleton-animation"} />
+      <div className={"bg-grey h-14 w-full rounded-sm skeleton-animation"} />
     );
   },
 });

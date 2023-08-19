@@ -55,9 +55,9 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                     <div className="p-4">
                         <h3 className={barlowSemi.className}>Categories</h3>
                     </div>
-                    <hr className="text-gray w-full mb-4" />
+                    <hr className="text-grey w-full mb-4" />
                     <CategoriesSidebar />
-                    <hr className="text-gray w-full mb-4" />
+                    <hr className="text-grey w-full mb-4" />
                     <MultiRangeSlider
                         name={"Price"}
                         min={1}
@@ -97,7 +97,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                     <h3 className={`p-4 text-base ${barlowSemi.className}`}>
                         Upload Plan
                     </h3>
-                    <hr className="text-gray w-full mb-4" />
+                    <hr className="text-grey w-full mb-4" />
                     <p className="px-4">
                         Get a personalized quote created just for your house
                         simply by uploading the house’s plan

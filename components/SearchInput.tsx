@@ -6,7 +6,7 @@ export default function SearchInput() {
 			<div className='w-full flex items-center'>
 				<label
 					htmlFor='email'
-					className={`border border-r-0 py-2 px-4 rounded-md rounded-r-none bg-white border-gray`}>
+					className={`border border-r-0 py-2 px-4 rounded-md rounded-r-none bg-white border-grey`}>
 					<BiSearch size={'24px'} color='#DBDBDB' />
 				</label>
 
@@ -14,7 +14,7 @@ export default function SearchInput() {
 					id={'search'}
 					type={'text'}
 					placeholder={'Search'}
-					className={`border py-2 px-4 w-full border-gray rounded-md rounded-l-none focus:outline-none`}
+					className={`border py-2 px-4 w-full border-grey rounded-md rounded-l-none focus:outline-none`}
 				/>
 			</div>
 			<button className='button-primary py-2 px-4 font-semibold'>Search</button>

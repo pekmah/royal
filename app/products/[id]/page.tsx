@@ -1,6 +1,6 @@
 "use client";
 
-import ProductDetailMain from "@/components/ProductDetail/ProductDetailMain";
+import ProductDetailMain from "@/components/ProductDetail/ProductDetailMain.js";
 import ProductDetailDescription from "@/components/ProductDetail/ProductDetailDescription";
 import ProductReviews from "@/components/ProductDetail/ProductReviews";
 import { useQuery } from "react-query";
@@ -19,14 +19,14 @@ export default function Page({ params }: Props) {
 
     if (isLoading) {
         return (
-            <div className="w-full rounded-md h-[500px] bg-gray animate-pulse" />
+            <div className="w-full rounded-md h-[500px] bg-grey animate-pulse" />
         );
     }
 
     if (!data && !isLoading) {
         return (
             <div
-                className={`w-full rounded-md justify-center items-center bg-gray h-[500px] flex`}
+                className={`w-full rounded-md justify-center items-center bg-grey h-[500px] flex`}
             >
                 Requested product was not found
             </div>

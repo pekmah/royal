@@ -18,7 +18,7 @@ export function DropdownMenuItem({
 				<button
 					type='button'
 					className={`${
-						active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+						active ? 'bg-grey-100 text-grey-900' : 'text-grey-700'
 					} block w-full px-4 py-2 text-left text-sm`}
 					onClick={onClick}>
 					{children}

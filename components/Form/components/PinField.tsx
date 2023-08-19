@@ -15,7 +15,7 @@ function PinField(props: PinFieldProps & { name: string }) {
         width: "full",
       }}
     >
-      <p className="font-light text-fadegray">
+      <p className="font-light text-fadegrey">
         {helperText ? helperText : null}
       </p>
       <label htmlFor={name} className="text-blue">

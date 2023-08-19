@@ -19,7 +19,7 @@ export default function SelectLength({
             </label>
             {options ? (
                 options.length === 1 ? (
-                    <span className='border border-gray text-[#888888] text-[12px] font-medium rounded-md w-full p-2'>
+                    <span className='border border-grey text-[#888888] text-[12px] font-medium rounded-md w-full p-2'>
                         {options[0]}
                     </span>
                 ) : (
@@ -31,7 +31,7 @@ export default function SelectLength({
                             const option = options.find(opt => opt === key) || null;
                             onSelectOption(Number(option));
                         }}
-                        className='border border-gray text-[#020202] text-[12px] font-medium rounded-md w-full p-2 outline-none'>
+                        className='border border-grey text-[#020202] text-[12px] font-medium rounded-md w-full p-2 outline-none'>
                         <option value=''>Select</option>
                         {options.map((option, idx) => (
                             <option

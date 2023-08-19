@@ -20,7 +20,7 @@ export default function Footer() {
 	const path = usePathname();
 	return path.startsWith('/auth') ? (
 		<footer className='w-full flex justify-center bottom-0 pb-8'>
-			<div className='text-center text-[10pt] text-fadegray'>
+			<div className='text-center text-[10pt] text-fadegrey'>
 				<p>Copyright © 2023 Royal Mabati</p>
 				<p>Factory LTD Reserved</p>
 			</div>

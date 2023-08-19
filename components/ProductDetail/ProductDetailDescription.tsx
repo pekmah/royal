@@ -24,7 +24,7 @@ export default function ProductDetailDescription({ description }: Props) {
 	return (
 		<div className='bg-white rounded-md shadow-lg w-full md:w-[50%]'>
 			<h3 className={`${barlowSemi.className} p-4`}>Product Details</h3>
-			<hr className='text-gray w-full mb-4' />
+			<hr className='text-grey w-full mb-4' />
 			<div className='px-4 pb-4 text-sm'>
 				{splitString(description, delimiters)?.map((line, index) => (
 					<p key={index} className='pb-2'>

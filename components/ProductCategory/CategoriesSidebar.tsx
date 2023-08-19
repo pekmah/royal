@@ -24,7 +24,7 @@ export default function CategoriesSidebar() {
             .map((v, idx) => (
               <div
                 key={idx}
-                className={"w-full my-4 h-6 bg-gray animate-pulse"}
+                className={"w-full my-4 h-6 bg-grey animate-pulse"}
               />
             ))
         : null}
@@ -45,9 +45,9 @@ export default function CategoriesSidebar() {
                         : ""
                     }`
               }`}
-              className={`w-full justify-start flex items-center gap-2 px-4 py-2 hover:bg-gray hover:text-blue ${
-                !category && id === -1 ? "bg-gray text-blue font-semibold" : ""
-              } ${category === id ? "bg-gray text-blue font-semibold" : ""}`}
+              className={`w-full justify-start flex items-center gap-2 px-4 py-2 hover:bg-grey hover:text-blue ${
+                !category && id === -1 ? "bg-grey text-blue font-semibold" : ""
+              } ${category === id ? "bg-grey text-blue font-semibold" : ""}`}
               key={id}
             >
               {thumbnail_code ? (

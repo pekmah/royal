@@ -17,7 +17,7 @@ export default function QuantityCount({
 					onClick={() =>
 						quantity - 1 > 0 ? onQuantityChange(quantity - 1) : null
 					}
-					className='relative inline-flex items-center rounded-l-md px-2 py-2 text-fadegray bg-gray hover:text-blue'>
+					className='relative inline-flex items-center rounded-l-md px-2 py-2 text-fadegrey bg-grey hover:text-blue'>
 					<AiOutlineMinus />
 				</button>
 				<input
@@ -38,10 +38,10 @@ export default function QuantityCount({
 				/>
 				<button
 					onClick={() => onQuantityChange(quantity + 1)}
-					className='relative inline-flex items-center rounded-r-md px-2 py-2 text-fadegray bg-gray hover:text-blue'>
+					className='relative inline-flex items-center rounded-r-md px-2 py-2 text-fadegrey bg-grey hover:text-blue'>
 					<AiOutlinePlus />
 				</button>
-				 <p className="text-fadegray text-sm px-4">Piece(s)</p>
+				 <p className="text-fadegrey text-sm px-4">Piece(s)</p>
 			</div>
 		</div>
 	);

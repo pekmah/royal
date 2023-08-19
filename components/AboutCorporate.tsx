@@ -10,14 +10,14 @@ const barlowSemi = Barlow({
   });
 const AboutCorporate = () => {
     // console.log(AboutData)
-  
+
   return (
     <div className='pt-6'>
         <h2  className={`${barlowSemi.className} flex-1 text-[20px] py-6 text-center`}>
             <span className='text-black'>Our </span>
             <span className='text-red'> Corporate Social Responsibility</span>
           </h2>
-          <p className='text-sm leading-[24px] text-lightgray'>{AboutData.message}</p>
+          <p className='text-sm leading-[24px] text-lightgrey'>{AboutData.message}</p>
           <div className='py-8'>
             {AboutData.context.map(({id, image, subtitle, content})=>(
                 <div className='flex gap-8 even:flex-row-reverse w-full justify-between py-8' key={id}>
@@ -26,7 +26,7 @@ const AboutCorporate = () => {
                     </div>
                     <div className='flex-1'>
                         <h4 className={`${barlowSemi.className} py-4`}>{subtitle}</h4>
-                        <p className='text-sm leading-[24px] text-lightgray'>{content}</p>
+                        <p className='text-sm leading-[24px] text-lightgrey'>{content}</p>
                     </div>
                 </div>
             ))}
