@@ -50,7 +50,7 @@ export default function ProductCard({product}: ProductCardProps) {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    height: 'calc(100% - 160px)',
+                    height: 'calc(100% - 161px)',
                 }}>
 
                 <div className='h-fit w-full'>

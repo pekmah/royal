@@ -7,6 +7,8 @@ import {Barlow} from 'next/font/google';
 import {useRouter} from 'next/navigation';
 import AsyncStorageService from "@/services/AsyncStorageService";
 import {CContext} from "@/context/CartContext2";
+import Image from "next/image";
+import empty from '@/public/empty.png'
 
 const barlowSemi = Barlow({
     style: 'normal',
@@ -57,9 +59,9 @@ const Cart = () => {
     const vat = (Math.ceil(subTotal)) * 16 / 100
     const total = subTotal + vat
     return (
-        <div>
+        <div className={'min-h-[80vh] flex'}>
             {
-                itemQuantity > 0 ? (
+                    cart?.length >= 1 ? (
                     <div className='flex w-full justify-between gap-8'>
                         <div className='min-w-[60%]'>
                             <CartItem items={cart}/>
@@ -96,7 +98,11 @@ const Cart = () => {
                             </div>
                         </div>
                     </div>
-                ) : null
+                ) : <div className={'flex-1 flex flex-col gap-y-2 justify-center items-center'}>
+
+<Image src={empty} alt={'empty'}/>
+                      <h5 className={'font-barlow font-[500] text-gray-400'}>Cart empty. </h5>
+                    </div>
             }
         </div>
     )
