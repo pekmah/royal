@@ -241,7 +241,7 @@ export default function ProductDetailMain({ product }) {
                         style={{ objectFit: "cover", objectPosition: "center" }}
                         className="rounded-md"
                     />
-                    {roof_details.length > 0 && <div
+                    {roof_details?.length > 0 && <div
                         className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
                         <AiOutlineEye size={25} />
                         <p className={`${barlowMedium.className}`}>View Roof</p>
