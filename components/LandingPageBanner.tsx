@@ -30,7 +30,7 @@ export default function LandingPageBanner() {
 		setCurrentSlide((prevSlide) => (prevSlide + 1) % (data?.results?.length ?? 0));
 	  };
 	useEffect(() => {
-		
+		if(data){
 		  // Start the automatic sliding after 3 seconds
 		  timerRef.current = setInterval(nextSlide, 3000);
 	
@@ -39,17 +39,18 @@ export default function LandingPageBanner() {
 			if (timerRef.current) {
 			  clearInterval(timerRef.current);
 			}
+		}
 		  };
-	  }, []);
-
+	  }, [data]);
+// console.log(currentSlide)
 	return (
 		<div className={'w-full h-max block md:flex shadow-lg rounded-md'}>
 
-		<div className='justify-center rounded-md  h-[229px] bg-grey'>
+		<div className='justify-center rounded-md  min-w-[340px] h-[229px] bg-grey'>
 		{data && data.results && data.results?.length > 0 && data.results.map(({ id, image_code }, index) => (
 			<div
 			  key={id}
-			  className={`relative h-[229px] w-[340px] ${
+			  className={`relative h-[229px] min-w-[340px] ${
 				index === currentSlide ? '' : 'hidden'
 			  }`}>
 			  <Image
