@@ -37,8 +37,8 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     const { push } = useRouter();
     const params = useSearchParams();
     const categoryParam = params.get("category");
-    const maxPriceParam = useSearchParams().get("maxPrice");
-    const minPriceParam = useSearchParams().get("minPrice");
+    const maxPriceParam = params.get("maxPrice");
+    const minPriceParam = params.get("minPrice");
     const maxPrice = maxPriceParam ? parseInt(maxPriceParam) : undefined;
     const minPrice = minPriceParam ? parseInt(minPriceParam) : undefined;
 

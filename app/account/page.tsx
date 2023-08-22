@@ -1,7 +1,11 @@
 "use client"
+// import getUserDetails from '@/services/User/getUserDetaill';
+import { useSession } from 'next-auth/react';
 import { Barlow } from 'next/font/google';
 import Link from 'next/link';
 import {BiSolidEditAlt} from 'react-icons/bi'
+import { useQuery } from 'react-query';
+import {useEffect, useState} from 'react'
 
 const details = [
   {label:'Name', detail:"John Doe"},
@@ -21,8 +25,37 @@ const barlowNormal = Barlow({
 
 
 const account = () => {
+  // const {data} = useQuery(['user_details'], ()=> getUserDetails())
+  // const [data, setData] = useState([])
+  // const {data:session} = useSession()
+  //   const accessToken = session?.user
+  //   // console.log(accessToken)
+  // useEffect(() =>{
+  //   const fetchUser = async () => {
+  //     try{
+  //     const res = await fetch(
+  //       `/api/user/details`, {
+  //           headers:{ 
+  //               Authorization :`Bearer ${accessToken}`
+  //             }
+  //         }
+  //     );
+  //     console.log(res)
+  //     if (!res.ok) {
+  //         throw new Error('Failed to fetch User Details');
+  //     }
+
+  //     console.log(res.json());
+  // } catch (error) {
+  //     console.error('Error fetching user Details:', error);
+  //     throw error; // Rethrow the error to be caught by the query
+  // }
+  //     }
+  //     fetchUser()
+  //   },[])
+  // console.log(data)
   return (
-      <div className='flex flex-col min-w-[50vw] flex-grow h-[75vh] bg-white shadow-md rounded-md max-w-full px-4'>
+      <div className=''>
         <div className='flex justify-between w-full'>
             <h3 className={`${barlowSemi.className} p-4 `}>Personal Details</h3>
             <Link href={'/account/edit'} className='flex gap-4 text-red items-center'>
