@@ -1,5 +1,6 @@
 "use client"
 import getCarouselImages from '@/services/Carousel/getCarouselImages';
+import { useSession } from 'next-auth/react';
 import { Barlow } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,6 +23,8 @@ export default function LandingPageBanner() {
 	const [page, _setPage] = useState<number>(1);
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 	const timerRef = useRef<NodeJS.Timeout | null>(null);
+	const session = useSession()
+	console.log(session)
 	 const { data, isLoading, error } = useQuery(
       ['carouselImages'],
       () => getCarouselImages(page),

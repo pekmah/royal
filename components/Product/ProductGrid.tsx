@@ -9,6 +9,7 @@ import Pagination from "../Pagination";
 import { usePathname, useSearchParams } from "next/navigation";
 import CircleLoader from "../Loaders/CircleLoader";
 import Breadcrumb from "../BreadCrumb";
+import { useSearchContext } from "@/context/SearchContext";
 
 interface ProductGridProps {
     queryFn: (
@@ -25,12 +26,17 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
     const [pageSize] = useState(20);
     const [count, setCount] = useState(0);
 
+    const { searchQuery } = useSearchContext();
+
     const categoryParam = useSearchParams().get("category");
     const maxPriceParam = useSearchParams().get("maxPrice");
     const minPriceParam = useSearchParams().get("minPrice");
     const category = categoryParam ? parseInt(categoryParam) : undefined;
     const maxPrice = maxPriceParam ? parseInt(maxPriceParam) : undefined;
     const minPrice = minPriceParam ? parseInt(minPriceParam) : undefined;
+
+    const [selectedMinPrice, setSelectedMinPrice] = useState(minPrice);
+    const [selectedMaxPrice, setSelectedMaxPrice] = useState(maxPrice);
 
     const pathname = usePathname();
 
@@ -40,8 +46,8 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
         category && maxPrice && minPrice
             ? ["products", category, page, maxPrice, minPrice]
             : category
-            ? ["products", category, page]
-            : ["products", "all", page],
+                ? ["products", category, page]
+                : ["products", "all", page],
         () => queryFn(pageSize, page, category, maxPrice, minPrice),
         {
             keepPreviousData: true,
@@ -53,6 +59,10 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             },
         }
     );
+    useEffect(() => {
+        setSelectedMinPrice(minPrice);
+        setSelectedMaxPrice(maxPrice);
+    }, [minPrice, maxPrice]);
 
     useEffect(() => {
         if (data?.next) {
@@ -61,7 +71,29 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             );
         }
     }, [data, page, queryClient, pageSize, queryFn]);
+    const uniqueProductIds = new Set();
+    const filteredProducts = data?.results
+        ? data.results
+            .filter((product) => {
+                const meetsFilteringConditions =
+                    product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                    product.pricing &&
+                    product.pricing[0]?.price! >= selectedMinPrice! &&
+                    product.pricing[0]?.price! <= selectedMaxPrice!;
 
+                if (meetsFilteringConditions && !uniqueProductIds.has(product.id)) {
+                    uniqueProductIds.add(product.id);
+                    return true;
+                }
+                return false;
+            })
+            .map((product) => ({
+                ...product,
+                uniqueId: `${product.id}_${product.pricing && product.pricing[0]?.price}`, // Using a uniqueId property
+            }))
+        : null;
+
+    // console.log(filteredProducts)
     return (
         <div className="w-full">
             {pathname.startsWith("/products") ? (
@@ -78,18 +110,15 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6">
                 {isLoading
                     ? Array(4)
-                          .fill(0)
-                          .map((_, idx) => <ProductCardSkeleton key={idx} />)
-                    : null}
-
-                {data?.results
-                    ? data.results.map((product, idx) => (
-                          <ProductCard
-                              key={`${product.id}~${idx}`}
-                              product={product}
-                          />
-                      ))
-                    : null}
+                        .fill(0)
+                        .map((_, idx) => <ProductCardSkeleton key={idx} />)
+                    : filteredProducts && filteredProducts.length > 0
+                        ? filteredProducts.map((product, idx) => (
+                            <ProductCard key={`${product.id}~${idx}`} product={product} />
+                        ))
+                        : data && data.results && data?.results.map((product, idx) => (
+                            <ProductCard key={`${product.id}~${idx}`} product={product} />
+                        ))}
             </div>
 
             {data?.results ? (

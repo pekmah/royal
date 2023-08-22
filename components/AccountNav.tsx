@@ -23,11 +23,11 @@ const barlowNormal = Barlow({
 const iconSize = 20
 const accountLinks = [
     {path:'/account', icon: <BsPerson size={iconSize}/>, name:'Profile Information'},
-    {path:'/orders', icon: <BsBagCheck size={iconSize}/>, name:'Orders'},
-    {path:'/plans', icon: <BsFileEarmarkText size={iconSize}/> ,name:"My plans"},
-    {path:'/favorite', icon: <BsHeart size={iconSize}/>, name:'Favorite'},
-    {path:'/installments', icon: <BsCreditCard size={iconSize}/>, name:"Installments"},
-    {path:'/reviews', icon: <IoChatbubblesOutline size={iconSize}/>, name: "My reviews"},
+    {path:'/account/orders', icon: <BsBagCheck size={iconSize}/>, name:'Orders'},
+    {path:'/account/plans', icon: <BsFileEarmarkText size={iconSize}/> ,name:"My plans"},
+    {path:'/account/favorite', icon: <BsHeart size={iconSize}/>, name:'Favorite'},
+    {path:'/account/installments', icon: <BsCreditCard size={iconSize}/>, name:"Installments"},
+    {path:'/account/reviews', icon: <IoChatbubblesOutline size={iconSize}/>, name: "My reviews"},
   ]
 const AccountNav = () => {
     const pathname = usePathname()

@@ -6,6 +6,7 @@ import MainContainer from '@/components/PageSections/MainContainer';
 import QueryProvider from '@/components/Providers/QueryProvider';
 import CartContextProvider from '@/context/CartContext';
 import CartContext2Provider from "@/context/CartContext2";
+import SearchContextProvider from '@/context/SearchContext';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -26,8 +27,10 @@ export default function RootLayout({
             <QueryProvider>
                 <CartContextProvider>
                     <CartContext2Provider>
+                        <SearchContextProvider>
                         <MainContainer>{children}</MainContainer>
                         <Toaster position='bottom-right' reverseOrder={false}/>
+                        </SearchContextProvider>
                     </CartContext2Provider>
                 </CartContextProvider>
             </QueryProvider>
