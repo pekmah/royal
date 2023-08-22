@@ -36,7 +36,7 @@ export default function ProductDetailMain({ product }) {
         total_reviews,
         roof_details
     } = product;
-    const [activeFinish, setActiveFinish] = useState(pricing ? pricing[0] : undefined);
+    const [activeFinish, setActiveFinish] = useState(null);
     const [selectedColor, setSelectedColor] = useState(thumbnail_colors ? thumbnail_colors[0] : undefined);
 
     const [activeGauge, setActiveGauge] = useState(null);
@@ -143,7 +143,7 @@ export default function ProductDetailMain({ product }) {
 
         return newList;
     }, [activeGauge, activeWidth, pricing])
-    console.log(product?.pricing?.at(0)?.price)
+
     const totalProductPrice = useMemo(() => {
         let currentCartItem = cart?.filter(
             item => item?.pricing === activeFinish?.id,
