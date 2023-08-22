@@ -71,28 +71,27 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             );
         }
     }, [data, page, queryClient, pageSize, queryFn]);
-    const uniqueProductIds = new Set();
-    const filteredProducts = data?.results
-        ? data.results
-            .filter((product) => {
-                const meetsFilteringConditions =
-                    product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-                    product.pricing &&
-                    product.pricing[0]?.price! >= selectedMinPrice! &&
-                    product.pricing[0]?.price! <= selectedMaxPrice!;
 
-                if (meetsFilteringConditions && !uniqueProductIds.has(product.id)) {
-                    uniqueProductIds.add(product.id);
-                    return true;
-                }
-                return false;
-            })
-            .map((product) => ({
-                ...product,
-                uniqueId: `${product.id}_${product.pricing && product.pricing[0]?.price}`, // Using a uniqueId property
-            }))
-        : null;
+const uniqueProductIds = new Set();
+const filteredProducts = data?.results
+  ? data.results
+      .filter((product) => {
+        const meetsFilteringConditions =
+          product.pricing &&
+          product.pricing[0]?.price! >= selectedMinPrice! &&
+          product.pricing[0]?.price! <= selectedMaxPrice!;
 
+        if (meetsFilteringConditions && !uniqueProductIds.has(product.id)) {
+          uniqueProductIds.add(product.id);
+          return true;
+        }
+        return false;
+      })
+      .map((product) => ({
+        ...product,
+        uniqueId: `${product.id}_${product.pricing && product.pricing[0]?.price}`,
+      }))
+  : [];
     // console.log(filteredProducts)
     return (
         <div className="w-full">
@@ -108,17 +107,23 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             ) : null}
 
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6">
-                {isLoading
-                    ? Array(4)
-                        .fill(0)
-                        .map((_, idx) => <ProductCardSkeleton key={idx} />)
-                    : filteredProducts && filteredProducts.length > 0
-                        ? filteredProducts.map((product, idx) => (
-                            <ProductCard key={`${product.id}~${idx}`} product={product} />
-                        ))
-                        : data && data.results && data?.results.map((product, idx) => (
-                            <ProductCard key={`${product.id}~${idx}`} product={product} />
-                        ))}
+            {isLoading
+    ? Array(4)
+        .fill(0)
+        .map((_, idx) => <ProductCardSkeleton key={idx} />)
+    : filteredProducts && filteredProducts.length > 0
+    ? filteredProducts
+        .filter((product) =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .map((product, idx) => (
+          <ProductCard key={`${product.uniqueId}_${idx}`} product={product} />
+        ))
+    : data && data.results && data?.results.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  ).map((product, idx) => (
+        <ProductCard key={`${product.id}_${idx}`} product={product} />
+      ))}
             </div>
 
             {data?.results ? (
