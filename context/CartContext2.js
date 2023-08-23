@@ -8,7 +8,7 @@ import AsyncStorageService from "@/services/AsyncStorageService";
     
 //     setCart:React.Dispatch<React.SetStateAction<{}>>
 // }
-export const CContext = createContext();
+export const CContext = createContext({});
 
 const CartContext2Provider = ({children}) => {
     // const [products, setProducts] = useState([]);
