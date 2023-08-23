@@ -8,7 +8,7 @@ interface cartProps{
     setCart: Dispatch<SetStateAction<string[]>>
 }
 // CartContext2
- const CContext = createContext({} as cartProps);
+ export const CContext = createContext({} as cartProps);
 
 
 const CartContext2Provider = ({children}:{children:React.ReactNode}) => {
