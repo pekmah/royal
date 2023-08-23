@@ -4,7 +4,7 @@ import React, {createContext, useEffect, useState} from 'react';
 import AsyncStorageService from "@/services/AsyncStorageService";
 
 // CartContext2
-export const CContext = createContext();
+export const CContext = createContext({});
 
 const CartContext2Provider = ({children}) => {
     // const [products, setProducts] = useState([]);
