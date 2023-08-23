@@ -4,6 +4,10 @@ import React, {createContext, useEffect, useState} from 'react';
 import AsyncStorageService from "@/services/AsyncStorageService";
 
 // CartContext2
+// interface cartProps{
+    
+//     setCart:React.Dispatch<React.SetStateAction<{}>>
+// }
 export const CContext = createContext();
 
 const CartContext2Provider = ({children}) => {
