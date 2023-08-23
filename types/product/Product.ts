@@ -57,3 +57,7 @@ export interface ProductReview {
     review_date: string;
     user: string;
 }
+
+export interface SearchEntity{
+    search_query:string
+}

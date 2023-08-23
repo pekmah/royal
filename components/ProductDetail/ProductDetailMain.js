@@ -7,7 +7,7 @@ import { AiOutlineEye } from 'react-icons/ai'
 import CostDisplay from './CostDisplay';
 import { BsCart2 } from "react-icons/bs";
 import QuantityCount from "./QuantityCount";
-import { CContext } from "@/context/CartContext2";
+import { CContext } from "@/context/CartContext2.js";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -241,7 +241,7 @@ export default function ProductDetailMain({ product }) {
                         style={{ objectFit: "cover", objectPosition: "center" }}
                         className="rounded-md"
                     />
-                    {roof_details?.length > 0 && <div
+                    {roof_details.length > 0 && <div
                         className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
                         <AiOutlineEye size={25} />
                         <p className={`${barlowMedium.className}`}>View Roof</p>
@@ -267,11 +267,16 @@ export default function ProductDetailMain({ product }) {
                             </label>
                             <select
                                 className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
-                                placeholder={"Choose Finish"}>
+                                placeholder={"Choose Finish"}
+                                onChange={(e) => { // @ts-ignore
+                                    setActiveFinish(pricing.find(item=>parseInt(item.id)===parseInt(e.target.value)))
+                                }}
+                            >
                                 <option className={`px-2 py-3 bg-white text-gray-500 `}>Select</option>
                                 {finishList?.map(item => (
 
                                     <option key={item?.id}
+                                            value={item?.id}
                                         className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item?.finish}</option>
                                 ))
 

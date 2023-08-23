@@ -1,10 +1,13 @@
 "use client"
-
 import React, {createContext, useEffect, useState} from 'react';
 import AsyncStorageService from "@/services/AsyncStorageService";
 
 // CartContext2
-export const CContext = createContext();
+// interface cartProps{
+    
+//     setCart:React.Dispatch<React.SetStateAction<{}>>
+// }
+export const CContext = createContext({});
 
 const CartContext2Provider = ({children}) => {
     // const [products, setProducts] = useState([]);
@@ -24,7 +27,7 @@ const CartContext2Provider = ({children}) => {
 
         handleCart();
     }, []);
-
+// console.log(cart)
 
     return (
         <CContext.Provider

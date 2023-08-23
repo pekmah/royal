@@ -3,40 +3,27 @@ import React, { useState } from 'react'
 import Empty from './Empty'
 import Shared from './Shared'
 import { StaticImageData } from 'next/image'
+import useAuth from '@/hooks/useAuth'
+import { useQuery } from 'react-query'
 
 export interface RequestProps {
     id: number;
     image: StaticImageData;
-    plan: string;
+    roof_plan_file_name: string;
+    created_at?:string | number | Date
     button: string;
   }
 
-  const requestsData: RequestProps[] = [
-    {
-      id: 1,
-      image: rectangle,
-      plan: 'My plan.pdf',
-      button: 'Request a Quote',
-    },
-    {
-      id: 2,
-      image: rectangle,
-      plan: 'My plan.pdf',
-      button: 'Request a Quote',
-    },
-    {
-      id: 3,
-      image: rectangle,
-      plan: 'My plan.pdf',
-      button: 'Request a Quote',
-    },
-  ];
-const RecievedQuotes = () => {
+  
+const RecievedQuotes = ({status}:{status:string}) => {
+  const {fetchPhotosByStatus} = useAuth()
+    const {data}  = useQuery(['photos', status], () => fetchPhotosByStatus(status));
+    // console.log(data.results.length)
     const text = 'There are quotes for you yet. Request a quote from the uploaded plans tab'
   return (
     <div>
-        {requestsData.length > 0 ? (
-        <Shared requests={requestsData} />
+        {data && data.results.length > 0  ? (
+        <Shared requests={data.results} />
       )  : <Empty text={text}/> }
 
     </div>

@@ -6,7 +6,7 @@ import {BsArrowRightShort} from 'react-icons/bs'
 import {Barlow} from 'next/font/google';
 import {useRouter} from 'next/navigation';
 import AsyncStorageService from "@/services/AsyncStorageService";
-import {CContext} from "@/context/CartContext2";
+import {CContext} from "@/context/CartContext2.js";
 import Image from "next/image";
 import empty from '@/public/empty.png'
 
@@ -28,6 +28,7 @@ const barlowNormal = Barlow({
 
 const Cart = () => {
     const {itemQuantity, totalPrice} = useCartContext()
+    // @ts-ignore
     const {cart} = useContext(CContext)
 
     useEffect(() => {
@@ -45,18 +46,24 @@ const Cart = () => {
             const currentPricing = val?.product?.pricing
                 ?.filter(prod => prod?.id === val?.pricing)
                 ?.at(0);
+            
+            // Extract the relevant numeric values from val
+            const quantity = val?.quantity;
+            const length = parseFloat(val?.measurements?.length) || 0;
+            const price = parseFloat(currentPricing?.price) || 0;
+    
+            // Calculate single item amount based on pricing and properties
             const singleItemAmount = currentPricing?.gauge_size
-                ? parseFloat(currentPricing?.price) *
-                parseFloat(val?.measurements?.length) *
-                val?.quantity
-                : parseFloat(currentPricing?.price) * val?.quantity;
-
-            return acc + singleItemAmount || 0;
+                ? price * length * quantity
+                : price * quantity;
+    
+            // Accumulate the single item amount in the accumulator
+            return acc + singleItemAmount;
         }, 0);
     }, [cart]);
 
 
-    const vat = (Math.ceil(subTotal)) * 16 / 100
+    const vat = (Math.ceil(parseInt(subTotal))) * 16 / 100
     const total = subTotal + vat
     return (
         <div className={'min-h-[80vh] flex'}>
@@ -74,7 +81,7 @@ const Cart = () => {
                                 <div className='flex w-full justify-between'>
                                     <span
                                         className={`${barlowNormal.className} text-black/60 `}>Total for item(s)</span>
-                                    <span className={`${barlowSemi.className} `}>{Math.ceil(subTotal)}</span>
+                                    <span className={`${barlowSemi.className} `}>{Math.ceil(parseInt(subTotal))}</span>
                                 </div>
                                 <div className='flex w-full justify-between py-2'>
                                     <span className={`${barlowNormal.className} text-black/60 `}>VAT( 16% )</span>
@@ -83,7 +90,7 @@ const Cart = () => {
 
                                 <div className='flex w-full justify-between pt-4'>
                                     <span className={`${barlowMedium.className} `}>Total</span>
-                                    <span className={`${barlowSemi.className} `}>{Math.ceil(total)}</span>
+                                    <span className={`${barlowSemi.className} `}>{Math.ceil(parseInt(total))}</span>
                                 </div>
                                 <div className='flex gap-4 py-6 w-full justify-center'>
                                     <button onClick={() => router.back()}
@@ -96,7 +103,7 @@ const Cart = () => {
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                      *p  </div>
                     </div>
                 ) : <div className={'flex-1 flex flex-col gap-y-2 justify-center items-center'}>
 

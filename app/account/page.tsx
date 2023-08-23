@@ -6,15 +6,19 @@ import Link from 'next/link';
 import {BiSolidEditAlt} from 'react-icons/bi'
 import { useQuery } from 'react-query';
 import {useEffect, useState} from 'react'
+import useAuth from '@/hooks/useAuth';
+import { UserEntity } from '@/types/user/User';
+import { useRouter } from 'next/navigation';
+import { ProductCardSkeleton } from '@/components/Product/ProductCard';
 
-const details = [
-  {label:'Name', detail:"John Doe"},
-  {label:"Email", detail:"ericpekmah@gmail.com"},
-  {label:'Phone Number', detail:"+254 700 000 000"}
-]
 const barlowSemi = Barlow({
 	style: 'normal',
 	weight: '600',
+	subsets: ['latin'],
+});
+const barlowMedium = Barlow({
+	style: 'normal',
+	weight: '500',
 	subsets: ['latin'],
 });
 const barlowNormal = Barlow({
@@ -24,36 +28,33 @@ const barlowNormal = Barlow({
 });
 
 
-const account = () => {
+const Account = () => {
   // const {data} = useQuery(['user_details'], ()=> getUserDetails())
-  // const [data, setData] = useState([])
-  // const {data:session} = useSession()
-  //   const accessToken = session?.user
-  //   // console.log(accessToken)
-  // useEffect(() =>{
-  //   const fetchUser = async () => {
-  //     try{
-  //     const res = await fetch(
-  //       `/api/user/details`, {
-  //           headers:{ 
-  //               Authorization :`Bearer ${accessToken}`
-  //             }
-  //         }
-  //     );
-  //     console.log(res)
-  //     if (!res.ok) {
-  //         throw new Error('Failed to fetch User Details');
-  //     }
+  const router = useRouter()
+  const {getUser} = useAuth()
+  const [data, setData] = useState<UserEntity | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  
+  const {data:session, status} = useSession()
+    const accessToken = session?.user
 
-  //     console.log(res.json());
-  // } catch (error) {
-  //     console.error('Error fetching user Details:', error);
-  //     throw error; // Rethrow the error to be caught by the query
-  // }
-  //     }
-  //     fetchUser()
-  //   },[])
-  // console.log(data)
+    if (status === 'unauthenticated'){
+      router.push('/')
+    }
+    // console.log(accessToken)
+  useEffect(() =>{
+    setIsLoading(true)
+    const fetchUser = async () => {
+     
+      if (accessToken){
+        const userData =  await getUser()
+        setData(userData)
+      }
+    }
+    setIsLoading(false)
+      fetchUser()
+    },[accessToken])
+
   return (
       <div className=''>
         <div className='flex justify-between w-full'>
@@ -64,15 +65,29 @@ const account = () => {
             </Link>
         </div>
         <hr className="text-grey w-full mb-4" />
+      {
+        isLoading ? <ProductCardSkeleton/> : (
+        <div className={` py-2 px-6`}>
 
-        <div className={`${barlowNormal.className} py-2 px-6`}>
-          {details.map(({label, detail})=>(
-              <div key={label} className='flex flex-col py-4 gap-2 text-sm'>
-                <h4 className='text-lightgrey'>{label}:</h4>
-                <p>{detail}</p>
+              <div  className='flex flex-col py-4 text-sm'>
+                <h4 className={`${barlowMedium.className} `}>Name</h4>
+                <div className=' text-lightgrey'>
+                  <span>{data?.first_name}</span>
+                  <span className='px-2'>{data?.last_name}</span>
+                </div>
               </div>
-          ))}
+              <div  className='flex flex-col py-4 gap-2 text-sm'>
+                <h4 className={`${barlowSemi.className} `}>Email</h4>
+                <p className='text-lightgrey'>{data?.email}</p>
+              </div>
+              <div  className='flex flex-col py-4 gap-2 text-sm'>
+                <h4 className={`${barlowSemi.className} `}>Phone Number</h4>
+                <p className='text-lightgrey'>{data?.phone_number}</p>
+              </div>
         </div>
+
+        )
+      }
         <div className="">
           <h3 className={`${barlowSemi.className} p-4 `}>Privacy & Security</h3>
           <hr className="text-grey w-full mb-4" />
@@ -88,4 +103,4 @@ const account = () => {
   )
 }
 
-export default account
+export default Account

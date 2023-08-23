@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-import Header from './Header';
+import Header from './Header.js';
 import Sidebar from './Sidebar';
 import { usePathname } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';

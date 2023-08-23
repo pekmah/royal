@@ -5,31 +5,26 @@ import RecievedQuotes from "@/components/Accounts/Plan/RecievedQuotes";
 import UploadFiles from "@/components/Accounts/Plan/UploadFiles";
 
 import UploadPlans from "@/components/Accounts/Plan/UploadPlans";
+import useAuth from "@/hooks/useAuth";
 
 import { Barlow } from "next/font/google";
 
 import { ChangeEvent, useState } from "react"
 
 import { BsUpload } from "react-icons/bs";
+import { useQuery } from "react-query";
 
 const barlowSemi = Barlow({
-
     style: 'normal',
-
     weight: '600',
-
     subsets: ['latin'],
-
 });
 
 const Plans = () => {
-
     const [togglePlans, setTogglePlans] = useState<boolean>(true)
-
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
+    const [closeUploadFiles, setCloseUploadFile] =  useState(false)
     const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
-
         const files = e.target.files;
 
         if (files && files?.length > 0) {
@@ -39,6 +34,7 @@ const Plans = () => {
             setSelectedFile(file)
 
         }
+        setCloseUploadFile(true)
     };
     //   console.log(selectedFile)
 
@@ -66,13 +62,12 @@ const Plans = () => {
 
             <hr className="text-grey w-full mb-4" />
 
-            {selectedFile && <UploadFiles selectedFile={selectedFile} />}
+            {selectedFile && closeUploadFiles && <UploadFiles selectedFile={selectedFile} closeUpload = {setCloseUploadFile} />}
 
             <div>
-
                 {
 
-                    togglePlans ? <UploadPlans /> : <RecievedQuotes />
+                    togglePlans ? <UploadPlans status="pending" /> : <RecievedQuotes status="received" />
 
                 }
 

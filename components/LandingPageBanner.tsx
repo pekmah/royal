@@ -1,6 +1,5 @@
 "use client"
 import getCarouselImages from '@/services/Carousel/getCarouselImages';
-import { useSession } from 'next-auth/react';
 import { Barlow } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,8 +22,6 @@ export default function LandingPageBanner() {
 	const [page, _setPage] = useState<number>(1);
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 	const timerRef = useRef<NodeJS.Timeout | null>(null);
-	const session = useSession()
-	console.log(session)
 	 const { data, isLoading, error } = useQuery(
       ['carouselImages'],
       () => getCarouselImages(page),
@@ -47,9 +44,9 @@ export default function LandingPageBanner() {
 	  }, [data]);
 // console.log(currentSlide)
 	return (
-		<div className={'w-full h-max block md:flex shadow-lg rounded-md'}>
+		<div className={'w-full relative h-max block md:flex shadow-lg rounded-md'}>
 
-		<div className='justify-center rounded-md  min-w-[340px] h-[229px] bg-grey'>
+		<div className='justify-center rounded-md  min-w-full h-[229px] bg-grey'>
 		{data && data.results && data.results?.length > 0 && data.results.map(({ id, image_code }, index) => (
 			<div
 			  key={id}
@@ -69,7 +66,7 @@ export default function LandingPageBanner() {
 			  />
 			</div>
 		  ))}
-		  <div className="absolute top-1/2 left-[60%] transform -translate-x-1/2 -translate-y-1/2 flex gap-2">
+		  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex gap-2">
           {data && data.results && data.results?.length > 0 ? data.results.map((_, index) => (
             <div
               key={index}
@@ -79,9 +76,10 @@ export default function LandingPageBanner() {
             />
           )): null}
 		  </div>
-        </div>
+       
 		  
 			<div
+			className='absolute top-1/2 left-[60%] -translate-x-1/2 -translate-y-1/2 z-10 opacity-100'
 				style={{
 					width: '100%',
 					display: 'flex',
@@ -90,12 +88,12 @@ export default function LandingPageBanner() {
 					alignItems: 'center',
 					paddingLeft: '8px',
 					paddingRight: '8px',
-				}}>
-				<h2 className={`${barlowSemi.className} text-[32px] py-2`}>
+				}}> 
+				 <h2 className={`${barlowSemi.className} text-[32px] py-2`}>
 					<span className='text-black'>Get your</span>
 					<span className='text-blue'> Royal Mabati</span>
 				</h2>
-				<p className={`${barlow.className} text-[12px] text-center py-2 px-2`}>
+				<p className={`${barlow.className} text-[12px] max-w-xl mx-auto text-center py-2 px-2`}>
 					When it comes to roofing, Royal Mabati ® has the experience & know how
 					to make it both durable and beautiful. Roman longtile, Box, Bricktile,
 					Corrugated, Eurotile Profile and Commercial IT 5 Available
@@ -107,6 +105,7 @@ export default function LandingPageBanner() {
 						Buy Now
 					</Link>
 				</div>
+			</div>
 			</div>
 		</div>
 	);

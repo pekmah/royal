@@ -108,14 +108,13 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                         setMinVal(value);
                         event.target.value = value.toString();
                     }}
-                    className={`thumb thumb--zindex-3 ${
-                        minVal > max - 100 ? " thumb--zindex-5" : ""
-                    }`}
+                    className={`thumb thumb--zindex-3 ${minVal > max - 100 ? " thumb--zindex-5" : ""
+                        }`}
                 />
                 <input
                     type="range"
                     min={min}
-                    max={max}
+                    max={10000}
                     value={maxVal}
                     ref={maxValRef}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -134,29 +133,30 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                                 className="w-fit border border-grey rounded-md px-2 py-1"
                                 type="number"
                                 id="min"
-                                min={min}
-                                max={maxVal - 1}
+                                min={1}
+                                max={Math.min(maxVal - 1, 10000)} // Restrict to minimum of 1 and maxVal - 1 or 10000
                                 value={minVal}
                                 onChange={(e) => {
                                     const val = parseInt(e.target.value);
-                                    if (val < maxVal) {
-                                        setMinVal(val);
+                                    if (!isNaN(val)) {
+                                        const clampedValue = Math.min(Math.max(val, 1), Math.min(maxVal - 1, 10000));
+                                        setMinVal(clampedValue);
                                     }
                                 }}
-                            />
-                        </div>
+                            />                   </div>
                         <div className="text-black slider__right-value w-fit">
                             <input
                                 className="w-fit border border-grey rounded-md px-2 py-1"
                                 type="number"
                                 id="max"
                                 min={minVal + 1}
-                                max={max}
+                                max={10000}
                                 value={maxVal}
                                 onChange={(e) => {
                                     const val = parseInt(e.target.value);
-                                    if (val > minVal) {
-                                        setMaxVal(val);
+                                    if (!isNaN(val)) {
+                                        const clampedValue = Math.min(Math.max(val, minVal + 1), 10000);
+                                        setMaxVal(clampedValue);
                                     }
                                 }}
                             />

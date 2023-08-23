@@ -1,4 +1,4 @@
-import AccountNav from '@/components/AccountNav';
+import AccountNav from '@/components/Accounts/AccountNav';
 
 export const metadata = {
 	title: 'Account Details',
