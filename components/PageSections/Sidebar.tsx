@@ -6,6 +6,8 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import MultiRangeSlider from "../MultiRangeSlider";
 import { Transition } from "@headlessui/react";
 import CategoriesSidebar from "../ProductCategory/CategoriesSidebar";
+import { ChangeEvent, useState } from "react";
+import UploadFiles from "../Accounts/Plan/UploadFiles";
 
 const barlow = Barlow({
     style: "normal",
@@ -41,6 +43,23 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     const minPriceParam = params.get("minPrice");
     const maxPrice = maxPriceParam ? parseInt(maxPriceParam) : undefined;
     const minPrice = minPriceParam ? parseInt(minPriceParam) : undefined;
+
+
+    const [togglePlans, setTogglePlans] = useState<boolean>(true)
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [closeUploadFiles, setCloseUploadFile] =  useState(false)
+    const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+
+        if (files && files?.length > 0) {
+
+            const file = files[0]
+
+            setSelectedFile(file)
+
+        }
+        setCloseUploadFile(true)
+    };
 
     return path.startsWith("/auth") || path.startsWith("/about") ? null : (
         <Transition
@@ -102,17 +121,25 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                         Get a personalized quote created just for your house
                         simply by uploading the house’s plan
                     </p>
+                    {selectedFile && closeUploadFiles &&
+                    <div className="w-[25%]">
+
+                     <UploadFiles selectedFile={selectedFile} closeUpload = {setCloseUploadFile} />
+                    </div>
+                    }
                     <div className="px-4">
-                        <button
-                            className={`button-primary w-full mt-4 rounded-lg text-sm flex items-center justify-center gap-4 ${barlowSemi.className}`}
+                        <label
+                            className={`button-primary cursor-pointer w-full mt-4 rounded-lg text-sm flex items-center justify-center gap-4 ${barlowSemi.className}`}
                         >
                             <MdOutlineFileUpload
                                 size={16}
                                 className="text-white"
                             />
+                            <input className="hidden" type="file" onChange={uploadFile} />
                             <span>Upload Plan</span>
-                        </button>
+                        </label>
                     </div>
+                   
                 </div>
             </aside>
         </Transition>

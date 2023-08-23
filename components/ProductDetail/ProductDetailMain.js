@@ -8,6 +8,7 @@ import CostDisplay from './CostDisplay';
 import { BsCart2 } from "react-icons/bs";
 import QuantityCount from "./QuantityCount";
 import { CContext } from "@/context/CartContext2";
+import {toast} from 'react-hot-toast'
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -143,7 +144,7 @@ export default function ProductDetailMain({ product }) {
 
         return newList;
     }, [activeGauge, activeWidth, pricing])
-    console.log(product?.pricing?.at(0)?.price)
+    // console.log(product?.pricing?.at(0)?.price)
     const totalProductPrice = useMemo(() => {
         let currentCartItem = cart?.filter(
             item => item?.pricing === activeFinish?.id,
@@ -206,6 +207,7 @@ export default function ProductDetailMain({ product }) {
                 },
                 ...OtherCartItems,
             ]);
+            toast.success('Item Quantity increased')
         } else {
             //   initiate new item to cart
 
@@ -220,6 +222,7 @@ export default function ProductDetailMain({ product }) {
                     pricing: activeFinish?.id,
                 },
             ]);
+            toast.success('Item added to cart')
         }
 
     };

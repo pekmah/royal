@@ -3,13 +3,14 @@
 import { useQuery, useQueryClient } from "react-query";
 import ProductCard, { ProductCardSkeleton } from "./ProductCard";
 import { PaginatedResponse } from "@/types/api/Response";
-import { ProductEntity } from "@/types/product/Product";
+import { ProductEntity, SearchEntity } from "@/types/product/Product";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination";
 import { usePathname, useSearchParams } from "next/navigation";
 import CircleLoader from "../Loaders/CircleLoader";
 import Breadcrumb from "../BreadCrumb";
 import { useSearchContext } from "@/context/SearchContext";
+import getSearchedProduct from "@/services/Product/getSearchedProduct";
 
 interface ProductGridProps {
     queryFn: (
@@ -59,6 +60,16 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             },
         }
     );
+
+    // const { data:search, isError } = useQuery<SearchEntity>(
+    //     ["search", searchQuery], // Query key includes searchQuery
+    //     () => getSearchedProduct(searchQuery), // Fetch data using your getSearchedProduct function
+    //     {
+    //       enabled: searchQuery.trim() !== "", // Only fetch if searchQuery is not empty
+    //     }
+    //   );
+
+    //   console.log(search)
     useEffect(() => {
         setSelectedMinPrice(minPrice);
         setSelectedMaxPrice(maxPrice);
@@ -72,6 +83,10 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
         }
     }, [data, page, queryClient, pageSize, queryFn]);
 
+    const maxPriceOfProducts = data?.results
+  ? Math.max(...data.results.map((product) => product.pricing && product.pricing[0]?.price || 0))
+  : 0;
+
 const uniqueProductIds = new Set();
 const filteredProducts = data?.results
   ? data.results
@@ -79,7 +94,9 @@ const filteredProducts = data?.results
         const meetsFilteringConditions =
           product.pricing &&
           product.pricing[0]?.price! >= selectedMinPrice! &&
+          product.pricing[0]?.price! <= selectedMaxPrice! &&
           product.pricing[0]?.price! <= selectedMaxPrice!;
+;
 
         if (meetsFilteringConditions && !uniqueProductIds.has(product.id)) {
           uniqueProductIds.add(product.id);
@@ -93,6 +110,10 @@ const filteredProducts = data?.results
       }))
   : [];
     // console.log(filteredProducts)
+    if (selectedMinPrice! > maxPriceOfProducts) {
+        filteredProducts.length = 0;
+      }
+
     return (
         <div className="w-full">
             {pathname.startsWith("/products") ? (
@@ -119,9 +140,7 @@ const filteredProducts = data?.results
         .map((product, idx) => (
           <ProductCard key={`${product.uniqueId}_${idx}`} product={product} />
         ))
-    : data && data.results && data?.results.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  ).map((product, idx) => (
+    : data && data.results && data?.results.map((product, idx) => (
         <ProductCard key={`${product.id}_${idx}`} product={product} />
       ))}
             </div>
