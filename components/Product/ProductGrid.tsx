@@ -129,20 +129,23 @@ const filteredProducts = data?.results
 
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6">
             {isLoading
-    ? Array(4)
-        .fill(0)
-        .map((_, idx) => <ProductCardSkeleton key={idx} />)
-    : filteredProducts && filteredProducts.length > 0
-    ? filteredProducts
-        .filter((product) =>
-          product.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        .map((product, idx) => (
-          <ProductCard key={`${product.uniqueId}_${idx}`} product={product} />
-        ))
-    : data && data.results && data?.results.map((product, idx) => (
+  ? Array(4)
+      .fill(0)
+      .map((_, idx) => <ProductCardSkeleton key={idx} />)
+  : data && data.results
+  ? data.results
+      .filter((product) =>
+        (!selectedMinPrice || !selectedMaxPrice || 
+          (product.pricing &&
+            product.pricing[0]?.price! >= selectedMinPrice! &&
+            product.pricing[0]?.price! <= selectedMaxPrice!)
+        ) &&
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .map((product, idx) => (
         <ProductCard key={`${product.id}_${idx}`} product={product} />
-      ))}
+      ))
+  : null}
             </div>
 
             {data?.results ? (
