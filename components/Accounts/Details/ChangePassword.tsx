@@ -40,20 +40,20 @@ const ChangePassword = ({ initialPass }: { initialPass: string }) => {
             return
         }
         
-        try {
-            const data = {
-                current_pass,
-                new_pass,
-                confirm_new_pass
-            }
+        // try {
+        //     const data = {
+        //         current_pass,
+        //         new_pass,
+        //         confirm_new_pass
+        //     }
     
-            const checkResponse = await axios.post('/api/user/password_change', data);
+        //     const checkResponse = await axios.post('/api/user/password_change', data);
 
-          console.log(checkResponse)
-            await changePassword(data, initialPass)
-        }catch(e){
-            throw e
-        }
+        //   console.log(checkResponse)
+        //     await changePassword(data, initialPass)
+        // }catch(e){
+        //     throw e
+        // }
     }
 
     return (
