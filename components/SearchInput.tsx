@@ -1,6 +1,16 @@
+"use client"
+import { useSearchContext } from '@/context/SearchContext';
 import { BiSearch } from 'react-icons/bi';
 
 export default function SearchInput() {
+	const { searchQuery, setSearch } = useSearchContext();
+
+	const handleSearch = () => {
+	  // Call setSearch to update the searchQuery in the context
+	  setSearch(searchQuery);
+	};
+  
+
 	return (
 		<div className='hidden md:flex w-full gap-4'>
 			<div className='w-full flex items-center'>
@@ -13,11 +23,14 @@ export default function SearchInput() {
 				<input
 					id={'search'}
 					type={'text'}
+					
 					placeholder={'Search'}
+					value={searchQuery}
+        			onChange={(e) => setSearch(e.target.value)}
 					className={`border py-2 px-4 w-full border-grey rounded-md rounded-l-none focus:outline-none`}
 				/>
 			</div>
-			<button className='button-primary py-2 px-4 font-semibold'>Search</button>
+			<button onClick={handleSearch} className='button-primary py-2 px-4 font-semibold'>Search</button>
 		</div>
 	);
 }

@@ -12,17 +12,17 @@ import NavMenu from './NavMenu';
 import DropdownMenu, {DropdownMenuItem} from '../Dropdown';
 import SearchInput from '../SearchInput';
 import {Dispatch, SetStateAction, useContext} from 'react';
-import {CContext} from "@/context/CartContext2";
+import {CContext} from "@/context/CartContext2.js";
 
-interface HeaderProps {
-    isSidebarOpen: boolean;
-    setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
-}
+// interface HeaderProps {
+//     isSidebarOpen: boolean;
+//     setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+// }
 
 export default function Header({
                                    setIsSidebarOpen,
                                    isSidebarOpen,
-                               }: HeaderProps) {
+                               }) {
     const {status, data} = useSession();
     const path = usePathname();
     const {cart} = useContext(CContext)
