@@ -21,7 +21,7 @@ const barlowNormal = Barlow({
 });
 
 
-const account = () => {
+const Account = () => {
   // const {data} = useQuery(['user_details'], ()=> getUserDetails())
   const {getUser} = useAuth()
   const [data, setData] = useState<UserEntity | null>(null)
@@ -82,4 +82,4 @@ const account = () => {
   )
 }
 
-export default account
+export default Account
