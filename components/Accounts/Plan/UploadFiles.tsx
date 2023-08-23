@@ -1,12 +1,12 @@
 "use client"
 import pdf from '@/public/pdf.png'
 import { Barlow } from 'next/font/google';
-import React, { useState, ChangeEvent } from 'react'
+import React from 'react'
 import { IoArrowBackOutline, IoArrowForwardOutline } from 'react-icons/io5'
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import useAuth from '@/hooks/useAuth';
 import { toast } from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 
 const barlowSemi = Barlow({
 	style: 'normal',
@@ -14,9 +14,14 @@ const barlowSemi = Barlow({
 	subsets: ['latin'],
 });
 const UploadFiles = ({selectedFile, closeUpload}:any) => {
-  const router = useRouter()
+  const session = useSession()
+  // console.log(session)
   const { uploadImage } = useAuth();
   // console.log(selectedFile)
+  if (session.status === 'unauthenticated'){
+    toast.error('Please login to upload plan')
+    return
+  }
   const handleUpload = () => {
     if (selectedFile) {
       uploadImage(selectedFile);
