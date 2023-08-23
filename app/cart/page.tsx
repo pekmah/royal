@@ -42,7 +42,7 @@ const Cart = () => {
     const router = useRouter()
 
     const subTotal = useMemo(() => {
-        return cart?.reduce((acc, val) => {
+        return cart?.reduce((acc: number, val: { product: { pricing: any[]; }; pricing: any; measurements: { length: string; }; quantity: number; }) => {
             const currentPricing = val?.product?.pricing
                 ?.filter(prod => prod?.id === val?.pricing)
                 ?.at(0);
