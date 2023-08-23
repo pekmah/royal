@@ -6,7 +6,7 @@ import {BsArrowRightShort} from 'react-icons/bs'
 import {Barlow} from 'next/font/google';
 import {useRouter} from 'next/navigation';
 import AsyncStorageService from "@/services/AsyncStorageService";
-import {CContext} from "@/context/CartContext2";
+import {CContext} from "@/context/CartContext2.js";
 import Image from "next/image";
 import empty from '@/public/empty.png'
 
@@ -28,6 +28,7 @@ const barlowNormal = Barlow({
 
 const Cart = () => {
     const {itemQuantity, totalPrice} = useCartContext()
+    // @ts-ignore
     const {cart} = useContext(CContext)
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const Cart = () => {
     const router = useRouter()
 
     const subTotal = useMemo(() => {
-        return cart?.reduce((acc: number, val: { product: { pricing: any[]; }; pricing: any; measurements: { length: string; }; quantity: number; }) => {
+        return cart?.reduce((acc, val) => {
             const currentPricing = val?.product?.pricing
                 ?.filter(prod => prod?.id === val?.pricing)
                 ?.at(0);
@@ -96,7 +97,7 @@ const Cart = () => {
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                      *p  </div>
                     </div>
                 ) : <div className={'flex-1 flex flex-col gap-y-2 justify-center items-center'}>
 
