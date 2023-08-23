@@ -1,20 +1,15 @@
 "use client"
 
-import React, {Dispatch, SetStateAction, createContext, useEffect, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import AsyncStorageService from "@/services/AsyncStorageService";
 
-interface cartProps{
-    cart:string[]
-    setCart: Dispatch<SetStateAction<string[]>>
-}
 // CartContext2
- export const CContext = createContext({} as cartProps);
+export const CContext = createContext({});
 
-
-const CartContext2Provider = ({children}:{children:React.ReactNode}) => {
+const CartContext2Provider = ({children}) => {
     // const [products, setProducts] = useState([]);
     // const [loading, setLoading] = useState(false);
-    const [cart, setCart] = useState<string[]>([]);
+    const [cart, setCart] = useState([]);
 
 
     // retrieve cart data from localstorage
@@ -33,9 +28,15 @@ const CartContext2Provider = ({children}:{children:React.ReactNode}) => {
 
     return (
         <CContext.Provider
-            value={{cart, setCart,}}>
+            value={{
+
+                cart,
+                setCart,
+
+            }}>
             {children}
         </CContext.Provider>
-    )
+    );
 };
+
 export default CartContext2Provider;
