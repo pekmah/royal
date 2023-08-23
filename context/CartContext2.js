@@ -27,7 +27,7 @@ const CartContext2Provider = ({children}) => {
 
         handleCart();
     }, []);
-console.log(cart)
+// console.log(cart)
 
     return (
         <CContext.Provider

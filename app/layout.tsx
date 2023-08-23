@@ -5,7 +5,7 @@ import AuthProvider from '@/components/Providers/AuthProvider';
 import MainContainer from '@/components/PageSections/MainContainer';
 import QueryProvider from '@/components/Providers/QueryProvider';
 import CartContextProvider from '@/context/CartContext';
-import CartContext2Provider from "@/context/CartContext2";
+import CartContext2Provider from "@/context/CartContext2.js";
 import SearchContextProvider from '@/context/SearchContext';
 
 const inter = Inter({subsets: ['latin']});
