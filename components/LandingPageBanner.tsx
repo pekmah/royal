@@ -1,22 +1,8 @@
 "use client"
 import getCarouselImages from '@/services/Carousel/getCarouselImages';
-import { Barlow } from 'next/font/google';
 import Image from 'next/image';
-import Link from 'next/link';
 import {useEffect, useState, useRef} from 'react'
 import { useQuery } from 'react-query';
-
-const barlowSemi = Barlow({
-	style: 'normal',
-	weight: '600',
-	subsets: ['latin'],
-});
-
-const barlow = Barlow({
-	style: 'normal',
-	weight: '400',
-	subsets: ['latin'],
-});
 
 export default function LandingPageBanner() {
 	const [page, _setPage] = useState<number>(1);
@@ -50,7 +36,7 @@ export default function LandingPageBanner() {
 		{data && data.results && data.results?.length > 0 && data.results.map(({ id, image_code }, index) => (
 			<div
 			  key={id}
-			  className={`relative h-[229px] min-w-[340px] ${
+			  className={`relative h-[229px] min-w-[100vw] ${
 				index === currentSlide ? '' : 'hidden'
 			  }`}>
 			  <Image
@@ -76,36 +62,6 @@ export default function LandingPageBanner() {
             />
           )): null}
 		  </div>
-       
-		  
-			<div
-			className='absolute top-1/2 left-[60%] -translate-x-1/2 -translate-y-1/2 z-10 opacity-100'
-				style={{
-					width: '100%',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
-					alignItems: 'center',
-					paddingLeft: '8px',
-					paddingRight: '8px',
-				}}> 
-				 <h2 className={`${barlowSemi.className} text-[32px] py-2`}>
-					<span className='text-black'>Get your</span>
-					<span className='text-blue'> Royal Mabati</span>
-				</h2>
-				<p className={`${barlow.className} text-[12px] max-w-xl mx-auto text-center py-2 px-2`}>
-					When it comes to roofing, Royal Mabati ® has the experience & know how
-					to make it both durable and beautiful. Roman longtile, Box, Bricktile,
-					Corrugated, Eurotile Profile and Commercial IT 5 Available
-				</p>
-				<div className='py-2'>
-					<Link
-						className='button-primary py-[6px] px-[14px] text-[12px]'
-						href={'/products'}>
-						Buy Now
-					</Link>
-				</div>
-			</div>
 			</div>
 		</div>
 	);

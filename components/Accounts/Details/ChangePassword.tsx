@@ -1,6 +1,5 @@
 "use client"
 import useAuth from '@/hooks/useAuth';
-import axios from 'axios';
 import { Barlow } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
@@ -40,22 +39,23 @@ const ChangePassword = ({ initialPass }: { initialPass: string }) => {
             return
         }
         
-        // try {
-        //     const data = {
-        //         current_pass,
-        //         new_pass,
-        //         confirm_new_pass
-        //     }
-    
-        //     const checkResponse = await axios.post('/api/user/password_change', data);
-
-        //   console.log(checkResponse)
-        //     await changePassword(data, initialPass)
-        // }catch(e){
-        //     throw e
-        // }
+        try {
+            const data = {
+                current_pass,
+                new_pass,
+                confirm_new_pass
+            }
+            await changePassword(data, initialPass)
+        }catch(e){
+            throw e
+        }
     }
-
+        const handleCancel = () =>{
+            setCurrent_pass("")
+            setNew_pass("")
+            setConfirm_new_pass("")
+            
+        }
     return (
         <div className='flex flex-col min-w-[50vw] flex-grow h-full bg-white shadow-md rounded-md max-w-full px-4'>
             <div onClick={() => router.back()} className='flex w-full cursor-pointer gap-2 items-center'>
@@ -100,7 +100,7 @@ const ChangePassword = ({ initialPass }: { initialPass: string }) => {
                 </div>
 
                 <div className='flex gap-4 pb-4'>
-                    <button className='button-secondary border border-red py-1.5 font-bold px-4'> Cancel</button>
+                    <button onClick={handleCancel} type='button' className='button-secondary border border-red py-1.5 font-bold px-4'> Cancel</button>
                     <button className="button-primary py-1.5 ">Save</button>
                 </div>
             </form>

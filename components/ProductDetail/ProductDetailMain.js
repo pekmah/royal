@@ -8,6 +8,9 @@ import CostDisplay from './CostDisplay';
 import { BsCart2 } from "react-icons/bs";
 import QuantityCount from "./QuantityCount";
 import { CContext } from "@/context/CartContext2.js";
+import { toast } from 'react-hot-toast';
+import Modal from "./Modal";
+import {useEffect} from 'react'
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -34,8 +37,11 @@ export default function ProductDetailMain({ product }) {
         length,
         review_summary,
         total_reviews,
+        roof_details_colors,
         roof_details
     } = product;
+
+    // console.log(product)
     const [activeFinish, setActiveFinish] = useState(null);
     const [selectedColor, setSelectedColor] = useState(thumbnail_colors ? thumbnail_colors[0] : undefined);
 
@@ -46,6 +52,10 @@ export default function ProductDetailMain({ product }) {
 
     const [quantity, setQuantity] = useState(1);
 
+    const [showModal, setShowModal] = useState(false)
+    useEffect(() => {
+        document.body.style.overflow = showModal ? "hidden" : "scroll";
+      }, [showModal]);
 
     const findPricing = (gauge_size, width, finish) => {
         for (const model of pricing) {
@@ -206,6 +216,7 @@ export default function ProductDetailMain({ product }) {
                 },
                 ...OtherCartItems,
             ]);
+            toast.success("Item quantity increased")
         } else {
             //   initiate new item to cart
 
@@ -220,6 +231,7 @@ export default function ProductDetailMain({ product }) {
                     pricing: activeFinish?.id,
                 },
             ]);
+            toast.success("Item added to cart")
         }
 
     };
@@ -228,7 +240,7 @@ export default function ProductDetailMain({ product }) {
         <div
             className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4`}
         >
-            <div className="w-full flex-1">
+            <div className="w-full relative flex-1">
                 <div className="relative h-[240px]">
                     <Image
                         alt={"Product Thumbnail"}
@@ -241,11 +253,13 @@ export default function ProductDetailMain({ product }) {
                         style={{ objectFit: "cover", objectPosition: "center" }}
                         className="rounded-md"
                     />
-                    {roof_details.length > 0 && <div
+                    {roof_details.length > 0 && <div onClick={(e) => setShowModal(true)}
                         className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
                         <AiOutlineEye size={25} />
                         <p className={`${barlowMedium.className}`}>View Roof</p>
                     </div>}
+
+
                 </div>
 
                 {product?.pricing?.at(0)?.gauge_size && <div className="flex gap-10 items-center py-4 ">
@@ -269,14 +283,14 @@ export default function ProductDetailMain({ product }) {
                                 className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
                                 placeholder={"Choose Finish"}
                                 onChange={(e) => { // @ts-ignore
-                                    setActiveFinish(pricing.find(item=>parseInt(item.id)===parseInt(e.target.value)))
+                                    setActiveFinish(pricing.find(item => parseInt(item.id) === parseInt(e.target.value)))
                                 }}
                             >
                                 <option className={`px-2 py-3 bg-white text-gray-500 `}>Select</option>
                                 {finishList?.map(item => (
 
                                     <option key={item?.id}
-                                            value={item?.id}
+                                        value={item?.id}
                                         className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item?.finish}</option>
                                 ))
 
@@ -431,6 +445,7 @@ export default function ProductDetailMain({ product }) {
                 </div>
 
             </div>
+            {showModal && <Modal roof={roof_details} closeModal={setShowModal} color={roof_details_colors} />}
         </div>
     );
 }

@@ -25,7 +25,7 @@ const Edit = () => {
       }
     }
     fetchUser()
-  }, [accessToken])
+  }, [accessToken, data])
 
   return (
     <div>
