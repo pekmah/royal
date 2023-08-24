@@ -1,10 +1,5 @@
     "use client"
-
-
-import useAuth from '@/hooks/useAuth';
     import React, {createContext, useContext, useState} from 'react';
-import { useQuery } from 'react-query';
-    // import { useQuery } from 'react-query';
 
     interface SearchProps{
         searchQuery:string

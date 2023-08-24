@@ -1,15 +1,17 @@
 import rectangle from '@/public/Rectangle-8.png'
 import React, { useState } from 'react'
 import Empty from './Empty'
-import Shared from './Shared'
 import { StaticImageData } from 'next/image'
 import useAuth from '@/hooks/useAuth'
 import { useQuery } from 'react-query'
+import Recieved from './Recieved'
 
 export interface RequestProps {
     id: number;
     image: StaticImageData;
     roof_plan_file_name: string;
+    quote_file_code:string
+    quote_file_name:string
     created_at?:string | number | Date
     button: string;
   }
@@ -23,7 +25,7 @@ const RecievedQuotes = ({status}:{status:string}) => {
   return (
     <div>
         {data && data.results.length > 0  ? (
-        <Shared requests={data.results} />
+        <Recieved requests={data.results} />
       )  : <Empty text={text}/> }
 
     </div>

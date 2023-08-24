@@ -38,7 +38,7 @@ const AccountNav = () => {
     const Logout =  () => {
       signOut()
       router.push('/')
-    }
+  }
   return (
     <aside className='flex relative h-[75vh] w-full bg-white shadow-md min-w-[20vw] max-w-[25vh]  rounded-md'>
     <div>

@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import pdf from '@/public/pdf.png'
-import React from 'react'
+import React, { useState } from 'react'
 import { RequestProps } from './RecievedQuotes'
 import { Barlow } from 'next/font/google'
 import Link from 'next/link'
+import ReceivedDetail from './ReceivedDetail'
 
 interface sharedProps {
     requests: RequestProps[]
@@ -25,18 +26,19 @@ const barlowSmall = Barlow({
 });
 
 const Recieved: React.FC<sharedProps> = ({ requests }) => {
+    const [isOpen, setIsOpen] = useState(false)
     // console.log(requests)
     return (
-        <div className='grid grid-cols-3 gap-8'>
+        <div className='grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8'>
             {
-                requests.map(({ id, image, roof_plan_file_name, created_at }) => {
+                requests.map(({ id, quote_file_code, quote_file_name,  roof_plan_file_name, created_at }) => {
                     const dateObject = new Date(created_at!);
                     const formattedDate = `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
                     return (
 
-                        <Link href={'/'} key={id} className='flex flex-col gap-4'>
+                        <div key={id} className='flex relative flex-col gap-4'>
 
-                            <div className='relative rounded-2xl overflow-hidden w-[15.625rem] h-[10rem]'>
+                            <div onClick={()=>setIsOpen(true)} className='relative rounded-2xl cursor-pointer overflow-hidden w-[15.625rem] h-[10rem]'>
 
                                 <Image src={pdf} alt='/'
 
@@ -47,9 +49,10 @@ const Recieved: React.FC<sharedProps> = ({ requests }) => {
                             </div>
 
                             <h4 className={`${barlowMedium.className}`}>{roof_plan_file_name}</h4>
+                            {isOpen && <ReceivedDetail name={quote_file_name} close={setIsOpen} />}
 
                             <p className={`${barlowSmall.className} text-fadegrey`}>{formattedDate}</p>
-                        </Link>
+                        </div>
 
                     )
                 })
