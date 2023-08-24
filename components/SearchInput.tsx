@@ -6,18 +6,7 @@ import {useState} from 'react'
 import { useRouter } from 'next/navigation';
 
 export default function SearchInput() {
-	const { searchQuery, setSearch,setSearchQuery } = useSearchContext();
-	// const [searchQuery, setSearchQuery] = useState('');
-	const { search } = useAuth()
-	const router = useRouter()
-
-	const handleSearch = async () => {
-		await search(searchQuery)
-		router.refresh()
-	  setSearch(searchQuery);
-		// setSearchQuery('')
-	};
-  
+		  const { searchQuery, setSearchQuery,Search, handleSearch  } = useSearchContext();
 
 	return (
 		<div className='hidden md:flex w-full gap-4'>

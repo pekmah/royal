@@ -13,7 +13,7 @@ const barlowSemi = Barlow({
 
 const ReceivedDetail = ({ name, close }: { name: string, close: React.Dispatch<React.SetStateAction<boolean>> }) => {
     return (
-        <div className='bg-white absolute  opacity-100 z-20 h-full w-[100vh]'>
+        <div className='bg-white absolute inset-0  opacity-100 z-20 h-full w-[100vw]'>
             {name && (
                 <div>
                     <div onClick={() => close(false)} className='flex w-full cursor-pointer gap-2 items-center'>
@@ -22,7 +22,7 @@ const ReceivedDetail = ({ name, close }: { name: string, close: React.Dispatch<R
                     </div>
                     <hr className="text-grey w-full mb-2" />
                     <div className=''>
-                        <div className='relative w-[350px] h-[230px] bg-gray overflow-hidden rounded-2xl'>
+                        <div className='relative w-[250px] h-[200px] bg-gray overflow-hidden rounded-2xl'>
                             <Image fill priority className='object-cover' src={pdf} alt='' />
                         </div>
                         <h3 className={`${barlowSemi.className} py-4`}>Sent Quote</h3>

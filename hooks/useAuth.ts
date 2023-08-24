@@ -106,6 +106,7 @@ const changePassword = async (data:any, initialPass:string) =>{
     if (!response.ok) {
       throw new Error('Network error'); 
     }
+    router.refresh()
     return response.json();
   };
   
