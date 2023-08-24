@@ -1,28 +1,36 @@
-"use client"
-
-import React, {createContext, useContext, useState} from 'react';
-
-interface SearchProps{
-    searchQuery:string
-    setSearch: (query:string) => void
-}
-export const SearchContext = createContext({} as SearchProps);
-export const useSearchContext = () => useContext(SearchContext);
+    "use client"
 
 
-const SearchContextProvider = ({children}:{children:React.ReactNode}) => {
-    const [searchQuery, setSearchQuery] = useState('');
+import useAuth from '@/hooks/useAuth';
+    import React, {createContext, useContext, useState} from 'react';
+import { useQuery } from 'react-query';
+    // import { useQuery } from 'react-query';
 
-    const setSearch = (query:string) => {
-      setSearchQuery(query);
+    interface SearchProps{
+        searchQuery:string
+        setSearchQuery:React.Dispatch<React.SetStateAction<string>>
+        setSearch: (query:string) => void
+    }
+    export const SearchContext = createContext({} as SearchProps);
+    export const useSearchContext = () => useContext(SearchContext);
+
+
+    const SearchContextProvider = ({children}:{children:React.ReactNode}) => {
+        
+        const [searchQuery, setSearchQuery] = useState('');
+       
+    
+
+        const setSearch = (query:string) => {
+        setSearchQuery(query);
+        };
+
+        return (
+            <SearchContext.Provider
+            value={{ searchQuery, setSearch, setSearchQuery }}>
+                {children}
+            </SearchContext.Provider>
+        );
     };
 
-    return (
-        <SearchContext.Provider
-        value={{ searchQuery, setSearch }}>
-            {children}
-        </SearchContext.Provider>
-    );
-};
-
-export default SearchContextProvider;
+    export default SearchContextProvider;

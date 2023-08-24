@@ -3,6 +3,7 @@ import pdf from '@/public/pdf.png'
 import React from 'react'
 import { RequestProps } from './RecievedQuotes'
 import { Barlow } from 'next/font/google'
+import Link from 'next/link'
 
 interface sharedProps {
     requests: RequestProps[]
@@ -23,7 +24,7 @@ const barlowSmall = Barlow({
 
 });
 
-const Shared: React.FC<sharedProps> = ({ requests }) => {
+const Recieved: React.FC<sharedProps> = ({ requests }) => {
     // console.log(requests)
     return (
         <div className='grid grid-cols-3 gap-8'>
@@ -33,7 +34,7 @@ const Shared: React.FC<sharedProps> = ({ requests }) => {
                     const formattedDate = `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
                     return (
 
-                        <div key={id} className='flex flex-col gap-4'>
+                        <Link href={'/'} key={id} className='flex flex-col gap-4'>
 
                             <div className='relative rounded-2xl overflow-hidden w-[15.625rem] h-[10rem]'>
 
@@ -48,7 +49,7 @@ const Shared: React.FC<sharedProps> = ({ requests }) => {
                             <h4 className={`${barlowMedium.className}`}>{roof_plan_file_name}</h4>
 
                             <p className={`${barlowSmall.className} text-fadegrey`}>{formattedDate}</p>
-                        </div>
+                        </Link>
 
                     )
                 })
@@ -64,4 +65,4 @@ const Shared: React.FC<sharedProps> = ({ requests }) => {
 
 
 
-export default Shared
+export default Recieved

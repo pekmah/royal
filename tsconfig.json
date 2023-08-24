@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "context/CartContext2.js", "components/PageSections/Header.js", "app/cart/page.js", "context/CartContext2.js", "context/CartContext.js", "context/CartContext2.js", "context/CartContext2.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "context/CartContext2.tsx", "components/PageSections/Header.js", "app/cart/page.js", "context/CartContext2.tsx", "context/CartContext.js", "context/CartContext2.tsx", "context/CartContext2.tsx"],
   "exclude": ["node_modules"]
 }

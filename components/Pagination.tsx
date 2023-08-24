@@ -6,7 +6,7 @@ type PaginationProps = {
 	onPageChange: (page: number) => void;
 	count: number;
 	pageSize: number;
-	itemCount: number;
+	itemCount: number | undefined;
 };
 
 const Pagination: FC<PaginationProps> = ({
@@ -44,7 +44,7 @@ const Pagination: FC<PaginationProps> = ({
 					onClick={() => handlePageClick(page)}
 					className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
 						page === currentPage
-							? 'bg-indigo-600 text-blue bg-grey'
+							? ' text-blue bg-grey'
 							: 'text-grey-900 hover:bg-grey-50'
 					}`}>
 					{page}
@@ -80,9 +80,9 @@ const Pagination: FC<PaginationProps> = ({
 			<div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
 				<div>
 					<p className='text-sm text-grey-700'>
-						Showing <span className='font-medium'>1</span> to{' '}
+						Showing <span className='font-medium'>{itemCount === 0 ? 0 : 1}</span> to{' '}
 						<span className='font-medium'>{itemCount}</span> of{' '}
-						<span className='font-medium'>{count}</span> results
+						<span className='font-medium'>{itemCount === 0 ? '0' : count}</span> results
 					</p>
 				</div>
 				<div>

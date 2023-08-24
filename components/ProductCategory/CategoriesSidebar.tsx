@@ -15,7 +15,6 @@ export default function CategoriesSidebar() {
   const maxPrice = useSearchParams().get("maxPrice");
   const minPrice = useSearchParams().get("minPrice");
   const category = categoryParam ? parseInt(categoryParam) : undefined;
-
   return (
     <div className="text-sm w-full mb-4">
       {isLoading && !data
@@ -56,6 +55,7 @@ export default function CategoriesSidebar() {
                     src={`${process.env.BASE_URL}/api/v1/core/category/thumbnails/${thumbnail_code}`}
                     width={24}
                     height={24}
+                    priority
                     alt={`Thumbnail for ${name} category.`}
                   />
                 </span>

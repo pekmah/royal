@@ -10,7 +10,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import CircleLoader from "../Loaders/CircleLoader";
 import Breadcrumb from "../BreadCrumb";
 import { useSearchContext } from "@/context/SearchContext";
-import getSearchedProduct from "@/services/Product/getSearchedProduct";
+import useAuth from "@/hooks/useAuth";
 
 interface ProductGridProps {
     queryFn: (
@@ -26,8 +26,10 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
     const [page, setPage] = useState(1);
     const [pageSize] = useState(20);
     const [count, setCount] = useState(0);
+    const [searchCount, setSearchCount] = useState(0)
 
     const { searchQuery } = useSearchContext();
+    const { search } = useAuth()
 
     const categoryParam = useSearchParams().get("category");
     const maxPriceParam = useSearchParams().get("maxPrice");
@@ -61,19 +63,41 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
         }
     );
 
-    // const { data:search, isError } = useQuery<SearchEntity>(
-    //     ["search", searchQuery], // Query key includes searchQuery
-    //     () => getSearchedProduct(searchQuery), // Fetch data using your getSearchedProduct function
-    //     {
-    //       enabled: searchQuery.trim() !== "", // Only fetch if searchQuery is not empty
-    //     }
-    //   );
-
-    //   console.log(search)
+    const { data: searchProduct, isLoading:loading } = useQuery<ProductEntity[]>(['search'], () => search(searchQuery),
+        {
+            enabled: searchQuery.trim() !== "", // Only fetch if searchQuery is not empty
+            keepPreviousData: true,
+            onSuccess(data) {
+                setSearchCount(searchProduct?.length!);
+            },
+            onError(err) {
+                console.error("err", err);
+            },
+        }
+    )
+     
+    // console.log(searchProduct)
     useEffect(() => {
         setSelectedMinPrice(minPrice);
         setSelectedMaxPrice(maxPrice);
     }, [minPrice, maxPrice]);
+
+    const [filteredProductCount, setFilteredProductCount] = useState<number | null>(null);
+
+// ...
+
+useEffect(() => {
+  if (data?.results) {
+    const count = data.results.filter((product) =>
+      (!selectedMinPrice || !selectedMaxPrice ||
+        (product.pricing &&
+          product.pricing[0]?.price! >= selectedMinPrice! &&
+          product.pricing[0]?.price! <= selectedMaxPrice!)
+      )
+    ).length;
+    setFilteredProductCount(count);
+  }
+}, [data, selectedMinPrice, selectedMaxPrice]);
 
     useEffect(() => {
         if (data?.next) {
@@ -83,37 +107,37 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
         }
     }, [data, page, queryClient, pageSize, queryFn]);
 
-    const maxPriceOfProducts = data?.results
-        ? Math.max(...data.results.map((product) => product.pricing && product.pricing[0]?.price || 0))
-        : 0;
+    // const maxPriceOfProducts = data?.results
+    //     ? Math.max(...data.results.map((product) => product.pricing && product.pricing[0]?.price || 0))
+    //     : 0;
 
-    const uniqueProductIds = new Set();
-    const filteredProducts = data?.results
-        ? data.results
-            .filter((product) => {
-                const meetsFilteringConditions =
-                    product.pricing &&
-                    product.pricing[0]?.price! >= selectedMinPrice! &&
-                    product.pricing[0]?.price! <= selectedMaxPrice! &&
-                    product.pricing[0]?.price! <= selectedMaxPrice!;
-                ;
+    // const uniqueProductIds = new Set();
+    // const filteredProducts = data?.results
+    //     ? data.results
+    //         .filter((product) => {
+    //             const meetsFilteringConditions =
+    //                 product.pricing &&
+    //                 product.pricing[0]?.price! >= selectedMinPrice! &&
+    //                 product.pricing[0]?.price! <= selectedMaxPrice! &&
+    //                 product.pricing[0]?.price! <= selectedMaxPrice!;
+    //             ;
 
-                if (meetsFilteringConditions && !uniqueProductIds.has(product.id)) {
-                    uniqueProductIds.add(product.id);
-                    return true;
-                }
-                return false;
-            })
-            .map((product) => ({
-                ...product,
-                uniqueId: `${product.id}_${product.pricing && product.pricing[0]?.price}`,
-            }))
-        : [];
-    // console.log(filteredProducts)
-    if (selectedMinPrice! > maxPriceOfProducts) {
-        filteredProducts.length = 0;
-    }
-
+    //             if (meetsFilteringConditions && !uniqueProductIds.has(product.id)) {
+    //                 uniqueProductIds.add(product.id);
+    //                 return true;
+    //             }
+    //             return false;
+    //         })
+    //         .map((product) => ({
+    //             ...product,
+    //             uniqueId: `${product.id}_${product.pricing && product.pricing[0]?.price}`,
+    //         }))
+    //     : [];
+    // // console.log(filteredProducts)
+    // if (selectedMinPrice! > maxPriceOfProducts) {
+    //     filteredProducts.length = 0;
+    // }
+ 
     return (
         <div className="w-full">
             {pathname.startsWith("/products") ? (
@@ -124,28 +148,47 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             ) : null}
 
             {data?.results ? (
-                <div className="mt-5">{`Products (${count})`}</div>
+                <div className="mt-5">{`Products (${searchQuery ? searchCount : filteredProductCount})`}</div>
             ) : null}
-
+          
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6">
-                {isLoading
-                    ? Array(4)
-                        .fill(0)
-                        .map((_, idx) => <ProductCardSkeleton key={idx} />)
-                    : data && data.results
-                        ? data.results
-                            .filter((product) =>
-                                (!selectedMinPrice || !selectedMaxPrice ||
-                                    (product.pricing &&
-                                        product.pricing[0]?.price! >= selectedMinPrice! &&
-                                        product.pricing[0]?.price! <= selectedMaxPrice!)
-                                ) &&
-                                product.name.toLowerCase().includes(searchQuery.toLowerCase())
-                            )
-                            .map((product, idx) => (
-                                <ProductCard key={`${product.id}_${idx}`} product={product} />
-                            ))
-                        : null}
+            {searchQuery && searchProduct ? loading ? (
+                Array(4)
+                  .fill(0)
+                  .map((_, idx) => <ProductCardSkeleton key={idx} />)
+              ) :   searchQuery && (
+                    searchProduct
+                      ? searchProduct.filter((product) =>
+                      (!selectedMinPrice || !selectedMaxPrice ||
+                        (product.pricing &&
+                          product.pricing[0]?.price! >= selectedMinPrice! &&
+                          product.pricing[0]?.price! <= selectedMaxPrice!)
+                      )
+                    ).map((product:any, idx:any) => (
+                            <ProductCard key={`${product.id}_${idx}`} product={product} />
+                          ))
+                      : null
+                  ) :  
+            
+            isLoading ? (
+                Array(4)
+                  .fill(0)
+                  .map((_, idx) => <ProductCardSkeleton key={idx} />)
+              ) : (
+                data && data.results
+                  ? data.results
+                      .filter((product) =>
+                        (!selectedMinPrice || !selectedMaxPrice ||
+                          (product.pricing &&
+                            product.pricing[0]?.price! >= selectedMinPrice! &&
+                            product.pricing[0]?.price! <= selectedMaxPrice!)
+                        )
+                      )
+                      .map((product, idx) => (
+                        <ProductCard key={`${product.id}_${idx}`} product={product} />
+                      ))
+                  : null
+              )}
             </div>
 
             {data?.results ? (
@@ -153,9 +196,9 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
                     <Pagination
                         currentPage={page}
                         onPageChange={setPage}
-                        count={count}
+                        count={searchQuery ? searchCount :count}
                         pageSize={pageSize}
-                        itemCount={data.results.length}
+                        itemCount={searchQuery ? (searchProduct && !loading) ? searchProduct.length : 0 : filteredProductCount || 0}
                     />
                 </div>
             ) : null}

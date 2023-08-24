@@ -11,6 +11,8 @@ import { CContext } from "@/context/CartContext2.js";
 import { toast } from 'react-hot-toast';
 import Modal from "./Modal";
 import {useEffect} from 'react'
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -27,6 +29,8 @@ const barlowMedium = Barlow({
 
 export default function ProductDetailMain({ product }) {
     // const {addToCart} = useCartContext()
+    const {status} = useSession()
+    const router = useRouter()
     const { cart, setCart } = useContext(CContext)
     const {
         id,
@@ -181,6 +185,11 @@ export default function ProductDetailMain({ product }) {
     const handleAddToCart = () => {
         // validate form
         // handleValidateRequiredFields();
+        // Check if user is authenticated
+        if (status === 'unauthenticated'){
+            router.push('/auth/login')
+            toast.success('Please login to continue')
+        }
 
         // check if item is already contained
         let itemIsContained = false;
@@ -253,7 +262,7 @@ export default function ProductDetailMain({ product }) {
                         style={{ objectFit: "cover", objectPosition: "center" }}
                         className="rounded-md"
                     />
-                    {roof_details.length > 0 && <div onClick={(e) => setShowModal(true)}
+                    {roof_details?.length > 0 && <div onClick={(e) => setShowModal(true)}
                         className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
                         <AiOutlineEye size={25} />
                         <p className={`${barlowMedium.className}`}>View Roof</p>

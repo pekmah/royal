@@ -100,9 +100,19 @@ const changePassword = async (data:any, initialPass:string) =>{
     return response.json();
   };
   
+  
+  const search = async(search_query:string) =>{
+    const response = await fetch(`${process.env.BASE_URL}/api/v1/core/products/search/?search_query=${search_query}`, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Network error'); 
+    }
+    return response.json();
+  };
+  
 
-    return {getUser, updateUserDetails, changePassword, uploadImage: mutate, fetchPhotosByStatus}
+    return {getUser, updateUserDetails, changePassword, uploadImage: mutate, fetchPhotosByStatus, search}
 
 }
+
 
 export default useAuth

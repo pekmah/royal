@@ -8,7 +8,7 @@ export default async function getAllProductCategories(
 	page = 1
 ): Promise<PaginatedResponse<ProductCategoryEntity>> {
 	const res = await fetch(
-		`${process.env.NEXTAUTH_URL}/api/product_categories/all?page_size=${pageSize}&page=${page}`
+		`${process.env.NEXTAUTH_URL}/api/product_categories/all?page=${page}&page_size=${pageSize}`
 	);
 	return res.json();
 }
