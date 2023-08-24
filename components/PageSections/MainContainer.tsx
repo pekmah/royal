@@ -6,9 +6,11 @@ import Sidebar from './Sidebar';
 import { usePathname } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';
 import Footer from './Footer';
+import { useSearchContext } from '@/context/SearchContext';
 
 export default function MainContainer({ children }: { children: ReactNode }) {
-	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+	
+	const {isSidebarOpen, setIsSidebarOpen} = useSearchContext()
 	const path = usePathname();
 	const isMediumDevice = useMediaQuery('(max-width: 1024px)');
 

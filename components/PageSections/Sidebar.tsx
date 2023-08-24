@@ -8,6 +8,8 @@ import { Transition } from "@headlessui/react";
 import CategoriesSidebar from "../ProductCategory/CategoriesSidebar";
 import { ChangeEvent, useState } from "react";
 import UploadFiles from "../Accounts/Plan/UploadFiles";
+import { useMediaQuery } from "usehooks-ts";
+import { useSearchContext } from "@/context/SearchContext";
 
 const barlow = Barlow({
     style: "normal",
@@ -44,8 +46,6 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     const maxPrice = maxPriceParam ? parseInt(maxPriceParam) : undefined;
     const minPrice = minPriceParam ? parseInt(minPriceParam) : undefined;
 
-
-    const [togglePlans, setTogglePlans] = useState<boolean>(true)
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [closeUploadFiles, setCloseUploadFile] =  useState(false)
     const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -106,7 +106,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                                     ? `category=${categoryParam}`
                                     : ""
                                 }&minPrice=${min}&maxPrice=${max}`
-                            );
+                            )
                         }}
                     />
                 </div>

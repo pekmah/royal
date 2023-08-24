@@ -8,6 +8,8 @@ import {
 } from "react";
 import "./multiRangeSlider.css";
 import { Barlow } from "next/font/google";
+import { useSearchContext } from "@/context/SearchContext";
+import { useMediaQuery } from "usehooks-ts";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -73,6 +75,15 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         }
     }, [maxVal, getPercent]);
 
+
+    const isMediumDevice = useMediaQuery('(max-width: 1024px)');
+    const { isSidebarOpen ,setIsSidebarOpen} = useSearchContext()
+  
+    const CloseSidebar = () =>{
+      if (isMediumDevice) setIsSidebarOpen(false);
+    }
+    console.log(isSidebarOpen)
+
     return (
         <>
             <div className="flex justify-between px-6">
@@ -82,6 +93,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                         className="button-secondary border border-red rounded-md px-2 py-1 text-semibold text-sm"
                         onClick={() => {
                             onClear();
+                            CloseSidebar()
                         }}
                     >
                         Clear
@@ -90,6 +102,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                         className="button-primary px-2 py-1 text-semibold text-sm"
                         onClick={() => {
                             onApply({ min: minVal, max: maxVal });
+                            CloseSidebar()
                         }}
                     >
                         Apply

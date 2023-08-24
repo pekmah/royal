@@ -10,6 +10,8 @@ import { useQuery } from 'react-query';
         searchQuery:string
         setSearchQuery:React.Dispatch<React.SetStateAction<string>>
         setSearch: (query:string) => void
+        isSidebarOpen:boolean
+        setIsSidebarOpen:React.Dispatch<React.SetStateAction<boolean>>
     }
     export const SearchContext = createContext({} as SearchProps);
     export const useSearchContext = () => useContext(SearchContext);
@@ -18,8 +20,7 @@ import { useQuery } from 'react-query';
     const SearchContextProvider = ({children}:{children:React.ReactNode}) => {
         
         const [searchQuery, setSearchQuery] = useState('');
-       
-    
+        const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
         const setSearch = (query:string) => {
         setSearchQuery(query);
@@ -27,7 +28,7 @@ import { useQuery } from 'react-query';
 
         return (
             <SearchContext.Provider
-            value={{ searchQuery, setSearch, setSearchQuery }}>
+            value={{ searchQuery, setSearch, setSearchQuery, isSidebarOpen, setIsSidebarOpen }}>
                 {children}
             </SearchContext.Provider>
         );
