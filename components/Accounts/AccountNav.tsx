@@ -32,13 +32,13 @@ const accountLinks = [
 const AccountNav = () => {
     const pathname = usePathname()
     const router = useRouter()
-    const inactive = "flex items-center gap-4 py-2 px-4 hover:bg-grey";
-    const active = `${inactive} bg-grey w-full  rounded-l-xl`;
+    const inactive = "flex items-center gap-4 p-4 hover:bg-grey";
+    const active = `${inactive} bg-grey w-full `;
 
     const Logout =  () => {
       signOut()
       router.push('/')
-    }
+  }
   return (
     <aside className='flex relative h-[75vh] w-full bg-white shadow-md min-w-[20vw] max-w-[25vh]  rounded-md'>
     <div>
@@ -46,7 +46,7 @@ const AccountNav = () => {
       <hr className="text-grey w-full mb-4" />
       {
         accountLinks.map(({path, name, icon})=>(
-          <Link key={path} href={path} className={'flex items-center gap-4 p-4 hover:bg-grey'}>
+          <Link key={path} href={path}  className={`${pathname.includes(path) ? active : inactive} `}>
             <div className='text-blue'>{icon}</div>
             <span className={`${barlowNormal.className} text-lightgrey`}>{name}</span>
           </Link>

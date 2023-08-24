@@ -44,8 +44,6 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     const maxPrice = maxPriceParam ? parseInt(maxPriceParam) : undefined;
     const minPrice = minPriceParam ? parseInt(minPriceParam) : undefined;
 
-
-    const [togglePlans, setTogglePlans] = useState<boolean>(true)
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [closeUploadFiles, setCloseUploadFile] =  useState(false)
     const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {

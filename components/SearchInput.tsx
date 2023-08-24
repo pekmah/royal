@@ -1,13 +1,21 @@
 "use client"
 import { useSearchContext } from '@/context/SearchContext';
+import useAuth from '@/hooks/useAuth';
 import { BiSearch } from 'react-icons/bi';
+import {useState} from 'react'
+import { useRouter } from 'next/navigation';
 
 export default function SearchInput() {
-	const { searchQuery, setSearch } = useSearchContext();
+	const { searchQuery, setSearch,setSearchQuery } = useSearchContext();
+	// const [searchQuery, setSearchQuery] = useState('');
+	const { search } = useAuth()
+	const router = useRouter()
 
-	const handleSearch = () => {
-	  // Call setSearch to update the searchQuery in the context
+	const handleSearch = async () => {
+		await search(searchQuery)
+		router.refresh()
 	  setSearch(searchQuery);
+		// setSearchQuery('')
 	};
   
 
@@ -26,7 +34,7 @@ export default function SearchInput() {
 					
 					placeholder={'Search'}
 					value={searchQuery}
-        			onChange={(e) => setSearch(e.target.value)}
+        			onChange={(e) => setSearchQuery(e.target.value)}
 					className={`border py-2 px-4 w-full border-grey rounded-md rounded-l-none focus:outline-none`}
 				/>
 			</div>

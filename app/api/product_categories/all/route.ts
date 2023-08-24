@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
 	try {
 		const res = await getRequest<PaginatedResponse<ProductCategoryEntity>>(
-			`/api/v1/core/categories?page_size=${page_size}&page=${page}`
+			`/api/v1/core/categories?page=${page}&page_size=${page_size}`
 		);
 		return new Response(JSON.stringify(res.data));
 	} catch (e: any) {

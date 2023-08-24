@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, {useState } from 'react'
 import { IoArrowBackOutline } from 'react-icons/io5'
 import useAuth from '@/hooks/useAuth';
-import { toast } from 'react-hot-toast';
+
 
 const barlowSemi = Barlow({
     style: 'normal',
@@ -45,9 +45,18 @@ const EditDetails = ({ userEmail, firstName, lastName, phoneNumber }: detailsPro
             await updateUserDetails(data);
            
            } catch (e:any) {
-                toast.error(e.message)
                 throw e
            }
+    }
+
+    const handleCancel = () =>{
+        setFullName(fullNames)
+        setEmail(userEmail)
+        setPhone(phoneNumber)
+        
+
+
+        
     }
     return (
         <div className='flex flex-col min-w-[50vw] flex-grow h-full bg-white shadow-md rounded-md max-w-full px-4'>
@@ -89,7 +98,7 @@ const EditDetails = ({ userEmail, firstName, lastName, phoneNumber }: detailsPro
                 </div>
 
                 <div className='flex gap-4 pb-4'>
-                    <button type='button' className='button-secondary border border-red py-1.5 font-bold px-4'> Cancel</button>
+                    <button type='button' onClick={handleCancel} className='button-secondary border border-red py-1.5 font-bold px-4'> Cancel</button>
                     <button className="button-primary py-1.5 ">Save</button>
                 </div>
             </form>

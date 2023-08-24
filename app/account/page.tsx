@@ -38,9 +38,9 @@ const Account = () => {
   const {data:session, status} = useSession()
     const accessToken = session?.user
 
-    if (status === 'unauthenticated'){
-      router.push('/')
-    }
+    // if (status === 'unauthenticated'){
+    //   router.push('/')
+    // }
     // console.log(accessToken)
   useEffect(() =>{
     setIsLoading(true)

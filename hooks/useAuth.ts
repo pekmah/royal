@@ -3,28 +3,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
-import bcrypt from 'bcrypt'
-import { useQuery } from 'react-query';
 import { useMutation } from "react-query";
-
-export const getUser = async () =>  {
-  const {data:session} = useSession()
-    const accessToken = session?.user
-  try {
-    // Perform the API request to get user details
-    const response = await axios.get<UserEntity>(`${process.env.BASE_URL}/api/v1/auth/user/`, {
-      headers: {
-          Authorization: `Bearer ${accessToken}`
-      }
-      
-    });
-    // Return the response data
-  //   console.log(response)
-    return response.data;
-  } catch (e: any) {
-      throw e;
-  }
-}
 
 const useAuth = () => {
     const router = useRouter() 
@@ -68,27 +47,21 @@ async function updateUserDetails(data:{}) {
 }
 
 const changePassword = async (data:any, initialPass:string) =>{
-  // console.log(data)
-  // const isCurrentPasswordValid  =await bcrypt.compare(data.current_pass, initialPass)
-        
-  //       if(!isCurrentPasswordValid){
-  //           toast.error("Inalid current password")
-  //       }
-
     try {
-        const response = await axios.patch(`${process.env.BASE_URL}/api/v1/auth/user/change-password`, data, {
+        const response = await axios.post(`${process.env.BASE_URL}/api/v1/auth/user/change-password`, data, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
           },
         });
         // Return response or handle success as needed
         // console.log(response)
+        toast.success("Password Updated")
+        router.back()
         return response.data;
       } catch (error:any) {
-        toast.error("Invalid current password")
+        toast.error(error.message)
         // Handle error, show error message, etc.
-        throw error;
+        // throw error;
       }
 }
   const uploadImage = async (file:any) => {
@@ -127,9 +100,19 @@ const changePassword = async (data:any, initialPass:string) =>{
     return response.json();
   };
   
+  
+  const search = async(search_query:string) =>{
+    const response = await fetch(`${process.env.BASE_URL}/api/v1/core/products/search/?search_query=${search_query}`, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Network error'); 
+    }
+    return response.json();
+  };
+  
 
-    return {getUser, updateUserDetails, changePassword, uploadImage: mutate, fetchPhotosByStatus}
+    return {getUser, updateUserDetails, changePassword, uploadImage: mutate, fetchPhotosByStatus, search}
 
 }
+
 
 export default useAuth

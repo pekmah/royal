@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const maxPrice = searchParams.get("maxPrice");
     const minPrice = searchParams.get("minPrice");
 
-    console.log(maxPrice, minPrice, category);
+    // console.log(maxPrice, minPrice, category);
     const pricesValid =
         maxPrice &&
         minPrice &&

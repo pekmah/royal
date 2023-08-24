@@ -11,7 +11,7 @@ import {usePathname} from 'next/navigation';
 import NavMenu from './NavMenu';
 import DropdownMenu, {DropdownMenuItem} from '../Dropdown';
 import SearchInput from '../SearchInput';
-import {Dispatch, SetStateAction, useContext} from 'react';
+import {useContext} from 'react';
 import {CContext} from "@/context/CartContext2.js";
 
 // interface HeaderProps {
