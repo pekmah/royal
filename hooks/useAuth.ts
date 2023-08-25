@@ -39,9 +39,10 @@ async function updateUserDetails(data:{}) {
 
         // Return response or handle success as needed
         // console.log(response)
+        toast.success('Profile updated successfully');
         return response.data;
       } catch (error) {
-        // Handle error, show error message, etc.
+        toast.error('Error updating profile');
         throw error;
       }
 }
@@ -59,7 +60,7 @@ const changePassword = async (data:any, initialPass:string) =>{
         router.back()
         return response.data;
       } catch (error:any) {
-        toast.error(error.message)
+        toast.error(`Incorrect Current Passwors,${error.message}`)
         // Handle error, show error message, etc.
         // throw error;
       }

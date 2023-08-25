@@ -2,9 +2,10 @@
 
 import { Barlow } from 'next/font/google';
 import { useRouter } from 'next/navigation';
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import { IoArrowBackOutline } from 'react-icons/io5'
 import useAuth from '@/hooks/useAuth';
+import { toast } from 'react-hot-toast';
 
 
 const barlowSemi = Barlow({
@@ -21,8 +22,8 @@ interface detailsProps {
 
 const EditDetails = ({ userEmail, firstName, lastName, phoneNumber }: detailsProps) => {
     const router = useRouter()
-    const {updateUserDetails} = useAuth()
-    
+    const { updateUserDetails } = useAuth()
+
     const [first_name, _setFirst_name] = useState(firstName)
     const [last_name, _setLast_name] = useState(lastName)
     const fullNames = `${first_name} ${last_name}`
@@ -30,43 +31,41 @@ const EditDetails = ({ userEmail, firstName, lastName, phoneNumber }: detailsPro
     const [email, setEmail] = useState(userEmail)
     const [phone, setPhone] = useState(phoneNumber)
 
-    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
-            e.preventDefault()
-            const part = fullName.split(' ')
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const part = fullName.split(' ')
 
+        try {
             const data = {
-                first_name:part[0],
-                last_name:part[1],
+                first_name: part[0],
+                last_name: part[1],
                 email,
                 phone
-                
             }
-           try {
             await updateUserDetails(data);
-           
-           } catch (e:any) {
-                throw e
-           }
+        } catch (e: any) {
+            throw e
+        }
     }
 
-    const handleCancel = () =>{
+    const handleCancel = () => {
         setFullName(fullNames)
         setEmail(userEmail)
         setPhone(phoneNumber)
-        
 
 
-        
+
+
     }
     return (
         <div className='flex flex-col min-w-[50vw] flex-grow h-full bg-white shadow-md rounded-md max-w-full px-4'>
-            <div onClick={() => router.back()} className='flex w-full gap-2 items-center cursor-pointer'>
+            <div onClick={() => router.push('/account')} className='flex w-full gap-2 items-center cursor-pointer'>
                 <IoArrowBackOutline size={25} />
                 <h3 className={`${barlowSemi.className} p-4 `}>Personal Details</h3>
             </div>
             <hr className="text-grey w-full mb-4" />
 
-            <form onClick={handleSubmit} className='h-full w-full gap-4' >
+            <form onSubmit={handleSubmit} className='h-full w-full gap-4' >
                 <div className=' flex-col md:flex gap-4 items-center w-full'>
 
                     <div className=' flex w-full flex-col gap-2'>
@@ -93,7 +92,7 @@ const EditDetails = ({ userEmail, firstName, lastName, phoneNumber }: detailsPro
                         id='phone'
                         value={phone}
                         placeholder='+254 703 567 890'
-                        onChange={(e)=>setPhone(e.target.value)}
+                        onChange={(e) => setPhone(e.target.value)}
                         className='border outline-none  rounded-md border-grey px-4 py-2.5' />
                 </div>
 
