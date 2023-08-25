@@ -74,7 +74,7 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
     //         // },
     //     }
     // )
-    console.log(Search)
+    // console.log(Search)
     // console.log(searchProduct)
     useEffect(() => {
         setSelectedMinPrice(minPrice);
