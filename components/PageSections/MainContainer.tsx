@@ -27,7 +27,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
 			
 			<main className={`w-screen p-8 flex gap-8 bg-[#fbfbff]`}>
 				<Sidebar isOpen={isSidebarOpen} />
-				{!path.startsWith('/auth') && !path.startsWith('/about') ? (
+				{!path.startsWith('/auth') && !path.startsWith('/about') && ! !path.startsWith('/account') ? (
 					<section
 						className={`${
 							isSidebarOpen ? 'md:w-[80%] hidden md:block' : 'w-full' 

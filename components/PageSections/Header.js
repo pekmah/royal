@@ -27,7 +27,7 @@ export default function Header({
     const path = usePathname();
     const {cart} = useContext(CContext)
     return path.startsWith('/auth') ? null : (
-        <header className='fixed w-screen md:relative z-20'>
+        <header className='fixed w-screen md:relative z-30'>
             {/* <div className='w-full h-[70px] relative'>
 				<Image
 					alt={'Offers Banner'}

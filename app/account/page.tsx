@@ -59,9 +59,9 @@ const Account = () => {
       <div className=''>
         <div className='flex justify-between w-full'>
             <h3 className={`${barlowSemi.className} p-4 `}>Personal Details</h3>
-            <Link href={'/account/edit'} className='flex gap-4 text-red items-center'>
-            <BiSolidEditAlt size={25}/>
-              <span>Edit</span>
+            <Link href={'/account/edit'} className='flex gap-2 md:gap-4 text-red items-center'>
+            <BiSolidEditAlt className='' size={25}/>
+              <span className='text-sm md:text-base'>Edit</span>
             </Link>
         </div>
         <hr className="text-grey w-full mb-4" />
@@ -93,7 +93,7 @@ const Account = () => {
           <hr className="text-grey w-full mb-4" />
           <div className='flex justify-between w-full items-center pb-4'>
             <h3 className={`${barlowNormal.className} p-4 `}>Your Password</h3>
-            <Link href={'/account/change-password'} className='border border-red rounded-md  text-red bg-white px-4 max-w-max py-1.5'>
+            <Link href={'/account/change-password'} className='border text-sm md:text-base border-red rounded-md  text-red bg-white px-4 max-w-max py-1.5'>
               Change Password
             </Link>
           </div>

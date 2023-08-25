@@ -109,9 +109,21 @@ const changePassword = async (data:any, initialPass:string) =>{
     router.refresh()
     return response.json();
   };
-  
 
-    return {getUser, updateUserDetails, changePassword, uploadImage: mutate, fetchPhotosByStatus, search}
+  const fetchQuoteFile = async (quote_file:string) =>{
+      const response = await fetch(`${process.env.BASE_URL}/api/v1/core/quote/file/${quote_file}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+  
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network error'); // Handle error appropriately
+      }
+      return response.json();
+    };  
+
+    return {getUser, updateUserDetails, changePassword, uploadImage: mutate, fetchPhotosByStatus, search, fetchQuoteFile}
 
 }
 

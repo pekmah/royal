@@ -75,7 +75,7 @@ const ChangePassword = ({ initialPass }: { initialPass: string }) => {
                         placeholder='Enter current password'
                         className='border outline-none  rounded-md border-grey px-4 py-2.5' />
                 </div>
-                <div className=' flex gap-4 items-center w-full py-4'>
+                <div className=' flex-col md:flex gap-4 items-center w-full py-4'>
 
                     <div className=' flex w-full flex-col gap-2'>
                         <label htmlFor="newPassword">Confirm Password</label>
