@@ -58,7 +58,7 @@ const ChangePassword = ({ initialPass }: { initialPass: string }) => {
         }
     return (
         <div className='flex flex-col min-w-[50vw] flex-grow h-full bg-white shadow-md rounded-md max-w-full px-4'>
-            <div onClick={() => router.back()} className='flex w-full cursor-pointer gap-2 items-center'>
+            <div onClick={() => router.push('/account')} className='flex w-full cursor-pointer gap-2 items-center'>
       <IoArrowBackOutline size={25} />
                 <h3 className={`${barlowSemi.className} p-4 `}>Personal Details</h3>
             </div>
@@ -75,7 +75,7 @@ const ChangePassword = ({ initialPass }: { initialPass: string }) => {
                         placeholder='Enter current password'
                         className='border outline-none  rounded-md border-grey px-4 py-2.5' />
                 </div>
-                <div className=' flex-col md:flex gap-4 items-center w-full py-4'>
+                <div className=' flex flex-col md:flex-row gap-4 items-center w-full py-4'>
 
                     <div className=' flex w-full flex-col gap-2'>
                         <label htmlFor="newPassword">Confirm Password</label>
