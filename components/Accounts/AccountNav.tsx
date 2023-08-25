@@ -31,32 +31,28 @@ const accountLinks = [
   ]
 const AccountNav = () => {
     const pathname = usePathname()
-    const router = useRouter()
+    // console.log(pathname)
     const inactive = "flex items-center gap-4 p-4 hover:bg-grey";
     const active = `${inactive} bg-grey w-full `;
 
-    const Logout =  () => {
-      signOut()
-      router.push('/')
-  }
   return (
-    <aside className='flex relative h-[75vh] w-full bg-white shadow-md min-w-[20vw] max-w-[25vh]  rounded-md'>
+    <aside className='flex relative h-[75vh] w-24  md:w-full bg-white shadow-md min-w-[10vw]  md:min-w-[20vw] max-w-[25vh]  rounded-md'>
     <div>
-      <h2 className={`${barlowSemi.className} p-4 `}>My account</h2>
+      <h2 className={`${barlowSemi.className} p-4 text-sm md:text-base `}>My account</h2>
       <hr className="text-grey w-full mb-4" />
       {
         accountLinks.map(({path, name, icon})=>(
-          <Link key={path} href={path}  className={`${pathname.includes(path) ? active : inactive} `}>
+          <Link key={path} href={path}  className={`${pathname === path ? active : inactive} `}>
             <div className='text-blue'>{icon}</div>
-            <span className={`${barlowNormal.className} text-lightgrey`}>{name}</span>
+            <span className={`${barlowNormal.className} text-lightgrey hidden md:block`}>{name}</span>
           </Link>
         ))
       }
      <hr className="text-grey w-full mt-8" />
      <div className='absolute bottom-4  '>
-         <button onClick={Logout} className='flex items-center gap-2 px-4'>
+         <button onClick={() => signOut()} className='flex items-center gap-2 px-4'>
             <IoLogOutOutline size={iconSize} className='text-blue'/>
-            <span>Logout</span>
+            <span className='hidden md:block'>Logout</span>
          </button>
      </div>
     </div>

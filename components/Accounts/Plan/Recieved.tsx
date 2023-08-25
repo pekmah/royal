@@ -29,7 +29,7 @@ const Recieved: React.FC<sharedProps> = ({ requests }) => {
     const [isOpen, setIsOpen] = useState(false)
     // console.log(requests)
     return (
-        <div className='grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8'>
+        <div className='grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
             {
                 requests.map(({ id, quote_file_code, quote_file_name,  roof_plan_file_name, created_at }) => {
                     const dateObject = new Date(created_at!);
@@ -49,7 +49,7 @@ const Recieved: React.FC<sharedProps> = ({ requests }) => {
                             </div>
 
                             <h4 className={`${barlowMedium.className}`}>{roof_plan_file_name}</h4>
-                            {isOpen && <ReceivedDetail name={quote_file_name} close={setIsOpen} />}
+                            {isOpen && <ReceivedDetail name={quote_file_name} close={setIsOpen} quote_file={quote_file_code} />}
 
                             <p className={`${barlowSmall.className} text-fadegrey`}>{formattedDate}</p>
                         </div>

@@ -2,22 +2,9 @@
 import { useSearchContext } from '@/context/SearchContext';
 import useAuth from '@/hooks/useAuth';
 import { BiSearch } from 'react-icons/bi';
-import {useState} from 'react'
-import { useRouter } from 'next/navigation';
 
 export default function SearchInput() {
-	const { searchQuery, setSearch,setSearchQuery } = useSearchContext();
-	// const [searchQuery, setSearchQuery] = useState('');
-	const { search } = useAuth()
-	const router = useRouter()
-
-	const handleSearch = async () => {
-		await search(searchQuery)
-		router.refresh()
-	  setSearch(searchQuery);
-		// setSearchQuery('')
-	};
-  
+		  const { searchQuery, setSearchQuery, handleSearch  } = useSearchContext();
 
 	return (
 		<div className='hidden md:flex w-full gap-4'>

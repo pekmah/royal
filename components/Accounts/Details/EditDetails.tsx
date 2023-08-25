@@ -67,7 +67,7 @@ const EditDetails = ({ userEmail, firstName, lastName, phoneNumber }: detailsPro
             <hr className="text-grey w-full mb-4" />
 
             <form onClick={handleSubmit} className='h-full w-full gap-4' >
-                <div className=' flex gap-4 items-center w-full'>
+                <div className=' flex-col md:flex gap-4 items-center w-full'>
 
                     <div className=' flex w-full flex-col gap-2'>
                         <label htmlFor="name">Full Name</label>

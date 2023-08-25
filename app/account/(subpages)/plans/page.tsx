@@ -43,12 +43,12 @@ const Plans = () => {
         <div className="p-4 w-full h-full">
             <nav className="w-full flex justify-between items-center">
                 <ul className="flex gap-6">
-                    <li onClick={() => setTogglePlans(true)} className={`${togglePlans ? "text-blue border-b-2 border-spacing-4 border-red " : "text-[#B3B3B3] "} py-2 ${barlowSemi.className} `}>Uploaded Plans(0)</li>
-                    <li onClick={() => setTogglePlans(false)} className={`${togglePlans ? `text-[#B3B3B3] ` : " text-blue border-b-2 border-red border-spacing-4 "} py-2 ${barlowSemi.className} `}>Recieved Quotes(0)</li>
+                    <li onClick={() => setTogglePlans(true)} className={`${togglePlans ? "text-blue border-b-2 border-spacing-4 border-red " : "text-[#B3B3B3] "} py-2 ${barlowSemi.className} `}>Uploaded Plans</li>
+                    <li onClick={() => setTogglePlans(false)} className={`${togglePlans ? `text-[#B3B3B3] ` : " text-blue border-b-2 border-red border-spacing-4 "} py-2 ${barlowSemi.className} `}>Recieved Quotes</li>
 
                 </ul>
 
-                <label className="button-primary py-2 cursor-pointer flex gap-2 items-center max-w-max  ">
+                <label className="button-primary py-2 my-4 md:my-0 cursor-pointer flex gap-2 items-center max-w-max  ">
 
                     <BsUpload size={25} />
 

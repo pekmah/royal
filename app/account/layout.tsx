@@ -18,7 +18,7 @@ export default function AccountLayout({
 			<Breadcrumb />
 				<div className='flex gap-8'>
 					<AccountNav />
-					<div className='flex flex-col min-w-[50vw] flex-grow h-[75vh] bg-white shadow-md rounded-md max-w-full px-4'>
+					<div className='flex flex-col min-w-[40vw] md:min-w-[50vw] flex-grow min-h-[75vh] bg-white shadow-md rounded-md max-w-full px-4'>
 						{children}
 					</div>
 

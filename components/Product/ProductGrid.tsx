@@ -26,9 +26,9 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
     const [page, setPage] = useState(1);
     const [pageSize] = useState(20);
     const [count, setCount] = useState(0);
-    const [searchCount, setSearchCount] = useState(0)
+    // const [searchCount, setSearchCount] = useState(0)
 
-    const { searchQuery } = useSearchContext();
+    const { searchQuery, searchCount, Search } = useSearchContext();
     const { search } = useAuth()
 
     const categoryParam = useSearchParams().get("category");
@@ -63,19 +63,18 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
         }
     );
 
-    const { data: searchProduct, isLoading:loading } = useQuery<ProductEntity[]>(['search'], () => search(searchQuery),
-        {
-            enabled: searchQuery.trim() !== "", // Only fetch if searchQuery is not empty
-            keepPreviousData: true,
-            onSuccess(data) {
-                setSearchCount(searchProduct?.length!);
-            },
-            onError(err) {
-                console.error("err", err);
-            },
-        }
-    )
-     
+    // const { data: searchProduct, isLoading:loading } = useQuery<ProductEntity[]>(['search'], () => search(searchQuery),
+    //     {
+    //         enabled: searchQuery.trim() !== "", // Only fetch if searchQuery is not empty
+    //         // onSuccess(searchProduct) {
+    //         //     setSearchCount(searchProduct?.length!);
+    //         // },
+    //         // onError(err) {
+    //         //     console.error("err", err);
+    //         // },
+    //     }
+    // )
+    console.log(Search)
     // console.log(searchProduct)
     useEffect(() => {
         setSelectedMinPrice(minPrice);
@@ -84,20 +83,20 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
 
     const [filteredProductCount, setFilteredProductCount] = useState<number | null>(null);
 
-// ...
+    // ...
 
-useEffect(() => {
-  if (data?.results) {
-    const count = data.results.filter((product) =>
-      (!selectedMinPrice || !selectedMaxPrice ||
-        (product.pricing &&
-          product.pricing[0]?.price! >= selectedMinPrice! &&
-          product.pricing[0]?.price! <= selectedMaxPrice!)
-      )
-    ).length;
-    setFilteredProductCount(count);
-  }
-}, [data, selectedMinPrice, selectedMaxPrice]);
+    useEffect(() => {
+        if (data?.results) {
+            const count = data.results.filter((product) =>
+            (!selectedMinPrice || !selectedMaxPrice ||
+                (product.pricing &&
+                    product.pricing[0]?.price! >= selectedMinPrice! &&
+                    product.pricing[0]?.price! <= selectedMaxPrice!)
+            )
+            ).length;
+            setFilteredProductCount(count);
+        }
+    }, [data, selectedMinPrice, selectedMaxPrice]);
 
     useEffect(() => {
         if (data?.next) {
@@ -137,7 +136,7 @@ useEffect(() => {
     // if (selectedMinPrice! > maxPriceOfProducts) {
     //     filteredProducts.length = 0;
     // }
- 
+
     return (
         <div className="w-full">
             {pathname.startsWith("/products") ? (
@@ -150,45 +149,38 @@ useEffect(() => {
             {data?.results ? (
                 <div className="mt-5">{`Products (${searchQuery ? searchCount : filteredProductCount})`}</div>
             ) : null}
-          
+
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6">
-            {searchQuery && searchProduct ? loading ? (
-                Array(4)
-                  .fill(0)
-                  .map((_, idx) => <ProductCardSkeleton key={idx} />)
-              ) :   searchQuery && (
-                    searchProduct
-                      ? searchProduct.filter((product) =>
-                      (!selectedMinPrice || !selectedMaxPrice ||
-                        (product.pricing &&
-                          product.pricing[0]?.price! >= selectedMinPrice! &&
-                          product.pricing[0]?.price! <= selectedMaxPrice!)
-                      )
-                    ).map((product:any, idx:any) => (
-                            <ProductCard key={`${product.id}_${idx}`} product={product} />
-                          ))
-                      : null
-                  ) :  
-            
-            isLoading ? (
-                Array(4)
-                  .fill(0)
-                  .map((_, idx) => <ProductCardSkeleton key={idx} />)
-              ) : (
-                data && data.results
-                  ? data.results
-                      .filter((product) =>
+                {isLoading ? (
+                    Array(4)
+                        .fill(0)
+                        .map((_, idx) => <ProductCardSkeleton key={idx} />)
+                ) : searchQuery &&
+                    Search
+                        ? Search.filter((product) =>
                         (!selectedMinPrice || !selectedMaxPrice ||
-                          (product.pricing &&
-                            product.pricing[0]?.price! >= selectedMinPrice! &&
-                            product.pricing[0]?.price! <= selectedMaxPrice!)
+                            (product.pricing &&
+                                product.pricing[0]?.price! >= selectedMinPrice! &&
+                                product.pricing[0]?.price! <= selectedMaxPrice!)
                         )
-                      )
-                      .map((product, idx) => (
-                        <ProductCard key={`${product.id}_${idx}`} product={product} />
-                      ))
-                  : null
-              )}
+                        ).map((product: any, idx: any) => (
+                            <ProductCard key={`${product.id}_${idx}`} product={product} />
+                        ))
+                        : (
+                            data && data.results
+                                ? data.results
+                                    .filter((product) =>
+                                    (!selectedMinPrice || !selectedMaxPrice ||
+                                        (product.pricing &&
+                                            product.pricing[0]?.price! >= selectedMinPrice! &&
+                                            product.pricing[0]?.price! <= selectedMaxPrice!)
+                                    )
+                                    )
+                                    .map((product, idx) => (
+                                        <ProductCard key={`${product.id}_${idx}`} product={product} />
+                                    ))
+                                : null
+                        )}
             </div>
 
             {data?.results ? (
@@ -196,9 +188,9 @@ useEffect(() => {
                     <Pagination
                         currentPage={page}
                         onPageChange={setPage}
-                        count={searchQuery ? searchCount :count}
+                        count={searchQuery ? searchCount : count}
                         pageSize={pageSize}
-                        itemCount={searchQuery ? (searchProduct && !loading) ? searchProduct.length : 0 : filteredProductCount || 0}
+                        itemCount={searchQuery && Search ? Search.length : filteredProductCount || 0}
                     />
                 </div>
             ) : null}
