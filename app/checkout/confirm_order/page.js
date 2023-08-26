@@ -5,6 +5,7 @@ import {
   ChosenAddress,
   DeliveryMethod,
 } from "../../../components/checkout/confirm_order";
+import ChosenPaymentOption from "../../../components/checkout/confirm_order/ChosenPaymentOption";
 
 const ConfirmOrder = () => {
   return (
@@ -15,7 +16,8 @@ const ConfirmOrder = () => {
       {/*  Address  */}
       <ChosenAddress />
 
-      {/*    Payment Method  */}
+      {/*  Payment Method  */}
+      <ChosenPaymentOption />
     </div>
   );
 };

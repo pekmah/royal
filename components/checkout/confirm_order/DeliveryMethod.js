@@ -5,9 +5,9 @@ import EditSvg from "../../../public/svg/Edit";
 
 const DeliveryMethod = () => {
   return (
-    <div className="w-full h-[148px] font-barlow py-3 bg-white shadow">
+    <div className="w-full  font-barlow py-3 bg-white shadow">
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">
-        <div className="h-[25px]  font-[600] flex justify-between items-end w-full ">
+        <div className="  font-[600] flex justify-between items-end w-full ">
           <div className="[flex-grow:1] gap-[17px] flex justify-between items-center h-full text-black">
             <Check className="w-[17px] h-[17px] my-auto" />
             <p className="[flex-grow:1]  text-xl h-6">
