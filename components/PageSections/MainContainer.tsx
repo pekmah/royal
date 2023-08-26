@@ -25,7 +25,9 @@ export default function MainContainer({ children }: { children: ReactNode }) {
       />
 
       <main className={`w-screen p-8 flex gap-8 bg-[#fbfbff]`}>
-        {!path.startsWith("/checkout") && <Sidebar isOpen={isSidebarOpen} />}
+        {!path.startsWith("/checkout") && !path.startsWith("/account") && (
+          <Sidebar isOpen={isSidebarOpen} />
+        )}
         {!path.startsWith("/auth") &&
         !path.startsWith("/about") &&
         !path.startsWith("/account") ? (

@@ -9,7 +9,9 @@ const ChosenAddress = () => {
         <div className=" font-[600] flex justify-between items-end w-full ">
           <div className="[flex-grow:1] gap-[17px] flex justify-between items-center h-full text-black">
             <Check className="w-[17px] h-[17px] my-auto" />
-            <p className="[flex-grow:1]  text-xl h-6">Confirm Your Address</p>
+            <p className="[flex-grow:1]  text-[19px] h-6">
+              Confirm Your Address
+            </p>
           </div>
 
           <div className="text-[#DC2A25] gap-2.5 flex justify-center items-center ">
@@ -20,7 +22,7 @@ const ChosenAddress = () => {
         </div>
       </div>
 
-      <div className=" flex-col justify-start items-start gap-4 inline-flex px-5">
+      <div className=" flex-col justify-start items-start gap-4 inline-flex p-5">
         <div className="self-stretch justify-start items-center gap-4 inline-flex">
           <div className="text-black text-base font-medium">Nakuru</div>
           <div className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />

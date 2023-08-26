@@ -21,6 +21,7 @@
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "js-cookie": "^3.0.5",
+    "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
     "multi-range-slider-react": "^2.0.3",
     "next": "13.4.4",

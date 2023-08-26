@@ -10,7 +10,7 @@ const DeliveryMethod = () => {
         <div className="  font-[600] flex justify-between items-end w-full ">
           <div className="[flex-grow:1] gap-[17px] flex justify-between items-center h-full text-black">
             <Check className="w-[17px] h-[17px] my-auto" />
-            <p className="[flex-grow:1]  text-xl h-6">
+            <p className="[flex-grow:1]  text-[19px] h-6">
               Select type of Delivery
             </p>
           </div>
