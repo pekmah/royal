@@ -4,25 +4,25 @@ import useAuth from '@/hooks/useAuth';
 import { BiSearch } from 'react-icons/bi';
 
 export default function SearchInput() {
-		  const { searchQuery, setSearchQuery, handleSearch  } = useSearchContext();
+	const { searchQuery, setSearchQuery, handleSearch  } = useSearchContext();
 
 	return (
 		<div className='hidden md:flex w-full gap-4'>
-			<div className='w-full flex items-center'>
+			<div className='w-full flex items-center h-14'>
 				<label
 					htmlFor='email'
-					className={`border border-r-0 py-2 px-4 rounded-md rounded-r-none bg-white border-grey`}>
-					<BiSearch size={'24px'} color='#DBDBDB' />
+					className={`border-r-0 py-2 px-4 h-full flex rounded-md rounded-r-none bg-white border-grey`}>
+					<BiSearch className={'my-auto'} size={'18px'} color='#000' />
 				</label>
 
 				<input
 					id={'search'}
 					type={'text'}
-					
+
 					placeholder={'Search'}
 					value={searchQuery}
-        			onChange={(e) => setSearchQuery(e.target.value)}
-					className={`border py-2 px-4 w-full border-grey rounded-md rounded-l-none focus:outline-none`}
+					onChange={(e) => setSearchQuery(e.target.value)}
+					className={`h-full py-2 px-4 w-full placeholder-gray-900 font-barlow font-[500] border-grey rounded-md rounded-l-none focus:outline-none`}
 				/>
 			</div>
 			<button onClick={handleSearch} className='button-primary py-2 px-4 font-semibold'>Search</button>
