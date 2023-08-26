@@ -345,6 +345,7 @@ export default function ProductDetailMain({ product }) {
 
                                     onChange={(e) => { // @ts-ignore
                                         setActiveGauge(e.target.value)
+                                        setActiveFinish({})
                                     }}
                                 >
                                     <option className={`px-2 py-3 bg-white text-gray-500 `}>Select</option>
@@ -440,7 +441,7 @@ export default function ProductDetailMain({ product }) {
                         <CostDisplay activeSize={activeGauge} quantity={quantity}
                             total={Math.ceil(totalProductPrice || 0)} />
                         <button
-                            className="button-primary disabled:text-red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
+                            className="button-primary h-14 disabled:text-red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
                             onClick={handleAddToCart}
                             disabled={gaugeList?.length === 0 ? quantity === 0 : isAddToCartDisabled}
                         >
