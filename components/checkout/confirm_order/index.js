@@ -1,3 +1,4 @@
 import DeliveryMethod from "./DeliveryMethod";
+import ChosenAddress from "./ChosenAddress";
 
-export { DeliveryMethod };
+export { DeliveryMethod, ChosenAddress };
