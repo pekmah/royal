@@ -146,14 +146,14 @@ const SelectDelivery = () => {
           </div>
         </div>
         {/*  Footer   */}
-        <div className={"flex px-6 py-5 gap-x-6 border-t border-gray-200"}>
-          <button className="w-32 h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">
-            <div className=" text-red-600 text-base font-bold">Cancel</div>
-          </button>
-          <div className="w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex">
-            <div className=" text-white text-base font-bold">Save</div>
-          </div>
-        </div>
+        {/*<div className={"flex px-6 py-5 gap-x-6 border-t border-gray-200"}>*/}
+        {/*  <button className="w-32 h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">*/}
+        {/*    <div className=" text-red-600 text-base font-bold">Cancel</div>*/}
+        {/*  </button>*/}
+        {/*  <div className="w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex">*/}
+        {/*    <div className=" text-white text-base font-bold">Save</div>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
     </div>
   );
