@@ -94,10 +94,10 @@ const Cart = () => {
                                 </div>
                                 <div className='flex gap-4 py-6 w-full justify-center'>
                                     <button onClick={() => router.back()}
-                                            className='button-secondary border border-red py-1.5 font-bold px-4'>Back To
+                                            className='button-secondary border border-red py-1.5 font-bold px-4 h-14 rounded-sm'>Back To
                                         shop
                                     </button>
-                                    <button className="button-primary py-1.5 flex gap-2 items-center ">
+                                    <button className="button-primary py-1.5 flex gap-2 items-center font-[600] h-14 rounded-sm  ">
                                         <span>Checkout</span>
                                         <BsArrowRightShort size={25}/>
                                     </button>
