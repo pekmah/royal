@@ -1,13 +1,18 @@
-"use client"
+"use client";
 
-import React from 'react';
+import React from "react";
+import { DeliveryMethod } from "../../../components/checkout/confirm_order";
 
 const ConfirmOrder = () => {
-    return (
-        <div>
+  return (
+    <div>
+      {/*Delivery method*/}
+      <DeliveryMethod />
+      {/*  Address  */}
 
-        </div>
-    );
+      {/*    Payment Method  */}
+    </div>
+  );
 };
 
 export default ConfirmOrder;
