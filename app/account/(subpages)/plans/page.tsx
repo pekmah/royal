@@ -5,14 +5,12 @@ import RecievedQuotes from "@/components/Accounts/Plan/RecievedQuotes";
 import UploadFiles from "@/components/Accounts/Plan/UploadFiles";
 
 import UploadPlans from "@/components/Accounts/Plan/UploadPlans";
-import useAuth from "@/hooks/useAuth";
 
-import { Barlow } from "next/font/google";
+import {Barlow} from "next/font/google";
 
-import { ChangeEvent, useState } from "react"
+import {ChangeEvent, useState} from "react"
 
-import { BsUpload } from "react-icons/bs";
-import { useQuery } from "react-query";
+import {BsUpload} from "react-icons/bs";
 
 const barlowSemi = Barlow({
     style: 'normal',
@@ -23,7 +21,7 @@ const barlowSemi = Barlow({
 const Plans = () => {
     const [togglePlans, setTogglePlans] = useState<boolean>(true)
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [closeUploadFiles, setCloseUploadFile] =  useState(false)
+    const [closeUploadFiles, setCloseUploadFile] = useState(false)
     const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
 
@@ -43,31 +41,38 @@ const Plans = () => {
         <div className="p-4 w-full h-full">
             <nav className="w-full flex justify-between items-center">
                 <ul className="flex gap-6">
-                    <li onClick={() => setTogglePlans(true)} className={`${togglePlans ? "text-blue border-b-2 border-spacing-4 border-red " : "text-[#B3B3B3] "} py-2 ${barlowSemi.className} `}>Uploaded Plans</li>
-                    <li onClick={() => setTogglePlans(false)} className={`${togglePlans ? `text-[#B3B3B3] ` : " text-blue border-b-2 border-red border-spacing-4 "} py-2 ${barlowSemi.className} `}>Recieved Quotes</li>
+                    <li onClick={() => setTogglePlans(true)}
+                        className={`${togglePlans ? "text-blue border-b-2 border-spacing-4 border-primary_red " : "text-[#B3B3B3] "} py-2 ${barlowSemi.className} `}>Uploaded
+                        Plans
+                    </li>
+                    <li onClick={() => setTogglePlans(false)}
+                        className={`${togglePlans ? `text-[#B3B3B3] ` : " text-blue border-b-2 border-primary_red border-spacing-4 "} py-2 ${barlowSemi.className} `}>Recieved
+                        Quotes
+                    </li>
 
                 </ul>
 
                 <label className="button-primary py-2 my-4 md:my-0 cursor-pointer flex gap-2 items-center max-w-max  ">
 
-                    <BsUpload size={25} />
+                    <BsUpload size={25}/>
 
                     <span>UploadPlan</span>
 
-                    <input className="hidden" type="file" onChange={uploadFile} />
+                    <input className="hidden" type="file" onChange={uploadFile}/>
 
                 </label>
 
             </nav>
 
-            <hr className="text-grey w-full mb-4" />
+            <hr className="text-grey w-full mb-4"/>
 
-            {selectedFile && closeUploadFiles && <UploadFiles selectedFile={selectedFile} closeUpload = {setCloseUploadFile} />}
+            {selectedFile && closeUploadFiles &&
+                <UploadFiles selectedFile={selectedFile} closeUpload={setCloseUploadFile}/>}
 
             <div>
                 {
 
-                    togglePlans ? <UploadPlans status="pending" /> : <RecievedQuotes status="received" />
+                    togglePlans ? <UploadPlans status="pending"/> : <RecievedQuotes status="received"/>
 
                 }
 
@@ -78,11 +83,6 @@ const Plans = () => {
     )
 
 }
-
-
-
-
-
 
 
 export default Plans

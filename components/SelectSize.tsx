@@ -23,7 +23,8 @@ export default function SelectOption<T>({
                     {label}
                 </label>
                 {explanatoryText &&
-                    <div className="bg-[#FCC2C0] text-red px-4 text-xs py-1.5 rounded-3xl">{explanatoryText}</div>}
+                    <div
+                        className="bg-[#FCC2C0] text-primary_red px-4 text-xs py-1.5 rounded-3xl">{explanatoryText}</div>}
 
             </div>
             {options ? (

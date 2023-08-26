@@ -1,18 +1,17 @@
 import Image from "next/image";
-import { useContext, useMemo, useState } from 'react'
-import { Barlow } from "next/font/google";
+import {useContext, useEffect, useMemo, useState} from 'react'
+import {Barlow} from "next/font/google";
 import StarRating from "./StarRating";
 import ColorSelector from "./ColorSelector";
-import { AiOutlineEye } from 'react-icons/ai'
+import {AiOutlineEye} from 'react-icons/ai'
 import CostDisplay from './CostDisplay';
-import { BsCart2 } from "react-icons/bs";
+import {BsCart2} from "react-icons/bs";
 import QuantityCount from "./QuantityCount";
-import { CContext } from "@/context/CartContext2.js";
-import { toast } from 'react-hot-toast';
+import {CContext} from "@/context/CartContext2.js";
+import {toast} from 'react-hot-toast';
 import Modal from "./Modal";
-import {useEffect} from 'react'
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import {useSession} from "next-auth/react";
+import {useRouter} from "next/navigation";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -27,11 +26,11 @@ const barlowMedium = Barlow({
 });
 
 
-export default function ProductDetailMain({ product }) {
+export default function ProductDetailMain({product}) {
     // const {addToCart} = useCartContext()
     const {status} = useSession()
     const router = useRouter()
-    const { cart, setCart } = useContext(CContext)
+    const {cart, setCart} = useContext(CContext)
     const {
         id,
         name,
@@ -59,7 +58,7 @@ export default function ProductDetailMain({ product }) {
     const [showModal, setShowModal] = useState(false)
     useEffect(() => {
         document.body.style.overflow = showModal ? "hidden" : "scroll";
-      }, [showModal]);
+    }, [showModal]);
 
     const findPricing = (gauge_size, width, finish) => {
         for (const model of pricing) {
@@ -186,7 +185,7 @@ export default function ProductDetailMain({ product }) {
         // validate form
         // handleValidateRequiredFields();
         // Check if user is authenticated
-        if (status === 'unauthenticated'){
+        if (status === 'unauthenticated') {
             router.push('/auth/login')
             toast.success('Please login to continue')
         }
@@ -216,7 +215,7 @@ export default function ProductDetailMain({ product }) {
                 {
                     quantity: (currentCartItem?.quantity || 0) + quantity,
                     product: product,
-                    measurements: { length: activeLength, width: activeWidth },
+                    measurements: {length: activeLength, width: activeWidth},
                     // color: product?.thumbnails?.at(currentColor - 1)
                     //   ?.thumbnail_color,
                     color: selectedColor,
@@ -233,7 +232,7 @@ export default function ProductDetailMain({ product }) {
                 ...prev,
                 {
                     quantity,
-                    measurements: { length: activeLength, width: activeWidth },
+                    measurements: {length: activeLength, width: activeWidth},
                     color: selectedColor,
                     product: product,
                     total_price: totalProductPrice,
@@ -259,12 +258,12 @@ export default function ProductDetailMain({ product }) {
                                 : "/temp-product-img.png"
                         }
                         fill
-                        style={{ objectFit: "cover", objectPosition: "center" }}
+                        style={{objectFit: "cover", objectPosition: "center"}}
                         className="rounded-md"
                     />
                     {roof_details?.length > 0 && <div onClick={(e) => setShowModal(true)}
-                        className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
-                        <AiOutlineEye size={25} />
+                                                      className={`absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue rounded-3xl bg-white/80 z-10 flex gap-2 items-center px-4 py-1.5 `}>
+                        <AiOutlineEye size={25}/>
                         <p className={`${barlowMedium.className}`}>View Roof</p>
                     </div>}
 
@@ -299,8 +298,8 @@ export default function ProductDetailMain({ product }) {
                                 {finishList?.map(item => (
 
                                     <option key={item?.id}
-                                        value={item?.id}
-                                        className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item?.finish}</option>
+                                            value={item?.id}
+                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item?.finish}</option>
                                 ))
 
                                 }
@@ -345,14 +344,15 @@ export default function ProductDetailMain({ product }) {
 
                                     onChange={(e) => { // @ts-ignore
                                         setActiveGauge(e.target.value)
+                                        setActiveFinish({})
                                     }}
                                 >
                                     <option className={`px-2 py-3 bg-white text-gray-500 `}>Select</option>
                                     {gaugeList?.map(item => (
 
                                         <option key={item}
-                                            value={item}
-                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
+                                                value={item}
+                                                className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
                                     ))
 
                                     }
@@ -381,7 +381,7 @@ export default function ProductDetailMain({ product }) {
                                     {[...length, "Custom"]?.map(item => (
 
                                         <option key={item}
-                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
+                                                className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
                                     ))
 
                                     }
@@ -413,7 +413,7 @@ export default function ProductDetailMain({ product }) {
                                     Width:
                                 </label>
                                 {/*<div*/}
-                                {/*    className="bg-[#FCC2C0] text-red px-4 text-xs py-1 my-1 rounded-3xl">{`Default Width is !000mm, Select Custom for more`}</div>*/}
+                                {/*    className="bg-[#FCC2C0] text-primary_red px-4 text-xs py-1 my-1 rounded-3xl">{`Default Width is !000mm, Select Custom for more`}</div>*/}
                                 <select
                                     className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
                                     placeholder={"Choose Finish"}
@@ -424,7 +424,7 @@ export default function ProductDetailMain({ product }) {
                                     {widthList?.map(item => (
 
                                         <option key={item}
-                                            className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
+                                                className={`px-2 py-3 bg-white text-gray-500 text-base`}>{item}</option>
                                     ))
 
                                     }
@@ -433,19 +433,19 @@ export default function ProductDetailMain({ product }) {
 
                         </div>
                     }
-                    <QuantityCount quantity={quantity} onQuantityChange={setQuantity} />
+                    <QuantityCount quantity={quantity} onQuantityChange={setQuantity}/>
                     <div
                         className={`w-full flex flex-col sm:flex-row justify-between items-center py-4 gap-20`}
                     >
                         <CostDisplay activeSize={activeGauge} quantity={quantity}
-                            total={Math.ceil(totalProductPrice || 0)} />
+                                     total={Math.ceil(totalProductPrice || 0)}/>
                         <button
-                            className="button-primary disabled:text-red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
+                            className="button-primary h-14 disabled:text-primary_red disabled:bg-[#FCC2C0] font-medium text-sm max-w-xs py-2 flex flex-1 items-center justify-center gap-6"
                             onClick={handleAddToCart}
                             disabled={gaugeList?.length === 0 ? quantity === 0 : isAddToCartDisabled}
                         >
 
-                            <BsCart2 size={"20"} />
+                            <BsCart2 size={"20"}/>
 
                             <span>Add to Cart</span>
 
@@ -454,7 +454,7 @@ export default function ProductDetailMain({ product }) {
                 </div>
 
             </div>
-            {showModal && <Modal roof={roof_details} closeModal={setShowModal} color={roof_details_colors} />}
+            {showModal && <Modal roof={roof_details} closeModal={setShowModal} color={roof_details_colors}/>}
         </div>
     );
 }

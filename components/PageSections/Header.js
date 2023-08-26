@@ -82,7 +82,7 @@ export default function Header({
                                 <div className=''>
                                     <BsCart2 size={'16'} color={'#fff'}/>
                                     <div
-                                        className='absolute -top-3 text-sm left-3 opacity-100 bg-red w-6 flex items-center justify-center text-center h-6 text-white rounded-full px-1'>
+                                        className='absolute -top-3 text-sm left-3 opacity-100 bg-primary_red w-6 flex items-center justify-center text-center h-6 text-white rounded-full px-1'>
                                         {cart?.length}
                                     </div>
                                 </div>

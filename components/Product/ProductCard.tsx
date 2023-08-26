@@ -62,7 +62,7 @@ export default function ProductCard({product}: ProductCardProps) {
                                     {activeGauge.price *
                                         ((100 - activeGauge?.percentage_discount) / 100)}
 								</span>
-                                <span className='text-red line-through'>
+                                <span className='text-primary_red line-through'>
 									Ksh. {activeGauge?.price ?? '-'}
 								</span>
                             </>

@@ -1,15 +1,8 @@
-import {
-    ChangeEvent,
-    FC,
-    useCallback,
-    useEffect,
-    useState,
-    useRef,
-} from "react";
+import {ChangeEvent, FC, useCallback, useEffect, useRef, useState,} from "react";
 import "./multiRangeSlider.css";
-import { Barlow } from "next/font/google";
-import { useSearchContext } from "@/context/SearchContext";
-import { useMediaQuery } from "usehooks-ts";
+import {Barlow} from "next/font/google";
+import {useSearchContext} from "@/context/SearchContext";
+import {useMediaQuery} from "usehooks-ts";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -27,13 +20,13 @@ interface MultiRangeSliderProps {
 }
 
 const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
-    min,
-    max,
-    onApply,
-    onClear,
-    name,
-    initialValues,
-}) => {
+                                                         min,
+                                                         max,
+                                                         onApply,
+                                                         onClear,
+                                                         name,
+                                                         initialValues,
+                                                     }) => {
     const [minVal, setMinVal] = useState(
         initialValues ? initialValues.min : min
     );
@@ -77,10 +70,10 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
 
 
     const isMediumDevice = useMediaQuery('(max-width: 1024px)');
-    const { isSidebarOpen ,setIsSidebarOpen} = useSearchContext()
-  
-    const CloseSidebar = () =>{
-      if (isMediumDevice) setIsSidebarOpen(false);
+    const {isSidebarOpen, setIsSidebarOpen} = useSearchContext()
+
+    const CloseSidebar = () => {
+        if (isMediumDevice) setIsSidebarOpen(false);
     }
     console.log(isSidebarOpen)
 
@@ -90,7 +83,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                 <h3 className={barlowSemi.className}>{name}</h3>
                 <div className="gap-2 flex">
                     <button
-                        className="button-secondary border border-red rounded-md px-2 py-1 text-semibold text-sm"
+                        className="button-secondary border border-primary_red rounded-md px-2 py-1 text-semibold text-sm"
                         onClick={() => {
                             onClear();
                             CloseSidebar()
@@ -101,7 +94,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                     <button
                         className="button-primary px-2 py-1 text-semibold text-sm"
                         onClick={() => {
-                            onApply({ min: minVal, max: maxVal });
+                            onApply({min: minVal, max: maxVal});
                             CloseSidebar()
                         }}
                     >
@@ -122,7 +115,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                         event.target.value = value.toString();
                     }}
                     className={`thumb thumb--zindex-3 ${minVal > max - 100 ? " thumb--zindex-5" : ""
-                        }`}
+                    }`}
                 />
                 <input
                     type="range"
@@ -156,7 +149,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
                                         setMinVal(clampedValue);
                                     }
                                 }}
-                            />                   </div>
+                            /></div>
                         <div className="text-black slider__right-value w-fit">
                             <input
                                 className="w-fit border border-grey rounded-md px-2 py-1"
