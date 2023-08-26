@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Group from "../../../public/svg/Group";
 import FullPayment from "./FullPayment";
 import InstallmentPayment from "./InstallmentPayment";
+import { useRouter } from "next/navigation";
 
 const PaymentForm = () => {
+  const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("full"); //Payment methods: full/installments
   return (
     <div className="w-full bg-white rounded shadow">
@@ -56,9 +58,12 @@ const PaymentForm = () => {
         <button className="w-32 h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">
           <div className=" text-red-600 text-base font-bold">Cancel</div>
         </button>
-        <div className="w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex">
+        <button
+          className="w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex"
+          onClick={() => router.push("/checkout/confirm_order")}
+        >
           <div className=" text-white text-base font-bold">Save</div>
-        </div>
+        </button>
       </div>
     </div>
   );
