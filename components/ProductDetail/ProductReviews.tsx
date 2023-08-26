@@ -1,10 +1,10 @@
-import { useQuery } from "react-query";
+import {useQuery} from "react-query";
 import StarRating from "./StarRating";
-import { Barlow } from "next/font/google";
+import {Barlow} from "next/font/google";
 import getProductReviews from "@/services/Product/getProductReviews";
-import { useState } from "react";
-import { ProductReview } from "@/types/product/Product";
-import { formatDate } from "@/utils/dateFormatter";
+import {useState} from "react";
+import {ProductReview} from "@/types/product/Product";
+import {formatDate} from "@/utils/dateFormatter";
 
 const barlowSemi = Barlow({
     style: "normal",
@@ -32,11 +32,11 @@ function getAbbreviation(name: string) {
 }
 
 const SingleReview = ({
-    user,
-    rating,
-    comments,
-    review_date,
-}: ProductReview) => {
+                          user,
+                          rating,
+                          comments,
+                          review_date,
+                      }: ProductReview) => {
     return (
         <div className="px-4 border-b border-grey mb-4">
             <div className="flex items-center gap-2">
@@ -47,7 +47,7 @@ const SingleReview = ({
                     <p className="flex items-center">
                         <span className="font-semibold">{user}</span>
                         {/* <span className="mx-4 rounded-full bg-fadegrey p-1" />
-                        <span className="text-red text-[12px]">
+                        <span className="text-primary_red text-[12px]">
                             Verified Purchase
                         </span> */}
                     </p>
@@ -55,19 +55,19 @@ const SingleReview = ({
                 </div>
             </div>
             <div className="py-4">
-                <StarRating rating={rating} />
+                <StarRating rating={rating}/>
                 <p className="text-sm py-4">{comments}</p>
             </div>
         </div>
     );
 };
 
-export default function ProductReviews({ id }: Props) {
+export default function ProductReviews({id}: Props) {
     const [page, setPage] = useState(1);
     const [pageSize] = useState(20);
     const [count, setCount] = useState(0);
 
-    const { data } = useQuery(
+    const {data} = useQuery(
         ["reviews", id],
         () => getProductReviews(pageSize, page, parseInt(id)),
         {
@@ -86,16 +86,16 @@ export default function ProductReviews({ id }: Props) {
             <div className="flex justify-between w-full p-4 items-center">
                 <h3 className={`${barlowSemi.className}`}>Customer Reviews</h3>
                 {data && data.results && data.results.length > 0 ? (
-                    <p className="font-medium text-sm underline text-red">
+                    <p className="font-medium text-sm underline text-primary_red">
                         See all ({data.count})
                     </p>
                 ) : null}
             </div>
-            <hr className="text-grey w-full mb-4" />
+            <hr className="text-grey w-full mb-4"/>
             <div className="max-h-[500px] overflow-y-auto">
                 {data && data.results && data.results.length > 0 ? (
                     data.results.map((value, idx) => (
-                        <SingleReview {...value} key={`${value.id}~${idx}`} />
+                        <SingleReview {...value} key={`${value.id}~${idx}`}/>
                     ))
                 ) : (
                     <div className="px-4 border-b border-grey pb-4">
