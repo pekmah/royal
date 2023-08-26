@@ -8,7 +8,7 @@ const InstallmentPayment = () => {
         Choose installment plan
       </h6>
 
-      <div className="w-full px-5 flex flex-col gap-y-4">
+      <div className="w-full px-5 flex flex-col gap-y-4 pb-4">
         {/*    installments  */}
         {installments?.map(({ title, duration }) => (
           <div
