@@ -14,15 +14,14 @@
 
 @layer components {
     .button-primary {
-        @apply px-8 py-4 text-base rounded-lg;
-        background-color: theme('colors.red');
+        @apply px-8 py-4 text-base rounded-lg bg-primary_red;
         color: theme('colors.white');
     }
 
     .button-secondary {
-        @apply px-8 py-4 text-base rounded-lg;
+        @apply px-8 py-4 text-base text-red-600 rounded-lg;
         background-color: theme('colors.white');
-        color: theme('colors.red');
+        /*color: theme('colors.red');*/
     }
 
     .link {
