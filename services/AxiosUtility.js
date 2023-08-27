@@ -41,4 +41,7 @@ PrivateAxiosUtility.interceptors.request.use(async (req) => {
   else window.location.href = "/login/";
 });
 
-export default AxiosUtility;
+export const Paths = {
+  countiesUrl: "/api/v1/cart/deliverycosts/?page_size=500&page=1",
+  userLocationsUrl: "/api/v1/cart/order/locations/",
+};

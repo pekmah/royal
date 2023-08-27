@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import FaFilePdfO from "../../../public/svg/FaFilePdfO";
 import Group from "../../../public/svg/Group";
+import { CContext } from "../../../context/CartContext2";
 
 const SelectDelivery = () => {
+  const { setCheckout, checkout } = useContext(CContext);
+
   return (
     <div className={`font-barlow w-full text-left flex flex-col items-center `}>
       {/*Header*/}
@@ -27,7 +30,15 @@ const SelectDelivery = () => {
           {/*Door delivery*/}
           <div className="w-full  p-6 rounded border border-zinc-100 flex-col justify-start items-start gap-2.5 inline-flex">
             <div className="flex gap-x-6">
-              <RadioButton />
+              <RadioButton
+                value={checkout?.del_option === "FREE_DELIVERY"}
+                handleChoose={() => {
+                  setCheckout((prev) => ({
+                    ...prev,
+                    del_option: "FREE_DELIVERY",
+                  }));
+                }}
+              />
 
               <div className="w-full h-[60px] left-[40px] top-0  flex-col justify-start items-start gap-4 inline-flex">
                 <div className="self-stretch  flex-col justify-start items-start gap-4 flex">
@@ -76,7 +87,15 @@ const SelectDelivery = () => {
           {/*    fast express delivery  */}
           <div className="w-full p-6 rounded border border-zinc-100 flex-col justify-start items-start gap-2.5 inline-flex">
             <div className="flex gap-x-6">
-              <RadioButton />
+              <RadioButton
+                value={checkout?.del_option === "EXPRESS_DELIVERY"}
+                handleChoose={() => {
+                  setCheckout((prev) => ({
+                    ...prev,
+                    del_option: "EXPRESS_DELIVERY",
+                  }));
+                }}
+              />
 
               <div className=" h-full flex-col justify-start items-start gap-4 inline-flex">
                 <div className="self-stretch h-full flex-col justify-start items-start gap-4 flex">
@@ -111,7 +130,15 @@ const SelectDelivery = () => {
           {/*    Own Collection   */}
           <div className="w-full  p-6 rounded border border-zinc-100 flex-col justify-start items-start gap-2.5 inline-flex">
             <div className="  flex gap-x-6">
-              <RadioButton />
+              <RadioButton
+                value={checkout?.del_option === "OWN_COLLECTION"}
+                handleChoose={() => {
+                  setCheckout((prev) => ({
+                    ...prev,
+                    del_option: "OWN_COLLECTION",
+                  }));
+                }}
+              />
 
               <div className="  left-[40px]  flex-col justify-start items-start gap-4 inline-flex">
                 <div className="self-stretch  flex-col justify-start items-start gap-4 flex">
@@ -161,14 +188,15 @@ const SelectDelivery = () => {
 
 export default SelectDelivery;
 
-export const RadioButton = ({ isChecked }) => (
-  <div class="flex items-center mb-4">
+export const RadioButton = ({ isChecked, handleCheck, value }) => (
+  <div class="flex items-center mb-4 cursor-pointer">
     <input
       id="default-radio-1"
       type="radio"
-      value=""
       name="default-radio"
-      className="w-4 h-4  text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+      className="w-4 h-4 cursor-pointer text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+      onChange={handleCheck}
+      value={value}
     />
   </div>
 );
