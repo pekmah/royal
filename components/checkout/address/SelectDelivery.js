@@ -5,7 +5,7 @@ import { CContext } from "../../../context/CartContext2";
 
 const SelectDelivery = () => {
   const { setCheckout, checkout } = useContext(CContext);
-
+  console.log(checkout);
   return (
     <div className={`font-barlow w-full text-left flex flex-col items-center `}>
       {/*Header*/}

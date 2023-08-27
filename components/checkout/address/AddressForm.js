@@ -1,8 +1,5 @@
 import React, { useContext, useState } from "react";
 import Group from "../../../public/svg/Group";
-import MapMarkerSvg from "../../../public/svg/MapMarker";
-import LandMarkSvg from "../../../public/svg/LandMark";
-import KenyaFlagSvg from "../../../public/svg/KenyaFlag";
 import useCustomQuery from "../../../hooks/useCustomQuery";
 import { Paths } from "../../../services/AxiosUtility";
 import validator from "../../../utils/Validators";
@@ -10,12 +7,19 @@ import useError from "../../../hooks/useError";
 import { useMutation } from "react-query";
 import checkoutServices from "../../../services/CheckoutServices";
 import { CContext } from "../../../context/CartContext2";
-import FloatingLoader from "../../FloatingLoader";
 import { useCustomToast } from "../../../hooks/useToast";
+import { RadioButton } from "./SelectDelivery";
+import FloatingLoader from "../../FloatingLoader";
+import KenyaFlagSvg from "../../../public/svg/KenyaFlag";
+import LandMarkSvg from "../../../public/svg/LandMark";
+import MapMarkerSvg from "../../../public/svg/MapMarker";
 
 const AddressForm = () => {
-  const { setCheckout } = useContext(CContext);
-  const { isLoading, data: res, refetch } = useCustomQuery(Paths.countiesUrl);
+  const { setCheckout, checkout } = useContext(CContext);
+  const { isLoading, data: res } = useCustomQuery(Paths.countiesUrl);
+  const { isLoading: fetchingLocations, data: locRes } = useCustomQuery(
+    Paths.userLocationsUrl,
+  );
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
   const mutation = useMutation(
@@ -26,7 +30,7 @@ const AddressForm = () => {
         delivery_phone_number: state?.deliveryPhoneNumber,
       }),
     {
-      onSuccess: async (res) => {
+      onSuccess: (res) => {
         showSuccessToast("Location Saved.");
 
         setCheckout((prev) => ({
@@ -39,8 +43,8 @@ const AddressForm = () => {
               instructions: state?.landmark,
               delivery_phone_number: validator?.validatePhoneNumber(
                 state?.deliveryPhoneNumber?.toString(),
-              ),
-              loc: res?.data,
+              )?.phone,
+              loc: res,
             },
             phone: validator?.validatePhoneNumber(
               state?.deliveryPhoneNumber?.toString(),
@@ -59,6 +63,8 @@ const AddressForm = () => {
     landmark: "",
     deliveryPhoneNumber: "",
   });
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [chosenIndex, setChosenIndex] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,82 +100,150 @@ const AddressForm = () => {
         </div>
       </div>
 
-      {/*  body*/}
-      <div className={"p-8"}>
-        <div className="w-full h-[214px] rounded border border-zinc-100 p-5 flex flex-wrap gap-y-4 justify-between">
-          {/*County input*/}
-          <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
-            <div className={"flex-shrink-0"}>
-              <MapMarkerSvg />
-            </div>
-
-            <select
-              required
-              className={
-                "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
-              }
-              placeholder={"Select County"}
-              value={state?.county || ""}
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, county: e.target.value }))
-              }
-            >
-              <option>Select County</option>
-              {res?.data?.results?.map((item) => (
-                <option key={item?.id} value={item?.id}>
-                  {item?.region}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/*  Landmark input  */}
-          <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
-            <div className={"flex-shrink-0"}>
-              <LandMarkSvg />
-            </div>
-
-            <input
-              required
-              className={
-                "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
-              }
-              placeholder={"Enter Landmark"}
-              value={state.landmark}
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, landmark: e.target.value }))
-              }
-            />
-          </div>
-
-          {/*  Landmark input  */}
-          <div className="w-full h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
-            <div className={"flex-shrink-0"}>
-              <KenyaFlagSvg />
-            </div>
-
-            {/*Pretext*/}
-            <span className={"text-black font-[600] font-barlow"}>+254</span>
-            <input
-              required
-              className={
-                "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
-              }
-              placeholder={"712345678"}
-              value={state.deliveryPhoneNumber}
-              onChange={(e) =>
-                setState((prev) => ({
+      <div className={"bg-white flex-1"}>
+        <div className={" p-6 grid grid-cols-2 gap-10 place-items-center"}>
+          {locRes?.data?.results?.map((item, l) => (
+            <LocationItem
+              key={l}
+              title={item.region?.region}
+              desc={item?.instructions}
+              phone={"+254" + item?.delivery_phone_number}
+              handleChoose={() => {
+                setChosenIndex(l);
+                setCheckout((prev) => ({
                   ...prev,
-                  deliveryPhoneNumber: e.target.value,
-                }))
-              }
+                  location: {
+                    ...prev?.location,
+                    // loc: [...prev?.location?.loc, locRes?.data],
+                    chosenLocation: {
+                      region: item?.region,
+                      instructions: item?.instructions,
+                      delivery_phone_number: item?.delivery_phone_number,
+                      loc: item,
+                    },
+                    phone: item?.delivery_phone_number,
+                    // chosenLocation: locRes?.data,
+                    // phone: locRes?.data?.delivery_phone_number,
+                  },
+                }));
+              }}
+              isChecked={chosenIndex === l}
             />
-          </div>
+          ))}
         </div>
 
-        {(isLoading || mutation.isLoading) && (
-          <FloatingLoader message={"Saving Address . . ."} />
+        {showCreateForm && (
+          <div className={"p-8"}>
+            <div className="w-full h-[214px] rounded border border-zinc-100 p-5 flex flex-wrap gap-y-4 justify-between">
+              {/*County input*/}
+              <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+                <div className={"flex-shrink-0"}>
+                  <MapMarkerSvg />
+                </div>
+
+                <select
+                  required
+                  className={
+                    "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
+                  }
+                  placeholder={"Select County"}
+                  value={state?.county || ""}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, county: e.target.value }))
+                  }
+                >
+                  <option>Select County</option>
+                  {res?.data?.results?.map((item) => (
+                    <option key={item?.id} value={item?.id}>
+                      {item?.region}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/*  Landmark input  */}
+              <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+                <div className={"flex-shrink-0"}>
+                  <LandMarkSvg />
+                </div>
+
+                <input
+                  required
+                  className={
+                    "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
+                  }
+                  placeholder={"Enter Landmark"}
+                  value={state.landmark}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, landmark: e.target.value }))
+                  }
+                />
+              </div>
+
+              {/*  Landmark input  */}
+              <div className="w-full h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+                <div className={"flex-shrink-0"}>
+                  <KenyaFlagSvg />
+                </div>
+
+                {/*Pretext*/}
+                <span className={"text-black font-[600] font-barlow"}>
+                  +254
+                </span>
+                <input
+                  required
+                  className={
+                    "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
+                  }
+                  placeholder={"712345678"}
+                  value={state.deliveryPhoneNumber}
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      deliveryPhoneNumber: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+            </div>
+            {(isLoading || fetchingLocations || mutation.isLoading) && (
+              <FloatingLoader
+                message={
+                  mutation?.isLoading
+                    ? "Saving Address . . ."
+                    : "Fetching locations"
+                }
+              />
+            )}
+          </div>
         )}
+
+        <div
+          className={
+            "flex-row justify-end pb-3 pt-2 w-full bg-white items-center pr-5 mb-10"
+          }
+        >
+          <button
+            className={
+              "flex-row items-center font-barlow text-primary_red float-right"
+            }
+            type={"button"}
+            onClick={() => {
+              setShowCreateForm(!showCreateForm);
+            }}
+          >
+            <span className={"text-2xl text-primary-red mr-1 font-semibold"}>
+              +
+            </span>
+            <span
+              className={
+                "text-primary-red font-barlow-semibold text-lg font-semibold"
+              }
+            >
+              Create New Location
+            </span>
+          </button>
+        </div>
       </div>
 
       {/*  Footer   */}
@@ -178,8 +252,14 @@ const AddressForm = () => {
           <div className=" text-red-600 text-base font-bold">Cancel</div>
         </button>
         <button
+          disabled={
+            !checkout?.location?.chosenLocation?.region?.id || !showCreateForm
+          }
           type={"submit"}
-          className="w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex"
+          className={`w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex ${
+            !checkout?.location?.chosenLocation?.region?.id ||
+            (!showCreateForm && "opacity-70 cursor-no-drop")
+          }`}
         >
           <div className=" text-white text-base font-bold">Save</div>
         </button>
@@ -193,3 +273,26 @@ export default AddressForm;
 const CInput = () => (
   <div className=" h-[69px] rounded border border-zinc-300 flex gap-x-3"></div>
 );
+
+const LocationItem = ({ title, desc, phone, handleChoose }) => (
+  <div className="w-80 h-[100px] relative">
+    <div className="w-80 h-full left-0 top-0 absolute bg-violet-50 rounded border border-indigo-800" />
+    <div className={"absolute top-5 left-2"}>
+      <RadioButton handleCheck={handleChoose} />
+    </div>
+    <div className="left-[36px] top-[15px] absolute text-indigo-800 text-base font-semibold">
+      {title}
+    </div>
+    <div className=" left-[36px] top-[39px] absolute text-indigo-800 text-sm font-normal">
+      {desc}
+    </div>
+    <div className=" left-[36px] top-[61px] absolute text-indigo-800 text-sm font-normal">
+      {phone}
+    </div>
+    <div className=" h-[15px] left-[14px] top-[17px] absolute" />
+  </div>
+);
+
+{
+  /*  body*/
+}
