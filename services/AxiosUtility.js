@@ -38,7 +38,7 @@ PrivateAxiosUtility.interceptors.request.use(async (req) => {
   const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
 
   if (!isExpired) return req;
-  else window.location.href = "/login/";
+  else window.location.href = "/auth/login/";
 });
 
 export const Paths = {

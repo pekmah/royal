@@ -32,6 +32,7 @@ const CartContext2Provider = ({ children }) => {
       cardDetails: {},
       phone: "",
     },
+    paymentType: "full",
     orderRequest: {},
     isEditing: false,
     editScreen: "",

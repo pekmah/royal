@@ -5,7 +5,7 @@ import { CContext } from "../../../context/CartContext2";
 
 const SelectDelivery = () => {
   const { setCheckout, checkout } = useContext(CContext);
-  console.log(checkout);
+
   return (
     <div className={`font-barlow w-full text-left flex flex-col items-center `}>
       {/*Header*/}
@@ -30,8 +30,8 @@ const SelectDelivery = () => {
           {/*Door delivery*/}
           <div className="w-full  p-6 rounded border border-zinc-100 flex-col justify-start items-start gap-2.5 inline-flex">
             <div className="flex gap-x-6">
-              <RadioButton
-                value={checkout?.del_option === "FREE_DELIVERY"}
+              <CheckInput
+                isChecked={checkout?.del_option === "FREE_DELIVERY"}
                 handleChoose={() => {
                   setCheckout((prev) => ({
                     ...prev,
@@ -87,8 +87,8 @@ const SelectDelivery = () => {
           {/*    fast express delivery  */}
           <div className="w-full p-6 rounded border border-zinc-100 flex-col justify-start items-start gap-2.5 inline-flex">
             <div className="flex gap-x-6">
-              <RadioButton
-                value={checkout?.del_option === "EXPRESS_DELIVERY"}
+              <CheckInput
+                isChecked={checkout?.del_option === "EXPRESS_DELIVERY"}
                 handleChoose={() => {
                   setCheckout((prev) => ({
                     ...prev,
@@ -130,8 +130,8 @@ const SelectDelivery = () => {
           {/*    Own Collection   */}
           <div className="w-full  p-6 rounded border border-zinc-100 flex-col justify-start items-start gap-2.5 inline-flex">
             <div className="  flex gap-x-6">
-              <RadioButton
-                value={checkout?.del_option === "OWN_COLLECTION"}
+              <CheckInput
+                isChecked={checkout?.del_option === "OWN_COLLECTION"}
                 handleChoose={() => {
                   setCheckout((prev) => ({
                     ...prev,
@@ -196,7 +196,19 @@ export const RadioButton = ({ isChecked, handleCheck, value }) => (
       name="default-radio"
       className="w-4 h-4 cursor-pointer text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
       onChange={handleCheck}
-      value={value}
     />
   </div>
+);
+
+export const CheckInput = ({ disabled, handleChoose, isChecked }) => (
+  <button
+    type={"button"}
+    className={
+      "h-4 w-4 border-2 border-blue flex rounded-full items-center justify-center"
+    }
+    disabled={disabled}
+    onClick={handleChoose}
+  >
+    {isChecked && <div className={"h-2 w-2 rounded-full bg-blue"} />}
+  </button>
 );

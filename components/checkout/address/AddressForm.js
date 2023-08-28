@@ -8,7 +8,7 @@ import { useMutation } from "react-query";
 import checkoutServices from "../../../services/CheckoutServices";
 import { CContext } from "../../../context/CartContext2";
 import { useCustomToast } from "../../../hooks/useToast";
-import { RadioButton } from "./SelectDelivery";
+import { CheckInput } from "./SelectDelivery";
 import FloatingLoader from "../../FloatingLoader";
 import KenyaFlagSvg from "../../../public/svg/KenyaFlag";
 import LandMarkSvg from "../../../public/svg/LandMark";
@@ -109,7 +109,6 @@ const AddressForm = () => {
               desc={item?.instructions}
               phone={"+254" + item?.delivery_phone_number}
               handleChoose={() => {
-                setChosenIndex(l);
                 setCheckout((prev) => ({
                   ...prev,
                   location: {
@@ -127,7 +126,9 @@ const AddressForm = () => {
                   },
                 }));
               }}
-              isChecked={chosenIndex === l}
+              isChecked={
+                checkout?.location?.chosenLocation?.loc?.id === item?.id
+              }
             />
           ))}
         </div>
@@ -162,7 +163,7 @@ const AddressForm = () => {
               </div>
 
               {/*  Landmark input  */}
-              <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+              <div className=" h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
                 <div className={"flex-shrink-0"}>
                   <LandMarkSvg />
                 </div>
@@ -257,8 +258,9 @@ const AddressForm = () => {
           }
           type={"submit"}
           className={`w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex ${
-            !checkout?.location?.chosenLocation?.region?.id ||
-            (!showCreateForm && "opacity-70 cursor-no-drop")
+            (!checkout?.location?.chosenLocation?.region?.id ||
+              !showCreateForm) &&
+            "opacity-70 cursor-no-drop"
           }`}
         >
           <div className=" text-white text-base font-bold">Save</div>
@@ -274,11 +276,11 @@ const CInput = () => (
   <div className=" h-[69px] rounded border border-zinc-300 flex gap-x-3"></div>
 );
 
-const LocationItem = ({ title, desc, phone, handleChoose }) => (
+const LocationItem = ({ title, desc, phone, handleChoose, isChecked }) => (
   <div className="w-80 h-[100px] relative">
     <div className="w-80 h-full left-0 top-0 absolute bg-violet-50 rounded border border-indigo-800" />
     <div className={"absolute top-5 left-2"}>
-      <RadioButton handleCheck={handleChoose} />
+      <CheckInput isChecked={isChecked} handleChoose={handleChoose} />
     </div>
     <div className="left-[36px] top-[15px] absolute text-indigo-800 text-base font-semibold">
       {title}
