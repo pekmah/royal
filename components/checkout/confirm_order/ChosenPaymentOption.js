@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Check from "../../../public/svg/Check";
 import EditSvg from "../../../public/svg/Edit";
 import Image from "next/image";
 import Mpesa from "@/public/mpesa.png";
+import { CContext } from "../../../context/CartContext2";
 
 const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
+  const { checkout } = useContext(CContext);
+
   return (
     <div className="w-full font-barlow py-3 bg-white shadow">
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">
@@ -30,20 +33,26 @@ const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
               : "bg-none border border-red-600 text-red-600"
           }`}
         >
-          <div className=" text-base ">Pay Full Amount</div>
+          <div className=" text-base capitalize">
+            {checkout?.payment?.paymentType === "full"
+              ? "Pay full amount"
+              : "pay in installments"}
+          </div>
         </button>
       </div>
 
       <div className={"p-5"}>
-        <div className="w-[756px] h-[60px] justify-start items-start gap-4 inline-flex">
+        <div className=" h-[60px] justify-start items-start gap-4 inline-flex">
           <Image className={"h-12 object-contain"} src={Mpesa} alt={"mpesa"} />
           <div className="flex-col justify-start items-start gap-2 inline-flex">
-            <div className="w-[707px] justify-start items-center gap-4 inline-flex">
-              <div className="text-black text-base font-medium">Mpesa</div>
+            <div className=" justify-start items-center gap-4 inline-flex">
+              <div className="text-black text-base font-medium capitalize">
+                {checkout?.payment?.type}
+              </div>
             </div>
-            <div className="w-[707px] py-2 justify-start items-center gap-2 inline-flex">
+            <div className=" py-2 justify-start items-center gap-2 inline-flex">
               <div className="text-zinc-700 text-sm font-medium">
-                +254 742041190
+                {checkout?.payment?.phone}
               </div>
             </div>
           </div>

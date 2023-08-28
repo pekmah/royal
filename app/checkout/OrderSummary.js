@@ -1,81 +1,209 @@
-import React from "react";
+"use client";
+
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import CardSvg from "../../public/svg/Card";
+import { CContext } from "../../context/CartContext2";
+import { usePathname } from "next/navigation";
+import cartServices from "../../services/CartServices";
+import { useMutation } from "react-query";
+import { useCustomToast } from "../../hooks/useToast";
+import useError from "../../hooks/useError";
+import Helpers from "../../utils/helpers";
+import FloatingLoader from "../../components/FloatingLoader";
+import { router } from "next/client";
 
 const OrderSummary = ({ className }) => {
+  const { cart, checkout } = useContext(CContext);
+  const path = usePathname();
+  const handleError = useError();
+  const { showSuccessToast } = useCustomToast();
+  const [orderId, setOrderId] = useState(null);
+
+  const subTotal = useMemo(() => {
+    return cart?.reduce((acc, val) => {
+      const currentPricing = val?.product?.pricing
+        ?.filter((prod) => prod?.id === val?.pricing)
+        ?.at(0);
+
+      // Extract the relevant numeric values from val
+      const quantity = val?.quantity;
+      const length = parseFloat(val?.measurements?.length) || 0;
+      const price = parseFloat(currentPricing?.price) || 0;
+
+      // Calculate single item amount based on pricing and properties
+      const singleItemAmount = currentPricing?.gauge_size
+        ? price * length * quantity
+        : price * quantity;
+
+      // Accumulate the single item amount in the accumulator
+      return acc + singleItemAmount;
+    }, 0);
+  }, [cart]);
+
+  const vat = (Math.ceil(parseInt(subTotal)) * 16) / 100;
+  const total = subTotal + vat;
+
+  const paymentMutation = useMutation(
+    (data) => cartServices.makePayment(data?.body),
+    {
+      onSuccess: (order) => {
+        showSuccessToast("Payment Initiated.");
+        router.push("/checkout/payment", {
+          order: orderId,
+          paymentIndex: 0,
+        });
+      },
+    },
+  );
+
+  const mutation = useMutation((data) => cartServices.createOrder(data), {
+    onSuccess: (order) => {
+      showSuccessToast("Order Created.");
+
+      const paymentObj =
+        order?.order?.payment_plan === "FULL_PAYMENT"
+          ? { order_id: order?.order?.id }
+          : { payment_record: order?.order?.payment_records?.at(0)?.id };
+
+      setOrderId(order?.order?.id);
+
+      paymentMutation.mutate({
+        body: {
+          phone_number: Helpers?.getPhoneNumber(checkout?.payment?.phone),
+          ...paymentObj,
+        },
+        order: order?.order?.id,
+      });
+      // router.push("/checkout/address");
+    },
+  });
+
+  //     useMutation((data) => cartServices.createOrder(data), {
+  //   onSuccess: (res) => {
+  //     showSuccessToast("Cart Saved.");
+  //
+  //     // router.push("/checkout/address");
+  //   },
+  //
+  // });
+
+  const handleProceed = async () => {
+    const delivery =
+      checkout?.del_option === "OWN_COLLECTION"
+        ? { pickup_center_id: checkout?.location?.pickupPoint?.id }
+        : { delivery_location: checkout?.location?.chosenLocation.loc?.id };
+
+    mutation.mutate({
+      cart_id: checkout?.cartId,
+      payment_plan: checkout?.payment?.type,
+      order_type: checkout?.del_option,
+      ...delivery,
+    });
+
+    // // call the initiate payment endpoint
+    // if (order?.order?.id) {
+    //   setMode("payment");
+    //
+    //   // initiate payment
+    //
+    //   const paymentObj =
+    //     order?.order?.payment_plan === "FULL_PAYMENT"
+    //       ? { order_id: order?.order?.id }
+    //       : { payment_record: order?.order?.payment_records?.at(0)?.id };
+    //
+    //   await makePayment(
+    //     {
+    //       phone_number: Helper?.getPhoneNumber(checkout?.payment?.phone),
+    //       ...paymentObj,
+    //     },
+    //     order?.order?.id,
+    //   );
+    //   setMode("");
+    // } else {
+    //   showToast("Order not created.", "error");
+    // }
+  };
+
+  useEffect(() => {
+    if (mutation?.isError) {
+      handleError(mutation.error);
+    } else if (paymentMutation.isError) {
+      handleError(paymentMutation.error);
+    }
+  }, [
+    mutation.error,
+    mutation?.isError,
+    paymentMutation.error,
+    paymentMutation.isError,
+  ]);
+
   return (
     <div className={"w-30% relative"}>
-      <div className={"sticky top-5 "}>
+      <div className={"sticky top-5 relative"}>
         <div
           className={`font-barlow pb-6 drop-shadow-lg flex flex-col items-center box-shadow:0px_0px_0px_1px_rgba(243,_243,_243,_1)_inset] [box-shadow-width:1px] [flex-grow:1] bg-white ${className}`}
         >
-          <div className="  pt-14 relative  flex justify-center text-left">
-            <p className="left-[15px] font-[600] tracking-[-0.02em] w-[133px] top-4 absolute text-xl leading-6 text-black h-6">
+          <div className="  pt-14 relative  flex justify-center text-left w-full ">
+            <p className="left-[15px] font-[600] tracking-[-0.02em]  top-4 absolute text-xl leading-6 text-black h-6">
               Order Summary
             </p>
-            <div className="text-[#333333] gap-2 flex flex-col items-center h-full w-full">
+            <div className="text-[#333333] gap-2  flex flex-col items-center h-full w-full">
               <div className="w-full h-[0] outline outline-1 outline-[#F3F3F3]" />
-              <div className="[flex-grow:1] bg-white gap-4 flex flex-col items-start p-2">
-                <p className="w-[341px] font-[500] tracking-[-0.02em] text-base leading-6">
-                  Aluminum aluzinc tile matte finish with alloy
-                </p>
-                <div className="gap-[179px] font-[400] flex items-start">
-                  <p className="tracking-[-0.02em] w-[41px] text-sm leading-6">
-                    3 Units
+              {cart?.map((c) => (
+                <div
+                  key={c?.pricing}
+                  className="[flex-grow:1] w-full bg-white gap-4 flex flex-col items-start px-5 py-2"
+                >
+                  <p className=" font-[500] tracking-[-0.02em] text-base leading-6">
+                    {c?.product?.name}
                   </p>
-                  <p className="tracking-[-0.02em] w-[120px] text-sm leading-6">
-                    Total Cost: Ksh 2400
-                  </p>
+                  <div className="justify-between font-[400] flex items-start w-full">
+                    <p className="tracking-[-0.02em]  text-sm leading-6">
+                      {c?.quantity} Units
+                    </p>
+                    <p className="tracking-[-0.02em]  text-sm leading-6">
+                      Total Cost: Ksh {Math.ceil(c?.total_price)}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="[flex-grow:1] bg-white gap-4 flex flex-col items-start mt-6 p-2">
-                <p className="w-full font-[500] tracking-[-0.03em] text-base leading-6">
-                  Aluminum aluzinc tile matte finish with alloy
-                </p>
-                <div className="gap-[179px] font-[400] flex items-start">
-                  <p className="tracking-[-0.03em] text-sm leading-6 w-10">
-                    3 Units
-                  </p>
-                  <p className="tracking-[-0.03em] w-[117px] text-sm leading-6">
-                    Total Cost: Ksh 2400
-                  </p>
-                </div>
-              </div>
-              <div className="w-full h-[0] outline outline-1 outline-[#FCFCFC]" />
+              ))}
+
+              <div className="w-full h-[0] outline outline-1 outline-gray-200" />
             </div>
           </div>
           <div className=" gap-6 flex flex-col items-center">
-            <div className=" flex gap-6 flex-col justify-center items-start">
-              <div className="gap-6 flex flex-col items-center">
-                <div className="gap-4 flex flex-col items-start px-5">
-                  <div className="gap-52 flex items-start">
-                    <p className="font-[400] tracking-[-0.02em] text-[#00000099] w-[63px] text-base leading-6 text-left">
+            <div className=" flex gap-6 flex-col justify-center items-start w-full ">
+              <div className="gap-6 flex flex-col items-center w-full ">
+                <div className="gap-4 flex flex-col items-start px-5 w-full">
+                  <div className="w-full justify-between flex items-start">
+                    <p className="font-[400] tracking-[-0.02em] text-[#00000099]  text-base leading-6 text-left">
                       Sub-total
                     </p>
-                    <p className="font-[500] tracking-[-0.02em] text-[#333333] w-[71px] text-base leading-6 text-right">
-                      Ksh. 2,400
+                    <p className="font-[500] tracking-[-0.02em] text-[#333333]  text-base leading-6 text-right">
+                      Ksh. {Math.ceil(subTotal)}
                     </p>
                   </div>
-                  <div className="gap-[234px] flex items-start">
-                    <p className="font-[400] tracking-[-0.02em] text-[#00000099] w-[49px] text-base leading-6 text-left">
+                  <div className=" flex items-start w-full justify-between">
+                    <p className="font-[400] tracking-[-0.02em] text-[#00000099]  text-base leading-6 text-left">
                       VAT (%)
                     </p>
-                    <p className="font-[500] tracking-[-0.02em] text-[#333333] w-[58px] text-base leading-6 text-right">
-                      Ksh. 300
+                    <p className="font-[500] tracking-[-0.02em] text-[#333333]  text-base leading-6 text-right">
+                      Ksh. {Math.ceil(vat)}
                     </p>
                   </div>
                 </div>
-                <div className="w-[374px] outline outline-1 outline-[#F3F3F3] origin-center h-px" />
+                <div className=" outline outline-1 outline-[#F3F3F3] origin-center h-px" />
               </div>
-              <div className="gap-[234px] flex items-start text-black px-5">
-                <p className="font-[500] tracking-[-0.02em] w-[34px] text-base leading-6 text-left">
+              <div className=" flex w-full justify-between items-start text-black px-5">
+                <p className="font-[500] tracking-[-0.02em]  text-base leading-6 text-left">
                   Total
                 </p>
-                <p className="font-[700] tracking-[-0.02em] w-[69px] text-base leading-6 text-right">
-                  Ksh.2,900
+                <p className="font-[700] tracking-[-0.02em]  text-base leading-6 text-right">
+                  Ksh. {Math.ceil(total)}
                 </p>
               </div>
             </div>
-            <div className="w-[341px] font-[400] text-left leading-none relative">
+            <div className=" font-[400] text-left leading-none relative">
               <p className="text-[#888888] text-sm inline">
                 {"By proceeding to pay it means you have agreed to "}
                 <br />
@@ -88,10 +216,24 @@ const OrderSummary = ({ className }) => {
             </div>
           </div>
         </div>
-        <button className="w-full flex h-[59px] bg-[#DC2A25] font-[700] gap-2.5 justify-center items-center mt-14 rounded p-2.5 text-white text-left">
-          <CardSvg className="w-[25px] h-[25px]" />
-          <p className=" h-5 text-base">Proceed to pay</p>
-        </button>
+        {path?.endsWith("/confirm_order") && (
+          <button
+            onClick={handleProceed}
+            className="w-full flex h-[59px] bg-[#DC2A25] font-[700] gap-2.5 justify-center items-center mt-14 rounded p-2.5 text-white text-left"
+          >
+            <CardSvg className="w-[25px] h-[25px]" />
+            <p className=" h-5 text-base">Proceed to pay</p>
+          </button>
+        )}
+        {(paymentMutation?.isLoading || mutation?.isLoading) && (
+          <FloatingLoader
+            message={
+              mutation.isLoading
+                ? "Creating order . . ."
+                : "Initializing payment"
+            }
+          />
+        )}
       </div>
     </div>
   );

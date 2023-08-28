@@ -36,6 +36,10 @@ const PaymentForm = () => {
           onClick={() => {
             setCheckout((prev) => ({
               ...prev,
+              payment: {
+                ...prev?.payment,
+                type: "FULL_PAYMENT",
+              },
               paymentType: "full",
             }));
           }}

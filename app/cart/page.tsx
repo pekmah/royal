@@ -9,6 +9,11 @@ import AsyncStorageService from "@/services/AsyncStorageService";
 import { CContext } from "@/context/CartContext2.js";
 import Image from "next/image";
 import empty from "@/public/empty.png";
+import { useCustomToast } from "@/hooks/useToast";
+import { useMutation } from "react-query";
+import cartServices from "@/services/CartServices";
+import useError from "@/hooks/useError";
+import { Spinner } from "@/components/FloatingLoader";
 
 const barlowSemi = Barlow({
   style: "normal",
@@ -27,6 +32,11 @@ const barlowNormal = Barlow({
 });
 
 const Cart = () => {
+  // @ts-ignore
+  const { checkout, setCheckout } = useContext(CContext);
+  const { showErrorToast, showSuccessToast } = useCustomToast();
+  const handleError = useError();
+
   const { itemQuantity, totalPrice } = useCartContext();
   // @ts-ignore
   const { cart } = useContext(CContext);
@@ -74,6 +84,66 @@ const Cart = () => {
 
   const vat = (Math.ceil(parseInt(subTotal)) * 16) / 100;
   const total = subTotal + vat;
+
+  // @ts-ignore
+  const mutation = useMutation(
+    (data) => cartServices.saveCart({ items: data }),
+    {
+      onSuccess: (res) => {
+        showSuccessToast("Cart Saved.");
+
+        // @ts-ignore
+        setCheckout((prev) => ({
+          ...prev,
+          cartId: res?.items?.id,
+        }));
+
+        router.push("/checkout/address");
+      },
+      onError: (e) => handleError(e),
+    },
+  );
+
+  const handleProceedToCheckout = async () => {
+    if (cart?.length < 1) {
+      return showErrorToast("Cart empty!");
+    }
+    // @ts-ignore
+    let newItemsArr = [];
+    // @ts-ignore
+    cart?.forEach((item) => {
+      let newCartItem = {
+        pricing: item?.pricing,
+        length: parseFloat(item?.measurements?.length),
+        color: item?.product?.thumbnails?.at(item?.color)?.thumbnail_color,
+        quantity: parseInt(item?.quantity),
+      };
+
+      newItemsArr?.push(newCartItem);
+    });
+
+    // if (checkout?.isEditing && checkout?.editScreen === "cart") {
+    //   updateCartProduct(checkout?.cartId, {
+    //     items: newItemsArr,
+    //   }).then(async (r) => {
+    //     showToast("Cart updated.");
+    //     navigation.navigate("checkout_confirmorder");
+    //     resetEditing();
+    //   });
+    // } else {
+    // @ts-ignore
+    mutation.mutate(newItemsArr);
+    //   addProductToCart({
+    //     items: newItemsArr,
+    //   }).then(async (r) => {
+    //     await AsyncStorageService.setData("_cart_id", r?.items?.id);
+    //     setCheckout((prev) => ({
+    //       ...prev,
+    //       cartId: r?.items?.id,
+    //     }));
+    //   });
+    // }
+  };
   return (
     <div className={"min-h-[80vh] flex"}>
       {cart?.length >= 1 ? (
@@ -114,12 +184,25 @@ const Cart = () => {
                 >
                   Back To shop
                 </button>
+
                 <button
-                  className="button-primary py-1.5 flex gap-2 items-center font-[600] h-14 "
-                  onClick={() => router.push("/checkout/address")}
+                  className={`button-primary py-1.5 flex gap-2 items-center font-[600] h-14 ${
+                    mutation?.isLoading && "opacity-70"
+                  } `}
+                  // onClick={() => router.push("/checkout/address")}
+                  onClick={handleProceedToCheckout}
                 >
-                  <span>Checkout</span>
-                  <BsArrowRightShort size={25} />
+                  {!mutation?.isLoading ? (
+                    <>
+                      <span>Checkout</span>
+                      <BsArrowRightShort size={25} />
+                    </>
+                  ) : (
+                    <>
+                      <Spinner h={"6"} w={"6"} />
+                      <span> Saving cart . . .</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>

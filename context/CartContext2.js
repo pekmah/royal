@@ -27,7 +27,7 @@ const CartContext2Provider = ({ children }) => {
     },
     del_option: "", // PICKUP/DOORSTEP
     payment: {
-      type: "", //FULL_PAYMENT,3_MONTHS,6_MONTHS,9_MONTHS,12_MONTHS
+      type: "FULL_PAYMENT", //FULL_PAYMENT,3_MONTHS,6_MONTHS,9_MONTHS,12_MONTHS
       option: "MPESA", // CARD|MPESA,
       cardDetails: {},
       phone: "",

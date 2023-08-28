@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Check from "../../../public/svg/Check";
 import EditSvg from "../../../public/svg/Edit";
+import { CContext } from "../../../context/CartContext2";
 
 const ChosenAddress = () => {
+  const { checkout } = useContext(CContext);
+
   return (
     <div className="w-full font-barlow py-3 bg-white shadow">
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">
@@ -24,14 +27,16 @@ const ChosenAddress = () => {
 
       <div className=" flex-col justify-start items-start gap-4 inline-flex p-5">
         <div className="self-stretch justify-start items-center gap-4 inline-flex">
-          <div className="text-black text-base font-medium">Nakuru</div>
+          <div className="text-black text-base font-medium">
+            {checkout.location?.chosenLocation?.loc?.region?.region}
+          </div>
           <div className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />
           <div className="text-black text-base font-medium">
-            St. Andrews International School
+            {checkout.location?.chosenLocation?.loc?.instructions}
           </div>
         </div>
         <div className=" text-zinc-800 text-sm font-medium">
-          +254 742 041 190
+          +254{checkout.location?.chosenLocation?.delivery_phone_number}
         </div>
       </div>
     </div>

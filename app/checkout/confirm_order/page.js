@@ -8,6 +8,7 @@ import {
 import ChosenPaymentOption from "../../../components/checkout/confirm_order/ChosenPaymentOption";
 
 const ConfirmOrder = () => {
+
   return (
     <div className={"flex flex-col gap-y-5"}>
       {/*Delivery method*/}
