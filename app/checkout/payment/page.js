@@ -1,17 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ChosenPaymentOption } from "../../../components/checkout/confirm_order";
 import FailedCard from "../../../components/checkout/payment/FailedCard";
+import { ProcessingCard } from "../../../components/checkout/payment";
+import SuccessfulCard from "../../../components/checkout/payment/SuccessfulCard";
+import { useParams } from "next/navigation";
 
 const Page = () => {
+  const [status, setStatus] = useState(1); //0-failed 1-processing 2-success
+  const params = useParams();
+  console.log(params);
   return (
     <div className={"flex flex-col gap-y-5"}>
       <div className="w-full font-barlow bg-white shadow ">
         {/*loader & text*/}
-        {/*<ProcessingCard />*/}
-        <FailedCard />
-        {/*<SuccessfulCard />*/}
+        {status === 1 ? (
+          <ProcessingCard />
+        ) : status === 2 ? (
+          <SuccessfulCard />
+        ) : (
+          <FailedCard />
+        )}
 
         <div
           className={
