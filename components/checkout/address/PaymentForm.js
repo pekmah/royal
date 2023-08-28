@@ -10,7 +10,6 @@ import Mpesa from "@/public/mpesa.png";
 const PaymentForm = () => {
   const router = useRouter();
   const { setCheckout, checkout } = useContext(CContext);
-  console.log(checkout);
   return (
     <div className="w-full bg-white rounded shadow">
       {/*  Header */}

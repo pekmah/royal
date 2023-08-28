@@ -44,4 +44,5 @@ PrivateAxiosUtility.interceptors.request.use(async (req) => {
 export const Paths = {
   countiesUrl: "/api/v1/cart/deliverycosts/?page_size=500&page=1",
   userLocationsUrl: "/api/v1/cart/order/locations/",
+  pickupCentersUrl: "/api/v1/cart/pickupcenters/?page_size=500&page=1",
 };

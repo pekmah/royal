@@ -20,6 +20,9 @@ const AddressForm = () => {
   const { isLoading: fetchingLocations, data: locRes } = useCustomQuery(
     Paths.userLocationsUrl,
   );
+  const { isLoading: fetchingCenters, data: pickupCenters } = useCustomQuery(
+    Paths.pickupCentersUrl,
+  );
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
   const mutation = useMutation(
@@ -100,152 +103,195 @@ const AddressForm = () => {
         </div>
       </div>
 
-      <div className={"bg-white flex-1"}>
-        <div className={" p-6 grid grid-cols-2 gap-10 place-items-center"}>
-          {locRes?.data?.results?.map((item, l) => (
-            <LocationItem
-              key={l}
-              title={item.region?.region}
-              desc={item?.instructions}
-              phone={"+254" + item?.delivery_phone_number}
-              handleChoose={() => {
+      {checkout?.del_option === "OWN_COLLECTION" ? (
+        <div className={"p-5"}>
+          <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+            <div className={"flex-shrink-0"}>
+              <MapMarkerSvg />
+            </div>
+
+            <select
+              required
+              className={
+                "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500] bg-white"
+              }
+              placeholder={"Pickup Centre"}
+              onChange={(e) => {
                 setCheckout((prev) => ({
                   ...prev,
                   location: {
                     ...prev?.location,
-                    // loc: [...prev?.location?.loc, locRes?.data],
-                    chosenLocation: {
-                      region: item?.region,
-                      instructions: item?.instructions,
-                      delivery_phone_number: item?.delivery_phone_number,
-                      loc: item,
-                    },
-                    phone: item?.delivery_phone_number,
-                    // chosenLocation: locRes?.data,
-                    // phone: locRes?.data?.delivery_phone_number,
+                    pickupPoint: pickupCenters?.data?.results?.find(
+                      (item) =>
+                        parseInt(item?.id) === parseInt(e?.target?.value),
+                    ),
                   },
                 }));
               }}
-              isChecked={
-                checkout?.location?.chosenLocation?.loc?.id === item?.id
-              }
-            />
-          ))}
+            >
+              <option>Select Pickup center</option>
+              {(pickupCenters?.data?.results || [])?.map((item) => (
+                <option key={item?.id} value={item?.id}>
+                  {item?.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-
-        {showCreateForm && (
-          <div className={"p-8"}>
-            <div className="w-full h-[214px] rounded border border-zinc-100 p-5 flex flex-wrap gap-y-4 justify-between">
-              {/*County input*/}
-              <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
-                <div className={"flex-shrink-0"}>
-                  <MapMarkerSvg />
-                </div>
-
-                <select
-                  required
-                  className={
-                    "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
-                  }
-                  placeholder={"Select County"}
-                  value={state?.county || ""}
-                  onChange={(e) =>
-                    setState((prev) => ({ ...prev, county: e.target.value }))
-                  }
-                >
-                  <option>Select County</option>
-                  {res?.data?.results?.map((item) => (
-                    <option key={item?.id} value={item?.id}>
-                      {item?.region}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/*  Landmark input  */}
-              <div className=" h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
-                <div className={"flex-shrink-0"}>
-                  <LandMarkSvg />
-                </div>
-
-                <input
-                  required
-                  className={
-                    "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
-                  }
-                  placeholder={"Enter Landmark"}
-                  value={state.landmark}
-                  onChange={(e) =>
-                    setState((prev) => ({ ...prev, landmark: e.target.value }))
-                  }
-                />
-              </div>
-
-              {/*  Landmark input  */}
-              <div className="w-full h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
-                <div className={"flex-shrink-0"}>
-                  <KenyaFlagSvg />
-                </div>
-
-                {/*Pretext*/}
-                <span className={"text-black font-[600] font-barlow"}>
-                  +254
-                </span>
-                <input
-                  required
-                  className={
-                    "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
-                  }
-                  placeholder={"712345678"}
-                  value={state.deliveryPhoneNumber}
-                  onChange={(e) =>
-                    setState((prev) => ({
-                      ...prev,
-                      deliveryPhoneNumber: e.target.value,
-                    }))
-                  }
-                />
-              </div>
-            </div>
-            {(isLoading || fetchingLocations || mutation.isLoading) && (
-              <FloatingLoader
-                message={
-                  mutation?.isLoading
-                    ? "Saving Address . . ."
-                    : "Fetching locations"
+      ) : (
+        <div className={"bg-white flex-1"}>
+          <div className={" p-6 grid grid-cols-2 gap-10 place-items-center"}>
+            {locRes?.data?.results?.map((item, l) => (
+              <LocationItem
+                key={l}
+                title={item.region?.region}
+                desc={item?.instructions}
+                phone={"+254" + item?.delivery_phone_number}
+                handleChoose={() => {
+                  setCheckout((prev) => ({
+                    ...prev,
+                    location: {
+                      ...prev?.location,
+                      // loc: [...prev?.location?.loc, locRes?.data],
+                      chosenLocation: {
+                        region: item?.region,
+                        instructions: item?.instructions,
+                        delivery_phone_number: item?.delivery_phone_number,
+                        loc: item,
+                      },
+                      phone: item?.delivery_phone_number,
+                      // chosenLocation: locRes?.data,
+                      // phone: locRes?.data?.delivery_phone_number,
+                    },
+                  }));
+                }}
+                isChecked={
+                  checkout?.location?.chosenLocation?.loc?.id === item?.id
                 }
               />
-            )}
+            ))}
           </div>
-        )}
 
-        <div
-          className={
-            "flex-row justify-end pb-3 pt-2 w-full bg-white items-center pr-5 mb-10"
-          }
-        >
-          <button
+          {showCreateForm && (
+            <div className={"p-8"}>
+              <div className="w-full h-[214px] rounded border border-zinc-100 p-5 flex flex-wrap gap-y-4 justify-between">
+                {/*County input*/}
+                <div className="w-[48%] h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+                  <div className={"flex-shrink-0"}>
+                    <MapMarkerSvg />
+                  </div>
+
+                  <select
+                    required
+                    className={
+                      "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
+                    }
+                    placeholder={"Select County"}
+                    value={state?.county || ""}
+                    onChange={(e) =>
+                      setState((prev) => ({ ...prev, county: e.target.value }))
+                    }
+                  >
+                    <option>Select County</option>
+                    {res?.data?.results?.map((item) => (
+                      <option key={item?.id} value={item?.id}>
+                        {item?.region}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/*  Landmark input  */}
+                <div className=" h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+                  <div className={"flex-shrink-0"}>
+                    <LandMarkSvg />
+                  </div>
+
+                  <input
+                    required
+                    className={
+                      "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
+                    }
+                    placeholder={"Enter Landmark"}
+                    value={state.landmark}
+                    onChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        landmark: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+
+                {/*  Landmark input  */}
+                <div className="w-full h-[69px] rounded border border-zinc-300 flex gap-x-3 items-center px-5 bg-white">
+                  <div className={"flex-shrink-0"}>
+                    <KenyaFlagSvg />
+                  </div>
+
+                  {/*Pretext*/}
+                  <span className={"text-black font-[600] font-barlow"}>
+                    +254
+                  </span>
+                  <input
+                    required
+                    className={
+                      "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
+                    }
+                    placeholder={"712345678"}
+                    value={state.deliveryPhoneNumber}
+                    onChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        deliveryPhoneNumber: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+              </div>
+              {(isLoading ||
+                fetchingLocations ||
+                fetchingCenters ||
+                mutation.isLoading) && (
+                <FloatingLoader
+                  message={
+                    mutation?.isLoading
+                      ? "Saving Address . . ."
+                      : "Fetching locations"
+                  }
+                />
+              )}
+            </div>
+          )}
+
+          <div
             className={
-              "flex-row items-center font-barlow text-primary_red float-right"
+              "flex-row justify-end pb-3 pt-2 w-full bg-white items-center pr-5 mb-10"
             }
-            type={"button"}
-            onClick={() => {
-              setShowCreateForm(!showCreateForm);
-            }}
           >
-            <span className={"text-2xl text-primary-red mr-1 font-semibold"}>
-              +
-            </span>
-            <span
+            <button
               className={
-                "text-primary-red font-barlow-semibold text-lg font-semibold"
+                "flex-row items-center font-barlow text-primary_red float-right"
               }
+              type={"button"}
+              onClick={() => {
+                setShowCreateForm(!showCreateForm);
+              }}
             >
-              Create New Location
-            </span>
-          </button>
+              <span className={"text-2xl text-primary-red mr-1 font-semibold"}>
+                +
+              </span>
+              <span
+                className={
+                  "text-primary-red font-barlow-semibold text-lg font-semibold"
+                }
+              >
+                Create New Location
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/*  Footer   */}
       <div className={"flex px-6 py-5 gap-x-6 border-t border-gray-200"}>
