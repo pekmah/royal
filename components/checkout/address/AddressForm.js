@@ -184,7 +184,7 @@ const AddressForm = () => {
                   <select
                     required
                     className={
-                      "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500]"
+                      "flex-1 h-full focus:outline-none placeholder-gray-700 font-barlow font-[500] bg-white"
                     }
                     placeholder={"Select County"}
                     value={state?.county || ""}
@@ -276,6 +276,14 @@ const AddressForm = () => {
               type={"button"}
               onClick={() => {
                 setShowCreateForm(!showCreateForm);
+                setCheckout((prev) => ({
+                  ...prev,
+                  location: {
+                    ...prev?.location,
+                    chosenLocation: {},
+                    phone: "",
+                  },
+                }));
               }}
             >
               <span className={"text-2xl text-primary-red mr-1 font-semibold"}>
