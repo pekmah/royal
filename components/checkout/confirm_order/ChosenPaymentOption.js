@@ -47,7 +47,7 @@ const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
           <div className="flex-col justify-start items-start gap-2 inline-flex">
             <div className=" justify-start items-center gap-4 inline-flex">
               <div className="text-black text-base font-medium capitalize">
-                {checkout?.payment?.type}
+                {checkout?.paymentType}
               </div>
             </div>
             <div className=" py-2 justify-start items-center gap-2 inline-flex">
