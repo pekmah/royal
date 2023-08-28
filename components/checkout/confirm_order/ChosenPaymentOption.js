@@ -34,7 +34,7 @@ const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
           }`}
         >
           <div className=" text-base capitalize">
-            {checkout?.payment?.paymentType === "full"
+            {checkout?.paymentType === "full"
               ? "Pay full amount"
               : "pay in installments"}
           </div>
