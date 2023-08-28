@@ -11,9 +11,10 @@ import useError from "../../hooks/useError";
 import Helpers from "../../utils/helpers";
 import FloatingLoader from "../../components/FloatingLoader";
 import { router } from "next/client";
+import AsyncStorageService from "../../services/AsyncStorageService";
 
 const OrderSummary = ({ className }) => {
-  const { cart, checkout } = useContext(CContext);
+  const { cart, setCart, checkout } = useContext(CContext);
   const path = usePathname();
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
@@ -57,8 +58,11 @@ const OrderSummary = ({ className }) => {
   );
 
   const mutation = useMutation((data) => cartServices.createOrder(data), {
-    onSuccess: (order) => {
+    onSuccess: async (order) => {
       showSuccessToast("Order Created.");
+
+      await AsyncStorageService.removeData("_cart");
+      setCart([]);
 
       const paymentObj =
         order?.order?.payment_plan === "FULL_PAYMENT"
