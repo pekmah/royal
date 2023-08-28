@@ -102,6 +102,11 @@ export default function ProductDetailMain({ product }) {
     );
   }
 
+  // checks if product is a nongauge product
+  const isNoneGauge = useMemo(() => {
+    return pricing?.length === 1 && !pricing?.at(0)?.gauge_size;
+  }, [pricing]);
+
   const isAddToCartDisabled =
     activeLength === null || activeGauge === null || !activeFinish?.id;
   const thumbnail =
@@ -198,33 +203,47 @@ export default function ProductDetailMain({ product }) {
     // check if item is already contained
     let itemIsContained = false;
 
-    if (cart?.some((item) => item?.pricing === activeFinish?.id)) {
+    if (!isNoneGauge) {
+      if (cart?.some((item) => item?.pricing === activeFinish?.id)) {
+        let currentCartItem = cart?.find(
+          (item) => item?.pricing === activeFinish?.id,
+        );
+
+        itemIsContained = cart?.some(
+          (item) => item?.pricing === currentCartItem?.pricing,
+        );
+      }
+    } else {
       let currentCartItem = cart?.find(
-        (item) => item?.pricing === activeFinish?.id,
+        (item) => item?.pricing === pricing?.at(0)?.id,
       );
 
-      itemIsContained = cart?.some(
-        (item) => item?.pricing === currentCartItem?.pricing,
-      );
+      if (currentCartItem) {
+        itemIsContained = cart?.some(
+          (item) => item?.pricing === currentCartItem?.pricing,
+        );
+      } else {
+        itemIsContained = false;
+      }
     }
 
     if (itemIsContained) {
-      let currentCartItem = cart?.filter(
-        (item) => item?.pricing === activeFinish?.id,
-      )[0];
-      let OtherCartItems = cart?.filter(
-        (item) => item?.pricing !== activeFinish?.id,
-      );
+      let currentCartItem = isNoneGauge
+        ? cart?.filter((item) => item?.pricing === pricing?.at(0)?.id)[0]
+        : cart?.filter((item) => item?.pricing === activeFinish?.id)[0];
+      // console.log(currentCartItem);
+      let OtherCartItems = isNoneGauge
+        ? cart?.filter((item) => item?.pricing !== pricing?.at(0)?.id)
+        : cart?.filter((item) => item?.pricing !== activeFinish?.id);
+
       setCart((prev) => [
         {
-          quantity: (currentCartItem?.quantity || 0) + quantity,
+          quantity: (currentCartItem?.quantity ?? 0) + quantity,
           product: product,
           measurements: { length: activeLength, width: activeWidth },
-          // color: product?.thumbnails?.at(currentColor - 1)
-          //   ?.thumbnail_color,
           color: selectedColor,
-          total_price: totalProductPrice,
-          pricing: activeFinish?.id,
+          total_price: totalProductPrice ?? 0 + currentCartItem?.total_price,
+          pricing: isNoneGauge ? pricing?.at(0)?.id : activeFinish?.id,
         },
         ...OtherCartItems,
       ]);
@@ -240,7 +259,7 @@ export default function ProductDetailMain({ product }) {
           color: selectedColor,
           product: product,
           total_price: totalProductPrice,
-          pricing: activeFinish?.id,
+          pricing: isNoneGauge ? pricing?.at(0)?.id : activeFinish?.id,
         },
       ]);
       toast.success("Item added to cart");
