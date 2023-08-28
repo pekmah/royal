@@ -54,29 +54,7 @@ const SelectDelivery = () => {
                   </div>
                   <div className="self-stretch">
                     <span className="text-zinc-800 text-sm font-medium">
-                      Free for regions without security fee. Delivery between{" "}
-                    </span>
-                    <span className="text-zinc-800 text-sm font-semibold">
-                      Jun 30
-                    </span>
-                    <span className="text-zinc-800 text-sm font-medium">
-                      {" "}
-                      and{" "}
-                    </span>
-                    <span className="text-zinc-800 text-sm font-semibold">
-                      Jun 24.{" "}
-                    </span>
-                    <span className="text-zinc-800 text-sm font-medium">
-                      See
-                    </span>
-                    <span className="text-zinc-800 text-sm font-semibold">
-                      {" "}
-                    </span>
-                    <span className="text-red-600 text-sm font-semibold underline">
-                      Delivery Guide
-                    </span>
-                    <span className="text-zinc-800 text-sm font-semibold">
-                      .
+                      Free for regions without security fee.
                     </span>
                   </div>
                 </div>
@@ -148,21 +126,6 @@ const SelectDelivery = () => {
                     </div>
                   </div>
                   <div className="flex-col justify-start items-start gap-2 flex">
-                    <div className="">
-                      <span className="text-zinc-800 text-sm font-medium">
-                        Quote will be ready between{" "}
-                      </span>
-                      <span className="text-zinc-800 text-sm font-semibold">
-                        Jun 17
-                      </span>
-                      <span className="text-zinc-800 text-sm font-medium">
-                        {" "}
-                        and{" "}
-                      </span>
-                      <span className="text-zinc-800 text-sm font-semibold">
-                        Jun 24
-                      </span>
-                    </div>
                     <div className=" text-zinc-800 text-sm font-medium">
                       Location: Depot at Machakos, Mlolongo - Along Mombasa Rd
                     </div>
