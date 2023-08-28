@@ -1,9 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { CheckInput } from "./SelectDelivery";
 import { CContext } from "../../../context/CartContext2";
 
 const InstallmentPayment = () => {
-  const { setCheckout, checkout } = useContext(CContext);
+  const { setCheckout, checkout, cart } = useContext(CContext);
+
+  const subTotal = useMemo(() => {
+    return cart?.reduce((acc, val) => {
+      const currentPricing = val?.product?.pricing
+        ?.filter((prod) => prod?.id === val?.pricing)
+        ?.at(0);
+
+      // Extract the relevant numeric values from val
+      const quantity = val?.quantity;
+      const length = parseFloat(val?.measurements?.length) || 0;
+      const price = parseFloat(currentPricing?.price) || 0;
+
+      // Calculate single item amount based on pricing and properties
+      const singleItemAmount = currentPricing?.gauge_size
+        ? price * length * quantity
+        : price * quantity;
+
+      // Accumulate the single item amount in the accumulator
+      return acc + singleItemAmount;
+    }, 0);
+  }, [cart]);
+  const vat = (Math.ceil(parseInt(subTotal)) * 16) / 100;
+  const total = subTotal + vat;
 
   return (
     <div className="flex flex-col justify-center  w-full border-b font-barlow">
@@ -41,7 +64,7 @@ const InstallmentPayment = () => {
                   </div>
                 </div>
                 <div className="self-stretch text-zinc-800 text-sm font-medium">
-                  Pay Ksh. 1,200 for {duration} months
+                  Pay Ksh. {Math.ceil(total / duration)} for {duration} months
                 </div>
               </div>
             </div>
