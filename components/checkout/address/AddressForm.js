@@ -68,7 +68,7 @@ const AddressForm = () => {
   });
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [chosenIndex, setChosenIndex] = useState(null);
-
+  console.log(state);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -302,24 +302,31 @@ const AddressForm = () => {
       )}
 
       {/*  Footer   */}
-      <div className={"flex px-6 py-5 gap-x-6 border-t border-gray-200"}>
-        <button className="w-32 h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">
-          <div className=" text-red-600 text-base font-bold">Cancel</div>
-        </button>
-        <button
-          disabled={
-            !checkout?.location?.chosenLocation?.region?.id || !showCreateForm
-          }
-          type={"submit"}
-          className={`w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex ${
-            (!checkout?.location?.chosenLocation?.region?.id ||
-              !showCreateForm) &&
-            "opacity-70 cursor-no-drop"
-          }`}
-        >
-          <div className=" text-white text-base font-bold">Save</div>
-        </button>
-      </div>
+      {state?.county && state?.landmark && state?.deliveryPhoneNumber && (
+        <div className={"flex px-6 py-5 gap-x-6 border-t border-gray-200"}>
+          <button className="w-32 h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">
+            <div className=" text-red-600 text-base font-bold">Cancel</div>
+          </button>
+          <button
+            disabled={
+              !state?.county ||
+              !state?.landmark ||
+              !state?.deliveryPhoneNumber ||
+              !showCreateForm
+            }
+            type={"submit"}
+            className={`w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex ${
+              (!state?.county ||
+                !state?.landmark ||
+                !state?.deliveryPhoneNumber ||
+                !showCreateForm) &&
+              "opacity-70 cursor-no-drop"
+            }`}
+          >
+            <div className=" text-white text-base font-bold">Save</div>
+          </button>
+        </div>
+      )}
     </form>
   );
 };
