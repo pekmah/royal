@@ -3,6 +3,7 @@ import { BsFacebook, BsInstagram } from "react-icons/bs";
 import Link from "next/link";
 import TwitterSvg from "@/public/svg/Twitter";
 
+
 const barlow = Barlow({
   style: "normal",
   weight: "500",
@@ -10,11 +11,13 @@ const barlow = Barlow({
 });
 
 const navItems = [
-  { path: "/shop", name: "Shop" },
+
+  { path: "/", name: "Shop" },
   { path: "/about", name: "About Us" },
 ];
 
 const navSocials = [
+
   {
     path: "https://www.facebook.com/royalmabati",
     icon: <BsFacebook size={15} />,
@@ -24,6 +27,7 @@ const navSocials = [
     icon: <BsInstagram size={15} />,
   },
   { path: "https://twitter.com/RoyalMabati", icon: <TwitterSvg /> },
+
 ];
 
 export default function NavMenu() {
