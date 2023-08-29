@@ -10,7 +10,6 @@ import Mpesa from "@/public/mpesa.png";
 const PaymentForm = () => {
   const router = useRouter();
   const { setCheckout, checkout } = useContext(CContext);
-
   return (
     <div className="w-full bg-white rounded shadow">
       {/*  Header */}
@@ -129,6 +128,8 @@ const PaymentForm = () => {
             (!checkout?.location?.chosenLocation?.loc?.id &&
               !checkout.location.pickupPoint?.id) ||
             !checkout?.paymentType ||
+            (checkout?.paymentType === "installments" &&
+              !checkout?.payment?.type) ||
             !checkout?.payment?.phone
           }
           className={`w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex ${
@@ -136,6 +137,9 @@ const PaymentForm = () => {
               (!checkout?.location?.chosenLocation?.loc?.id &&
                 !checkout.location.pickupPoint?.id) ||
               !checkout?.paymentType ||
+              (checkout?.paymentType === "installments" &&
+                (!checkout?.payment?.type ||
+                  checkout?.payment?.type === "FULL_PAYMENT")) ||
               !checkout?.payment?.phone) &&
             "opacity-70 cursor-no-drop"
           }`}

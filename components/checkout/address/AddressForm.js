@@ -67,8 +67,7 @@ const AddressForm = () => {
     deliveryPhoneNumber: "",
   });
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [chosenIndex, setChosenIndex] = useState(null);
-  console.log(state);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
