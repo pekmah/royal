@@ -19,10 +19,9 @@ export default function SearchInput() {
           id={"search"}
           type={"text"}
           placeholder={"Search"}
-          value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
-            handleSearch();
+            handleSearch(e.target.value);
           }}
           className={`h-full py-2 px-2 w-full placeholder-gray-900 font-barlow font-[500] border-grey rounded rounded-l-none focus:outline-none`}
         />
