@@ -26,18 +26,26 @@ const ChosenAddress = () => {
       </div>
 
       <div className=" flex-col justify-start items-start gap-4 inline-flex p-5">
-        <div className="self-stretch justify-start items-center gap-4 inline-flex">
+        {checkout.location.pickupPoint?.id ? (
           <div className="text-black text-base font-medium">
-            {checkout.location?.chosenLocation?.loc?.region?.region}
+            {checkout.location?.pickupPoint?.name}
           </div>
-          <div className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />
-          <div className="text-black text-base font-medium">
-            {checkout.location?.chosenLocation?.loc?.instructions}
-          </div>
-        </div>
-        <div className=" text-zinc-800 text-sm font-medium">
-          +254{checkout.location?.chosenLocation?.delivery_phone_number}
-        </div>
+        ) : (
+          <>
+            <div className="self-stretch justify-start items-center gap-4 inline-flex">
+              <div className="text-black text-base font-medium">
+                {checkout.location?.chosenLocation?.loc?.region?.region}
+              </div>
+              <div className="w-1.5 h-1.5 bg-zinc-800 rounded-full" />
+              <div className="text-black text-base font-medium">
+                {checkout.location?.chosenLocation?.loc?.instructions}
+              </div>
+            </div>
+            <div className=" text-zinc-800 text-sm font-medium">
+              +254{checkout.location?.chosenLocation?.delivery_phone_number}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
