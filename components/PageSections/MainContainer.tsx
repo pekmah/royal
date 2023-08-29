@@ -46,7 +46,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
         )}
         <WhatsappBtn />
       </main>
-      {path.startsWith("/checkout") ? <Footer /> : null}
+      <Footer />
     </>
   );
 }
