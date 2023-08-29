@@ -77,7 +77,7 @@ const InstallmentPayment = () => {
 
 export default InstallmentPayment;
 
-const installments = [
+export const installments = [
   {
     duration: 3,
     title: "3 Month Plan",
