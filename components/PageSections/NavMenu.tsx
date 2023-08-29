@@ -1,6 +1,8 @@
 import { Barlow } from "next/font/google";
-import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
+import { BsFacebook, BsInstagram } from "react-icons/bs";
 import Link from "next/link";
+import TwitterSvg from "@/public/svg/Twitter";
+
 
 const barlow = Barlow({
   style: "normal",
@@ -9,14 +11,23 @@ const barlow = Barlow({
 });
 
 const navItems = [
+
   { path: "/", name: "Shop" },
   { path: "/about", name: "About Us" },
 ];
 
 const navSocials = [
-  { path: "https://facebook.com", icon: <BsFacebook size={15} /> },
-  { path: "/instagram", icon: <BsInstagram size={15} /> },
-  { path: "/linkedin", icon: <BsLinkedin size={15} /> },
+
+  {
+    path: "https://www.facebook.com/royalmabati",
+    icon: <BsFacebook size={15} />,
+  },
+  {
+    path: "https://www.instagram.com/royalmabati/",
+    icon: <BsInstagram size={15} />,
+  },
+  { path: "https://twitter.com/RoyalMabati", icon: <TwitterSvg /> },
+
 ];
 
 export default function NavMenu() {
