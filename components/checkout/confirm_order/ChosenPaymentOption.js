@@ -4,6 +4,7 @@ import EditSvg from "../../../public/svg/Edit";
 import Image from "next/image";
 import Mpesa from "@/public/mpesa.png";
 import { CContext } from "../../../context/CartContext2";
+import { installments } from "../address/InstallmentPayment";
 
 const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
   const { checkout } = useContext(CContext);
@@ -25,7 +26,7 @@ const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
         </div>
       </div>
 
-      <div className="gap-4 flex items-center p-6  w-full border-b border-b-gray-200 font-barlow">
+      <div className="gap-4 flex items-center p-6 justify-between  w-full border-b border-b-gray-200 font-barlow">
         <button
           className={` h-12 px-6 py-2.5 rounded justify-center items-center gap-2.5 inline-flex ${
             paymentMethod === "full"
@@ -39,6 +40,13 @@ const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
               : "pay in installments"}
           </div>
         </button>
+
+        <h5>
+          {
+            installments?.find((item) => item?.type === checkout.payment?.type)
+              ?.title
+          }
+        </h5>
       </div>
 
       <div className={"p-5"}>
@@ -47,7 +55,7 @@ const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
           <div className="flex-col justify-start items-start gap-2 inline-flex">
             <div className=" justify-start items-center gap-4 inline-flex">
               <div className="text-black text-base font-medium capitalize">
-                {checkout?.paymentType}
+                MPESA
               </div>
             </div>
             <div className=" py-2 justify-start items-center gap-2 inline-flex">
