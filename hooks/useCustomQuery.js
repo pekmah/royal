@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useQuery} from "react-query";
 import {useEffect} from "react";
-import {PrivateAxiosUtility} from "../services/AxiosUtility";
+import {PrivateAxiosUtility} from "@/services/AxiosUtility";
 import useError from "./useError";
 
 const useCustomQuery = (route, isEnabled) => {
