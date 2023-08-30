@@ -12,6 +12,13 @@ import { toast } from "react-hot-toast";
 import Modal from "./Modal";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import HeartSvg from "@/public/svg/Heart";
+import { useMutation } from "react-query";
+import productServices from "@/services/ProductServices";
+import useError from "@/hooks/useError";
+import FloatingLoader from "@/components/FloatingLoader";
+import useCustomQuery from "@/hooks/useCustomQuery";
+import { Paths } from "@/services/AxiosUtility";
 
 const barlowSemi = Barlow({
   style: "normal",
@@ -27,9 +34,11 @@ const barlowMedium = Barlow({
 
 export default function ProductDetailMain({ product }) {
   // const {addToCart} = useCartContext()
+  const { isLoading, data: res } = useCustomQuery(Paths.favoritesUrl);
   const { status } = useSession();
   const router = useRouter();
-  const { cart, setCart } = useContext(CContext);
+  const handleError = useError();
+  const { cart, setCart, favorites, setFavorites } = useContext(CContext);
   const {
     id,
     name,
@@ -61,6 +70,9 @@ export default function ProductDetailMain({ product }) {
     document.body.style.overflow = showModal ? "hidden" : "scroll";
   }, [showModal]);
 
+  const isFavorite = useMemo(() => {
+    return res?.data?.results?.some((item) => item?.product === parseInt(id));
+  }, [product, favorites]);
   const findPricing = (gauge_size, width, finish) => {
     for (const model of pricing) {
       if (
@@ -266,12 +278,48 @@ export default function ProductDetailMain({ product }) {
     }
   };
 
+  const addFavoriteMutation = useMutation(
+    (data) =>
+      productServices?.addToFavorites({
+        product: id,
+      }),
+    {
+      onSuccess: (res) => {
+        setFavorites([...favorites, res?.favorite]);
+      },
+      onError: (e) => handleError(e),
+    },
+  );
+  // const { isLoading, data: res } = useCustomQuery(Paths.openOrdersUrl);
+  const handleAddToFavorites = async () => {
+    addFavoriteMutation.mutate();
+  };
+  const handleRemoveFromFavorites = async () => {
+    // await removeProductFromFavorites(productId);
+  };
+
+  const handleFavorites = async () => {
+    if (isFavorite) {
+      await handleRemoveFromFavorites();
+    } else {
+      await handleAddToFavorites();
+    }
+  };
+
   return (
     <div
-      className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4`}
+      className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4 relative`}
     >
       <div className="w-full relative flex-1">
         <div className="relative h-[240px]">
+          <button
+            className={
+              "cursor-pointer z-[100] rounded-full absolute top-2 right-2 flex items-center justify-center h-10 w-10 bg-[#F3F3F3]"
+            }
+            onClick={handleFavorites}
+          >
+            <HeartSvg fill={isFavorite ? "#2C3699" : "none"} />
+          </button>
           <Image
             alt={"Product Thumbnail"}
             src={
@@ -484,6 +532,18 @@ export default function ProductDetailMain({ product }) {
           roof={roof_details}
           closeModal={setShowModal}
           color={roof_details_colors}
+        />
+      )}
+
+      {(addFavoriteMutation?.isLoading || isLoading) && (
+        <FloatingLoader
+          message={
+            addFavoriteMutation?.isLoading
+              ? "Adding to favorite"
+              : isLoading
+              ? "Fetching favorite"
+              : "Removing from favorite"
+          }
         />
       )}
     </div>
