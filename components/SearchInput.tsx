@@ -5,8 +5,9 @@ import { BiSearch } from "react-icons/bi";
 export default function SearchInput() {
   const { searchQuery, setSearchQuery, handleSearch } = useSearchContext();
 
+  // @ts-ignore
   return (
-    <div className="hidden md:flex w-full gap-4">
+    <div className="hidden md:flex w-full gap-2">
       <div className="w-full flex items-center h-14">
         <label
           htmlFor="email"

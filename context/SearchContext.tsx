@@ -12,7 +12,7 @@ interface SearchProps {
   searchCount: number;
   setSearchCount: React.Dispatch<React.SetStateAction<number>>;
   Search: ProductEntity[];
-  handleSearch: () => void;
+  handleSearch: (value: string) => void;
   setSearches: React.Dispatch<React.SetStateAction<ProductEntity[]>>;
 }
 

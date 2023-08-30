@@ -95,4 +95,4 @@ const AccountNav = () => {
   );
 };
 
-export default AccountNav
+export default AccountNav;
