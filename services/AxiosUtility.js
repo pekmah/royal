@@ -50,4 +50,5 @@ export const Paths = {
   deliveredOrdersUrl:
     "/api/v1/auth/user/orders?order_status=FULLY_PAID,FAILED,SUCCESS,ADMIN_CANCELLED&ordering=desc&page=1&page_size=1000",
   favoritesUrl: "/api/v1/core/favorites/",
+  singleOrder: "/api/v1/cart/order/",
 };

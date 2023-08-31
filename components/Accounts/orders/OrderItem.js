@@ -4,9 +4,11 @@ import OrderNoWrapper from "./OrderNoWrapper";
 import CopySvg from "../../../public/svg/Copy";
 import { CopyToClipboard } from "react-copy-to-clipboard/src";
 import { ENDPOINT } from "../../../services/AxiosUtility";
+import { useRouter } from "next/navigation";
 
 const OrderItem = ({ order }) => {
   let currentProduct = order?.order_items?.at(0)?.items?.at(0)?.product;
+  const router = useRouter();
   return (
     <div
       className={"border border-slate-200 py-2 px-3 flex gap-x-5 rounded-md"}
@@ -40,7 +42,10 @@ const OrderItem = ({ order }) => {
       </div>
 
       <div className={"self-end flex justify-end"}>
-        <button className="w-[150px] h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">
+        <button
+          onClick={() => router.push("account/orders/" + order?.id)}
+          className="w-[150px] h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex"
+        >
           <div className="text-red-600 text-sm font-[600]">See Details</div>
         </button>
       </div>
