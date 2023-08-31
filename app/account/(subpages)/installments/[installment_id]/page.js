@@ -5,13 +5,13 @@ import useCustomQuery from "../../../../../hooks/useCustomQuery";
 import { Paths } from "../../../../../services/AxiosUtility";
 import FloatingLoader from "../../../../../components/FloatingLoader";
 import { installments } from "../../../../../components/checkout/address/InstallmentPayment";
+import moment from "moment";
 
 const Page = ({ params }) => {
   const { isLoading, data: res } = useCustomQuery(
     Paths.singleOrder + params?.installment_id + "/",
   );
 
-  console.log("SINGLE INSTALLMENT: ", res);
   const paidInstallments = res?.data?.payment_records?.filter(
     (item) => item?.payment_status?.toLowerCase() === "success",
   );
@@ -66,8 +66,8 @@ const Page = ({ params }) => {
         <div className={"flex flex-row justify-between"}>
           <span className={"font-semibold "}>Model of Payment</span>
           <span className={"text-gray-700"}>
-            Pay Ksh {res?.data?.payment_records?.at(0)?.amount} for{" "}
-            {res?.data?.payment_records?.length} month(s)
+            Pay Ksh <strong>{res?.data?.payment_records?.at(0)?.amount}</strong>{" "}
+            for {res?.data?.payment_records?.length} month(s)
           </span>
         </div>
         {res?.data?.payment_records?.map((item, ind) => {
@@ -80,6 +80,10 @@ const Page = ({ params }) => {
                 <span className={"text-black font-[500]"}>
                   {ind + 1}
                   <sup>{indexList[ind + 1]}</sup> Installment
+                  <span className={"px-3 text-gray-500 font-[400]"}>
+                    Paid on{" "}
+                    {moment(item?.expected_date)?.format("Do MMMM YYYY")}
+                  </span>
                 </span>
                 <span className={"text-[#15CF74] font-medium flex gap-x-3"}>
                   <svg
@@ -113,37 +117,52 @@ const Page = ({ params }) => {
                 <p className="[flex-grow:1] text-base h-6">
                   {(itemIndex ?? 0) + 1}
                   <sup>{indexList[(itemIndex ?? 0) + 1]}</sup> Installment
+                  <span className={"px-3 text-gray-500 font-[400]"}>
+                    Expected at{" "}
+                    {moment(currentPendingInstallment?.expected_date)?.format(
+                      "Do MMMM YYYY",
+                    )}
+                  </span>
                 </p>
               </div>
 
               <div>
-                <span className={"text-red-500 font-[500]"}>Due in 2 days</span>
+                {moment().diff(
+                  currentPendingInstallment?.expected_date,
+                  "days",
+                ) > -5 ? (
+                  <span className={"text-red-500 font-[500]"}>
+                    Due{" "}
+                    {Math.abs(
+                      moment().diff(
+                        currentPendingInstallment?.expected_date,
+                        "days",
+                      ),
+                    )}
+                  </span>
+                ) : moment().diff(
+                    currentPendingInstallment?.expected_date,
+                    "days",
+                  ) > 0 ? (
+                  <div className={"flex items-center gap-x-3"}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M9 5V11L14.2 14.1L15 12.9L10.5 10.2V5H9ZM18 10V16H20V10H18ZM18 18V20H20V18H18ZM16 18C14.3 19.3 12.3 20 10 20C4.5 20 0 15.5 0 10C0 4.5 4.5 0 10 0C14.8 0 18.9 3.4 19.8 8H17.7C16.8 4.6 13.7 2 10 2C5.6 2 2 5.6 2 10C2 14.4 5.6 18 10 18C12.4 18 14.5 16.9 16 15.3V18Z"
+                        fill="#DC2A25"
+                      />
+                    </svg>
+
+                    <span className={"mr-1 text-primary_red"}>Overdue</span>
+                  </div>
+                ) : null}
               </div>
             </div>
-          </div>
-
-          <div className={"p-5 flex flex-col gap-y-2"}>
-            {paidInstallments?.map((item, ind) => (
-              <div key={item?.id} className={"flex justify-between "}>
-                <div>
-                  {ind + 1}
-                  {indexList[ind + 1]} Installment
-                </div>
-
-                <div>
-                  <span className={""}>ksh. {item?.amount}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div
-            className={
-              "p-5 flex justify-between border-t border-zinc-300 text-lg font-[600]"
-            }
-          >
-            <span className={""}>Installment Balance</span>
-            <span className={""}>Ksh.{calculations?.balance}</span>
           </div>
 
           <div
@@ -158,6 +177,41 @@ const Page = ({ params }) => {
             </button>
           </div>
         </div>
+
+        {res?.data?.payment_records
+          ?.slice(itemIndex + 1, res?.data?.payment_records?.length)
+          ?.map((item, ind) => (
+            <div key={ind} className="w-full rounded border border-zinc-300">
+              <div
+                key={item?.id}
+                className="gap-4 flex flex-col items-center px-3 justify-center w-full h-14 "
+              >
+                <div className="h-[25px]  font-[600] flex justify-between items-end w-full ">
+                  <div className="[flex-grow:1] gap-[17px] flex justify-between items-center h-full text-black">
+                    <p className="[flex-grow:1] text-base h-6">
+                      {(paidInstallments?.length ?? 0) + 2 + ind}
+                      <sup>
+                        {indexList[(paidInstallments?.length ?? 0) + 2 + ind]}
+                      </sup>{" "}
+                      Installment
+                      <span className={"px-3 text-gray-500 font-[400]"}>
+                        Expected at{" "}
+                        {moment(item?.expected_date)?.format("Do MMMM YYYY")}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div>
+                    <span className={"font-[500]"}>
+                      Due in{" "}
+                      {Math.abs(moment().diff(item?.expected_date, "days"))}{" "}
+                      days
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
 
       <div className={" flex flex-col font-barlow border border-zinc-300 mx-5"}>
