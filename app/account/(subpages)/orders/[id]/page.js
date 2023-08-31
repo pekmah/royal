@@ -138,7 +138,7 @@ const Page = ({ params }) => {
           </div>
 
           <div className={"font-barlow text-gray-500 px-3"}>
-            {orders[res?.data?.order_type]}
+            {paymentPlans[res?.data?.order_type]}
           </div>
 
           {res?.data?.order_type === "OWN_COLLECTION" ? (
@@ -205,7 +205,7 @@ const Page = ({ params }) => {
 
 export default Page;
 
-const orders = {
+const paymentPlans = {
   OWN_COLLECTION: "Own Collection",
   FREE_DELIVERY: "Free Delivery",
   EXPRESS_DELIVERY: "Express Delivery",
