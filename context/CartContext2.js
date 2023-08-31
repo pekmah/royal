@@ -13,6 +13,7 @@ const CartContext2Provider = ({ children }) => {
   // const [products, setProducts] = useState([]);
   // const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const [checkout, setCheckout] = useState({
     cartId: null,
@@ -56,7 +57,8 @@ const CartContext2Provider = ({ children }) => {
       value={{
         cart,
         setCart,
-
+        favorites,
+        setFavorites,
         checkout,
         setCheckout,
       }}

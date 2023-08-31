@@ -1,12 +1,16 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import useCustomQuery from "@/hooks/useCustomQuery";
+import { Paths } from "@/services/AxiosUtility";
+import FloatingLoader from "@/components/FloatingLoader";
 
 const Page = () => {
   const router = useRouter();
+  const { isLoading, data: res } = useCustomQuery(Paths.installmentsUrl);
 
   return (
-    <div className={"py-3"}>
+    <div className={"py-3 relative"}>
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">
         <div className="h-[25px]  font-[600] flex justify-between items-end w-full ">
           <div className="[flex-grow:1] gap-[17px] flex justify-between items-center h-full text-black">
@@ -17,18 +21,28 @@ const Page = () => {
 
       <div className={"flex flex-col p-6 gap-y-5"}>
         {/*    installments list*/}
-        {installmentsList?.map((item, ind) => (
-          <button
-            key={ind}
-            className=" rounded border border-zinc-200 px-3 py-6 flex justify-between"
-            onClick={() => router.push(`account/installments/${ind}`)}
-          >
-            <h6 className={"font-[600] text-base"}>{item?.name}</h6>
+        {res?.data?.results?.map((item) => {
+          const isPending = item?.payment_records.some(
+            (item) => item?.payment_status?.toLowerCase() !== "success",
+          );
 
-            {item?.status === "success" ? <SuccessTag /> : <PendingTag />}
-          </button>
-        ))}
+          return (
+            <button
+              key={item?.id}
+              className=" rounded border border-zinc-200 px-3 py-6 flex justify-between"
+              onClick={() => router.push(`account/installments/${item?.id}`)}
+            >
+              <h6 className={"font-[600] text-base underline"}>
+                {item?.order_code}
+              </h6>
+
+              {isPending ? <PendingTag /> : <SuccessTag />}
+            </button>
+          );
+        })}
       </div>
+
+      {isLoading && <FloatingLoader message={"Loading Installments . . ."} />}
     </div>
   );
 };

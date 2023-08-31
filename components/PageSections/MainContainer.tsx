@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 import Footer from "./Footer";
 import { useSearchContext } from "@/context/SearchContext";
+import WhatsappBtn from "@/components/WhatsappBtn";
 
 export default function MainContainer({ children }: { children: ReactNode }) {
   const { isSidebarOpen, setIsSidebarOpen } = useSearchContext();
@@ -43,8 +44,9 @@ export default function MainContainer({ children }: { children: ReactNode }) {
             {children}
           </section>
         )}
+        <WhatsappBtn />
       </main>
-      {!isSidebarOpen || path.startsWith("/checkout") ? <Footer /> : null}
+      <Footer />
     </>
   );
 }

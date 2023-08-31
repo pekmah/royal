@@ -5,8 +5,9 @@ import { BiSearch } from "react-icons/bi";
 export default function SearchInput() {
   const { searchQuery, setSearchQuery, handleSearch } = useSearchContext();
 
+  // @ts-ignore
   return (
-    <div className="hidden md:flex w-full gap-4">
+    <div className="hidden md:flex w-full gap-2">
       <div className="w-full flex items-center h-14">
         <label
           htmlFor="email"
@@ -19,15 +20,14 @@ export default function SearchInput() {
           id={"search"}
           type={"text"}
           placeholder={"Search"}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            handleSearch(e.target.value);
+          }}
           className={`h-full py-2 px-2 w-full placeholder-gray-900 font-barlow font-[500] border-grey rounded rounded-l-none focus:outline-none`}
         />
       </div>
-      <button
-        onClick={handleSearch}
-        className="bg-primary_red rounded text-white font-barlow  px-6 py-2 font-semibold"
-      >
+      <button className="bg-primary_red rounded text-white font-barlow  px-6 py-2 font-semibold">
         Search
       </button>
     </div>

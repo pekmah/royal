@@ -31,7 +31,7 @@ PrivateAxiosUtility.interceptors.request.use(async (req) => {
     token = session.user;
     req.headers.Authorization = `Bearer ${token}`;
   } else {
-    window.location.href = "/login/";
+    window.location.href = "/auth/login/";
   }
 
   const user = jwt_decode(token);
@@ -45,4 +45,12 @@ export const Paths = {
   countiesUrl: "/api/v1/cart/deliverycosts/?page_size=500&page=1",
   userLocationsUrl: "/api/v1/cart/order/locations/",
   pickupCentersUrl: "/api/v1/cart/pickupcenters/?page_size=500&page=1",
+  openOrdersUrl:
+    "/api/v1/auth/user/orders?order_status=NEWLY_SUBMITTED,PARTIALLY_PAID&ordering=desc&page=1&page_size=1000",
+  deliveredOrdersUrl:
+    "/api/v1/auth/user/orders?order_status=FULLY_PAID,FAILED,SUCCESS,ADMIN_CANCELLED&ordering=desc&page=1&page_size=1000",
+  favoritesUrl: "/api/v1/core/favorites/",
+  singleOrder: "/api/v1/cart/order/",
+  installmentsUrl:
+    "/api/v1/auth/user/orders?page=1&page_size=1000&payment_plan=3_MONTHS,6_MONTHS,9_MONTHS,12_MONTHS&ordering=desc",
 };
