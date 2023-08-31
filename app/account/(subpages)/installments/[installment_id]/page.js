@@ -12,7 +12,6 @@ const Page = ({ params }) => {
     Paths.singleOrder + params?.installment_id + "/",
   );
 
-  console.log("SINGLE INSTALLMENT: ", res);
   const paidInstallments = res?.data?.payment_records?.filter(
     (item) => item?.payment_status?.toLowerCase() === "success",
   );
