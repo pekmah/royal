@@ -205,7 +205,7 @@ const Page = ({ params }) => {
 
 export default Page;
 
-export const paymentPlans = {
+const paymentPlans = {
   OWN_COLLECTION: "Own Collection",
   FREE_DELIVERY: "Free Delivery",
   EXPRESS_DELIVERY: "Express Delivery",
