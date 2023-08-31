@@ -11,7 +11,6 @@ const Page = ({ params }) => {
   const { isLoading, data: res } = useCustomQuery(
     Paths.singleOrder + params?.id + "/",
   );
-  console.log(res);
 
   const router = useRouter();
 
