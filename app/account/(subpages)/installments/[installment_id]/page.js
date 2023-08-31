@@ -181,7 +181,7 @@ const Page = ({ params }) => {
         {res?.data?.payment_records
           ?.slice(itemIndex + 1, res?.data?.payment_records?.length)
           ?.map((item, ind) => (
-            <div className="w-full rounded border border-zinc-300">
+            <div key={ind} className="w-full rounded border border-zinc-300">
               <div
                 key={item?.id}
                 className="gap-4 flex flex-col items-center px-3 justify-center w-full h-14 "
