@@ -10,7 +10,7 @@ const OrdersTopNav = ({ currentNav, setCurrent }) => {
       />
       <NavItem
         isCurrent={currentNav === 1}
-        title={`Delivered Orders`}
+        title={`Closed Orders`}
         handlePress={() => setCurrent(1)}
       />
     </div>

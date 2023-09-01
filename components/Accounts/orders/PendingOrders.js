@@ -6,7 +6,7 @@ import Image from "next/image";
 import empty from "../../../public/empty.png";
 import FloatingLoader from "../../FloatingLoader";
 
-const PendingOrders = ({ orders }) => {
+const PendingOrders = () => {
   const { isLoading, data: res } = useCustomQuery(Paths.openOrdersUrl);
 
   return (
