@@ -5,10 +5,13 @@ import CopySvg from "../../../public/svg/Copy";
 import { CopyToClipboard } from "react-copy-to-clipboard/src";
 import { ENDPOINT } from "../../../services/AxiosUtility";
 import { useRouter } from "next/navigation";
+import { useCustomToast } from "../../../hooks/useToast";
 
 const OrderItem = ({ order }) => {
   let currentProduct = order?.order_items?.at(0)?.items?.at(0)?.product;
   const router = useRouter();
+  const { showSuccessToast } = useCustomToast();
+
   return (
     <div
       className={"border border-slate-200 py-2 px-3 flex gap-x-5 rounded-md"}
@@ -27,7 +30,10 @@ const OrderItem = ({ order }) => {
           <div className={"flex gap-x-2"}>
             <OrderNoWrapper orderNo={order?.order_code} />
 
-            <CopyToClipboard text={order?.order_code}>
+            <CopyToClipboard
+              text={order?.order_code}
+              onCopy={() => showSuccessToast("Copied")}
+            >
               <button>
                 <CopySvg />
               </button>
