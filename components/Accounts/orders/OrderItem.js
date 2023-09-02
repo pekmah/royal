@@ -7,7 +7,7 @@ import { ENDPOINT } from "../../../services/AxiosUtility";
 import { useRouter } from "next/navigation";
 import { useCustomToast } from "../../../hooks/useToast";
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, type }) => {
   let currentProduct = order?.order_items?.at(0)?.items?.at(0)?.product;
   const router = useRouter();
   const { showSuccessToast } = useCustomToast();
@@ -49,7 +49,9 @@ const OrderItem = ({ order }) => {
 
       <div className={"self-end flex justify-end"}>
         <button
-          onClick={() => router.push("account/orders/" + order?.id)}
+          onClick={() =>
+            router.push("account/orders/" + order?.id + "?type=" + type)
+          }
           className="w-[150px] h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex"
         >
           <div className="text-red-600 text-sm font-[600]">See Details</div>

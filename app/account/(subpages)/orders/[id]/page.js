@@ -13,6 +13,7 @@ const Page = ({ params }) => {
   );
 
   const router = useRouter();
+  console.log([res?.data?.order_status]);
 
   // const
   return (
@@ -209,4 +210,13 @@ const paymentPlans = {
   OWN_COLLECTION: "Own Collection",
   FREE_DELIVERY: "Free Delivery",
   EXPRESS_DELIVERY: "Express Delivery",
+};
+
+const states = {
+  FULLY_PAID: "Closed Orders",
+  FAILED: "Closed Orders",
+  SUCCESS: "Closed Orders",
+  ADMIN_CANCELLED: "Closed Orders",
+  NEWLY_SUBMITTED: "Pending Orders",
+  PARTIALLY_PAID: "Pending Orders",
 };

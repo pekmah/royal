@@ -24,7 +24,7 @@ const PendingOrders = () => {
       ) : (
         <>
           {res?.data?.results?.map((ord, ind) => (
-            <OrderItem key={ind} order={ord} />
+            <OrderItem key={ind} order={ord} type={"pending"} />
           ))}
         </>
       )}
