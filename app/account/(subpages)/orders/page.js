@@ -7,19 +7,45 @@ import ClosedOrders from "../../../../components/Accounts/orders/ClosedOrders";
 
 const Page = () => {
   const [currentNav, setCurrent] = useState(0);
+  const [date, setDate] = useState({
+    start: "",
+    end: "",
+  });
 
   return (
     <div className={"font-barlow"}>
       {/*  header*/}
-      <OrdersTopNav currentNav={currentNav} setCurrent={setCurrent} />
+      <OrdersTopNav
+        currentNav={currentNav}
+        setCurrent={setCurrent}
+        reset={() => {
+          setDate({
+            start: "",
+            end: "",
+          });
+        }}
+      />
 
       {/*    body*/}
       <div className={"p-3"}>
         {/*    filters      */}
-        <OrderFilters />
+        <OrderFilters
+          setDate={setDate}
+          date={date}
+          reset={() => {
+            setDate({
+              start: "",
+              end: "",
+            });
+          }}
+        />
 
         {/*    Order List     */}
-        {currentNav === 0 ? <PendingOrders /> : <ClosedOrders />}
+        {currentNav === 0 ? (
+          <PendingOrders dates={date} current={currentNav} />
+        ) : (
+          <ClosedOrders dates={date} current={currentNav} />
+        )}
       </div>
     </div>
   );

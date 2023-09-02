@@ -43,7 +43,7 @@ const OrderItem = ({ order, type }) => {
 
         <h5 className={"font-medium text-gray-500"}>
           Ordered on:
-          {moment(order?.created_at).format("ddd MMM YYYY")}
+          {moment(order?.created_at).format("DD MMM YYYY")}
         </h5>
       </div>
 

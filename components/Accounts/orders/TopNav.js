@@ -1,17 +1,23 @@
 import React from "react";
 
-const OrdersTopNav = ({ currentNav, setCurrent }) => {
+const OrdersTopNav = ({ currentNav, setCurrent, reset }) => {
   return (
     <div className={"px-5 pt-2 flex gap-x-6 border-b border-gray-300 "}>
       <NavItem
         isCurrent={currentNav === 0}
         title={`Pending Orders`}
-        handlePress={() => setCurrent(0)}
+        handlePress={() => {
+          setCurrent(0);
+          reset();
+        }}
       />
       <NavItem
         isCurrent={currentNav === 1}
         title={`Closed Orders`}
-        handlePress={() => setCurrent(1)}
+        handlePress={() => {
+          setCurrent(1);
+          reset();
+        }}
       />
     </div>
   );
