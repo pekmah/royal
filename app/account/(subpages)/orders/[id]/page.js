@@ -13,15 +13,15 @@ const Page = ({ params }) => {
   );
 
   const router = useRouter();
-  console.log([res?.data?.order_status]);
+  console.log(states[res?.data?.order_status]);
 
   // const
   return (
-    <div className={"relative py-10"}>
+    <div className={"relative pb-10"}>
       <div className={"relative w-full"}>
         <div className={"px-5 p-3.5 flex gap-x-6 border-b border-gray-300 "}>
           <h5 className={"text-xl font-semibold flex"}>
-            Delivered Orders /{" "}
+            {states[res?.data?.order_status]} /{" "}
             <div
               className={
                 "p-0.5 border border-zinc-200 ml-2 text-sm rounded text-gray-800 px-1 font-[500]"
