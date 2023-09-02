@@ -537,13 +537,7 @@ export default function ProductDetailMain({ product }) {
 
       {(addFavoriteMutation?.isLoading || isLoading) && (
         <FloatingLoader
-          message={
-            addFavoriteMutation?.isLoading
-              ? "Adding to favorite"
-              : isLoading
-              ? "Fetching favorite"
-              : "Removing from favorite"
-          }
+          message={isLoading ? "Fetching favorite" : "Removing from favorite"}
         />
       )}
     </div>

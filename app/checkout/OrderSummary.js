@@ -3,14 +3,13 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import CardSvg from "../../public/svg/Card";
 import { CContext } from "../../context/CartContext2";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import cartServices from "../../services/CartServices";
 import { useMutation } from "react-query";
 import { useCustomToast } from "../../hooks/useToast";
 import useError from "../../hooks/useError";
 import Helpers from "../../utils/helpers";
 import FloatingLoader from "../../components/FloatingLoader";
-import { router } from "next/client";
 import AsyncStorageService from "../../services/AsyncStorageService";
 
 const OrderSummary = ({ className }) => {
@@ -19,6 +18,7 @@ const OrderSummary = ({ className }) => {
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
   const [orderId, setOrderId] = useState(null);
+  const router = useRouter();
 
   const subTotal = useMemo(() => {
     return cart?.reduce((acc, val) => {
@@ -92,6 +92,11 @@ const OrderSummary = ({ className }) => {
   // });
 
   const handleProceed = async () => {
+    router.push("/checkout/payment", {
+      order: orderId,
+      paymentIndex: 0,
+    });
+    return;
     const delivery =
       checkout?.del_option === "OWN_COLLECTION"
         ? { pickup_center_id: checkout?.location?.pickupPoint?.id }
@@ -207,7 +212,7 @@ const OrderSummary = ({ className }) => {
                 </p>
               </div>
             </div>
-            <div className=" font-[400] text-left leading-none relative">
+            <div className=" font-[400] text-left leading-none relative px-4">
               <p className="text-[#888888] text-sm inline">
                 {"By proceeding to pay it means you have agreed to "}
                 <br />
