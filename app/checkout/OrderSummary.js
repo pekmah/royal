@@ -92,11 +92,6 @@ const OrderSummary = ({ className }) => {
   // });
 
   const handleProceed = async () => {
-    router.push("/checkout/payment", {
-      order: orderId,
-      paymentIndex: 0,
-    });
-    return;
     const delivery =
       checkout?.del_option === "OWN_COLLECTION"
         ? { pickup_center_id: checkout?.location?.pickupPoint?.id }
