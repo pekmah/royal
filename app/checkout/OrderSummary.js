@@ -10,7 +10,6 @@ import { useCustomToast } from "../../hooks/useToast";
 import useError from "../../hooks/useError";
 import Helpers from "../../utils/helpers";
 import FloatingLoader from "../../components/FloatingLoader";
-import AsyncStorageService from "../../services/AsyncStorageService";
 
 const OrderSummary = ({ className }) => {
   const { cart, setCart, checkout } = useContext(CContext);
@@ -45,14 +44,16 @@ const OrderSummary = ({ className }) => {
   const total = subTotal + vat;
 
   const paymentMutation = useMutation(
-    (data) => cartServices.makePayment(data?.body),
+    async (data) => {
+      setOrderId(data?.order);
+      return await cartServices.makePayment(data?.body);
+    },
     {
-      onSuccess: (order) => {
+      onSuccess: (res) => {
         showSuccessToast("Payment Initiated.");
-        router.push("/checkout/payment", {
-          order: orderId,
-          paymentIndex: 0,
-        });
+        console.log("ORder:", orderId);
+        return;
+        router.push(`/checkout/payment?order_id=${orderId}&index=${0}`);
       },
     },
   );
@@ -60,23 +61,22 @@ const OrderSummary = ({ className }) => {
   const mutation = useMutation((data) => cartServices.createOrder(data), {
     onSuccess: async (order) => {
       showSuccessToast("Order Created.");
+      setOrderId(order?.order?.id);
 
-      await AsyncStorageService.removeData("_cart");
-      setCart([]);
+      // await AsyncStorageService.removeData("_cart");
+      // setCart([]);
 
       const paymentObj =
         order?.order?.payment_plan === "FULL_PAYMENT"
           ? { order_id: order?.order?.id }
           : { payment_record: order?.order?.payment_records?.at(0)?.id };
 
-      setOrderId(order?.order?.id);
-
       paymentMutation.mutate({
         body: {
           phone_number: Helpers?.getPhoneNumber(checkout?.payment?.phone),
           ...paymentObj,
         },
-        order: order?.order?.id,
+        order: order,
       });
       // router.push("/checkout/address");
     },
