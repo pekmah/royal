@@ -17,6 +17,9 @@ const ConfirmPayment = () => {
   const { setCheckout, checkout } = useContext(CContext);
   const { showSuccessToast } = useCustomToast();
   const orderId = useSearchParams().get("orderId");
+  const pricing = useSearchParams().get("pricing");
+  const paymentIndex = useSearchParams().get("index");
+  console.log(pricing);
 
   const paymentMutation = useMutation(
     async (data) => {
@@ -26,7 +29,9 @@ const ConfirmPayment = () => {
       onSuccess: (res, { order }) => {
         showSuccessToast("Payment Initiated.");
 
-        router.push(`/checkout/payment?order_id=${order?.id}&index=${0}`);
+        router.push(
+          `/checkout/payment?order_id=${order?.id}&index=${paymentIndex}`,
+        );
       },
     },
   );
@@ -106,15 +111,19 @@ const ConfirmPayment = () => {
           className={`w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex ${
             !checkout?.payment?.phone && "opacity-70 cursor-no-drop"
           }`}
-          onClick={() =>
+          onClick={() => {
+            const paymentObj = pricing
+              ? { payment_record: pricing }
+              : { order_id: order?.order?.id };
+
             paymentMutation.mutate({
               body: {
                 phone_number: Helpers?.getPhoneNumber(checkout?.payment?.phone),
-                order_id: orderId,
+                ...paymentObj,
               },
               order: { id: orderId },
-            })
-          }
+            });
+          }}
         >
           <div className=" text-white text-base font-bold">Continue</div>
         </button>

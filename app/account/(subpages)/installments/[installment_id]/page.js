@@ -1,16 +1,22 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
+import moment from "moment";
+import { useRouter } from "next/navigation";
+
 import useCustomQuery from "../../../../../hooks/useCustomQuery";
 import { Paths } from "../../../../../services/AxiosUtility";
 import FloatingLoader from "../../../../../components/FloatingLoader";
 import { installments } from "../../../../../components/checkout/address/InstallmentPayment";
-import moment from "moment";
+import { CContext } from "../../../../../context/CartContext2";
 
 const Page = ({ params }) => {
   const { isLoading, data: res } = useCustomQuery(
     Paths.singleOrder + params?.installment_id + "/",
   );
+  const { setCheckout } = useContext(CContext);
+
+  const router = useRouter();
 
   const paidInstallments = res?.data?.payment_records?.filter(
     (item) => item?.payment_status?.toLowerCase() === "success",
@@ -172,6 +178,21 @@ const Page = ({ params }) => {
           >
             <button
               className={` h-12 px-6 py-2.5 rounded justify-center items-center gap-2.5 inline-flex bg-none border border-red-600 text-red-600`}
+              onClick={() => {
+                setCheckout((prev) => ({
+                  ...prev,
+                  payment: {
+                    ...prev?.payment,
+                    phone:
+                      res?.data?.payment_records?.at(itemIndex)?.phone_number,
+                  },
+                }));
+                router.push(
+                  `/confirm_payment?orderId=${
+                    res.data?.id
+                  }&index=${0}&pricing=${currentPendingInstallment?.id}`,
+                );
+              }}
             >
               <div className=" text-base ">Make Payment</div>
             </button>

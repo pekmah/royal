@@ -13,7 +13,7 @@ const Page = ({ params }) => {
     Paths.singleOrder + params?.id + "/",
   );
   const currentOrderPayments = res?.data?.payment_records;
-  const { setCheckout, checkout } = useContext(CContext);
+  const { setCheckout } = useContext(CContext);
 
   const unpaid = useMemo(() => {
     return currentOrderPayments?.find(
