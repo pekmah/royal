@@ -1,5 +1,9 @@
 import React from "react";
-import { AboutCarousel, AboutTrustedBy } from "@/components/About";
+import {
+  AboutCarousel,
+  AboutTrustedBy,
+  AboutVarieties,
+} from "@/components/About";
 import OurStory from "@/components/About/OurStory";
 
 const Page = () => {
@@ -13,6 +17,9 @@ const Page = () => {
 
       {/*  Our Story  */}
       <OurStory />
+
+      {/*    Our Varieties  */}
+      <AboutVarieties />
     </div>
   );
 };
