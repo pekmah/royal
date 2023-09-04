@@ -55,7 +55,7 @@ const Page = () => {
     <div className={"flex flex-col gap-y-5 relative"}>
       <div className="w-full font-barlow bg-white shadow ">
         {/*loader & text*/}
-        {status === 1 ? (
+        {status === 1 || isLoading ? (
           <ProcessingCard />
         ) : status === 2 ? (
           <SuccessfulCard />

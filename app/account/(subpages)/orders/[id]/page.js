@@ -1,19 +1,26 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useContext, useMemo } from "react";
 import useCustomQuery from "../../../../../hooks/useCustomQuery";
 import { Paths } from "../../../../../services/AxiosUtility";
 import FloatingLoader from "../../../../../components/FloatingLoader";
 import { installments } from "../../../../../components/checkout/address/InstallmentPayment";
+import { useRouter } from "next/navigation";
+import { CContext } from "../../../../../context/CartContext2";
 
 const Page = ({ params }) => {
   const { isLoading, data: res } = useCustomQuery(
     Paths.singleOrder + params?.id + "/",
   );
+  const currentOrderPayments = res?.data?.payment_records;
+  const { setCheckout, checkout } = useContext(CContext);
 
+  const unpaid = useMemo(() => {
+    return currentOrderPayments?.find(
+      (item) => item?.payment_status?.toLowerCase() !== "success",
+    );
+  }, []);
   const router = useRouter();
-  console.log(states[res?.data?.order_status]);
 
   // const
   return (
@@ -198,6 +205,34 @@ const Page = ({ params }) => {
             </div>
           </div>
         </div>
+
+        {unpaid?.id && (
+          <div
+            className={
+              "px-5 py-6 flex justify-end border-t border-zinc-300 text-lg font-[500]"
+            }
+          >
+            <button
+              className={` h-12 px-6 py-2.5 rounded justify-center items-center gap-2.5 inline-flex bg-none border border-red-600 text-red-600`}
+              onClick={() => {
+                setCheckout((prev) => ({
+                  ...prev,
+                  payment: {
+                    ...prev?.payment,
+                    phone: res?.data?.payment_records?.at(0)?.phone_number,
+                  },
+                }));
+                router.push(
+                  `/account/orders/confirm_payment?orderId=${
+                    res.data?.id
+                  }&index=${0}`,
+                );
+              }}
+            >
+              <div className=" text-base ">Make Payment</div>
+            </button>
+          </div>
+        )}
         {isLoading && <FloatingLoader message={"Fetching order"} />}
       </div>
     </div>

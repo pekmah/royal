@@ -8,15 +8,16 @@ import cartServices from "../../services/CartServices";
 import { useMutation } from "react-query";
 import { useCustomToast } from "../../hooks/useToast";
 import useError from "../../hooks/useError";
-import Helpers from "../../utils/helpers";
 import FloatingLoader from "../../components/FloatingLoader";
+import Helpers from "../../utils/helpers";
+import AsyncStorageService from "../../services/AsyncStorageService";
 
 const OrderSummary = ({ className }) => {
   const { cart, setCart, checkout } = useContext(CContext);
   const path = usePathname();
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
-  const [orderId, setOrderId] = useState(null);
+  const [orderId, setOrderId] = useState({});
   const router = useRouter();
 
   const subTotal = useMemo(() => {
@@ -45,15 +46,13 @@ const OrderSummary = ({ className }) => {
 
   const paymentMutation = useMutation(
     async (data) => {
-      setOrderId(data?.order);
       return await cartServices.makePayment(data?.body);
     },
     {
-      onSuccess: (res) => {
+      onSuccess: (res, { order }) => {
         showSuccessToast("Payment Initiated.");
-        console.log("ORder:", orderId);
-        return;
-        router.push(`/checkout/payment?order_id=${orderId}&index=${0}`);
+
+        router.push(`/checkout/payment?order_id=${order?.id}&index=${0}`);
       },
     },
   );
@@ -61,11 +60,10 @@ const OrderSummary = ({ className }) => {
   const mutation = useMutation((data) => cartServices.createOrder(data), {
     onSuccess: async (order) => {
       showSuccessToast("Order Created.");
-      setOrderId(order?.order?.id);
-
-      // await AsyncStorageService.removeData("_cart");
-      // setCart([]);
-
+      setOrderId(order?.order);
+      await AsyncStorageService.removeData("_cart");
+      setCart([]);
+      //
       const paymentObj =
         order?.order?.payment_plan === "FULL_PAYMENT"
           ? { order_id: order?.order?.id }
@@ -76,7 +74,7 @@ const OrderSummary = ({ className }) => {
           phone_number: Helpers?.getPhoneNumber(checkout?.payment?.phone),
           ...paymentObj,
         },
-        order: order,
+        order: order?.order,
       });
       // router.push("/checkout/address");
     },
