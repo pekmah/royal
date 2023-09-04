@@ -325,7 +325,7 @@ export default function ProductDetailMain({ product }) {
             src={
               thumbnail
                 ? `${process.env.BASE_URL}/api/v1/core/products/thumbnail/${thumbnail}`
-                : "/temp-product-img.png"
+                : "/temp-product-abt-3.png"
             }
             fill
             style={{ objectFit: "cover", objectPosition: "center" }}

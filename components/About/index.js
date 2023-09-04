@@ -1,3 +1,4 @@
 import AboutCarousel from "./Carousel";
+import AboutTrustedBy from "./TrustedBy";
 
-export { AboutCarousel };
+export { AboutCarousel, AboutTrustedBy };

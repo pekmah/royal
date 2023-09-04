@@ -1,11 +1,14 @@
 import React from "react";
-import { AboutCarousel } from "@/components/About";
+import { AboutCarousel, AboutTrustedBy } from "@/components/About";
 
 const Page = () => {
   return (
     <div>
       {/*  Carousel image  */}
       <AboutCarousel />
+
+      {/*    Trusted by section */}
+      <AboutTrustedBy />
     </div>
   );
 };
