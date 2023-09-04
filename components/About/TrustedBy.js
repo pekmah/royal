@@ -14,7 +14,7 @@ const TrustedBy = () => {
           Trusted By
         </h3>
 
-        <div className={"h-[3px] bg-gray-200 rounded-sm  w-16 mx-auto"} />
+        <div className={"h-[3px] bg-gray-200 rounded-sm mt-2 w-16 mx-auto"} />
       </div>
 
       <div className={"flex w-3/4 mx-auto justify-between mt-12"}>

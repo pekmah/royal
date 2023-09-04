@@ -1,5 +1,6 @@
 import React from "react";
 import { AboutCarousel, AboutTrustedBy } from "@/components/About";
+import OurStory from "@/components/About/OurStory";
 
 const Page = () => {
   return (
@@ -9,6 +10,9 @@ const Page = () => {
 
       {/*    Trusted by section */}
       <AboutTrustedBy />
+
+      {/*  Our Story  */}
+      <OurStory />
     </div>
   );
 };
