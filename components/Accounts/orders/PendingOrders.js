@@ -5,9 +5,17 @@ import { Paths } from "../../../services/AxiosUtility";
 import Image from "next/image";
 import empty from "../../../public/empty.png";
 import FloatingLoader from "../../FloatingLoader";
+import moment from "moment";
 
-const PendingOrders = ({ orders }) => {
+const PendingOrders = ({ dates, current }) => {
   const { isLoading, data: res } = useCustomQuery(Paths.openOrdersUrl);
+
+  const { isLoading: loadingSearch, data: searchData } = useCustomQuery(
+    `${Paths.openOrdersUrl}&date_from=${moment(dates?.start).format(
+      "YYYY-MM-DD",
+    )}&date_to=${moment(dates?.end).format("YYYY-MM-DD") || ""}`,
+    dates?.start?.trim() !== "" && dates?.end?.trim() !== "" && current === 0,
+  );
 
   return (
     <div className={"flex flex-col gap-3 py-4 relative min-h-[124px]"}>
@@ -23,13 +31,21 @@ const PendingOrders = ({ orders }) => {
         </div>
       ) : (
         <>
-          {res?.data?.results?.map((ord, ind) => (
-            <OrderItem key={ind} order={ord} />
-          ))}
+          {dates?.start?.trim() !== "" && dates?.end?.trim() !== ""
+            ? searchData?.data?.results?.map((ord, ind) => (
+                <OrderItem key={ind} order={ord} type={"pending"} />
+              ))
+            : res?.data?.results?.map((ord, ind) => (
+                <OrderItem key={ind} order={ord} type={"pending"} />
+              ))}
         </>
       )}
 
-      {isLoading && <FloatingLoader message={"Fetching orders"} />}
+      {(isLoading || loadingSearch) && (
+        <FloatingLoader
+          message={loadingSearch ? "Filtering by date" : "Fetching orders"}
+        />
+      )}
     </div>
   );
 };

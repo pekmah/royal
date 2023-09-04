@@ -5,9 +5,17 @@ import Image from "next/image";
 import empty from "../../../public/empty.png";
 import OrderItem from "./OrderItem";
 import FloatingLoader from "../../FloatingLoader";
+import moment from "moment/moment";
 
-const ClosedOrders = () => {
+const ClosedOrders = ({ dates, current }) => {
   const { isLoading, data: res } = useCustomQuery(Paths.deliveredOrdersUrl);
+
+  const { isLoading: loadingSearch, data: searchData } = useCustomQuery(
+    `${Paths.deliveredOrdersUrl}&date_from=${moment(dates?.start).format(
+      "YYYY-MM-DD",
+    )}&date_to=${moment(dates?.end).format("YYYY-MM-DD") || ""}`,
+    dates?.start?.trim() !== "" && dates?.end?.trim() !== "" && current === 1,
+  );
 
   return (
     <div className={"flex flex-col gap-3 py-4 relative min-h-[124px]"}>
@@ -23,13 +31,19 @@ const ClosedOrders = () => {
         </div>
       ) : (
         <>
-          {res?.data?.results?.map((ord, ind) => (
-            <OrderItem key={ind} order={ord} />
-          ))}
+          {dates?.start?.trim() !== "" && dates?.end?.trim() !== ""
+            ? searchData?.data?.results?.map((ord, ind) => (
+                <OrderItem key={ind} order={ord} type={"pending"} />
+              ))
+            : res?.data?.results?.map((ord, ind) => (
+                <OrderItem key={ind} order={ord} />
+              ))}
         </>
       )}
 
-      {isLoading && <FloatingLoader message={"Fetching orders"} />}
+      {(isLoading || loadingSearch) && (
+        <FloatingLoader message={"Fetching orders"} />
+      )}
     </div>
   );
 };

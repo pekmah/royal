@@ -7,22 +7,44 @@ import ClosedOrders from "../../../../components/Accounts/orders/ClosedOrders";
 
 const Page = () => {
   const [currentNav, setCurrent] = useState(0);
+  const [date, setDate] = useState({
+    start: "",
+    end: "",
+  });
 
   return (
     <div className={"font-barlow"}>
       {/*  header*/}
-      <OrdersTopNav currentNav={currentNav} setCurrent={setCurrent} />
+      <OrdersTopNav
+        currentNav={currentNav}
+        setCurrent={setCurrent}
+        reset={() => {
+          setDate({
+            start: "",
+            end: "",
+          });
+        }}
+      />
 
       {/*    body*/}
       <div className={"p-3"}>
         {/*    filters      */}
-        <OrderFilters />
+        <OrderFilters
+          setDate={setDate}
+          date={date}
+          reset={() => {
+            setDate({
+              start: "",
+              end: "",
+            });
+          }}
+        />
 
         {/*    Order List     */}
         {currentNav === 0 ? (
-          <PendingOrders orders={sampleOrders} />
+          <PendingOrders dates={date} current={currentNav} />
         ) : (
-          <ClosedOrders />
+          <ClosedOrders dates={date} current={currentNav} />
         )}
       </div>
     </div>
@@ -30,13 +52,3 @@ const Page = () => {
 };
 
 export default Page;
-
-const sampleOrders = [
-  {
-    image:
-      "https://media.istockphoto.com/id/1018835072/photo/modern-roof-covered-with-tile-effect-pvc-coated-brown-metal-roof-sheets.jpg?s=612x612&w=0&k=20&c=Etz-EuQ9DZn5Q-YXKN8vV4E0aHnQAZ7qClXKcuxGwC4=",
-    title: "Zee Tiles Matte 28 & 2 Others",
-    order_no: "ZTM02JULY",
-    date: new Date() - 5,
-  },
-];

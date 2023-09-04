@@ -1,26 +1,34 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useContext, useMemo } from "react";
 import useCustomQuery from "../../../../../hooks/useCustomQuery";
 import { Paths } from "../../../../../services/AxiosUtility";
 import FloatingLoader from "../../../../../components/FloatingLoader";
 import { installments } from "../../../../../components/checkout/address/InstallmentPayment";
+import { useRouter } from "next/navigation";
+import { CContext } from "../../../../../context/CartContext2";
 
 const Page = ({ params }) => {
   const { isLoading, data: res } = useCustomQuery(
     Paths.singleOrder + params?.id + "/",
   );
+  const currentOrderPayments = res?.data?.payment_records;
+  const { setCheckout } = useContext(CContext);
 
+  const unpaid = useMemo(() => {
+    return currentOrderPayments?.find(
+      (item) => item?.payment_status?.toLowerCase() !== "success",
+    );
+  }, [currentOrderPayments]);
   const router = useRouter();
 
   // const
   return (
-    <div className={"relative py-10"}>
+    <div className={"relative pb-10"}>
       <div className={"relative w-full"}>
         <div className={"px-5 p-3.5 flex gap-x-6 border-b border-gray-300 "}>
           <h5 className={"text-xl font-semibold flex"}>
-            Delivered Orders /{" "}
+            {states[res?.data?.order_status]} /{" "}
             <div
               className={
                 "p-0.5 border border-zinc-200 ml-2 text-sm rounded text-gray-800 px-1 font-[500]"
@@ -197,6 +205,32 @@ const Page = ({ params }) => {
             </div>
           </div>
         </div>
+
+        {unpaid?.id && (
+          <div
+            className={
+              "px-5 py-6 flex justify-end border-t border-zinc-300 text-lg font-[500]"
+            }
+          >
+            <button
+              className={` h-12 px-6 py-2.5 rounded justify-center items-center gap-2.5 inline-flex bg-none border border-red-600 text-red-600`}
+              onClick={() => {
+                setCheckout((prev) => ({
+                  ...prev,
+                  payment: {
+                    ...prev?.payment,
+                    phone: res?.data?.payment_records?.at(0)?.phone_number,
+                  },
+                }));
+                router.push(
+                  `/confirm_payment?orderId=${res.data?.id}&index=${0}`,
+                );
+              }}
+            >
+              <div className=" text-base ">Make Payment</div>
+            </button>
+          </div>
+        )}
         {isLoading && <FloatingLoader message={"Fetching order"} />}
       </div>
     </div>
@@ -209,4 +243,13 @@ const paymentPlans = {
   OWN_COLLECTION: "Own Collection",
   FREE_DELIVERY: "Free Delivery",
   EXPRESS_DELIVERY: "Express Delivery",
+};
+
+const states = {
+  FULLY_PAID: "Closed Orders",
+  FAILED: "Closed Orders",
+  SUCCESS: "Closed Orders",
+  ADMIN_CANCELLED: "Closed Orders",
+  NEWLY_SUBMITTED: "Pending Orders",
+  PARTIALLY_PAID: "Pending Orders",
 };
