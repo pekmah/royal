@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AboutCarousel,
+  AboutContact,
   AboutMedia,
   AboutTrustedBy,
   AboutVarieties,
@@ -24,6 +25,9 @@ const Page = () => {
 
       {/*    media  */}
       <AboutMedia />
+
+      {/*    contact    */}
+      <AboutContact />
     </div>
   );
 };
