@@ -27,7 +27,7 @@ const Carousel = () => {
 
       <div
         className={
-          "flex bg-white absolute -bottom-10 px-10 right-[10vw] left-[10vw] py-6 z-20 rounded-xl shadow justify-around"
+          "flex bg-white absolute -bottom-[70px] px-10 right-[10vw] left-[10vw] py-10 z-20 rounded-xl shadow justify-around"
         }
       >
         <div

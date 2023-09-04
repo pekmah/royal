@@ -8,7 +8,7 @@ import Abt3 from "../../public/svg/about_trusted/abt-3.png";
 
 const TrustedBy = () => {
   return (
-    <div className={"bg-white py-16 flex flex-col "}>
+    <div className={"bg-white py-10 pt-24 flex flex-col "}>
       <div className={"mx-auto flex flex-col"}>
         <h3 className="text-red-600 text-2xl font-bold tracking-wide about-h3">
           Trusted By
