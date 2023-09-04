@@ -33,7 +33,7 @@ const Varieties = () => {
           </button>
         </div>
 
-        <div className={"flex-1 h-[280px] w-[350px] mt-8"}>
+        <div className={"flex-1 h-[280px] w-[350px] mt-8 mx-auto xl:ml-20"}>
           <div
             className={"h-[250px] w-[350px] relative bg-[#041ACC] shadow-lg"}
           >

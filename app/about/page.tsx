@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AboutCarousel,
+  AboutMedia,
   AboutTrustedBy,
   AboutVarieties,
 } from "@/components/About";
@@ -20,6 +21,9 @@ const Page = () => {
 
       {/*    Our Varieties  */}
       <AboutVarieties />
+
+      {/*    media  */}
+      <AboutMedia />
     </div>
   );
 };
