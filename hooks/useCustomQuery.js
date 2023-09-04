@@ -6,7 +6,7 @@ import useError from "./useError";
 
 const useCustomQuery = (route, isEnabled) => {
   const handleError = useError();
-  const { isLoading, error, data, isError, refetch } = useQuery(
+  const { isLoading, error, data, isError, refetch, isRefetching } = useQuery(
     route,
     () => PrivateAxiosUtility.get(route),
     { enabled: isEnabled },
@@ -18,7 +18,7 @@ const useCustomQuery = (route, isEnabled) => {
     }
   }, [isError]);
 
-  return { isLoading, data, refetch };
+  return { isLoading, data, refetch, isRefetching };
 };
 
 export default useCustomQuery;

@@ -19,7 +19,7 @@ const Page = ({ params }) => {
     return currentOrderPayments?.find(
       (item) => item?.payment_status?.toLowerCase() !== "success",
     );
-  }, []);
+  }, [currentOrderPayments]);
   const router = useRouter();
 
   // const
@@ -223,9 +223,7 @@ const Page = ({ params }) => {
                   },
                 }));
                 router.push(
-                  `/account/orders/confirm_payment?orderId=${
-                    res.data?.id
-                  }&index=${0}`,
+                  `/confirm_payment?orderId=${res.data?.id}&index=${0}`,
                 );
               }}
             >

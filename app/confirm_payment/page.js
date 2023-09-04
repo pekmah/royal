@@ -1,15 +1,38 @@
+"use client";
 import React, { useContext } from "react";
-import { useRouter } from "next/navigation";
-import { CContext } from "../../../../context/CartContext2";
-import Group from "../../../../public/svg/Group";
-import { CheckInput } from "../../../../components/checkout/address/SelectDelivery";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import Group from "../../public/svg/Group";
+import Mpesa from "../../public/mpesa.png";
+import { CheckInput } from "../../components/checkout/address/SelectDelivery";
+import { CContext } from "../../context/CartContext2";
+import { useMutation } from "react-query";
+import cartServices from "../../services/CartServices";
+import { useCustomToast } from "../../hooks/useToast";
+import Helpers from "../../utils/helpers";
+import FloatingLoader from "../../components/FloatingLoader";
 
 const ConfirmPayment = () => {
   const router = useRouter();
   const { setCheckout, checkout } = useContext(CContext);
+  const { showSuccessToast } = useCustomToast();
+  const orderId = useSearchParams().get("orderId");
+
+  const paymentMutation = useMutation(
+    async (data) => {
+      return await cartServices.makePayment(data?.body);
+    },
+    {
+      onSuccess: (res, { order }) => {
+        showSuccessToast("Payment Initiated.");
+
+        router.push(`/checkout/payment?order_id=${order?.id}&index=${0}`);
+      },
+    },
+  );
+
   return (
-    <div className="w-full bg-white rounded shadow">
+    <div className="w-full bg-white rounded shadow relative">
       {/*  Header */}
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">
         <div className="h-[25px]  font-[600] flex justify-between items-end w-full ">
@@ -79,31 +102,27 @@ const ConfirmPayment = () => {
           <div className=" text-red-600 text-base font-bold">Cancel</div>
         </button>
         <button
-          disabled={
-            !checkout?.del_option ||
-            (!checkout?.location?.chosenLocation?.loc?.id &&
-              !checkout.location.pickupPoint?.id) ||
-            !checkout?.paymentType ||
-            (checkout?.paymentType === "installments" &&
-              !checkout?.payment?.type) ||
-            !checkout?.payment?.phone
-          }
+          disabled={!checkout?.payment?.phone}
           className={`w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex ${
-            (!checkout?.del_option ||
-              (!checkout?.location?.chosenLocation?.loc?.id &&
-                !checkout.location.pickupPoint?.id) ||
-              !checkout?.paymentType ||
-              (checkout?.paymentType === "installments" &&
-                (!checkout?.payment?.type ||
-                  checkout?.payment?.type === "FULL_PAYMENT")) ||
-              !checkout?.payment?.phone) &&
-            "opacity-70 cursor-no-drop"
+            !checkout?.payment?.phone && "opacity-70 cursor-no-drop"
           }`}
-          onClick={() => router.push("/checkout/confirm_order")}
+          onClick={() =>
+            paymentMutation.mutate({
+              body: {
+                phone_number: Helpers?.getPhoneNumber(checkout?.payment?.phone),
+                order_id: orderId,
+              },
+              order: { id: orderId },
+            })
+          }
         >
           <div className=" text-white text-base font-bold">Continue</div>
         </button>
       </div>
+
+      {paymentMutation.isLoading && (
+        <FloatingLoader message={"Making payment . . . "} />
+      )}
     </div>
   );
 };

@@ -21,12 +21,12 @@ const Page = () => {
     isLoading,
     data: res,
     refetch,
+    isRefetching,
   } = useCustomQuery(Paths.orderUrl + "/" + order_id);
 
   useEffect(() => {
     const checkTransactionStatus = () => {
       const currentPayment = res?.data?.payment_records?.at(index);
-      console.log("CURRENT PAYMENT", currentPayment);
 
       if (currentPayment?.message) {
         // returns 0-success, 1 - error
@@ -85,7 +85,9 @@ const Page = () => {
 
       <ChosenPaymentOption />
 
-      {isLoading && <FloatingLoader message={"Verifying transaction . . ."} />}
+      {(isLoading || isRefetching) && (
+        <FloatingLoader message={"Verifying transaction . . ."} />
+      )}
     </div>
   );
 };
