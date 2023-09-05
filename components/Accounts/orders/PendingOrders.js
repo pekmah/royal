@@ -13,8 +13,12 @@ const PendingOrders = ({ dates, current }) => {
   const { isLoading: loadingSearch, data: searchData } = useCustomQuery(
     `${Paths.openOrdersUrl}&date_from=${moment(dates?.start).format(
       "YYYY-MM-DD",
-    )}&date_to=${moment(dates?.end).format("YYYY-MM-DD") || ""}`,
-    dates?.start?.trim() !== "" && dates?.end?.trim() !== "" && current === 0,
+    )}${
+      dates?.end
+        ? `&date_to=${moment(dates?.end).format("YYYY-MM-DD") || ""}`
+        : ""
+    }`,
+    dates?.start?.trim() !== "" && current === 0,
   );
 
   return (
@@ -31,7 +35,7 @@ const PendingOrders = ({ dates, current }) => {
         </div>
       ) : (
         <>
-          {dates?.start?.trim() !== "" && dates?.end?.trim() !== ""
+          {dates?.start?.trim() !== ""
             ? searchData?.data?.results?.map((ord, ind) => (
                 <OrderItem key={ind} order={ord} type={"pending"} />
               ))

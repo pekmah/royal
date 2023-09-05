@@ -96,6 +96,7 @@ const Cart = () => {
         setCheckout((prev) => ({
           ...prev,
           cartId: res?.items?.id,
+          isCheckingOut: true,
         }));
 
         router.push("/checkout/address");
@@ -133,16 +134,6 @@ const Cart = () => {
     // } else {
     // @ts-ignore
     mutation.mutate(newItemsArr);
-    //   addProductToCart({
-    //     items: newItemsArr,
-    //   }).then(async (r) => {
-    //     await AsyncStorageService.setData("_cart_id", r?.items?.id);
-    //     setCheckout((prev) => ({
-    //       ...prev,
-    //       cartId: r?.items?.id,
-    //     }));
-    //   });
-    // }
   };
   return (
     <div className={"min-h-[80vh] flex"}>

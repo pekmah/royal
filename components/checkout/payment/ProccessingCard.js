@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Group from "../../../public/svg/Group";
+import { CContext } from "../../../context/CartContext2";
 
 const defaultOptions = {
   loop: true,
@@ -10,6 +11,7 @@ const defaultOptions = {
 };
 
 const ProcessingCard = () => {
+  const { checkout } = useContext(CContext);
   return (
     <div className={"flex flex-col justify-center items-center font-barlow"}>
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">
@@ -44,8 +46,9 @@ const ProcessingCard = () => {
 
         <h6 className={"font-[600] my-3"}>Waiting Payment Confirmation</h6>
         <p className={"w-3/5 text-center"}>
-          You will receive a prompt to authorize payment from M-Pesa number +254
-          742041190. Please enter your PIN to complete the transaction.
+          You will receive a prompt to authorize payment from M-Pesa number $
+          {checkout?.payment?.phone}. Please enter your PIN to complete the
+          transaction.
         </p>
       </div>
     </div>

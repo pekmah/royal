@@ -221,6 +221,8 @@ const Page = ({ params }) => {
                     ...prev?.payment,
                     phone: res?.data?.payment_records?.at(0)?.phone_number,
                   },
+
+                  isCheckingOut: false,
                 }));
                 router.push(
                   `/confirm_payment?orderId=${res.data?.id}&index=${0}`,

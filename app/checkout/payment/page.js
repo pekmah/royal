@@ -68,12 +68,6 @@ const Page = () => {
             "flex justify-end px-6 py-5 gap-x-6 border-t border-gray-200"
           }
         >
-          <button className="w-32 h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">
-            <div className=" text-red-600 text-base font-bold">
-              Cancel order
-            </div>
-          </button>
-
           <button
             className="w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex"
             onClick={() => refetch()}
