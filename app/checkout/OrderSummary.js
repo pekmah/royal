@@ -138,6 +138,9 @@ const OrderSummary = ({ className }) => {
     paymentMutation.error,
     paymentMutation.isError,
   ]);
+  if (!checkout?.isCheckingOut) {
+    return;
+  }
 
   return (
     <div className={"w-30% relative"}>
