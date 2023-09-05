@@ -17,11 +17,16 @@ const ChosenAddress = () => {
             </p>
           </div>
 
-          <div className="text-[#DC2A25] gap-2.5 flex justify-center items-center ">
+          <button
+            className="text-[#DC2A25] gap-2.5 flex justify-center items-center "
+            onClick={() => {
+              router.push("/checkout/address");
+            }}
+          >
             <EditSvg />
 
             <span className={"text-base font-[500]"}>Edit</span>
-          </div>
+          </button>
         </div>
       </div>
 
