@@ -5,9 +5,11 @@ import Image from "next/image";
 import Mpesa from "@/public/mpesa.png";
 import { CContext } from "../../../context/CartContext2";
 import { installments } from "../address/InstallmentPayment";
+import { useRouter } from "next/navigation";
 
 const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
   const { checkout } = useContext(CContext);
+  const router = useRouter();
 
   return (
     <div className="w-full font-barlow py-3 bg-white shadow">

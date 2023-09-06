@@ -21,7 +21,6 @@ const Page = ({ params }) => {
     );
   }, [currentOrderPayments]);
   const router = useRouter();
-
   // const
   return (
     <div className={"relative pb-10"}>
@@ -41,7 +40,7 @@ const Page = ({ params }) => {
 
         <div className={"m-4 p-4 border border-gray-200 font-barlow"}>
           <div className={"text-lg font-[600]"}>
-            Order Items({res?.data?.order_items?.items?.length})
+            Order Items({res?.data?.order_items?.at(0)?.items?.length})
           </div>
 
           {res?.data?.order_items?.at(0)?.items?.map((item) => (
@@ -97,7 +96,7 @@ const Page = ({ params }) => {
                 <div className={"gap-x-3 flex items-center"}>
                   <span>Cost: </span>
 
-                  <span className={"text-sm"}>{item?.pricing?.price}</span>
+                  <span className={"text-sm"}>{item?.total_price}</span>
                 </div>
 
                 <div className={"gap-x-3 flex items-center"}>
@@ -120,7 +119,12 @@ const Page = ({ params }) => {
           <div className={" p-3 font-barlow text-gray-500 "}>
             <div className={"flex flex-1 justify-between"}>
               <span>Subtotal: </span>
-              <span>Ksh. {res?.data?.balance} </span>
+              <span>
+                Ksh.{" "}
+                {Math.ceil(
+                  parseFloat(res?.data?.balance) - parseFloat(res?.data?.vat),
+                )}{" "}
+              </span>
             </div>
 
             <div className={"flex flex-1 justify-between my-3"}>
