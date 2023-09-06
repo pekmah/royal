@@ -20,26 +20,22 @@ const OurMedia = () => {
 
       <div className={"flex gap-x-10 py-8"}>
         <MediaItem
-          title={
-            "Things to Consider before Starting a Mjengo. Tips From an Architect."
-          }
-          subtext={"RML Blogs"}
+          title={"Zee Matte Tiles"}
+          subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media1}
         />
 
         <MediaItem
-          title={"New House Tour in “The Salem Palace” || Episode 6, Season 4"}
-          subtext={"RML Youtube"}
+          title={"Zee Matte Tiles"}
+          subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media3}
         />
 
         <MediaItem
-          title={
-            "How to Get your Interior Design Right | Materials and Color Balance"
-          }
-          subtext={"RML Youtube"}
+          title={"Zee Matte Tiles"}
+          subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media2}
         />
@@ -64,14 +60,18 @@ const MediaItem = ({ image, title, subtext, date }) => (
       />
     </div>
 
-    <h5 className={"font-barlow font-[500] text-base mb-1"}>{title}</h5>
+    <h5 className={"font-barlow font-[600] text-lg mb-1"}>{title}</h5>
 
-    <div className={"flex gap-x-4 font-barlow items-center text-sm"}>
+    <div
+      className={
+        "flex gap-x-4 font-barlow items-center justify-between text-sm"
+      }
+    >
       <span className={"font-barlow font-[500] text-gray-500"}>{subtext}</span>
 
-      <div className={"h-2 w-2 rounded-full bg-black"} />
-
-      <span className={"text-gray-500 font-[500] text-sm"}>{date}</span>
+      <a href={"/"} className={"text-primary_red font-[600] text-sm"}>
+        Shop Now
+      </a>
     </div>
   </div>
 );
