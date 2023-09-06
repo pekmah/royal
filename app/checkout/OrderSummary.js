@@ -3,14 +3,13 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import CardSvg from "../../public/svg/Card";
 import { CContext } from "../../context/CartContext2";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import cartServices from "../../services/CartServices";
 import { useMutation } from "react-query";
 import { useCustomToast } from "../../hooks/useToast";
 import useError from "../../hooks/useError";
-import Helpers from "../../utils/helpers";
 import FloatingLoader from "../../components/FloatingLoader";
-import { router } from "next/client";
+import Helpers from "../../utils/helpers";
 import AsyncStorageService from "../../services/AsyncStorageService";
 
 const OrderSummary = ({ className }) => {
@@ -18,7 +17,8 @@ const OrderSummary = ({ className }) => {
   const path = usePathname();
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
-  const [orderId, setOrderId] = useState(null);
+  const [orderId, setOrderId] = useState({});
+  const router = useRouter();
 
   const subTotal = useMemo(() => {
     return cart?.reduce((acc, val) => {
@@ -45,14 +45,14 @@ const OrderSummary = ({ className }) => {
   const total = subTotal + vat;
 
   const paymentMutation = useMutation(
-    (data) => cartServices.makePayment(data?.body),
+    async (data) => {
+      return await cartServices.makePayment(data?.body);
+    },
     {
-      onSuccess: (order) => {
+      onSuccess: (res, { order }) => {
         showSuccessToast("Payment Initiated.");
-        router.push("/checkout/payment", {
-          order: orderId,
-          paymentIndex: 0,
-        });
+
+        router.push(`/checkout/payment?order_id=${order?.id}&index=${0}`);
       },
     },
   );
@@ -60,23 +60,21 @@ const OrderSummary = ({ className }) => {
   const mutation = useMutation((data) => cartServices.createOrder(data), {
     onSuccess: async (order) => {
       showSuccessToast("Order Created.");
-
+      setOrderId(order?.order);
       await AsyncStorageService.removeData("_cart");
       setCart([]);
-
+      //
       const paymentObj =
         order?.order?.payment_plan === "FULL_PAYMENT"
           ? { order_id: order?.order?.id }
           : { payment_record: order?.order?.payment_records?.at(0)?.id };
-
-      setOrderId(order?.order?.id);
 
       paymentMutation.mutate({
         body: {
           phone_number: Helpers?.getPhoneNumber(checkout?.payment?.phone),
           ...paymentObj,
         },
-        order: order?.order?.id,
+        order: order?.order,
       });
       // router.push("/checkout/address");
     },
@@ -140,6 +138,9 @@ const OrderSummary = ({ className }) => {
     paymentMutation.error,
     paymentMutation.isError,
   ]);
+  if (!checkout?.isCheckingOut) {
+    return;
+  }
 
   return (
     <div className={"w-30% relative"}>
@@ -207,7 +208,7 @@ const OrderSummary = ({ className }) => {
                 </p>
               </div>
             </div>
-            <div className=" font-[400] text-left leading-none relative">
+            <div className=" font-[400] text-left leading-none relative px-5">
               <p className="text-[#888888] text-sm inline">
                 {"By proceeding to pay it means you have agreed to "}
                 <br />

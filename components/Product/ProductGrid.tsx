@@ -118,11 +118,13 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
         </div>
       ) : null}
 
-      {data?.results ? (
-        <div className="mt-5">{`Products (${
-          searchQuery ? searchCount : filteredProductCount
-        })`}</div>
-      ) : null}
+      <div className={"relative"}>
+        {data?.results ? (
+          <div className="mt-5 font-barlow font-[600] text-xl z-10">{`Products (${
+            searchQuery ? searchCount : filteredProductCount
+          })`}</div>
+        ) : null}
+      </div>
 
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#fbfbff] mt-6">
         {isLoading

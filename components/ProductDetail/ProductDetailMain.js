@@ -308,7 +308,7 @@ export default function ProductDetailMain({ product }) {
 
   return (
     <div
-      className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4 relative`}
+      className={`w-full rounded-md bg-white flex flex-col md:flex-row gap-6 p-4 mt-4 relative`}
     >
       <div className="w-full relative flex-1">
         <div className="relative h-[240px]">
@@ -325,7 +325,7 @@ export default function ProductDetailMain({ product }) {
             src={
               thumbnail
                 ? `${process.env.BASE_URL}/api/v1/core/products/thumbnail/${thumbnail}`
-                : "/temp-product-img.png"
+                : "/temp-product-abt-3.png"
             }
             fill
             style={{ objectFit: "cover", objectPosition: "center" }}
@@ -537,13 +537,7 @@ export default function ProductDetailMain({ product }) {
 
       {(addFavoriteMutation?.isLoading || isLoading) && (
         <FloatingLoader
-          message={
-            addFavoriteMutation?.isLoading
-              ? "Adding to favorite"
-              : isLoading
-              ? "Fetching favorite"
-              : "Removing from favorite"
-          }
+          message={isLoading ? "Fetching favorite" : "Removing from favorite"}
         />
       )}
     </div>

@@ -5,10 +5,13 @@ import CopySvg from "../../../public/svg/Copy";
 import { CopyToClipboard } from "react-copy-to-clipboard/src";
 import { ENDPOINT } from "../../../services/AxiosUtility";
 import { useRouter } from "next/navigation";
+import { useCustomToast } from "../../../hooks/useToast";
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, type }) => {
   let currentProduct = order?.order_items?.at(0)?.items?.at(0)?.product;
   const router = useRouter();
+  const { showSuccessToast } = useCustomToast();
+
   return (
     <div
       className={"border border-slate-200 py-2 px-3 flex gap-x-5 rounded-md"}
@@ -27,7 +30,10 @@ const OrderItem = ({ order }) => {
           <div className={"flex gap-x-2"}>
             <OrderNoWrapper orderNo={order?.order_code} />
 
-            <CopyToClipboard text={order?.order_code}>
+            <CopyToClipboard
+              text={order?.order_code}
+              onCopy={() => showSuccessToast("Copied")}
+            >
               <button>
                 <CopySvg />
               </button>
@@ -37,13 +43,15 @@ const OrderItem = ({ order }) => {
 
         <h5 className={"font-medium text-gray-500"}>
           Ordered on:
-          {moment(order?.created_at).format("ddd mm yyyy")}
+          {moment(order?.created_at).format("DD MMM YYYY")}
         </h5>
       </div>
 
       <div className={"self-end flex justify-end"}>
         <button
-          onClick={() => router.push("account/orders/" + order?.id)}
+          onClick={() =>
+            router.push("account/orders/" + order?.id + "?type=" + type)
+          }
           className="w-[150px] h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex"
         >
           <div className="text-red-600 text-sm font-[600]">See Details</div>
