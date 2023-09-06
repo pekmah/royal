@@ -1,6 +1,8 @@
 "use client";
 import React, {createContext, useEffect, useState} from "react";
 import AsyncStorageService from "@/services/AsyncStorageService";
+import {Paths, PrivateAxiosUtility} from "@/services/AxiosUtility";
+import {getSession} from "next-auth/react";
 
 // CartContext2
 // interface cartProps{
@@ -40,6 +42,15 @@ const CartContext2Provider = ({ children }) => {
     editScreen: "",
   });
 
+  const fetchFavorites = async () => {
+    try {
+      const res = await PrivateAxiosUtility.get(Paths.favoritesUrl);
+      setFavorites(res.data?.results);
+    } catch (err) {
+      console.log("FETCH FAV ERROR: ", err);
+    }
+  };
+
   // retrieve cart data from localstorage
   useEffect(() => {
     const handleCart = async () => {
@@ -48,10 +59,15 @@ const CartContext2Provider = ({ children }) => {
 
       setCart(cartData || []);
     };
-
+    const getFavs = async () => {
+      const session = getSession();
+      if (session?.user) {
+        await fetchFavorites();
+      }
+    };
     handleCart();
+    getFavs();
   }, []);
-  // console.log(cart)
 
   return (
     <CContext.Provider
@@ -62,6 +78,7 @@ const CartContext2Provider = ({ children }) => {
         setFavorites,
         checkout,
         setCheckout,
+        refetchFavorites: fetchFavorites,
       }}
     >
       {children}
