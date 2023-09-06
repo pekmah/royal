@@ -19,7 +19,6 @@ const ConfirmPayment = () => {
   const orderId = useSearchParams().get("orderId");
   const pricing = useSearchParams().get("pricing");
   const paymentIndex = useSearchParams().get("index");
-  console.log(pricing);
 
   const paymentMutation = useMutation(
     async (data) => {
@@ -114,7 +113,7 @@ const ConfirmPayment = () => {
           onClick={() => {
             const paymentObj = pricing
               ? { payment_record: pricing }
-              : { order_id: order?.order?.id };
+              : { order_id: orderId };
 
             paymentMutation.mutate({
               body: {
