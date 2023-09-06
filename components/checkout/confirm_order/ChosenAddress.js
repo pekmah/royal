@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import Check from "../../../public/svg/Check";
 import EditSvg from "../../../public/svg/Edit";
 import { CContext } from "../../../context/CartContext2";
+import { useRouter } from "next/navigation";
 
 const ChosenAddress = () => {
   const { checkout } = useContext(CContext);
+  const router = useRouter();
 
   return (
     <div className="w-full font-barlow py-3 bg-white shadow">

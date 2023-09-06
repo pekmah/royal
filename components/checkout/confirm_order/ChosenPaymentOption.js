@@ -8,6 +8,7 @@ import { installments } from "../address/InstallmentPayment";
 
 const ChosenPaymentOption = ({ paymentMethod = "full" }) => {
   const { checkout } = useContext(CContext);
+  const router = useRouter();
 
   return (
     <div className="w-full font-barlow py-3 bg-white shadow">
