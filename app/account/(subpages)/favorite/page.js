@@ -40,7 +40,7 @@ const Page = () => {
         </h5>
       </div>
 
-      <div>
+      <div className={"mt-3 gap-y-3 py-2 px-3 flex flex-col"}>
         {res?.data?.results?.map((order) => {
           let currentProduct = order?.product?.pricing?.at(0);
 
