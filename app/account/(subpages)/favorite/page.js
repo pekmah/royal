@@ -5,10 +5,32 @@ import useCustomQuery from "../../../../hooks/useCustomQuery";
 import { Paths } from "../../../../services/AxiosUtility";
 import FloatingLoader from "../../../../components/FloatingLoader";
 import { useRouter } from "next/navigation";
+import { useMutation } from "react-query";
+import productServices from "../../../../services/ProductServices";
+import { useCustomToast } from "../../../../hooks/useToast";
 
 const Page = () => {
-  const { isLoading, data: res } = useCustomQuery(Paths.favoritesUrl);
+  const { isLoading, data: res, refetch } = useCustomQuery(Paths.favoritesUrl);
   const router = useRouter();
+  const { showSuccessToast } = useCustomToast();
+
+  const removeFromFavoriteMutation = useMutation(
+    (id) => productServices.removeFromFavorites(id),
+    {
+      onSuccess: async () => {
+        showSuccessToast("Product removed from favorites");
+        await refetch();
+      },
+    },
+  );
+
+  const handleRemove = (id) => {
+    if (
+      window.confirm("Are you sure you want to remove item from favorites?")
+    ) {
+      removeFromFavoriteMutation.mutate(id);
+    }
+  };
 
   return (
     <div className={"relative h-screen w-full"}>
@@ -49,12 +71,15 @@ const Page = () => {
                   onClick={() =>
                     router?.push("/products/" + order?.product?.id)
                   }
-                  className="w-[150px] h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex"
+                  className="w-[150px] h-11 p-2.5 rounded bg-red-600 justify-center items-center gap-2.5 inline-flex"
                 >
-                  <div className="text-red-600 text-sm font-[600]">View</div>
+                  <div className="text-white text-sm font-[600]">View</div>
                 </button>
 
-                <button className="w-[150px] h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">
+                <button
+                  onClick={() => handleRemove(order?.id)}
+                  className="w-[150px] h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex"
+                >
                   <div className="text-red-600 text-sm font-[600]">Remove</div>
                 </button>
               </div>
@@ -62,7 +87,15 @@ const Page = () => {
           );
         })}
       </div>
-      {isLoading && <FloatingLoader message={"Loading favorites . . ."} />}
+      {(isLoading || removeFromFavoriteMutation.isLoading) && (
+        <FloatingLoader
+          message={
+            removeFromFavoriteMutation?.isLoading
+              ? "Removing from favorites . . ."
+              : "Loading favorites . . ."
+          }
+        />
+      )}
     </div>
   );
 };

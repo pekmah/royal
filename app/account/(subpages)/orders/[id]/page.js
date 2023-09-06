@@ -21,13 +21,20 @@ const Page = ({ params }) => {
     );
   }, [currentOrderPayments]);
   const router = useRouter();
+
+  const subTotal = useMemo(() => {
+    return res?.data?.order_items?.at(0)?.items?.reduce(function (prev, cur) {
+      return prev + parseFloat(cur?.total_price);
+    }, 0);
+  }, [res?.data?.order_items]);
+
   // const
   return (
     <div className={"relative pb-10"}>
       <div className={"relative w-full"}>
         <div className={"px-5 p-3.5 flex gap-x-6 border-b border-gray-300 "}>
           <h5 className={"text-xl font-semibold flex"}>
-            {states[res?.data?.order_status]} /{" "}
+            {states[res?.data?.order_status]}
             <div
               className={
                 "p-0.5 border border-zinc-200 ml-2 text-sm rounded text-gray-800 px-1 font-[500]"
@@ -119,12 +126,7 @@ const Page = ({ params }) => {
           <div className={" p-3 font-barlow text-gray-500 "}>
             <div className={"flex flex-1 justify-between"}>
               <span>Subtotal: </span>
-              <span>
-                Ksh.{" "}
-                {Math.ceil(
-                  parseFloat(res?.data?.balance) - parseFloat(res?.data?.vat),
-                )}{" "}
-              </span>
+              <span>Ksh. {Math.ceil(subTotal)} </span>
             </div>
 
             <div className={"flex flex-1 justify-between my-3"}>
@@ -210,7 +212,8 @@ const Page = ({ params }) => {
           </div>
         </div>
 
-        {unpaid?.id && (
+        {(res?.data?.order_status === "NEWLY_SUBMITTED" ||
+          res?.data?.order_status === "PARTIALLY_PAID") && (
           <div
             className={
               "px-5 py-6 flex justify-end border-t border-zinc-300 text-lg font-[500]"
