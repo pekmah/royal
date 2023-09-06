@@ -208,7 +208,7 @@ const OrderSummary = ({ className }) => {
                 </p>
               </div>
             </div>
-            <div className=" font-[400] text-left leading-none relative px-4">
+            <div className=" font-[400] text-left leading-none relative px-5">
               <p className="text-[#888888] text-sm inline">
                 {"By proceeding to pay it means you have agreed to "}
                 <br />
