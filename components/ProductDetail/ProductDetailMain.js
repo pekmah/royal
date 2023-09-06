@@ -308,7 +308,7 @@ export default function ProductDetailMain({ product }) {
 
   return (
     <div
-      className={`w-full rounded-md shadow-lg bg-white flex flex-col md:flex-row gap-6 p-4 mt-4 relative`}
+      className={`w-full rounded-md bg-white flex flex-col md:flex-row gap-6 p-4 mt-4 relative`}
     >
       <div className="w-full relative flex-1">
         <div className="relative h-[240px]">
