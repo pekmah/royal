@@ -1,6 +1,9 @@
 "use client";
 import React, {createContext, useEffect, useState} from "react";
 import AsyncStorageService from "@/services/AsyncStorageService";
+import useCustomQuery from "@/hooks/useCustomQuery";
+import {Paths, PrivateAxiosUtility} from "@/services/AxiosUtility";
+import {useQuery} from "react-query";
 
 // CartContext2
 // interface cartProps{
@@ -52,6 +55,14 @@ const CartContext2Provider = ({ children }) => {
     handleCart();
   }, []);
   // console.log(cart)
+  useCustomQuery(Paths.favoritesUrl);
+  const { refetch: refetchFavorites } = useQuery(
+    ["favorites"],
+    () => PrivateAxiosUtility.get(Paths.favoritesUrl),
+    {
+      onSuccess: (res) => setFavorites(res.data?.results),
+    },
+  );
 
   return (
     <CContext.Provider
@@ -62,6 +73,7 @@ const CartContext2Provider = ({ children }) => {
         setFavorites,
         checkout,
         setCheckout,
+        refetchFavorites,
       }}
     >
       {children}

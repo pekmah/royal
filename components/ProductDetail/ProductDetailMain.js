@@ -17,8 +17,6 @@ import { useMutation } from "react-query";
 import productServices from "@/services/ProductServices";
 import useError from "@/hooks/useError";
 import FloatingLoader from "@/components/FloatingLoader";
-import useCustomQuery from "@/hooks/useCustomQuery";
-import { Paths } from "@/services/AxiosUtility";
 
 const barlowSemi = Barlow({
   style: "normal",
@@ -34,11 +32,10 @@ const barlowMedium = Barlow({
 
 export default function ProductDetailMain({ product }) {
   // const {addToCart} = useCartContext()
-  const { isLoading, data: res } = useCustomQuery(Paths.favoritesUrl);
   const { status } = useSession();
   const router = useRouter();
   const handleError = useError();
-  const { cart, setCart, favorites, setFavorites } = useContext(CContext);
+  const { cart, setCart, favorites, refetchFavorites } = useContext(CContext);
   const {
     id,
     name,
@@ -69,9 +66,8 @@ export default function ProductDetailMain({ product }) {
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "scroll";
   }, [showModal]);
-
   const isFavorite = useMemo(() => {
-    return res?.data?.results?.some((item) => item?.product === parseInt(id));
+    return favorites?.some((item) => item?.product?.id === parseInt(id));
   }, [product, favorites]);
   const findPricing = (gauge_size, width, finish) => {
     for (const model of pricing) {
@@ -284,8 +280,18 @@ export default function ProductDetailMain({ product }) {
         product: id,
       }),
     {
-      onSuccess: (res) => {
-        setFavorites([...favorites, res?.favorite]);
+      onSuccess: async () => {
+        await refetchFavorites();
+      },
+      onError: (e) => handleError(e),
+    },
+  );
+
+  const removeFavoriteMutation = useMutation(
+    (fav_id) => productServices?.removeFromFavorites(fav_id),
+    {
+      onSuccess: async () => {
+        await refetchFavorites();
       },
       onError: (e) => handleError(e),
     },
@@ -295,7 +301,10 @@ export default function ProductDetailMain({ product }) {
     addFavoriteMutation.mutate();
   };
   const handleRemoveFromFavorites = async () => {
-    // await removeProductFromFavorites(productId);
+    const currentFav = favorites?.find(
+      (item) => item?.product?.id === parseInt(id),
+    );
+    await removeFavoriteMutation.mutate(currentFav?.id);
   };
 
   const handleFavorites = async () => {
@@ -535,9 +544,13 @@ export default function ProductDetailMain({ product }) {
         />
       )}
 
-      {(addFavoriteMutation?.isLoading || isLoading) && (
+      {(addFavoriteMutation?.isLoading || removeFavoriteMutation.isLoading) && (
         <FloatingLoader
-          message={isLoading ? "Fetching favorite" : "Removing from favorite"}
+          message={
+            addFavoriteMutation?.isLoading
+              ? "Adding to favorites"
+              : "Removing from favorites"
+          }
         />
       )}
     </div>
