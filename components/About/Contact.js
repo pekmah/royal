@@ -10,7 +10,7 @@ const Contact = () => {
       <div className={"flex-1"}>
         <div className={"w-2/3"}>
           <h2 className={"text-[32px] font-[600] font-barlow"}>
-            We get quality products?
+            Want to get quality products?
           </h2>
 
           <p className={"font-barlow leading-6 font-[400] mt-3"}>
