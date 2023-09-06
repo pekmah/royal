@@ -11,7 +11,7 @@ const OurMedia = () => {
       <div className={"flex"}>
         <div className={" flex flex-col"}>
           <h3 className="text-red-600 text-[22px] font-[600] tracking-wide about-h3">
-            From Our Media
+            From Our Shop
           </h3>
 
           <div className={"h-[3px] bg-gray-200 rounded-sm mt-1 w-16 "} />
