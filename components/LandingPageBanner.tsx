@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const barlowSemi = Barlow({
   style: "normal",
@@ -22,6 +23,7 @@ export default function LandingPageBanner() {
   const [page, _setPage] = useState<number>(1);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [images, setImages] = useState([]);
   const { data, isLoading, error } = useQuery(["carouselImages"], () =>
     getCarouselImages(page),
   );
@@ -32,6 +34,14 @@ export default function LandingPageBanner() {
     );
   };
   useEffect(() => {
+    const getImages = async () => {
+      const res = await axios.get(
+        process.env.BASE_URL + "/api/v1/core/carousels",
+      );
+      setImages(res.data?.results);
+    };
+
+    getImages();
     if (data) {
       // Start the automatic sliding after 3 seconds
       timerRef.current = setInterval(nextSlide, 3000);
@@ -44,33 +54,35 @@ export default function LandingPageBanner() {
       };
     }
   }, [data]);
-  // console.log(currentSlide)
+
   return (
-    <div className={"w-full relative h-max block md:flex shadow-lg rounded-md"}>
-      <div className="justify-center rounded-md  min-w-full min-h-[220px] h-[30vh] bg-grey">
-        {data &&
-          data.results &&
-          data.results?.length > 0 &&
-          data.results.map(({ id, image_code }, index) => (
-            <div
-              key={id}
-              className={`relative h-[229px] min-w-[340px] ${
-                index === currentSlide ? "" : "hidden"
-              }`}
-            >
-              <Image
-                alt={"Landing page Banner"}
-                src={
-                  image_code
-                    ? `${process.env.BASE_URL}/api/v1/core/carousel/${image_code}`
-                    : "/landing-banner-2.png"
-                }
-                fill
-                priority
-                style={{ objectFit: "cover", objectPosition: "center" }}
-              />
-            </div>
-          ))}
+    <div
+      className={
+        "w-full relative min-h-[229px] h-[30vh]  block md:flex shadow-lg rounded-xl ovehi"
+      }
+    >
+      <div className="justify-center rounded-md  min-w-full h-full bg-grey">
+        {images?.map(({ id, image_code }, index) => (
+          <div
+            key={id}
+            className={`relative h-full min-w-[340px] ${
+              index === currentSlide ? "" : "hidden"
+            }`}
+          >
+            <Image
+              alt={"Landing page Banner"}
+              src={
+                image_code
+                  ? `${process.env.BASE_URL}/api/v1/core/carousel/${image_code}`
+                  : "/landing-banner-2.png"
+              }
+              fill
+              priority
+              style={{ objectFit: "cover", objectPosition: "center" }}
+            />
+          </div>
+        ))}
+
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex gap-2">
           {data && data.results && data.results?.length > 0
             ? data.results.map((_, index) => (
