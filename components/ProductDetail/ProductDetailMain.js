@@ -65,7 +65,10 @@ export default function ProductDetailMain({ product }) {
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "scroll";
-  }, [showModal]);
+    if (favorites?.length === 0) {
+      refetchFavorites();
+    }
+  }, [showModal, favorites]);
   const isFavorite = useMemo(() => {
     return favorites?.some((item) => item?.product?.id === parseInt(id));
   }, [product, favorites]);
