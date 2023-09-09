@@ -2,6 +2,7 @@ import React from "react";
 import {
   AboutCarousel,
   AboutContact,
+  AboutFooter,
   AboutMedia,
   AboutTrustedBy,
   AboutVarieties,
@@ -28,6 +29,9 @@ const Page = () => {
 
       {/*    contact    */}
       <AboutContact />
+
+      {/*    end section*/}
+      <AboutFooter />
     </div>
   );
 };
