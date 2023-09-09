@@ -4,7 +4,7 @@ import bgImage from "../../public/about-img.jpg";
 
 const Carousel = () => {
   return (
-    <div className={"h-[600px] bg-slate-400 w-full flex relative"}>
+    <div className={"h-[550px] bg-slate-400 w-full flex relative"}>
       <Image
         className={"h-full flex-1 object-cover bg-no-repeat"}
         src={bgImage}
