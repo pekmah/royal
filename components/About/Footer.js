@@ -2,11 +2,14 @@
 
 import React, { useState } from "react";
 import WhoWeAre from "./footer/WhoWeAre";
+import Terms from "./footer/Terms";
 
 const renderBody = (screen) => {
   switch (screen) {
     case 1:
       return <WhoWeAre />;
+    case 2:
+      return <Terms />;
 
     default:
       return <WhoWeAre />;
