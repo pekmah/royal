@@ -56,13 +56,16 @@ const accountLinks = [
 const AccountNav = () => {
   const pathname = usePathname();
   // console.log(pathname)
-  const inactive = "flex items-center gap-4 p-4 hover:bg-grey";
-  const active = `${inactive} bg-grey w-full `;
+  const inactive =
+    "flex items-center gap-4 px-4 py-3 mb-4 hover:bg-[#F8F8F8] text-gray-700 text-sm mx-1.5 flex-1";
+  const active = `${inactive} bg-[#F8F8F8] font-[600] text-black`;
 
   return (
     <aside className="flex relative h-[75vh] w-24  md:w-full bg-white shadow-md min-w-[10vw]  md:min-w-[20vw] max-w-[25vh]  rounded-md">
-      <div>
-        <h2 className={`${barlowSemi.className} p-4 text-sm md:text-base `}>
+      <div className={"flex-1"}>
+        <h2
+          className={`${barlowSemi.className} px-4 py-3.5 text-sm md:text-base `}
+        >
           My account
         </h2>
         <hr className="text-grey w-full mb-4" />
@@ -73,18 +76,14 @@ const AccountNav = () => {
             className={`${pathname === path ? active : inactive} `}
           >
             <div className="text-blue">{icon}</div>
-            <span
-              className={`${barlowNormal.className} text-lightgrey hidden md:block`}
-            >
-              {name}
-            </span>
+            <span className={`hidden md:block`}>{name}</span>
           </Link>
         ))}
-        <hr className="text-grey w-full mt-8" />
-        <div className="absolute bottom-4  ">
+
+        <div className="absolute bottom-2 py-4 border-t border-zinc-300 w-full font-barlow">
           <button
             onClick={() => signOut()}
-            className="flex items-center gap-2 px-4"
+            className="flex items-center gap-4 px-4"
           >
             <IoLogOutOutline size={iconSize} className="text-blue" />
             <span className="hidden md:block">Logout</span>
