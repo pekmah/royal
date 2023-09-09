@@ -4,6 +4,7 @@ import AboutOurStory from "./OurStory";
 import AboutVarieties from "./Varieties";
 import AboutMedia from "./OurMedia";
 import AboutContact from "./Contact";
+import AboutFooter from "./Footer";
 
 export {
   AboutCarousel,
@@ -12,4 +13,5 @@ export {
   AboutVarieties,
   AboutMedia,
   AboutContact,
+  AboutFooter,
 };

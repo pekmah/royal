@@ -3,28 +3,26 @@
 import { useSearchContext } from "@/context/SearchContext";
 import getAllProductCategories from "@/services/ProductCategory/getAllProductCategories";
 import { ProductCategoryEntity } from "@/types/product_category/ProductCategory";
-import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import { useQuery } from "react-query";
-import { useMediaQuery } from 'usehooks-ts';
+import { useMediaQuery } from "usehooks-ts";
 
 export default function CategoriesSidebar() {
   const { data, isLoading } = useQuery(["categories"], () =>
-    getAllProductCategories()
+    getAllProductCategories(),
   );
   const categoryParam = useSearchParams().get("category");
   const maxPrice = useSearchParams().get("maxPrice");
   const minPrice = useSearchParams().get("minPrice");
   const category = categoryParam ? parseInt(categoryParam) : undefined;
 
-  const isMediumDevice = useMediaQuery('(max-width: 1024px)');
-  const {setIsSidebarOpen} = useSearchContext()
+  const isMediumDevice = useMediaQuery("(max-width: 1024px)");
+  const { setIsSidebarOpen } = useSearchContext();
 
-  const CloseSidebar = () =>{
+  const CloseSidebar = () => {
     if (isMediumDevice) setIsSidebarOpen(false);
-  }
+  };
 
   return (
     <div className="text-sm w-full mb-4">
@@ -60,22 +58,10 @@ export default function CategoriesSidebar() {
                 !category && id === -1 ? "bg-grey text-blue font-semibold" : ""
               } ${category === id ? "bg-grey text-blue font-semibold" : ""}`}
               key={id}
-              
             >
-              {thumbnail_code ? (
-                <span>
-                  <Image
-                    src={`${process.env.BASE_URL}/api/v1/core/category/thumbnails/${thumbnail_code}`}
-                    width={24}
-                    height={24}
-                    priority
-                    alt={`Thumbnail for ${name} category.`}
-                  />
-                </span>
-              ) : null}
               {name}
             </Link>
-          )
+          ),
         )
       ) : !isLoading && !data ? (
         <p className="text-sm">Failed to load categories</p>
