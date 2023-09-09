@@ -17,6 +17,7 @@ import { useMutation } from "react-query";
 import productServices from "@/services/ProductServices";
 import useError from "@/hooks/useError";
 import FloatingLoader from "@/components/FloatingLoader";
+import InfoLabel from "@/components/Product/InfoLabel";
 
 const barlowSemi = Barlow({
   style: "normal",
@@ -322,7 +323,7 @@ export default function ProductDetailMain({ product }) {
     <div
       className={`w-full rounded-md bg-white flex flex-col md:flex-row gap-6 p-4 mt-4 relative`}
     >
-      <div className="w-full relative flex-1">
+      <div className="w-full relative flex-[0.8]">
         <div className="relative h-[240px]">
           <button
             className={
@@ -365,37 +366,6 @@ export default function ProductDetailMain({ product }) {
                 />
               </div>
             ) : null}
-            {pricing && pricing[0]?.finish !== null && (
-              <div className={"flex-1"}>
-                <label className="text-sm font-semibold mb-1">Finish:</label>
-                <select
-                  className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
-                  placeholder={"Choose Finish"}
-                  onChange={(e) => {
-                    // @ts-ignore
-                    setActiveFinish(
-                      pricing.find(
-                        (item) =>
-                          parseInt(item.id) === parseInt(e.target.value),
-                      ),
-                    );
-                  }}
-                >
-                  <option className={`px-2 py-3 bg-white text-gray-500 `}>
-                    Select
-                  </option>
-                  {finishList?.map((item) => (
-                    <option
-                      key={item?.id}
-                      value={item?.id}
-                      className={`px-2 py-3 bg-white text-gray-500 text-base`}
-                    >
-                      {item?.finish}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -421,9 +391,13 @@ export default function ProductDetailMain({ product }) {
             <div className=" flex gap-4 items-center">
               {
                 <div className={"flex-1"}>
-                  <label className="text-sm font-semibold mb-1">
-                    Gauge size:
-                  </label>
+                  <div className={"flex mb-1"}>
+                    <label className="text-sm font-semibold mb-1">
+                      Gauge size:
+                    </label>
+                    <InfoLabel text={"Thicker gauges are stronger."} />
+                  </div>
+
                   <select
                     className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
                     placeholder={"Choose Finish"}
@@ -448,30 +422,33 @@ export default function ProductDetailMain({ product }) {
                   </select>
                 </div>
               }
-              {length?.length > 0 && length !== null && (
+
+              {pricing && pricing[0]?.finish !== null && (
                 <div className={"flex-1"}>
-                  <label className="text-sm font-semibold mb-1">
-                    Measurements:
-                  </label>
+                  <label className="text-sm font-semibold mb-1">Finish:</label>
                   <select
                     className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
                     placeholder={"Choose Finish"}
                     onChange={(e) => {
-                      setActiveMeasurement(e.target.value);
-                      if (e.target.value?.toLocaleLowerCase() !== "custom") {
-                        setActiveLength(e.target.value);
-                      }
+                      // @ts-ignore
+                      setActiveFinish(
+                        pricing.find(
+                          (item) =>
+                            parseInt(item.id) === parseInt(e.target.value),
+                        ),
+                      );
                     }}
                   >
                     <option className={`px-2 py-3 bg-white text-gray-500 `}>
                       Select
                     </option>
-                    {[...length, "Custom"]?.map((item) => (
+                    {finishList?.map((item) => (
                       <option
-                        key={item}
+                        key={item?.id}
+                        value={item?.id}
                         className={`px-2 py-3 bg-white text-gray-500 text-base`}
                       >
-                        {item}
+                        {item?.finish}
                       </option>
                     ))}
                   </select>
@@ -479,10 +456,50 @@ export default function ProductDetailMain({ product }) {
               )}
             </div>
           )}
+          {/*Thicker gauges are stronger*/}
+          {length?.length > 0 && length !== null && (
+            <div className={"flex-1 mt-5"}>
+              <div className={"flex mb-1"}>
+                <label className="text-sm font-semibold ">Measurements:</label>
+
+                <InfoLabel
+                  text={
+                    "The default width is Normal Size. Select ‘Enter preferred measurements’ to customize."
+                  }
+                />
+              </div>
+              <select
+                className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
+                placeholder={"Choose Finish"}
+                onChange={(e) => {
+                  setActiveMeasurement(e.target.value);
+                  if (e.target.value?.toLocaleLowerCase() !== "custom") {
+                    setActiveLength(e.target.value);
+                  }
+                }}
+              >
+                <option className={`px-2 py-3 bg-white text-gray-500 `}>
+                  Select
+                </option>
+                {[...length, "Custom"]?.map((item) => (
+                  <option
+                    key={item}
+                    className={`px-2 py-3 bg-white text-gray-500 text-base`}
+                  >
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
           {activeMeasurement?.toLocaleLowerCase() === "custom" && (
-            <div className=" flex gap-4 pt-4 items-center">
+            <div className=" flex gap-4 pt-4 items-center ">
               <div className={"flex-1"}>
-                <label className="text-sm font-semibold mb-1">Length:</label>
+                <div className={"flex"}>
+                  <label className="text-sm font-semibold mb-1">Length:</label>
+                  <InfoLabel text={"In Metres"} />
+                </div>
 
                 <input
                   className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
