@@ -64,9 +64,10 @@ const Terms = (props) => {
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              1.4.3 agree that "you" in these general terms and conditions shall
-              reference both the individual user and the relevant person,
-              company or legal entity unless the context requires otherwise.
+              1.4.3 agree that &quot;you&quot; in these general terms and
+              conditions shall reference both the individual user and the
+              relevant person, company or legal entity unless the context
+              requires otherwise.
               <br />
             </span>
           </li>
@@ -383,7 +384,8 @@ const Terms = (props) => {
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              8.1 In these general terms and conditions, "your content" means:
+              8.1 In these general terms and conditions, &quot;your
+              content&quot; means:
               <br />
             </span>
           </li>
@@ -464,7 +466,7 @@ const Terms = (props) => {
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
               8.4 Your content must not be illegal or unlawful, infringe any
-              person's legal rights, or be capable of giving rise to legal
+              person&apos;s legal rights, or be capable of giving rise to legal
               action against any person (in each case in any jurisdiction and
               under any applicable law). Your content must not infringe or
               breach:
