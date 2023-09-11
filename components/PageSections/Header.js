@@ -5,7 +5,6 @@ import Link from "next/link";
 import {RxPerson} from "react-icons/rx";
 import {CgMenuLeft} from "react-icons/cg";
 import {IoMdClose} from "react-icons/io";
-import Image from "next/image";
 import {usePathname} from "next/navigation";
 import NavMenu from "./NavMenu";
 import DropdownMenu, {DropdownMenuItem} from "../Dropdown";
@@ -52,12 +51,10 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
               <CgMenuLeft color="#fff" size={"24"} />
             )}
           </button>
-          <Image
+          <img
             src={"/logo-2.png"}
             alt="Royal Mabati Logo"
-            height={30}
-            width={135}
-            style={{ width: "auto" }}
+            className={"h-24 object-cover"}
           />
         </div>
         <div className="w-[50%] flex">
