@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import FaFilePdfO from "../../../public/svg/FaFilePdfO";
 import Group from "../../../public/svg/Group";
 import { CContext } from "../../../context/CartContext2";
 
@@ -17,11 +16,6 @@ const SelectDelivery = () => {
               <p className="[flex-grow:1] w-[198px] text-xl h-6">
                 Select type of Delivery
               </p>
-            </div>
-
-            <div className="text-[#DC2A25] gap-2.5 flex justify-center items-center">
-              <FaFilePdfO className="w-[18px] h-5" />
-              <p className="w-[101px] text-base underline">Delivery Guide</p>
             </div>
           </div>
         </div>
@@ -44,7 +38,7 @@ const SelectDelivery = () => {
                 <div className="self-stretch  flex-col justify-start items-start gap-4 flex">
                   <div className="self-stretch justify-start items-center gap-4 inline-flex">
                     <div className="text-black text-base font-semibold">
-                      Door delivery
+                      Free Delivery
                     </div>
                     <div className="p-1 bg-red-600 bg-opacity-20 rounded justify-start items-start gap-2.5 flex">
                       <div className="text-red-600 text-base font-medium">
@@ -86,19 +80,6 @@ const SelectDelivery = () => {
                     <div className=" text-zinc-800 text-sm font-medium">
                       Receive your order as soon as possible
                     </div>
-                    <div className="">
-                      <span className="text-zinc-800 text-sm font-medium">
-                        Affordable rate that depends on the destination county.
-                        See{" "}
-                      </span>
-                      <span className="text-red-600 text-sm font-semibold underline">
-                        Delivery Guide
-                      </span>
-                      <span className="text-zinc-800 text-sm font-medium">
-                        {" "}
-                        for approximate prices.
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -127,7 +108,7 @@ const SelectDelivery = () => {
                   </div>
                   <div className="flex-col justify-start items-start gap-2 flex">
                     <div className=" text-zinc-800 text-sm font-medium">
-                      Location: Depot at Machakos, Mlolongo - Along Mombasa Rd
+                      Collect your order at a depot
                     </div>
                   </div>
                 </div>
@@ -135,15 +116,6 @@ const SelectDelivery = () => {
             </div>
           </div>
         </div>
-        {/*  Footer   */}
-        {/*<div className={"flex px-6 py-5 gap-x-6 border-t border-gray-200"}>*/}
-        {/*  <button className="w-32 h-11 p-2.5 rounded border border-red-600 justify-center items-center gap-2.5 inline-flex">*/}
-        {/*    <div className=" text-red-600 text-base font-bold">CancelSvg</div>*/}
-        {/*  </button>*/}
-        {/*  <div className="w-32 h-11 p-2.5 bg-red-600 rounded justify-center items-center gap-2.5 inline-flex">*/}
-        {/*    <div className=" text-white text-base font-bold">Save</div>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
       </div>
     </div>
   );
