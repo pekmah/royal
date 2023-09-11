@@ -7,7 +7,6 @@ import QueryProvider from "@/components/Providers/QueryProvider";
 import CartContextProvider from "@/context/CartContext";
 import CartContext2Provider from "@/context/CartContext2.js";
 import SearchContextProvider from "@/context/SearchContext";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,17 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        <script
-          type="text/javascript"
-          src="https://mylivechat.com/chatbutton.aspx?hccid=34992597
-&ButtonOnlineImage=1&ButtonOfflineImage=2&ButtonOnlineTooltip=Click to chat
-&ButtonOfflineTooltip=Leave a message"
-          async
-        ></script>
-      </Head>
       <AuthProvider>
-        <body className={`${inter.className}`} style={{ overflowX: "hidden" }}>
+        <body
+          className={`${inter.className} w-screen`}
+          style={{ overflowX: "hidden" }}
+        >
           <QueryProvider>
             <CartContextProvider>
               <CartContext2Provider>
