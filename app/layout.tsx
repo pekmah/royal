@@ -33,7 +33,10 @@ export default function RootLayout({
         ></script>
       </Head>
       <AuthProvider>
-        <body className={`${inter.className}`} style={{ overflowX: "hidden" }}>
+        <body
+          className={`${inter.className} w-screen`}
+          style={{ overflowX: "hidden" }}
+        >
           <QueryProvider>
             <CartContextProvider>
               <CartContext2Provider>
