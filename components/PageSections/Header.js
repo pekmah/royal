@@ -11,7 +11,7 @@ import DropdownMenu, {DropdownMenuItem} from "../Dropdown";
 import SearchInput from "../SearchInput";
 import {useContext} from "react";
 import {CContext} from "@/context/CartContext2.js";
-import CartSvg from "@/public/svg/CartSvg";
+import CartSvg from "@/public/svg/CartSvg"; // interface HeaderProps {
 
 // interface HeaderProps {
 //     isSidebarOpen: boolean;
@@ -51,6 +51,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
               <CgMenuLeft color="#fff" size={"24"} />
             )}
           </button>
+
           <img
             src={"/logo-2.png"}
             alt="Royal Mabati Logo"
