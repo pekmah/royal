@@ -11,7 +11,7 @@ import OurStory from "@/components/About/OurStory";
 
 const Page = () => {
   return (
-    <div>
+    <div className={"w-screen overflow-hidden"}>
       {/*  Carousel image  */}
       <AboutCarousel />
 

@@ -7,608 +7,348 @@ const Terms = (props) => {
       style={props.style}
     >
       <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
-        Returns and Claims
+        1. PRICE AND PAYMENT.
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              1.1 ”Royal Mabati” is the trading name for the Royal Mabati group
-              companies listed at Appendix 1. Each Royal Mabati group company
-              (“Royal Mabati” or “we”) operates an e-commerce platform
-              consisting of a website and mobile application (“marketplace”),
-              together with supporting IT, logistics and payment infrastructure,
-              for the sale and purchase of consumer products and services
-              (“products”) in its allocated territory as defined at Appendix 1
-              (“territory”).
+              1.1 Prices in the price list are based on rates and costs at the
+              prevailing date of the quotation and RMFL deserves the right to
+              increase the price and the customer must pay as per the effective
+              price list as notified by RMFL.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              1.2 These general terms and conditions shall apply to buyers and
-              sellers on the marketplace and shall govern your use of the
-              marketplace and related services.
+              1.2 RMFL’s payment terms are cash on order.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              1.3 By using our marketplace, you accept these general terms and
-              conditions in full. If you disagree with these general terms and
-              conditions or any part of these general terms and conditions, you
-              must not use our marketplace.
+              1.3 Notwithstanding the provisions of clause 1.2 above, a customer
+              may, subject to a separate approval process, be granted
+              installment payment terms, in which case, goods will be delivered
+              to the customer upon making the last and final payment within
+              three (3) months in respect of the goods purchased.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              1.4 If you use our marketplace in the course of a business or
-              other organizational project, then by so doing you:
+              1.5 All prices and any other charges are inclusive of Value Added
+              Tax (VAT).
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              1.4.1 confirm that you have obtained the necessary authority to
-              agree to these general terms and conditions;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              1.4.2 bind both yourself and the person, company or other legal
-              entity that operates that business or organizational project, to
-              these general terms and conditions; and
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              1.4.3 agree that &quot;you&quot; in these general terms and
-              conditions shall reference both the individual user and the
-              relevant person, company or legal entity unless the context
-              requires otherwise.
+              1.6 Steel products are sometimes subject to unusual price
+              volatility due to conditions beyond the control or anticipation of
+              RMFL. If there is an increase in the actual cost or shipping of
+              raw materials between the date of order confirmation and the time
+              when raw materials have arrived, the amount of the order may be
+              increased to reflect the additional costs to RMFL.
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        2. Registration and account
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        2. ORDERS
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              2.1 You may not register with our marketplace if you are under 18
-              years of age (by using our marketplace or agreeing to these
-              general terms and conditions, you warrant and represent to us that
-              you are at least 18 years of age).
+              2.1 RMFL may upon request by the customer issue a quotation in
+              respect of a product the customer wishes to purchase.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              2.2 If you register for an account with our marketplace, you will
-              be asked to provide an email address/user ID and password and you
-              agree to:
+              2.2 The customer must place an order (“Order”) ‘with RMFL in
+              respect of any goods the customer wishes to purchase, together
+              with written / verbal confirmation of the order specifications.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              2.2.1 keep your password confidential;
+              2.3 Orders are subject to formal acceptance in writing by RMFL
+              (‘Order Confirmation”). It is the responsibility of the customer
+              to ensure the correctness of the order as advised on order
+              confirmation and failure to communicate/ notify of any
+              discrepancies at the time of the order confirmation shall be
+              deemed to be an acceptance by the customer of the order as stated.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              2.2.2 notify us in writing immediately (using our contact details
-              provided at section 26) if you become aware of any disclosure of
-              your password; and
+              2.4 Upon acceptance by RMFL, orders shall not be subject to
+              cancellation or any amendment by the customer.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              2.2.3 be responsible for any activity on our marketplace arising
-              out of any failure to keep your password confidential, and you
-              acknowledge that you may be held liable for any losses arising out
-              of such a failure.
+              2.5 In the event that any specified material becomes unavailable
+              either temporarily or permanently after the order is confirmed,
+              RMFL may need to provide an equal substitute that will not affect
+              the overall performance of the product.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              2.3 Your account shall be used exclusively by you and you shall
-              not transfer your account to any third party. If you authorize any
-              third party to manage your account on your behalf this shall be at
-              your own risk.
+              2.6 In the event that any specified material becomes unavailable
+              either temporarily or permanently after the order is confirmed,
+              RMFL may need to provide an equal substitute that will not affect
+              the overall performance of the product.
               <br />
             </span>
           </li>
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              2.4 We may suspend or cancel your account, and/or edit your
-              account details, at any time in our sole discretion and without
-              notice or explanation, providing that if we cancel any products or
-              services you have paid for but not received, and you have not
-              breached these general terms and conditions, we will refund you in
-              respect of the same. See section 4.2 below for further information
-              about refunds.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              2.5 You may cancel your account on our marketplace by contacting
-              us as provided at section 26.
+              2.7 where colors and design are to be matched, RMFL shall make
+              reasonable efforts using standard colors and designs but does not
+              guarantee a perfect match and disclaims all liability arising out
+              of any color or design variation.
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        3. Terms and conditions of sale
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        3. RETURN
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              3.1 You acknowledge and agree that:
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.1.1 the marketplace provides an online location for sellers to
-              sell and buyers to purchase products;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.1.2 we shall accept binding sales, on behalf of sellers, but
-              (unless Royal Mabati is indicated as the seller) Royal Mabati is
-              not a party to the transaction between the seller and the buyer;
-              and
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.1.3 a contract for the sale and purchase of a product or
-              products will come into force between the buyer and seller, and
-              accordingly you commit to buying or selling the relevant product
-              or products, upon the buyer’s confirmation of purchase via the
-              marketplace.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.2 Subject to these general terms and conditions, the seller’s
-              terms of business shall govern the contract for sale and purchase
-              between the buyer and the seller. Notwithstanding this, the
-              following provisions will be incorporated into the contract of
-              sale and purchase between the buyer and the seller:
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.2.1 the price for a product will be as stated in the relevant
-              product listing;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.2.2 the price for the product must include all taxes and comply
-              with applicable laws in force from time to time;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.2.3 delivery charges, packaging charges, handling charges,
-              administrative charges, insurance costs, other ancillary costs and
-              charges, where applicable, will only be payable by the buyer if
-              this is expressly and clearly stated in the product listing; and
-              delivery of digital products may be made electronically;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.2.4 products must be of satisfactory quality, fit and safe for
-              any purpose specified in, and conform in all material respects to,
-              the product listing and any other description of the products
-              supplied or made available by the seller to the buyer; and
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.2.5 in respect of physical products sold, the seller warrants
-              that the seller has good title to, and is the sole legal and
-              beneficial owner of, the products and/or has the right to supply
-              the products pursuant to this agreement, and that the products are
-              not subject to any third party rights or restrictions including in
-              respect of third party intellectual property rights and/or any
-              criminal, insolvency or tax investigation or proceedings; and in
-              respect of digital products the seller warrants that the seller
-              has the right to supply the digital products to the buyer.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              3.2.6 The Seller warrants that, where a product sold has such
-              terms, the Seller will provide detailed disclosure of the product
-              terms and conditions, any applicable warranty, and other terms
-              necessary to inform the buyer on the product and its usage in the
-              specification section provided on each product page.
+              3.1 The customer is responsible for the selection and
+              specifications of the goods. Under no circumstance shall RMFL
+              accept the return or replacement of the materials selected by the
+              customer or be liable for the selection made by the customer.
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        4. Returns and refunds
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        4. CLAIMS
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              4.1 Returns of products by buyers and acceptance of returned
-              products by sellers shall be managed by us in accordance with the
-              returns page on the marketplace, as may be amended from time to
-              time. Acceptance of returns shall be in our discretion, subject to
-              compliance with applicable laws of the territory.
+              4.1 Claims in respect of shortages shall be made in writing,
+              immediately upon receipt of the consignment in respect of which a
+              shortage is alleged. No such claims shall be entertained if lodged
+              after the delivery of the consignment.
               <br />
             </span>
           </li>
+
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              4.2 Refunds in respect of returned products shall be managed in
-              accordance with the refunds page on the marketplace, as may be
-              amended from time to time. Our rules on refunds shall be exercised
-              in our discretion, subject to applicable laws of the territory. We
-              may offer refunds, in our discretion:
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              4.2.1 in respect of the product price;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              4.2.2 in respect of local and/or international shipping fees (as
-              stated on the refunds page); and
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              4.2.3 by way of store credits, vouchers, mobile money transfer,
-              bank transfers or such other methods as we may determine from time
-              to time.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              4.3 Returned products shall be accepted and refunds issued by
-              Royal Mabati, acting for and on behalf of the seller.
-              Notwithstanding paragraphs 4.1 and 4.2 above, in respect of
-              digital products or services and fresh food, Royal Mabati shall
-              issue refunds in respect of failures in delivery only. Refunds of
-              payment for such products for any other reasons shall be subject
-              to the seller’s terms and conditions of sale.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              4.4 Changes to our returns page or refunds page shall be effective
-              in respect of all purchases made from the date of publication of
-              the change on our website.
+              4.2 Unless otherwise expressly agreed, delivery lead times shall
+              not be regarded as binding and delays in delivery shall not
+              entitle customers to claim any damages resulting there from.
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        5. Payments
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        5. WARRANTY AND LIMITATIONS
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              5.1 You must make payments due under these general terms and
-              conditions in accordance with the Payments Information and
-              Guidelines on the marketplace.
+              RMFL warrants that all products supplied shall be free from
+              defects in material and conforms to the applicable KEBS Standard
+              KS EAS 468:2019, specifications, and be suitable for the purpose
+              intended by the buyer <br />
+              As per coating class 3 classification, the paint coating shall be
+              durable & resistant to weather as specified under KEBS Standards-
+              KS EAS 468:2019; UV & Slat Spray durability tests
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        6. Store credit
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        6. LIABILITY AND LIMITATION.
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              6.1 Store credits may be earned and managed in accordance with the
-              Royal Mabati Store Credit Terms and Conditions, as may be amended
-              from time to time. Royal Mabati reserves the right to cancel or
-              withdraw Royal Mabati store credit rewards for any reason in its
-              discretion, including if we suspect fraud or foul play. You can
-              view the Royal Mabati Store Credit terms and conditions and
-              information about your Royal Mabati store credit account on our
-              website and mobile application.
+              RMFL shall be responsible for making good any defect to any
+              portion of the roofing material which may appear or occur under
+              proper use during the warranty period, and which arises from
+              defects of material at the time of product supply, and the entire
+              liability of RMFL under this sales contract shall not exceed the
+              value of the goods purchased <br />
+              If any such defect shall appear, for which RMFL is responsible,
+              the customer shall immediately inform RMFL thereof stating in
+              writing the nature of the defect. RMFL shall investigate the claim
+              and if satisfied shall within a reasonable time provide repair
+              materials (paint in case of fading), to correct the defect. The
+              customer shall provide labor, and other incidental expenses.{" "}
+              <br />
+              RMFL shall be under no liability in respect of any defect arising
+              from fair wear and tear, willful damage, negligence installation
+              workmanship, mishandling, poor storage conditions, error I
+              customer specification or special, incidental and consequential
+              damages
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        7.Promotions
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        7. DELIVERY AND RATES
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              {
-                "7.1 Promotions and competitions run by Royal Mabati and/or other promoters shall be managed in accordance with the "
-              }
+              7.1 Unless otherwise expressly agreed, delivery dates or periods
+              are best estimates meant to assist the customer to plan their
+              operations and should not be construed as an express guarantee
+              that is binding on RMFL.
+              <br />
             </span>
-            <span className="text-base leading-8 underline list-disc">
-              Promotions Terms and Conditions
-            </span>
+          </li>
+
+          <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              {", where applicable. You can view "}
+              7.2 RMFL shall deliver the materials at the delivery charges
+              determined by RMFL from time to time, unless otherwise agreed in
+              writing prior to placing an order. For purposes of this clause,
+              delivery shall take place on the date the truck enters the
+              customer’s premises, or arrives at the premises and access is not
+              immediately allowed it should be noted that where the agreed point
+              of delivery is a place other than the customer’s site, this
+              provision will apply to delivery at that place of delivery. The
+              customer undertakes to take all such steps and do all such things
+              as may be required to be done so as to comply with its obligations
+              under this agreement to receive and accept delivery in terms
+              hereof.
+              <br />
             </span>
-            <span className="text-base leading-8 underline list-disc">
-              Promotions Terms and Conditions
-            </span>
+          </li>
+          <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              {" where they apply on our website or mobile application"}
+              7.3 Whenever RMFL is ready to deliver the materials and informs
+              the customer that it is ready to deliver the materials or proceeds
+              to deliver the materials, and the customer delays, fails, refuses,
+              or neglects to accept delivery, or is not available to accept
+              delivery or frustrates the delivery of the material, then delivery
+              shall be deemed to have taken place on the earlier date when RMFL
+              informs the customer that it is ready to deliver the material or
+              on the date the truck is refused entry into, or is otherwise
+              impeded from entering the customer’s premises, or the designated
+              delivery point if applicable
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        8. Rules about your content
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        8. TRANSFER OF RISK AND OWNERSHIP.
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              8.1 In these general terms and conditions, &quot;your
-              content&quot; means:
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.1.1 all works and materials (including without limitation text,
-              graphics, images, audio material, video material, audio-visual
-              material, scripts, software and files) that you submit to us or
-              our marketplace for storage or publication, processing by, or
-              onward transmission; and
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.1.2 all communications on the marketplace, including product
-              reviews, feedback and comments.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.2 Your content, and the use of your content by us in accordance
-              with these general terms and conditions, must be accurate,
-              complete and truthful.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.3 Your content must be appropriate, civil and tasteful, and
-              accord with generally accepted standards of etiquette and
-              behaviour on the internet, and must not:
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.3.1 be offensive, obscene, indecent, pornographic, lewd,
-              suggestive or sexually explicit;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.3.2 depict violence in an explicit, graphic or gratuitous
-              manner; or
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.3.3 be blasphemous, in breach of racial or religious hatred or
-              discrimination legislation;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.3.4 be deceptive, fraudulent, threatening, abusive, harassing,
-              anti-social, menacing, hateful, discriminatory or inflammatory;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.3.5 cause annoyance, inconvenience or needless anxiety to any
-              person; or
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.3.6 constitute spam
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.4 Your content must not be illegal or unlawful, infringe any
-              person&apos;s legal rights, or be capable of giving rise to legal
-              action against any person (in each case in any jurisdiction and
-              under any applicable law). Your content must not infringe or
-              breach:
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.4.1 any copyright, moral right, database right, trademark right,
-              design right, right in passing off or other intellectual property
-              right;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.4.2 any right of confidence, right of privacy or right under
-              data protection legislation;
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.4.5 any contractual obligation owed to any person; or
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.4.6 any court order.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.5 You must not use our marketplace to link to any website or web
-              page consisting of or containing material that would, were it
-              posted on our marketplace, breach the provisions of these general
-              terms and conditions.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.6 You must not submit to our marketplace any material that is or
-              has ever been the subject of any threatened or actual legal
-              proceedings or other similar complaint.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.7 The review function on the marketplace may be used to
-              facilitate buyer reviews on products. You shall not use the review
-              function or any other form of communication to provide inaccurate,
-              inauthentic or fake reviews.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.8 You must not interfere with a transaction by: (i) contacting
-              another user to buy or sell an item listed on the marketplace
-              outside of the marketplace; or (ii) communicating with a user
-              involved in an active or completed transaction to warn them away
-              from a particular buyer, seller or item; or (iii) contacting
-              another user with the intent to collect any payments
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.9 You acknowledge that all users of the marketplace are solely
-              responsible for interactions with other users and you shall
-              exercise caution and good judgment in your communication with
-              users. You shall not send them personal information including
-              credit card details.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.10 We may periodically review your content and we reserve the
-              right to remove any content in our discretion for any reason
-              whatsoever.
-              <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              8.11 If you learn of any unlawful material or activity on our
-              marketplace, or any material or activity that breaches these
-              general terms and conditions, you may inform us by contacting us
-              as provided at section 26.
+              8.1 Ownership of the goods shall remain with RMFL until when
+              delivery is made or deemed to have been made. The risk of loss or
+              damage in or to the goods shall pass to the customer upon
+              delivery.
               <br />
             </span>
           </li>
         </ul>
       </p>
-      <p className="font-barlow font-[400] text-[#333333] text-base leading-8 inline">
-        9. Rules about your content
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        9. OFF-LOADING OF MATERIAL
         <br />
         <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              9.1 You grant to us a worldwide, irrevocable, non-exclusive,
-              royalty-free license to use, reproduce, store, adapt, publish,
-              translate and distribute your content on our marketplace, and
-              across our marketing channels and any existing or future media.
+              9.1 The duty of the RMFL transport contractor and/or driver shall
+              be limited to the delivery of goods to the customer at the
+              customer’s premises or designated location and shall under no
+              circumstances be responsible for, or obliged to do physical
+              offloading of the material from the motor vehicle. This remains
+              the responsibility of the customer and/or the customer’s employees
+              and/or agents.
               <br />
             </span>
           </li>
+        </ul>
+      </p>
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        10. INDEMNITY AND UNDERTAKINGS
+        <br />
+        <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              9.2 You grant to us the right to sub-license the rights licensed
-              under section 9.1.
+              10.1 The customer hereby indemnifies and agrees to defend, keep
+              indemnified and hold harmless RMFL, in respect of all loss
+              including legal costs, liability, damage or expenses suffered or
+              incurred by the customer including third parties.
               <br />
             </span>
           </li>
+        </ul>
+      </p>
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        11. FORCE MAJEURE
+        <br />
+        <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              9.3 You grant to us the right to bring an action for infringement
-              of the rights licensed under section 9.1.
+              In the event of any act of God, war, strikes, breakdowns or plants
+              or any machinery at any of RMFL’s plants, riot, civil war,
+              operational disaster, heavy rains or floods making roads
+              impassable or any like circumstances arising or action taken
+              beyond or outside the reasonable control of RMFL and preventing
+              RMFL from supplying any material or otherwise performing any one
+              or more of its obligations in terms of these General Terms and
+              Conditions, then RMFL shall be relieved of such obligations to the
+              extent of the nature of the Force Majeure and shall not be liable
+              for any loss (direct and/or consequential) and/or damage which the
+              customer may suffer due to or resulting from the Force Majeure.,
+              provided always that a notice shall be promptly given to the
+              customer in regard to the Force Majeure.
               <br />
             </span>
           </li>
+        </ul>
+      </p>
+
+      <p className="font-barlow font-[700] text-[#333333] text-base leading-8 inline">
+        12. ENTIRE AGREEMENT AND VARIATION
+        <br />
+        <ul className="[padding-inline-start:1.5em] font-barlow text-[#333333] font-[400]">
           <li className="text-base leading-8 list-disc">
             <span className="text-base leading-8 list-disc">
-              9.4 You hereby waive all your moral rights in your content to the
-              maximum extent permitted by applicable law; and you warrant and
-              represent that all other moral rights in your content have been
-              waived to the maximum extent permitted by applicable law.
+              This document embodies the entire agreement between the parties
+              hereto and no amendment or variation of any of the provisions of
+              this General Conditions of sale shall be of any force or effect
+              unless reduced to writing and signed by RMFL’s Director.
               <br />
-            </span>
-          </li>
-          <li className="text-base leading-8 list-disc">
-            <span className="text-base leading-8 list-disc">
-              9.5 Without prejudice to our other rights under these general
-              terms and conditions, if you breach our rules on content in any
-              way, or if we reasonably suspect that you have breached our rules
-              on content, we may delete, unpublish or edit any or all of your
-              content.
             </span>
           </li>
         </ul>
