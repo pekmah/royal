@@ -8,6 +8,7 @@ import { useMediaQuery } from "usehooks-ts";
 import Footer from "./Footer";
 import { useSearchContext } from "@/context/SearchContext";
 import WhatsappBtn from "@/components/WhatsappBtn";
+import MyLiveChat from "@/components/MyLiveChat";
 
 export default function MainContainer({ children }: { children: ReactNode }) {
   const { isSidebarOpen, setIsSidebarOpen } = useSearchContext();
@@ -20,6 +21,8 @@ export default function MainContainer({ children }: { children: ReactNode }) {
 
   return (
     <>
+      <MyLiveChat />
+
       <Header
         setIsSidebarOpen={setIsSidebarOpen}
         isSidebarOpen={isSidebarOpen}

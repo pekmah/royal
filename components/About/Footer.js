@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import WhoWeAre from "./footer/WhoWeAre";
 import Terms from "./footer/Terms";
+import Faqs from "./footer/Faqs";
 
 const renderBody = (screen) => {
   switch (screen) {
@@ -10,6 +11,8 @@ const renderBody = (screen) => {
       return <WhoWeAre />;
     case 2:
       return <Terms />;
+    case 3:
+      return <Faqs />;
 
     default:
       return <WhoWeAre />;
@@ -46,16 +49,24 @@ const Header = ({ setCurrent, current }) => {
 };
 
 const HeaderItem = ({ isCurrent, text, handleSwitch }) => (
-  <button
-    className={`font-barlow  ${
-      isCurrent
-        ? "about-h3 font-[700] text-xl"
-        : "font-[400] text-gray-500 text-lg"
-    }`}
-    onClick={handleSwitch}
-  >
-    {text}
-  </button>
+  <div className={"flex flex-col items-center gap-y-2"}>
+    <button
+      className={`font-barlow  ${
+        isCurrent
+          ? "about-h3 font-[700] text-xl"
+          : "font-[400] text-gray-500 text-lg"
+      }`}
+      onClick={handleSwitch}
+    >
+      {text}
+    </button>
+
+    {isCurrent ? (
+      <div className={"w-14 h-1 bg-gray-200 rounded-full "} />
+    ) : (
+      <div />
+    )}
+  </div>
 );
 
 export const navList = [
