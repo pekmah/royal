@@ -1,6 +1,5 @@
-import ProductGrid from '@/components/Product/ProductGrid';
-import getManyProducts from '@/services/Product/getManyProducts';
+import ProductGrid from "@/components/Product/ProductGrid";
 
 export default function Page() {
-	return <ProductGrid queryFn={getManyProducts} />;
+  return <ProductGrid />;
 }
