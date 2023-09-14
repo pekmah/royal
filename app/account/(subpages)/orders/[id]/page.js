@@ -194,7 +194,7 @@ const Page = ({ params }) => {
 
           <div className={" p-3 font-barlow text-gray-500 "}>
             {res?.data?.fundi?.map((fundi) => (
-              <div className={"flex flex-1 justify-between"}>
+              <div key={fundi?.id} className={"flex flex-1 justify-between"}>
                 <span>{fundi?.name} </span>
 
                 <div>
