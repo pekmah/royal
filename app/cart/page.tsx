@@ -170,7 +170,7 @@ const Cart = () => {
               </div>
               <div className="flex gap-4 py-6 w-full justify-center">
                 <button
-                  onClick={() => router.back()}
+                  onClick={() => router.push("/")}
                   className=" button-secondary border border-primary_red py-1.5 font-bold px-4 h-14 "
                 >
                   Back To shop
