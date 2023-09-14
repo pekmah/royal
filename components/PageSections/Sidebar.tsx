@@ -74,7 +74,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
           <MultiRangeSlider
             name={"Price"}
             min={1}
-            max={30000}
+            max={50000}
             initialValues={
               maxPrice && minPrice
                 ? { max: maxPrice, min: minPrice }
