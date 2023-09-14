@@ -40,6 +40,11 @@ const CartContext2Provider = ({ children }) => {
     orderRequest: {},
     isEditing: false,
     editScreen: "",
+    fundi: {
+      fName: "",
+      lName: "",
+      phone: "",
+    },
   });
 
   const fetchFavorites = async () => {

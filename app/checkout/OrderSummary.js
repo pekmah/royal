@@ -100,6 +100,10 @@ const OrderSummary = ({ className }) => {
       payment_plan: checkout?.payment?.type,
       order_type: checkout?.del_option,
       ...delivery,
+      fundi_name: checkout?.fundi?.fName
+        ? checkout?.fundi?.fName + checkout?.fundi?.lName || ""
+        : "",
+      fundi_contact: checkout?.fundi?.phone || "",
     });
 
     // // call the initiate payment endpoint

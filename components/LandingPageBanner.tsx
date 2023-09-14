@@ -58,10 +58,10 @@ export default function LandingPageBanner() {
   return (
     <div
       className={
-        "w-full relative min-h-[229px] h-[30vh]  block md:flex shadow-lg rounded-xl ovehi"
+        "w-full relative min-h-[229px] h-[30vh] block md:flex shadow-lg  rounded-xl overflow-hidden"
       }
     >
-      <div className="justify-center rounded-md  min-w-full h-full bg-grey">
+      <div className="justify-center  overflow-hidden min-w-full h-full bg-grey">
         {images?.map(({ id, image_code }, index) => (
           <div
             key={id}
