@@ -27,7 +27,7 @@ const Page = ({ params }) => {
       return prev + parseFloat(cur?.total_price);
     }, 0);
   }, [res?.data?.order_items]);
-
+  console.log(res);
   // const
   return (
     <div className={"relative pb-10"}>
@@ -183,6 +183,26 @@ const Page = ({ params }) => {
               </div>
             </div>
           )}
+        </div>
+
+        <div
+          className={"flex gap-x-3 flex-col border border-zinc-200 mb-3 mx-4"}
+        >
+          <div className={"p-3 border-b border-slate-200 font-semibold  "}>
+            Construction Expert
+          </div>
+
+          <div className={" p-3 font-barlow text-gray-500 "}>
+            {res?.data?.fundi?.map((fundi) => (
+              <div className={"flex flex-1 justify-between"}>
+                <span>{fundi?.name} </span>
+
+                <div>
+                  <h6>{fundi?.contact}</h6>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div
