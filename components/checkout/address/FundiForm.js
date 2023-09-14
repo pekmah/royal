@@ -18,9 +18,7 @@ const FundiForm = () => {
   const { isLoading: fetchingLocations, data: locRes } = useCustomQuery(
     Paths.userLocationsUrl,
   );
-  const { isLoading: fetchingCenters, data: pickupCenters } = useCustomQuery(
-    Paths.pickupCentersUrl,
-  );
+
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
 
@@ -94,7 +92,7 @@ const FundiForm = () => {
         <div className="h-[25px]  font-[600] flex justify-between items-end w-full ">
           <div className="[flex-grow:1] gap-[17px] flex justify-between items-center h-full text-black">
             <Group className=" h-[17px] my-auto" />
-            <p className="[flex-grow:1] text-xl h-6 font-barlow flex items-center">
+            <p className="[flex-grow:1] text-xl h-6 font-barlow flex items-center gap-x-2">
               Construction Expert{"  "}
               <span className={"text-[13px] font-[500] text-primary_red"}>
                 (optional)
@@ -105,38 +103,6 @@ const FundiForm = () => {
       </div>
 
       <div className={"bg-white flex-1"}>
-        {/*  <div className={" p-6 grid grid-cols-2 gap-10 place-items-center"}>*/}
-        {/*    {locRes?.data?.results?.map((item, l) => (*/}
-        {/*      <LocationItem*/}
-        {/*        key={l}*/}
-        {/*        title={item.region?.region}*/}
-        {/*        desc={item?.instructions}*/}
-        {/*        phone={"+254" + item?.delivery_phone_number}*/}
-        {/*        handleChoose={() => {*/}
-        {/*          setCheckout((prev) => ({*/}
-        {/*            ...prev,*/}
-        {/*            location: {*/}
-        {/*              ...prev?.location,*/}
-        {/*              // loc: [...prev?.location?.loc, locRes?.data],*/}
-        {/*              chosenLocation: {*/}
-        {/*                region: item?.region,*/}
-        {/*                instructions: item?.instructions,*/}
-        {/*                delivery_phone_number: item?.delivery_phone_number,*/}
-        {/*                loc: item,*/}
-        {/*              },*/}
-        {/*              phone: item?.delivery_phone_number,*/}
-        {/*              // chosenLocation: locRes?.data,*/}
-        {/*              // phone: locRes?.data?.delivery_phone_number,*/}
-        {/*            },*/}
-        {/*          }));*/}
-        {/*        }}*/}
-        {/*        isChecked={*/}
-        {/*          checkout?.location?.chosenLocation?.loc?.id === item?.id*/}
-        {/*        }*/}
-        {/*      />*/}
-        {/*    ))}*/}
-        {/*  </div>*/}
-
         {
           <div className={"p-8"}>
             <div className="w-full h-[214px] rounded border border-zinc-100 p-5 flex flex-wrap gap-y-4 justify-between">
@@ -198,10 +164,7 @@ const FundiForm = () => {
                 />
               </div>
             </div>
-            {(isLoading ||
-              fetchingLocations ||
-              fetchingCenters ||
-              mutation.isLoading) && (
+            {(isLoading || mutation.isLoading) && (
               <FloatingLoader
                 message={
                   mutation?.isLoading
@@ -212,41 +175,6 @@ const FundiForm = () => {
             )}
           </div>
         }
-
-        <div
-          className={
-            "flex-row justify-end pb-3 pt-2 w-full bg-white items-center pr-5 mb-10"
-          }
-        >
-          <button
-            className={
-              "flex-row items-center font-barlow text-primary_red float-right"
-            }
-            type={"button"}
-            onClick={() => {
-              setShowCreateForm(!showCreateForm);
-              setCheckout((prev) => ({
-                ...prev,
-                location: {
-                  ...prev?.location,
-                  chosenLocation: {},
-                  phone: "",
-                },
-              }));
-            }}
-          >
-            <span className={"text-2xl text-primary-red mr-1 font-semibold"}>
-              +
-            </span>
-            <span
-              className={
-                "text-primary-red font-barlow-semibold text-lg font-semibold"
-              }
-            >
-              Create New Location
-            </span>
-          </button>
-        </div>
       </div>
 
       {/*  Footer   */}
