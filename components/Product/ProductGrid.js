@@ -2,8 +2,6 @@
 
 import { useQuery, useQueryClient } from "react-query";
 import ProductCard, { ProductCardSkeleton } from "./ProductCard";
-import { PaginatedResponse } from "@/types/api/Response";
-import { ProductEntity } from "@/types/product/Product";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -11,20 +9,11 @@ import CircleLoader from "../Loaders/CircleLoader";
 import Breadcrumb from "../BreadCrumb";
 import { useSearchContext } from "@/context/SearchContext";
 import useAuth from "@/hooks/useAuth";
+import axios from "axios";
 
-interface ProductGridProps {
-  queryFn: (
-    pageSize?: number,
-    page?: number,
-    category?: number,
-    max?: number,
-    min?: number,
-  ) => Promise<PaginatedResponse<ProductEntity>>;
-}
-
-export default function ProductGrid({ queryFn }: ProductGridProps) {
+export default function ProductGrid() {
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(20);
+  const [pageSize] = useState(500);
   const [count, setCount] = useState(0);
   // const [searchCount, setSearchCount] = useState(0)
 
@@ -46,16 +35,22 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
   const queryClient = useQueryClient();
 
   const { data, isLoading, isFetching } = useQuery(
-    category && maxPrice && minPrice
-      ? ["products", category, page, maxPrice, minPrice]
-      : category
-      ? ["products", category, page]
-      : ["products", "all", page],
-    () => queryFn(pageSize, page, category, maxPrice, minPrice),
+    ["products", pageSize, page, category, minPrice, maxPrice],
+    async () =>
+      axios.get(
+        `${
+          process.env.BASE_URL
+        }/api/v1/core/products?page_size=${pageSize}&page=${page}${
+          category ? `&category=${category}` : ""
+        }${minPrice ? `&minPrice=${minPrice}` : ""}${
+          maxPrice ? `&maxPrice=${maxPrice}` : ""
+        }`,
+      ),
+
     {
       keepPreviousData: true,
       onSuccess(data) {
-        setCount(data.count);
+        setCount(data?.data?.count);
       },
       onError(err) {
         console.error("err", err);
@@ -63,52 +58,38 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
     },
   );
 
-  // const { data: searchProduct, isLoading:loading } = useQuery<ProductEntity[]>(['search'], () => search(searchQuery),
-  //     {
-  //         enabled: searchQuery.trim() !== "", // Only fetch if searchQuery is not empty
-  //         // onSuccess(searchProduct) {
-  //         //     setSearchCount(searchProduct?.length!);
-  //         // },
-  //         // onError(err) {
-  //         //     console.error("err", err);
-  //         // },
-  //     }
-  // )
-  // console.log(Search)
-  // console.log(searchProduct)
   useEffect(() => {
     setSelectedMinPrice(minPrice);
     setSelectedMaxPrice(maxPrice);
   }, [minPrice, maxPrice]);
 
-  const [filteredProductCount, setFilteredProductCount] = useState<
-    number | null
-  >(null);
+  const [filteredProductCount, setFilteredProductCount] = useState(null);
 
   // ...
 
   useEffect(() => {
-    if (data?.results) {
-      const count = data.results.filter(
+    if (data?.data?.results) {
+      const count = data.data?.results.filter(
         (product) =>
           !selectedMinPrice ||
           !selectedMaxPrice ||
           (product.pricing &&
-            product.pricing[0]?.price! >= selectedMinPrice! &&
-            product.pricing[0]?.price! <= selectedMaxPrice!),
+            product.pricing[0]?.price >= selectedMinPrice &&
+            product.pricing[0]?.price <= selectedMaxPrice),
       ).length;
       setFilteredProductCount(count);
     }
   }, [data, selectedMinPrice, selectedMaxPrice]);
 
-  useEffect(() => {
-    if (data?.next) {
-      queryClient.prefetchQuery(["products", page + 1], () =>
-        queryFn(pageSize, page + 1),
-      );
-    }
-  }, [data, page, queryClient, pageSize, queryFn]);
+  // useEffect(() => {
+  //   if (data?.data?.next) {
+  //     queryClient.prefetchQuery(["products", page + 1], () =>
+  //       queryFn(pageSize, page + 1),
+  //     );
+  //   }
+  // }, [data, page, queryClient, pageSize, queryFn]);
 
+  // @ts-ignore
   return (
     <div className="w-full">
       {pathname.startsWith("/products") ? (
@@ -119,7 +100,7 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
       ) : null}
 
       <div className={"relative"}>
-        {data?.results ? (
+        {data?.data?.results ? (
           <div className="mt-5 font-barlow font-[600] text-xl z-10">{`Products (${
             searchQuery ? searchCount : filteredProductCount
           })`}</div>
@@ -137,20 +118,20 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
                 !selectedMinPrice ||
                 !selectedMaxPrice ||
                 (product.pricing &&
-                  product.pricing[0]?.price! >= selectedMinPrice! &&
-                  product.pricing[0]?.price! <= selectedMaxPrice!),
-            ).map((product: any, idx: any) => (
+                  product.pricing[0]?.price >= selectedMinPrice &&
+                  product.pricing[0]?.price <= selectedMaxPrice),
+            ).map((product, idx) => (
               <ProductCard key={`${product.id}_${idx}`} product={product} />
             ))
-          : data && data.results
-          ? data.results
+          : data && data.data?.results
+          ? data.data?.results
               .filter(
                 (product) =>
                   !selectedMinPrice ||
                   !selectedMaxPrice ||
                   (product.pricing &&
-                    product.pricing[0]?.price! >= selectedMinPrice! &&
-                    product.pricing[0]?.price! <= selectedMaxPrice!),
+                    product.pricing[0]?.price >= selectedMinPrice &&
+                    product.pricing[0]?.price <= selectedMaxPrice),
               )
               .map((product, idx) => (
                 <ProductCard key={`${product.id}_${idx}`} product={product} />
@@ -158,7 +139,7 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
           : null}
       </div>
 
-      {data?.results ? (
+      {data?.data?.results ? (
         <div className="w-full flex justify-center py-8">
           <Pagination
             currentPage={page}
@@ -166,7 +147,8 @@ export default function ProductGrid({ queryFn }: ProductGridProps) {
             count={searchQuery ? searchCount : count}
             pageSize={pageSize}
             itemCount={
-              searchQuery && Search ? Search.length : filteredProductCount || 0
+              searchQuery &&
+              (Search ? Search.length : filteredProductCount || 0)
             }
           />
         </div>
