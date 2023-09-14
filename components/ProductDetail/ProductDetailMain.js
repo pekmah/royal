@@ -276,6 +276,8 @@ export default function ProductDetailMain({ product }) {
       ]);
       toast.success("Item added to cart");
     }
+
+    router.push("/cart");
   };
 
   const addFavoriteMutation = useMutation(
