@@ -3,6 +3,7 @@
 import React from "react";
 import {
   AddressForm,
+  FundiForm,
   PaymentForm,
   SelectDelivery,
 } from "../../../components/checkout/address";
@@ -15,6 +16,9 @@ const Address = () => {
 
       {/*  enter address  */}
       <AddressForm />
+
+      {/*  Fundi  */}
+      <FundiForm />
 
       {/*    Payment   */}
       <PaymentForm />
