@@ -40,7 +40,8 @@ export default function NavMenu() {
       </div>
       <div className="flex divide-x-2 items-center gap-2">
         <p>Contact Us: +254 722 638 383</p>
-        <div className="flex gap-4 px-4 items-center">
+
+        <div className="hidden md:flex gap-4 px-4 items-center">
           {navSocials.map(({ path, icon }) => (
             <a href={path} key={path} target="_blank" rel="noopener noreferrer">
               {icon}

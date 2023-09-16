@@ -37,9 +37,9 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
       <div
         className={`${
           path === "/about" ? "hidden" : "flex"
-        } w-full py-4 px-8  justify-between items-center bg-blue shadow-sm`}
+        } w-full py-4 px-3 md:px-8 justify-between gap-3 md:gap-0 items-center bg-blue shadow-sm`}
       >
-        <div className={`flex gap-8 items-center`}>
+        <div className={`hidden md:flex gap-8 items-center flex-1`}>
           <button
             onClick={() => {
               setIsSidebarOpen((prev) => !prev);
@@ -53,15 +53,17 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
           </button>
 
           <img
-            src={"/logo-2.png"}
+            src={"/logo-2.jpeg"}
             alt="Royal Mabati Logo"
-            className={"h-24 object-cover"}
+            className={"h-16 object-cover rounded-md"}
           />
         </div>
-        <div className="w-[50%] flex">
+        <div className=" w-full md:w-[50%] flex">
           <SearchInput />
         </div>
-        <div className={`flex gap-4 items-center`}>
+        <div
+          className={`flex gap-4 items-center md:flex-1 justify-end pr-1 md:justify-center`}
+        >
           {status === "unauthenticated" ? (
             <div>
               <Link
@@ -77,10 +79,10 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
               className={"bg-grey h-[38px] w-[74px] animate-pulse rounded-md"}
             />
           ) : status === "authenticated" ? (
-            <div className="flex relative items-center gap-6 h-full">
+            <div className="flex relative items-center gap-5 md:gap-7 h-full">
               <Link
                 href={"/cart"}
-                className="flex items-center gap-8 font-medium"
+                className="flex items-center gap-3 font-medium"
               >
                 <div className="">
                   <CartSvg />
@@ -88,16 +90,18 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
                     {cart?.length}
                   </div>
                 </div>
-                <p className="text-sm text-white">Cart</p>
+                <p className="text-sm text-white hidden md:block">Cart</p>
               </Link>
               <DropdownMenu
                 buttonText={
                   <Link
                     href={"/account"}
-                    className="flex items-center gap-2.5 font-medium"
+                    className="flex items-center gap-1.5 font-medium"
                   >
                     <RxPerson size={"24"} color={"#fff"} />
-                    <p className="text-sm text-white">Account</p>
+                    <p className="text-sm text-white hidden md:block">
+                      Account
+                    </p>
                   </Link>
                 }
               >
