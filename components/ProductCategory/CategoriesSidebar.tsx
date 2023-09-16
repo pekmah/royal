@@ -54,9 +54,13 @@ export default function CategoriesSidebar() {
                     }`
               }`}
               onClick={CloseSidebar}
-              className={`w-full justify-start flex items-center gap-2 px-4 py-2 hover:bg-grey hover:text-blue ${
-                !category && id === -1 ? "bg-grey text-blue font-semibold" : ""
-              } ${category === id ? "bg-grey text-blue font-semibold" : ""}`}
+              className={`w-full justify-start flex items-center gap-2 px-4 py-2 hover:bg-[#F8F8F8] hover:text-blue ${
+                !category && id === -1
+                  ? "bg-[#F8F8F8] text-blue font-semibold"
+                  : ""
+              } ${
+                category === id ? "bg-[#F8F8F8] text-blue font-semibold" : ""
+              }`}
               key={id}
             >
               {name}
