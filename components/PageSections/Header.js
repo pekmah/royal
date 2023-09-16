@@ -39,7 +39,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
           path === "/about" ? "hidden" : "flex"
         } w-full py-4 px-3 md:px-8 justify-between gap-3 md:gap-0 items-center bg-blue shadow-sm`}
       >
-        <div className={`hidden md:flex gap-8 items-center flex-1`}>
+        <div className={`flex md:gap-8 items-center flex-1`}>
           <button
             onClick={() => {
               setIsSidebarOpen((prev) => !prev);
@@ -55,7 +55,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
           <img
             src={"/logo-2.jpeg"}
             alt="Royal Mabati Logo"
-            className={"h-16 object-cover rounded-md"}
+            className={"h-16 object-cover rounded-md hidden md:flex"}
           />
         </div>
         <div className=" w-full md:w-[50%] flex">

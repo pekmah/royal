@@ -67,10 +67,6 @@ export default function Footer() {
           </div>
 
           <div className={`flex-col mt-6`}>
-            <p className={`text-sm mt-3`}>Return and Refund Policy</p>
-          </div>
-
-          <div className={`flex-col mt-6`}>
             <p className={`text-sm mt-3`}>Shipping</p>
           </div>
 

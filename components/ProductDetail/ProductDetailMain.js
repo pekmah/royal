@@ -323,13 +323,13 @@ export default function ProductDetailMain({ product }) {
 
   return (
     <div
-      className={`w-full rounded-md bg-white flex flex-col md:flex-row gap-6 p-4 mt-4 relative`}
+      className={`w-full rounded-md bg-white flex flex-col md:flex-row gap-6 p-2 md:p-4 mt-4 relative`}
     >
       <div className="w-full relative flex-[0.8]">
         <div className="relative h-[240px]">
           <button
             className={
-              "cursor-pointer z-[100] rounded-full absolute top-2 right-2 flex items-center justify-center h-10 w-10 bg-[#F3F3F3]"
+              "cursor-pointer z-[20] rounded-full absolute top-2 right-2 flex items-center justify-center h-10 w-10 bg-[#F3F3F3]"
             }
             onClick={handleFavorites}
           >
@@ -390,10 +390,10 @@ export default function ProductDetailMain({ product }) {
             </div>
           )}
           {product?.pricing?.at(0)?.gauge_size && (
-            <div className=" flex gap-4 items-center">
+            <div className=" flex flex-col md:flex-row w-full gap-4 items-center">
               {
-                <div className={"flex-1"}>
-                  <div className={"flex mb-1"}>
+                <div className={"flex-1 w-full md:w-auto"}>
+                  <div className={"flex mb-1 flex-col md:flex-row"}>
                     <label className="text-sm font-semibold mb-1">
                       Gauge size:
                     </label>
@@ -426,7 +426,7 @@ export default function ProductDetailMain({ product }) {
               }
 
               {pricing && pricing[0]?.finish !== null && (
-                <div className={"flex-1"}>
+                <div className={"flex-1 w-full md:w-auto"}>
                   <label className="text-sm font-semibold mb-1">Finish:</label>
                   <select
                     className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
@@ -461,7 +461,7 @@ export default function ProductDetailMain({ product }) {
           {/*Thicker gauges are stronger*/}
           {length?.length > 0 && length !== null && (
             <div className={"flex-1 mt-5"}>
-              <div className={"flex mb-1"}>
+              <div className={"flex mb-1 flex-col md:flex-row"}>
                 <label className="text-sm font-semibold ">Measurements:</label>
 
                 <InfoLabel
@@ -496,9 +496,9 @@ export default function ProductDetailMain({ product }) {
           )}
 
           {activeMeasurement?.toLocaleLowerCase() === "custom" && (
-            <div className=" flex gap-4 pt-4 items-center ">
-              <div className={"flex-1"}>
-                <div className={"flex"}>
+            <div className=" flex gap-4 pt-4 items-center flex-col md:flex-row">
+              <div className={"flex-1 w-full md:w-auto"}>
+                <div className={"flex flex-col md:flex-row mb-1 md:mb-0"}>
                   <label className="text-sm font-semibold mb-1">Length:</label>
                   <InfoLabel text={"In Metres"} />
                 </div>
@@ -507,10 +507,10 @@ export default function ProductDetailMain({ product }) {
                   className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
                   placeholder={"Length"}
                   onChange={(e) => setActiveLength(e.target.value)}
-                ></input>
+                />
               </div>
 
-              <div className={"flex-1"}>
+              <div className={"flex-1 w-full md:w-auto"}>
                 <label className="text-sm font-semibold mb-1">Width:</label>
                 {/*<div*/}
                 {/*    className="bg-[#FCC2C0] text-primary_red px-4 text-xs py-1 my-1 rounded-3xl">{`Default Width is !000mm, Select Custom for more`}</div>*/}

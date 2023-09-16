@@ -26,7 +26,7 @@ export default function SearchInput() {
           className={`h-full py-2 px-2 w-full placeholder-gray-900 font-barlow font-[500] border-grey rounded md:rounded-l-none focus:outline-none`}
         />
       </div>
-      <button className="bg-primary_red rounded text-white font-barlow px-3 md:px-6 py-2 font-semibold">
+      <button className="hidden md:flex items-center bg-primary_red rounded text-white font-barlow px-3 md:px-6 py-2 font-semibold">
         Search
       </button>
     </div>
