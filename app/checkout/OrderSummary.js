@@ -88,22 +88,29 @@ const OrderSummary = ({ className }) => {
   //   },
   //
   // });
-
+  console.log("FUNDI", checkout?.fundi);
   const handleProceed = async () => {
     const delivery =
       checkout?.del_option === "OWN_COLLECTION"
         ? { pickup_center_id: checkout?.location?.pickupPoint?.id }
         : { delivery_location: checkout?.location?.chosenLocation.loc?.id };
+    const constructor = checkout?.fundi?.id
+      ? {
+          fundi_id: checkout?.fundi?.id,
+        }
+      : {
+          fundi_name: checkout?.fundi?.fName
+            ? checkout?.fundi?.fName + checkout?.fundi?.lName || ""
+            : "",
+          fundi_contact: checkout?.fundi?.phone || "",
+        };
 
     mutation.mutate({
       cart_id: checkout?.cartId,
       payment_plan: checkout?.payment?.type,
       order_type: checkout?.del_option,
       ...delivery,
-      fundi_name: checkout?.fundi?.fName
-        ? checkout?.fundi?.fName + checkout?.fundi?.lName || ""
-        : "",
-      fundi_contact: checkout?.fundi?.phone || "",
+      ...constructor,
     });
 
     // // call the initiate payment endpoint

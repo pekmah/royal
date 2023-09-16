@@ -14,11 +14,8 @@ import KenyaFlagSvg from "../../../public/svg/KenyaFlag";
 
 const FundiForm = () => {
   const { setCheckout, checkout } = useContext(CContext);
-  const { isLoading, data: res } = useCustomQuery(Paths.countiesUrl);
-  const { isLoading: fetchingLocations, data: locRes } = useCustomQuery(
-    Paths.userLocationsUrl,
-  );
-
+  const { isLoading, data: res } = useCustomQuery(Paths.expertsUrl);
+  console.log("Fundi", res);
   const handleError = useError();
   const { showSuccessToast } = useCustomToast();
 
@@ -103,7 +100,31 @@ const FundiForm = () => {
       </div>
 
       <div className={"bg-white flex-1"}>
-        {
+        <div className={" p-6 grid grid-cols-2 gap-10 place-items-center"}>
+          {res?.data?.map((item, l) => (
+            <FundiItem
+              key={l}
+              title={item.name}
+              phone={item?.contact}
+              handleChoose={() => {
+                setCheckout((prev) => ({
+                  ...prev,
+                  fundi: {
+                    id: item?.id,
+                    fName: item?.name?.split(" ")?.at(0),
+                    lName: item?.name?.split(" ")?.at(1),
+                    phone: item?.contact,
+                  },
+                }));
+              }}
+              isChecked={checkout?.fundi?.id === item?.id}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className={"bg-white flex-1"}>
+        {showCreateForm && (
           <div className={"p-8"}>
             <div className="w-full h-[214px] rounded border border-zinc-100 p-5 flex flex-wrap gap-y-4 justify-between">
               <CInput
@@ -169,12 +190,39 @@ const FundiForm = () => {
                 message={
                   mutation?.isLoading
                     ? "Saving Address . . ."
-                    : "Fetching locations"
+                    : "Fetching constructors"
                 }
               />
             )}
           </div>
+        )}
+      </div>
+
+      <div
+        className={
+          "flex-row justify-end pb-3 pt-2 w-full bg-white items-center pr-5 mb-10"
         }
+      >
+        <button
+          className={
+            "flex-row items-center font-barlow text-primary_red float-right"
+          }
+          type={"button"}
+          onClick={() => {
+            setShowCreateForm(!showCreateForm);
+          }}
+        >
+          <span className={"text-2xl text-primary-red mr-1 font-semibold"}>
+            +
+          </span>
+          <span
+            className={
+              "text-primary-red font-barlow-semibold text-lg font-semibold"
+            }
+          >
+            Create New
+          </span>
+        </button>
       </div>
 
       {/*  Footer   */}
@@ -227,7 +275,7 @@ const CInput = ({ label, placeholder, value, handleChange }) => (
   </div>
 );
 
-const LocationItem = ({ title, desc, phone, handleChoose, isChecked }) => (
+const FundiItem = ({ title, desc, phone, handleChoose, isChecked }) => (
   <div className="w-80 h-[100px] relative">
     <div className="w-80 h-full left-0 top-0 absolute bg-violet-50 rounded border border-indigo-800" />
     <div className={"absolute top-5 left-2"}>
@@ -236,9 +284,7 @@ const LocationItem = ({ title, desc, phone, handleChoose, isChecked }) => (
     <div className="left-[36px] top-[15px] absolute text-indigo-800 text-base font-semibold">
       {title}
     </div>
-    <div className=" left-[36px] top-[39px] absolute text-indigo-800 text-sm font-normal">
-      {desc}
-    </div>
+
     <div className=" left-[36px] top-[61px] absolute text-indigo-800 text-sm font-normal">
       {phone}
     </div>
