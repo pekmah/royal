@@ -10,7 +10,7 @@ import {
 
 const Address = () => {
   return (
-    <div className={"flex flex-col gap-y-8"}>
+    <div className={"flex flex-col gap-y-8 w-[100vw]"}>
       {/*choose deliver*/}
       <SelectDelivery />
 

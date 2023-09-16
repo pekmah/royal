@@ -154,8 +154,8 @@ const OrderSummary = ({ className }) => {
   }
 
   return (
-    <div className={"w-30% relative"}>
-      <div className={"sticky top-5 relative"}>
+    <div className={"w-full md:w-30% "}>
+      <div className={" top-5 relative"}>
         <div
           className={`font-barlow pb-6 drop-shadow-lg flex flex-col items-center box-shadow:0px_0px_0px_1px_rgba(243,_243,_243,_1)_inset] [box-shadow-width:1px] [flex-grow:1] bg-white ${className}`}
         >
@@ -168,7 +168,7 @@ const OrderSummary = ({ className }) => {
               {cart?.map((c) => (
                 <div
                   key={c?.pricing}
-                  className="[flex-grow:1] w-full bg-white gap-4 flex flex-col items-start px-5 py-2"
+                  className="[flex-grow:1] w-full bg-white gap-4 flex flex-col items-start px-4 pr-8 py-2"
                 >
                   <p className=" font-[500] tracking-[-0.02em] text-base leading-6">
                     {c?.product?.name}
@@ -190,7 +190,7 @@ const OrderSummary = ({ className }) => {
           <div className=" gap-6 flex flex-col items-center">
             <div className=" flex gap-6 flex-col justify-center items-start w-full ">
               <div className="gap-6 flex flex-col items-center w-full ">
-                <div className="gap-4 flex flex-col items-start px-5 w-full">
+                <div className="gap-4 flex flex-col items-start px-1 w-full">
                   <div className="w-full justify-between flex items-start">
                     <p className="font-[400] tracking-[-0.02em] text-[#00000099]  text-base leading-6 text-left">
                       Sub-total

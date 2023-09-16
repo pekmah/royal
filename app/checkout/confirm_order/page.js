@@ -7,6 +7,7 @@ import {
 } from "../../../components/checkout/confirm_order";
 import ChosenPaymentOption from "../../../components/checkout/confirm_order/ChosenPaymentOption";
 import Constructor from "../../../components/checkout/confirm_order/Constructor";
+import OrderSummary from "../OrderSummary";
 
 const ConfirmOrder = () => {
   return (
@@ -22,6 +23,8 @@ const ConfirmOrder = () => {
 
       {/*  Payment Method  */}
       <ChosenPaymentOption />
+
+      <OrderSummary />
     </div>
   );
 };

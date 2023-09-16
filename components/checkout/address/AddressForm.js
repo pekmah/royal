@@ -139,7 +139,11 @@ const AddressForm = () => {
         </div>
       ) : (
         <div className={"bg-white flex-1"}>
-          <div className={" p-6 grid grid-cols-2 gap-10 place-items-center"}>
+          <div
+            className={
+              "p-1 py-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-10 place-items-center"
+            }
+          >
             {locRes?.data?.results?.map((item, l) => (
               <LocationItem
                 key={l}

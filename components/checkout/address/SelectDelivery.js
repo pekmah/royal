@@ -20,7 +20,7 @@ const SelectDelivery = () => {
           </div>
         </div>
 
-        <div className={"p-6 flex flex-col gap-y-5"}>
+        <div className={"p-1 py-4 md:p-6 flex flex-col gap-y-5"}>
           {/*Door delivery*/}
           <div className="w-full  p-6 rounded border border-zinc-100 flex-col justify-start items-start gap-2.5 inline-flex">
             <div className="flex gap-x-6">
