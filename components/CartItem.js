@@ -107,7 +107,7 @@ const CartItem = ({ items }) => {
     setCart(otherCartItems);
   };
   return (
-    <div className="w-full flex flex-col gap-y-3 px-4 bg-white py-3">
+    <div className="w-full flex flex-col gap-y-3 md:px-4 bg-white py-3">
       {items.map((item) => {
         const currentPricing = item?.product?.pricing?.find(
           (i) => i?.id === item?.pricing,
@@ -117,8 +117,8 @@ const CartItem = ({ items }) => {
         );
 
         return (
-          <div key={item?.pricing} className="flex gap-5 items-center">
-            <div className="relative h-[173px] w-[226px]">
+          <div key={item?.pricing} className="flex md:gap-5 items-center">
+            <div className="relative hidden md:flex h-[173px] w-[226px]">
               <Image
                 alt={currentThumbNail?.image}
                 src={currentThumbNail?.image}
@@ -218,7 +218,7 @@ const CartItem = ({ items }) => {
                       </div>
                     )}
                     {!item?.measurements?.length && (
-                      <div className="flex w-full justify-between gap-x-4">
+                      <div className="flex  w-full justify-between gap-x-4">
                         <h4
                           className={`${barlowSemi.className} text-[#888888]`}
                         >
@@ -239,7 +239,7 @@ const CartItem = ({ items }) => {
                   </div>
                 )}
               </div>
-              <div className="flex w-full items-center justify-between ">
+              <div className="flex flex-col md:flex-row w-full md:items-center justify-between ">
                 <div className=" flex justify-between gap-4 gap items-center py-3">
                   <p className={`${barlowSemi.className}font-semibold text-sm`}>
                     Quantity:
@@ -271,7 +271,7 @@ const CartItem = ({ items }) => {
                   </div>
                 </div>
 
-                <div className="flex justify-between gap-x-4">
+                <div className="flex  justify-between gap-x-4">
                   <h4 className={`${barlowSemi.className} text-[#888888]`}>
                     Cost
                   </h4>

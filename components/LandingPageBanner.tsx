@@ -58,7 +58,7 @@ export default function LandingPageBanner() {
   return (
     <div
       className={
-        "w-full relative min-h-[229px] h-[30vh] block md:flex shadow-lg  rounded-xl overflow-hidden"
+        "w-full relative min-h-[229px] h-[30vh] hidden md:flex shadow-lg  rounded-xl overflow-hidden"
       }
     >
       <div className="justify-center  overflow-hidden min-w-full h-full bg-grey">
