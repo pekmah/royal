@@ -54,5 +54,5 @@ export const Paths = {
   installmentsUrl:
     "/api/v1/auth/user/orders?page=1&page_size=1000&payment_plan=3_MONTHS,6_MONTHS,9_MONTHS,12_MONTHS&ordering=desc",
   orderUrl: "/api/v1/cart/order",
-  expertsUrl: "",
+  expertsUrl: "/api/v1/cart/order/fundis/user",
 };

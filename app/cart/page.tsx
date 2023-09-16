@@ -138,12 +138,13 @@ const Cart = () => {
   return (
     <div className={"min-h-[80vh] flex"}>
       {cart?.length >= 1 ? (
-        <div className="flex w-full justify-between gap-8">
+        <div className="flex flex-col md:flex-row w-full justify-between gap-4 md:gap-8">
           <div className="min-w-[60%]">
             <CartItem items={cart} />
           </div>
-          <div className="flex-1 min-w-[35%]">
-            <div className="shadow-sm w-full h-full">
+
+          <div className="flex-1 md:min-w-[35%] ">
+            <div className="shadow-sm w-full h-full px-3">
               <h3 className={`${barlowSemi.className} py-4 `}>Order Summary</h3>
               <div className="flex w-full justify-between">
                 <span className={`${barlowNormal.className} text-black/60 `}>
@@ -171,13 +172,13 @@ const Cart = () => {
               <div className="flex gap-4 py-6 w-full justify-center">
                 <button
                   onClick={() => router.push("/")}
-                  className=" button-secondary border border-primary_red py-1.5 font-bold px-4 h-14 "
+                  className=" button-secondary text-[13px] md:text-base border border-primary_red py-1.5 font-bold px-4 h-10 md:h-14 "
                 >
                   Back To shop
                 </button>
 
                 <button
-                  className={`button-primary py-1.5 flex gap-2 items-center font-[600] h-14 ${
+                  className={`button-primary text-[13px] md:text-base py-1.5 flex gap-2 items-center font-[600] h-10 md:h-14 ${
                     mutation?.isLoading && "opacity-70"
                   } `}
                   // onClick={() => router.push("/checkout/address")}

@@ -8,6 +8,9 @@ const Constructor = ({ paymentMethod = "full" }) => {
   const { checkout } = useContext(CContext);
   const router = useRouter();
 
+  if (!checkout?.fundi?.phone) {
+    return;
+  }
   return (
     <div className="w-full font-barlow py-3 bg-white shadow">
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">

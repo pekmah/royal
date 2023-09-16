@@ -41,6 +41,7 @@ const CartContext2Provider = ({ children }) => {
     isEditing: false,
     editScreen: "",
     fundi: {
+      id: null,
       fName: "",
       lName: "",
       phone: "",
