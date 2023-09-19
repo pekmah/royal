@@ -1,7 +1,6 @@
 "use client";
 import React, { useContext } from "react";
 import { CContext } from "../../context/CartContext2";
-import OrderSummary from "./OrderSummary";
 
 const Layout = ({ children }) => {
   const { checkout } = useContext(CContext);
@@ -21,7 +20,7 @@ const Layout = ({ children }) => {
       </section>
 
       {/*Order Summary*/}
-      <OrderSummary />
+      {/*<OrderSummary />*/}
     </div>
   );
 };

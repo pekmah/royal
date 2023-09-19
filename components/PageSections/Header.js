@@ -11,7 +11,8 @@ import DropdownMenu, {DropdownMenuItem} from "../Dropdown";
 import SearchInput from "../SearchInput";
 import {useContext} from "react";
 import {CContext} from "@/context/CartContext2.js";
-import CartSvg from "@/public/svg/CartSvg"; // interface HeaderProps {
+import CartSvg from "@/public/svg/CartSvg";
+import Image from "next/image"; // interface HeaderProps {
 
 // interface HeaderProps {
 //     isSidebarOpen: boolean;
@@ -37,7 +38,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
       <div
         className={`${
           path === "/about" ? "hidden" : "flex"
-        } w-full py-4 px-3 md:px-8 justify-between gap-3 md:gap-0 items-center bg-blue shadow-sm`}
+        } w-full py-2 px-3 md:px-8 justify-between gap-3 md:gap-0 items-center bg-blue shadow-sm`}
       >
         <div className={`flex md:gap-8 items-center flex-1`}>
           <button
@@ -51,11 +52,12 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
               <CgMenuLeft color="#fff" size={"24"} />
             )}
           </button>
-
-          <img
-            src={"/logo-2.jpeg"}
+          <Image
+            src={"/logo_1.png"}
             alt="Royal Mabati Logo"
-            className={"h-16 object-cover rounded-md hidden md:flex"}
+            height={8}
+            width={80}
+            style={{ width: "auto" }}
           />
         </div>
         <div className=" w-full md:w-[50%] flex">
