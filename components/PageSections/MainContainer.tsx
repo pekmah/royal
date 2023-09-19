@@ -27,6 +27,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
         setIsSidebarOpen={setIsSidebarOpen}
         isSidebarOpen={isSidebarOpen}
       />
+
       {path.startsWith("/about") ? (
         <main
           className={`max-w-[100vw] overflow-x-hidden w-screen bg-[#fbfbff]`}

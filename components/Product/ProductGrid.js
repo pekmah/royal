@@ -38,13 +38,11 @@ export default function ProductGrid() {
     ["products", pageSize, page, category, minPrice, maxPrice],
     async () =>
       axios.get(
-        `${
-          process.env.BASE_URL
-        }/api/v1/core/products?page_size=${pageSize}&page=${page}${
-          category ? `&category=${category}` : ""
-        }${minPrice ? `&minPrice=${minPrice}` : ""}${
-          maxPrice ? `&maxPrice=${maxPrice}` : ""
-        }`,
+        `${process.env.BASE_URL}/api/v1/core/products/${
+          category ? `category/${category}` : ""
+        }?page_size=${pageSize}&page=${page}${
+          minPrice ? `&minPrice=${minPrice}` : ""
+        }${maxPrice ? `&maxPrice=${maxPrice}` : ""}`,
       ),
 
     {
