@@ -4,7 +4,7 @@ import bgImage from "../../public/about-img.jpg";
 
 const Carousel = () => {
   return (
-    <div className={"h-[550px] bg-slate-400 w-full flex relative"}>
+    <div className={"h-[400px] md:h-[550px] bg-slate-400 w-full flex relative"}>
       <Image
         className={"h-full flex-1 object-cover bg-no-repeat"}
         src={bgImage}
@@ -18,25 +18,30 @@ const Carousel = () => {
       >
         <h3
           className={
-            "xl:w-3/5 w-3/4 text-white font-[600] text-[32px] leading-[60px]"
+            "w-full md:w-3/4 xl:w-3/5  text-white font-[600] text-[32px] leading-[50px] md:leading-[60px]"
           }
         >
           We do more than just roofing. We provide the guarantee of safety
         </h3>
+        <div className={"h-10"} w={"full"} />
       </div>
 
       <div
         className={
-          "flex bg-white absolute -bottom-[70px] px-10 right-[10vw] left-[10vw] py-10 z-20 rounded-xl shadow justify-around"
+          "flex bg-white absolute -bottom-[70px] px-3 md:px-10 right-1 md:right-[10vw] left-1 md:left-[10vw] py-5 md:py-10 z-20 rounded-xl shadow justify-around"
         }
       >
         <div
           className={"flex flex-col items-center justify-center text-center"}
         >
-          <h3 className={"font-[700] text-[28px] font-inter text-primary_red"}>
+          <h3
+            className={
+              "font-[700] text-xl md:text-[28px] font-inter text-primary_red"
+            }
+          >
             3.5k +
           </h3>
-          <h6 className={"text-lg font-inter font-[500] text-black"}>
+          <h6 className={"text-base font-inter font-[500] text-black"}>
             Houses roofed
           </h6>
         </div>
@@ -44,10 +49,14 @@ const Carousel = () => {
         <div
           className={"flex flex-col items-center justify-center text-center"}
         >
-          <h3 className={"font-[700] text-[28px] font-inter text-primary_red"}>
+          <h3
+            className={
+              "font-[700] text-xl md:text-[28px] font-inter text-primary_red"
+            }
+          >
             864 +
           </h3>
-          <h6 className={"text-lg font-inter font-[500] text-black"}>
+          <h6 className={"text-base font-inter font-[500] text-black"}>
             Quotes Processed
           </h6>
         </div>
@@ -55,10 +64,14 @@ const Carousel = () => {
         <div
           className={"flex flex-col items-center justify-center text-center"}
         >
-          <h3 className={"font-[700] text-[28px] font-inter text-primary_red"}>
+          <h3
+            className={
+              "font-[700] text-xl md:text-[28px] font-inter text-primary_red"
+            }
+          >
             2.5K +
           </h3>
-          <h6 className={"text-lg font-inter font-[500] text-black"}>
+          <h6 className={"text-base font-inter font-[500] text-black"}>
             Deliveries made
           </h6>
         </div>
