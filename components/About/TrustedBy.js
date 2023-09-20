@@ -17,7 +17,7 @@ const TrustedBy = () => {
         <div className={"h-[3px] bg-gray-200 rounded-sm mt-2 w-16 mx-auto"} />
       </div>
 
-      <div className={"flex w-3/4 mx-auto justify-between mt-12"}>
+      <div className={"flex w= md:w-3/4 mx-auto justify-between mt-12"}>
         <Abt1 />
 
         <Abt2 />
