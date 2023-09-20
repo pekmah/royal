@@ -30,7 +30,7 @@ const OurStory = () => {
         </div>
         <div
           className={
-            "flex-1 text-sm md:text-base font-inter text-gray-700 leading-8 md:leading-9"
+            "flex-1 text-sm md:text-base font-inter text-gray-700 leading-8 md:leading-9 mt-5 md:mt-0"
           }
         >
           <p>
