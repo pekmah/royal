@@ -6,9 +6,13 @@ import { useRouter } from "next/navigation";
 const Contact = () => {
   const router = useRouter();
   return (
-    <div className={"about-contact py-10 px-[5vw] text-white flex"}>
+    <div
+      className={
+        "about-contact py-10 px-[5vw] text-white flex flex-col md:flex-row"
+      }
+    >
       <div className={"flex-1"}>
-        <div className={"w-2/3"}>
+        <div className={"md:w-2/3"}>
           <h2 className={"text-[32px] font-[600] font-barlow"}>
             Want to get quality products?
           </h2>
@@ -20,7 +24,11 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className={"flex-1 flex items-center justify-center flex-col"}>
+      <div
+        className={
+          "flex-1 flex items-center justify-center flex-col mt-4 md:mt-0"
+        }
+      >
         <h4 className={"font-barlow font-500] text-base"}>
           Start Shopping today!
         </h4>

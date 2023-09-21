@@ -1,4 +1,4 @@
-import AccountNav from "@/components/Accounts/AccountNav";
+import AccountNav from "@/components/Accounts/AccountNav.js";
 import ProtectedRoute from "@/components/Accounts/ProtectedRoute";
 import Breadcrumb from "@/components/BreadCrumb";
 
@@ -16,8 +16,9 @@ export default function AccountLayout({
     <div className="">
       <ProtectedRoute>
         <Breadcrumb />
-        <div className="flex gap-8">
+        <div className="flex gap-8 pt-20 md:pt-0">
           <AccountNav />
+
           <div className="flex flex-col min-w-[40vw] md:min-w-[50vw] flex-grow min-h-[75vh] bg-white shadow-md rounded-md max-w-full ">
             {children}
           </div>

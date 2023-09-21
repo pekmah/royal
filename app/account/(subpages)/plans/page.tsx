@@ -62,7 +62,7 @@ const Plans = () => {
         <label className="button-primary py-2 my-4 md:my-0 cursor-pointer flex gap-2 items-center max-w-max  ">
           <BsUpload size={25} />
 
-          <span>UploadPlan</span>
+          <span className={"hidden md:flex"}>UploadPlan</span>
 
           <input className="hidden" type="file" onChange={uploadFile} />
         </label>

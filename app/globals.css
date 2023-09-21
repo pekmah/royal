@@ -15,7 +15,7 @@
 
 @layer components {
     .button-primary {
-        @apply px-8 py-4 text-base rounded-lg bg-primary_red;
+        @apply px-2 md:px-8 py-4 text-base rounded-lg bg-primary_red;
         color: theme('colors.white');
     }
 

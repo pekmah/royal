@@ -13,12 +13,14 @@ const OrderItem = ({ order, type }) => {
 
   return (
     <div
-      className={"border border-slate-200 py-2 px-3 flex gap-x-5 rounded-lg"}
+      className={
+        "border border-slate-200 py-2 px-3 flex flex-col md:flex-row gap-x-5 rounded-lg"
+      }
     >
       <div
         alt={order?.image}
         className={
-          "h-40 w-56 rounded-md bg-[#2C36990A] flex items-center justify-center"
+          "h-40 w-56 rounded-md bg-[#2C36990A] hidden md:flex items-center justify-center"
         }
       >
         <svg

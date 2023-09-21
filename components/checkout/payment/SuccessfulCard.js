@@ -20,7 +20,7 @@ const SuccessfulCard = () => {
         </div>
 
         <h6 className={"font-[600] my-3"}>Payment Successful</h6>
-        <p className={"w-3/5 text-center"}>
+        <p className={"md:w-3/5 text-center"}>
           Your payment transaction has been processed. Your order will be
           processed and shipped within 5 business days. Thank you.
         </p>

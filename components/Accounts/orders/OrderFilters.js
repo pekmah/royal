@@ -12,18 +12,22 @@ const OrderFilters = ({ setDate, date, reset }) => {
         <FilterSvg />
       </button>
 
-      <DateFilter
-        label={"Start Date"}
-        value={date?.start}
-        onChange={(e) =>
-          setDate((prev) => ({ ...prev, start: e.target.value }))
-        }
-      />
-      <DateFilter
-        label={"End Date"}
-        value={date?.end}
-        onChange={(e) => setDate((prev) => ({ ...prev, end: e.target.value }))}
-      />
+      <div className={"flex flex-col md:flex-row gap-3"}>
+        <DateFilter
+          label={"Start Date"}
+          value={date?.start}
+          onChange={(e) =>
+            setDate((prev) => ({ ...prev, start: e.target.value }))
+          }
+        />
+        <DateFilter
+          label={"End Date"}
+          value={date?.end}
+          onChange={(e) =>
+            setDate((prev) => ({ ...prev, end: e.target.value }))
+          }
+        />
+      </div>
     </div>
   );
 };

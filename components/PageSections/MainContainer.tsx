@@ -29,14 +29,12 @@ export default function MainContainer({ children }: { children: ReactNode }) {
       />
 
       {path.startsWith("/about") ? (
-        <main
-          className={`max-w-[100vw] overflow-x-hidden w-screen bg-[#fbfbff]`}
-        >
+        <main className={` overflow-x-hidden w-screen bg-[#fbfbff]`}>
           {children}
         </main>
       ) : (
         <main
-          className={`max-w-[100vw] overflow-x-hidden w-screen p-4 md:p-8 flex gap-8 bg-[#fbfbff]`}
+          className={` overflow-x-hidden w-screen p-4 md:p-8 flex gap-8 bg-[#fbfbff]`}
         >
           {!path.startsWith("/checkout") && !path.startsWith("/account") && (
             <Sidebar isOpen={isSidebarOpen} />

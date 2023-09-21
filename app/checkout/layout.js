@@ -1,14 +1,13 @@
 "use client";
 import React, { useContext } from "react";
 import { CContext } from "../../context/CartContext2";
+import OrderSummary from "./OrderSummary";
 
 const Layout = ({ children }) => {
   const { checkout } = useContext(CContext);
   return (
     <div
-      className={
-        "min-h-screen flex flex-col md:flex-row md:gap-x-6 w-screen md:pr-14"
-      }
+      className={"min-h-screen flex flex-col md:flex-row md:gap-x-6 md:pr-6"}
     >
       {/*main body*/}
       <section
@@ -20,7 +19,7 @@ const Layout = ({ children }) => {
       </section>
 
       {/*Order Summary*/}
-      {/*<OrderSummary />*/}
+      <OrderSummary />
     </div>
   );
 };
