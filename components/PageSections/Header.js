@@ -57,6 +57,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
             alt="Royal Mabati Logo"
             height={8}
             width={80}
+            className={"hidden md:block"}
             style={{ width: "auto" }}
           />
         </div>

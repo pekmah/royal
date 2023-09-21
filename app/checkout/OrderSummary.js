@@ -88,7 +88,6 @@ const OrderSummary = ({ className }) => {
   //   },
   //
   // });
-  console.log("FUNDI", checkout?.fundi);
   const handleProceed = async () => {
     const delivery =
       checkout?.del_option === "OWN_COLLECTION"
@@ -154,8 +153,8 @@ const OrderSummary = ({ className }) => {
   }
 
   return (
-    <div className={"w-full md:w-30% "}>
-      <div className={" top-5 relative"}>
+    <div className={"w-full md:w-[30%] "}>
+      <div className={" top-1 relative"}>
         <div
           className={`font-barlow pb-6 drop-shadow-lg flex flex-col items-center box-shadow:0px_0px_0px_1px_rgba(243,_243,_243,_1)_inset] [box-shadow-width:1px] [flex-grow:1] bg-white ${className}`}
         >

@@ -45,7 +45,7 @@ const ProcessingCard = () => {
         </div>
 
         <h6 className={"font-[600] my-3"}>Waiting Payment Confirmation</h6>
-        <p className={"w-3/5 text-center"}>
+        <p className={"md:w-3/5 text-center"}>
           You will receive a prompt to authorize payment from M-Pesa number $
           {checkout?.payment?.phone}. Please enter your PIN to complete the
           transaction.

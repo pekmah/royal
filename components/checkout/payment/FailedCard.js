@@ -20,7 +20,7 @@ const FailedCard = () => {
         </div>
 
         <h6 className={"font-[600] my-3"}>Payment Unsuccessful</h6>
-        <p className={"w-3/5 text-center"}>
+        <p className={"md:w-3/5 text-center"}>
           Your transaction was not completed. Try entering your PIN when the
           prompt pops up on your phone. Request prompt to retry the transaction.
         </p>

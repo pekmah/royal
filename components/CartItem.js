@@ -173,6 +173,8 @@ const CartItem = ({ items }) => {
                         )}
                       </div>
                     )}
+
+                    <div className={" flex md:hidden h-10 w-full"} />
                     {item?.measurements?.length && (
                       <div className="flex">
                         {pricing && pricing[0]?.gauge_size !== null && (
