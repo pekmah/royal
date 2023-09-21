@@ -1,28 +1,40 @@
 "use client";
 
-import {signOut, useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import {RxPerson} from "react-icons/rx";
-import {CgMenuLeft} from "react-icons/cg";
-import {IoMdClose} from "react-icons/io";
-import {usePathname} from "next/navigation";
+import { RxPerson } from "react-icons/rx";
+import { CgMenuLeft } from "react-icons/cg";
+import { IoMdClose } from "react-icons/io";
+import { usePathname, useRouter } from "next/navigation";
 import NavMenu from "./NavMenu";
-import DropdownMenu, {DropdownMenuItem} from "../Dropdown";
+import DropdownMenu from "../Dropdown";
 import SearchInput from "../SearchInput";
-import {useContext} from "react";
-import {CContext} from "@/context/CartContext2.js";
+import { useContext } from "react";
+import { CContext } from "@/context/CartContext2.js";
 import CartSvg from "@/public/svg/CartSvg";
 import Image from "next/image"; // interface HeaderProps {
-
-// interface HeaderProps {
-//     isSidebarOpen: boolean;
-//     setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
-// }
 
 export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
   const { status, data } = useSession();
   const path = usePathname();
-  const { cart } = useContext(CContext);
+  const { cart, setShowAccountNav, showAccountNav } = useContext(CContext);
+  const router = useRouter();
+  const { innerWidth: width } = window;
+
+  const handleAccountNavigation = () => {
+    if (innerWidth < 768) {
+      console.log(path, showAccountNav);
+      if (path.startsWith("/account")) {
+        setShowAccountNav(!showAccountNav);
+      } else {
+        router.push("/account");
+        setShowAccountNav(true);
+      }
+    } else {
+      router.push("/account");
+    }
+  };
+
   return path.startsWith("/auth") ? null : (
     <header className="fixed w-screen md:relative z-30">
       {/* <div className='w-full h-[70px] relative'>
@@ -86,6 +98,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
               <Link
                 href={"/cart"}
                 className="flex items-center gap-3 font-medium"
+                onClick={() => setShowAccountNav(false)}
               >
                 <div className="">
                   <CartSvg />
@@ -95,23 +108,20 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
                 </div>
                 <p className="text-sm text-white hidden md:block">Cart</p>
               </Link>
+
               <DropdownMenu
                 buttonText={
-                  <Link
-                    href={"/account"}
-                    className="flex items-center gap-1.5 font-medium"
+                  <button
+                    onClick={handleAccountNavigation}
+                    className="flex items-center gap-3 font-medium"
                   >
                     <RxPerson size={"24"} color={"#fff"} />
                     <p className="text-sm text-white hidden md:block">
                       Account
                     </p>
-                  </Link>
+                  </button>
                 }
-              >
-                <DropdownMenuItem onClick={() => signOut()}>
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenu>
+              />
             </div>
           ) : null}
         </div>
