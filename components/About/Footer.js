@@ -21,7 +21,7 @@ const renderBody = (screen) => {
 const Footer = () => {
   const [current, setCurrent] = useState(1);
   return (
-    <div className={"text-black px-[8vw] py-14"}>
+    <div className={"text-black px-2 md:px-[8vw] py-14"}>
       <Header current={current} setCurrent={setCurrent} />
 
       {renderBody(current)}
@@ -53,8 +53,8 @@ const HeaderItem = ({ isCurrent, text, handleSwitch }) => (
     <button
       className={`font-barlow  ${
         isCurrent
-          ? "about-h3 font-[700] text-xl"
-          : "font-[400] text-gray-500 text-lg"
+          ? "about-h3 font-[700] text-lg md:text-xl"
+          : "font-[400] text-gray-500 text-base md:text-lg"
       }`}
       onClick={handleSwitch}
     >

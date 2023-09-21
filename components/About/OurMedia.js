@@ -7,7 +7,7 @@ import Media3 from "../../public/media-3.png";
 
 const OurMedia = () => {
   return (
-    <div className={"bg-white pb-10 flex flex-col px-[5vw]"}>
+    <div className={"bg-white pb-10 flex  flex-col px-[5vw]"}>
       <div className={"flex"}>
         <div className={" flex flex-col"}>
           <h3 className="text-red-600 text-[22px] font-[600] tracking-wide about-h3">
@@ -18,7 +18,7 @@ const OurMedia = () => {
         </div>
       </div>
 
-      <div className={"flex gap-x-10 py-8"}>
+      <div className={"flex gap-5 md:gap-10 py-8 flex-col md:flex-row"}>
         <MediaItem
           title={"Zee Matte Tiles"}
           subtext={"Gauge 32"}
@@ -46,7 +46,7 @@ const OurMedia = () => {
 
 export default OurMedia;
 const MediaItem = ({ image, title, subtext, date }) => (
-  <div className={"w-[30%]"}>
+  <div className={"w-full md:w-[30%] "}>
     {/*    image  */}
     <div
       className={

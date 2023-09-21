@@ -2,7 +2,7 @@ import React from "react";
 
 const WhoWeAre = () => {
   return (
-    <div className={"flex gap-x-5 p-5"}>
+    <div className={"flex flex-col md:flex-row gap-5 p-5"}>
       <div className={"flex-1 leading-9"}>
         <div className={"flex gap-x-6"}>
           <svg

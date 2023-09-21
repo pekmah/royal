@@ -18,6 +18,8 @@ const Page = () => {
       {/*    Trusted by section */}
       <AboutTrustedBy />
 
+      <div className={"w-full h-12 md:hidden"} />
+
       {/*  Our Story  */}
       <OurStory />
 

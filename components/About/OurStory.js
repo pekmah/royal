@@ -16,19 +16,23 @@ const OurStory = () => {
         </div>
       </div>
 
-      <div className={"flex gap-x-10 py-8"}>
+      <div className={"flex flex-col md:flex-row gap-x-10 py-8"}>
         <div
           className={
-            "flex-1 bg-gray-500 h-[380px] border-none rounded-tr-[60px] rounded-bl-[60px] overflow-hidden"
+            "flex-1 bg-gray-500 h-[250px] md:h-[380px] border-none rounded-tr-[60px] rounded-bl-[60px] overflow-hidden"
           }
         >
           <Image
             src={OurStoryImg}
             alt={"our-story"}
-            className={"h-full w-full object-cover border-none"}
+            className={"w-full object-cover h-[250px] md:h-[380px] border-none"}
           />
         </div>
-        <div className={"flex-1 text-base font-inter text-gray-700 leading-9"}>
+        <div
+          className={
+            "flex-1 text-sm md:text-base font-inter text-gray-700 leading-8 md:leading-9 mt-5 md:mt-0"
+          }
+        >
           <p>
             For many years, Royal Mabati Factory Limited has supported many
             clients succeed through our roofing solutions and products. We are a
@@ -37,7 +41,7 @@ const OurStory = () => {
             Today, we’re one of the leading manufacturers of roofing products
             with over distribution centers across Kenya and Eastern Africa.
             <br />
-            <br />
+            <br className={"hidden md:block"} />
             The strict implementation of state of the art manufacturing
             facilities, product testing, organized back office, thorough
             training, field supervision, research & development allows us to

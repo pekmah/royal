@@ -5,7 +5,7 @@ import CancelSvg from "../../../public/svg/CancelSvg";
 const Faqs = () => {
   return (
     <div className={"flex"}>
-      <div className={"w-1/3 flex font-barlow "}>
+      <div className={"w-1/3 hidden md:flex font-barlow "}>
         <ul className={"flex flex-col gap-y-4"}>
           <li
             className={
@@ -19,7 +19,7 @@ const Faqs = () => {
           <li className={"py-2 text-gray-400 pr-6"}>Sales Questions</li>
         </ul>
       </div>
-      <div className={"w-2/3 font-barlow"}>
+      <div className={"w-full md:w-2/3 font-barlow"}>
         <ul className={"flex flex-col gap-y-3.5"}>
           <li
             className={

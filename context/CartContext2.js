@@ -48,6 +48,8 @@ const CartContext2Provider = ({ children }) => {
     },
   });
 
+  const [showAccountNav, setShowAccountNav] = useState(true);
+
   const fetchFavorites = async () => {
     try {
       const res = await PrivateAxiosUtility.get(Paths.favoritesUrl);
@@ -84,6 +86,8 @@ const CartContext2Provider = ({ children }) => {
         setFavorites,
         checkout,
         setCheckout,
+        setShowAccountNav,
+        showAccountNav,
         refetchFavorites: fetchFavorites,
       }}
     >
