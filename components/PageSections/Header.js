@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { CContext } from "@/context/CartContext2.js";
 import CartSvg from "@/public/svg/CartSvg";
 import Image from "next/image"; // interface HeaderProps {
+import Logo from "@/public/Logo_1.png";
 
 export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
   const { status, data } = useSession();
@@ -65,7 +66,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
             )}
           </button>
           <Image
-            src={"/logo_1.png"}
+            src={Logo}
             alt="Royal Mabati Logo"
             height={8}
             width={80}
