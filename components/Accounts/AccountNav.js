@@ -61,7 +61,6 @@ const AccountNav = () => {
   const inactive =
     "flex items-center gap-4 px-4 py-3 mb-4 hover:bg-[#F8F8F8] text-gray-700 text-sm mx-1.5 flex-1";
   const active = `${inactive} bg-[#F8F8F8] font-[600] text-black`;
-  const { innerWidth: width } = window;
 
   const { showAccountNav, setShowAccountNav } = useContext(CContext);
 
@@ -98,7 +97,7 @@ const AccountNav = () => {
     </div>
   );
 
-  if (width < 768 && showAccountNav) {
+  if (window?.innerWidth < 768 && showAccountNav) {
     return (
       <div
         className={

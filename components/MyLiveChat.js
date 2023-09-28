@@ -11,7 +11,8 @@ const MyLiveChat = () => {
 
     return () => {
       // Clean up the script when the component unmounts
-      document.body.removeChild(script);
+      // if (document.getElementsByClassName("mylivechat_template5")[0] !== null)
+      //   document.body.removeChild(script);
     };
   }, []);
 

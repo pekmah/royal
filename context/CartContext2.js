@@ -12,8 +12,8 @@ import {getSession} from "next-auth/react";
 export const CContext = createContext({});
 
 const CartContext2Provider = ({ children }) => {
-  // const [products, setProducts] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [authEmail, setAuthEmail] = useState("");
+
   const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
@@ -89,6 +89,8 @@ const CartContext2Provider = ({ children }) => {
         setShowAccountNav,
         showAccountNav,
         refetchFavorites: fetchFavorites,
+        setAuthEmail,
+        authEmail,
       }}
     >
       {children}

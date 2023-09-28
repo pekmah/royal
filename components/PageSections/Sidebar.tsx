@@ -37,6 +37,7 @@ const transitionClasses = {
 export default function Sidebar({ isOpen }: SidebarProps) {
   const path = usePathname();
   const { push } = useRouter();
+  const router = useRouter();
   const params = useSearchParams();
   const categoryParam = params.get("category");
   const maxPriceParam = params.get("maxPrice");
@@ -113,15 +114,20 @@ export default function Sidebar({ isOpen }: SidebarProps) {
               />
             </div>
           )}
-          <div className="px-4">
+          <button
+            className="px-4"
+            onClick={() => {
+              router.push("/account/plans");
+            }}
+          >
             <label
               className={`button-primary cursor-pointer w-full mt-4 rounded-lg text-sm flex items-center justify-center gap-4 ${barlowSemi.className}`}
             >
               <MdOutlineFileUpload size={16} className="text-white" />
-              <input className="hidden" type="file" onChange={uploadFile} />
+              {/*<input className="hidden" type="file" onChange={uploadFile} />*/}
               <span>Upload Plan</span>
             </label>
-          </div>
+          </button>
         </div>
       </aside>
     </Transition>
