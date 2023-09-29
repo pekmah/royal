@@ -42,7 +42,8 @@ export default function MainContainer({ children }: { children: ReactNode }) {
 
           {!path.startsWith("/auth") &&
           !path.startsWith("/about") &&
-          !path.startsWith("/account") ? (
+          !path.startsWith("/account") &&
+          !path.startsWith("/checkout") ? (
             <section
               className={`${
                 isSidebarOpen ? "md:w-[80%] hidden md:block" : "w-full"

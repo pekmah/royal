@@ -58,7 +58,9 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     setCloseUploadFile(true);
   };
 
-  return path.startsWith("/auth") || path.startsWith("/about") ? null : (
+  return path.startsWith("/auth") ||
+    path.startsWith("/about") ||
+    path.startsWith("/checkout") ? null : (
     <Transition
       show={isOpen}
       {...transitionClasses}
