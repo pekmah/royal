@@ -203,7 +203,10 @@ export default function Signup() {
               push("/auth/verify");
             }
           } catch (e: any) {
-            console.error(JSON.stringify(e));
+            if (e.response?.status === 409) {
+              return push("/auth/verify");
+            }
+
             toast.error("Signup Failed");
           }
         }}
