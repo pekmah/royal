@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import toast from "react-hot-toast";
+import AuthServices from "@/services/AuthServices";
 
 const barlow = Barlow({
   style: "normal",
@@ -152,11 +153,20 @@ export default function Login() {
             redirect: false,
           });
           if (res?.error) {
-            if (res.status === 409) {
-              return push("/auth/verify");
+            try {
+              await AuthServices.login(data);
+            } catch (e: any) {
+              if (e.response.status === 409) {
+                toast.error(
+                  "Request unsuccessful. " + e.response.data?.detail ??
+                    e.message,
+                );
+                return push("/auth/verify");
+              }
+              toast.error(
+                "Request unsuccessful. " + e.response.data?.detail ?? e.message,
+              );
             }
-
-            toast.error(res.error);
           } else {
             toast.success("Login Successful");
             push("/");
