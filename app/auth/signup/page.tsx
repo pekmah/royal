@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { GoPerson } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { CContext } from "@/context/CartContext2";
-import parseServerErrors from "@/utils/parseServerErrors";
+import AuthServices from "@/services/AuthServices";
 
 const barlow = Barlow({
   style: "normal",
@@ -188,26 +188,21 @@ export default function Signup() {
       <MultiStepForm
         forms={[emailFormProps, passwordFormProps, infoFormProps]}
         submitHandler={async ({ data }) => {
+          // try {
+          setAuthEmail(data?.email);
           try {
-            setAuthEmail(data?.email);
-            const res = await fetch("/api/auth/signup", {
-              body: JSON.stringify(data),
-              method: "POST",
-            });
-            const resData = await res.json();
-
-            if (res.status !== 200) {
-              toast.error(parseServerErrors(resData));
-            } else {
-              toast.success("Account created successfully.");
-              push("/auth/verify");
-            }
+            await AuthServices.signUp(data);
           } catch (e: any) {
-            if (e.response?.status === 409) {
+            if (e.response.status === 409) {
+              setAuthEmail(data?.email);
+              toast.error(
+                "Request unsuccessful. " + e.response.data?.detail ?? e.message,
+              );
               return push("/auth/verify");
             }
-
-            toast.error("Signup Failed");
+            toast.error(
+              "Request unsuccessful. " + e.response.data?.detail ?? e.message,
+            );
           }
         }}
       />
