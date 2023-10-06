@@ -6,9 +6,10 @@ import { signIn } from "next-auth/react";
 import { Barlow } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 import toast from "react-hot-toast";
 import AuthServices from "@/services/AuthServices";
+import { CContext } from "@/context/CartContext2";
 
 const barlow = Barlow({
   style: "normal",
@@ -141,6 +142,8 @@ const passwordFormProps: FormProps = {
 
 export default function Login() {
   const { push } = useRouter();
+  const { setAuthEmail }: any = useContext(CContext);
+
   return (
     <main
       className={`md:py-20 md:px-16 sm:py-0 sm:px-0 min-h-screen ${barlow.className}`}
@@ -157,6 +160,7 @@ export default function Login() {
               await AuthServices.login(data);
             } catch (e: any) {
               if (e.response.status === 409) {
+                setAuthEmail(data?.email);
                 toast.error(
                   "Request unsuccessful. " + e.response.data?.detail ??
                     e.message,
