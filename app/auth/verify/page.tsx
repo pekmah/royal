@@ -28,7 +28,7 @@ const codeFormProps: FormProps = {
       throw new Error("OTP is required");
     }
   },
-  formTitle: "Reset your password",
+  formTitle: "Verify your account.",
   Container: ({ children }: { children: ReactNode }) => (
     <section className="min-h-full flex w-full">
       <div
