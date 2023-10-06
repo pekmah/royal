@@ -195,9 +195,7 @@ export default function Signup() {
           } catch (e: any) {
             if (e.response.status === 409) {
               setAuthEmail(data?.email);
-              toast.error(
-                "Request unsuccessful. " + e.response.data?.detail ?? e.message,
-              );
+              toast.success("Registration successful. Verify your account. ");
               return push("/auth/verify");
             }
             toast.error(
