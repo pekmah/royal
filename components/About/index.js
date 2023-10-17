@@ -6,6 +6,8 @@ import AboutMedia from "./OurMedia";
 import AboutContact from "./Contact";
 import AboutFooter from "./Footer";
 
+import FaqItem from "./faqs/FaqItem";
+
 export {
   AboutCarousel,
   AboutTrustedBy,
@@ -14,4 +16,5 @@ export {
   AboutMedia,
   AboutContact,
   AboutFooter,
+  FaqItem,
 };
