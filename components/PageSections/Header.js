@@ -37,7 +37,11 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
   };
 
   return path.startsWith("/auth") ? null : (
-    <header className="fixed w-screen md:relative z-30">
+    <header
+      className={`${
+        path === "/about" ? "hidden" : ""
+      } fixed w-screen md:relative z-30`}
+    >
       {/* <div className='w-full h-[70px] relative'>
 				<Image
 					alt={'Offers Banner'}
@@ -49,9 +53,7 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
 			</div> */}
       <NavMenu />
       <div
-        className={`${
-          path === "/about" ? "hidden" : "flex"
-        } w-full py-2 px-3 md:px-8 justify-between gap-3 md:gap-0 items-center bg-blue shadow-sm`}
+        className={`flex w-full py-2 px-3 md:px-8 justify-between gap-3 md:gap-0 items-center bg-blue shadow-sm`}
       >
         <div className={`flex md:gap-8 items-center flex-1`}>
           <button
