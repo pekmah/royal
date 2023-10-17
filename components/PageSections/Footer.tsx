@@ -3,6 +3,7 @@
 import { Barlow } from "next/font/google";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const barlow = Barlow({
   style: "normal",
@@ -62,17 +63,17 @@ export default function Footer() {
             <p className={`text-sm mt-3`}>Terms & Contitions</p>
           </a>
 
-          <div className={`flex-col mt-6`}>
+          <Link href={"/about/privacy"} className={`flex-col mt-6`}>
             <p className={`text-sm mt-3`}>Privacy Policy</p>
-          </div>
+          </Link>
 
           <div className={`flex-col mt-6`}>
             <p className={`text-sm mt-3`}>Shipping</p>
           </div>
 
-          <div className={`flex-col mt-6`}>
+          <Link href={"/about/faq"} className={`flex-col mt-6`}>
             <p className={`text-sm mt-3`}>FAQs</p>
-          </div>
+          </Link>
 
           <div className={`flex-col mt-6`}>
             <p className={`text-sm mt-3`}>Careers</p>
