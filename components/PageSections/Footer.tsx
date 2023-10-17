@@ -4,6 +4,7 @@ import { Barlow } from "next/font/google";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import TwitterSvg from "@/public/svg/Twitter";
 
 const barlow = Barlow({
   style: "normal",
@@ -123,6 +124,14 @@ export default function Footer() {
                   alt="Playstore icon link"
                 />
                 <p className="text-sm">Instagram</p>
+              </a>
+
+              <a
+                href={"https://twitter.com/RoyalMabati"}
+                className="flex gap-4 mt-3"
+              >
+                <TwitterSvg h={"26"} stroke={"2"} />
+                <p className="text-sm">Twitter</p>
               </a>
             </div>
           </div>

@@ -43,7 +43,7 @@ const accountLinks = [
   {
     path: "/account/plans",
     icon: <BsFileEarmarkText size={iconSize} />,
-    name: "My plans",
+    name: "My Building Designs",
   },
   {
     path: "/account/favorite",
