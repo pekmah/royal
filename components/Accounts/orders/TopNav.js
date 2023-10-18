@@ -13,9 +13,18 @@ const OrdersTopNav = ({ currentNav, setCurrent, reset }) => {
       />
       <NavItem
         isCurrent={currentNav === 1}
-        title={`Paid Orders`}
+        title={`Installments`}
         handlePress={() => {
           setCurrent(1);
+          reset();
+        }}
+      />
+
+      <NavItem
+        isCurrent={currentNav === 2}
+        title={`Paid Orders`}
+        handlePress={() => {
+          setCurrent(2);
           reset();
         }}
       />
