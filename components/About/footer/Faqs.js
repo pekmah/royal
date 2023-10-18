@@ -1,6 +1,5 @@
 import React from "react";
-import PlusSvg from "../../../public/svg/PlusSvg";
-import CancelSvg from "../../../public/svg/CancelSvg";
+import { FaqItem } from "../index";
 
 const Faqs = () => {
   return (
@@ -12,50 +11,34 @@ const Faqs = () => {
               "py-2 border-b border-zinc-200 pr-10 text-black font-[500]"
             }
           >
-            Sales Questions
+            Quick Answers
           </li>
-          <li className={"py-2 text-gray-400 pr-6"}>Sales Questions</li>
-          <li className={"py-2 text-gray-400 pr-6"}>Sales Questions</li>
-          <li className={"py-2 text-gray-400 pr-6"}>Sales Questions</li>
         </ul>
       </div>
       <div className={"w-full md:w-2/3 font-barlow"}>
         <ul className={"flex flex-col gap-y-3.5"}>
-          <li
-            className={
-              "font-[600] py-3 border-b border-zinc-200 flex justify-between"
+          <FaqItem
+            title={"Do you offer transport to customers and at how much?"}
+            desc={" We offer free transport countrywide."}
+          />
+
+          <FaqItem
+            title={
+              "What is the difference between ROYAL MABATI and your competitors?"
             }
-          >
-            <span>Our Frequently asked questions</span>
-            <PlusSvg />
-          </li>
-
-          <li
-            className={
-              "font-[600] py-3 border-b border-zinc-200 flex justify-between"
+            desc={
+              "Quality and durability. We do free delivery immediately after payment and special\n" +
+              "order measurements are produced immediately compared to our competitors who deliver\n" +
+              "within 2 to 3 weeks. Our Products have Aluminium and Zinc to prevent corrosion compared to\n" +
+              "poor quality mabati from Chinese importers that fade so fast"
             }
-          >
-            <span>Our Frequently asked questions</span>
-            <PlusSvg />
-          </li>
-          <li
-            className={"font-[600] py-3 border-b border-zinc-200 flex flex-col"}
-          >
-            <button className={"font-[600] flex justify-between w-full"}>
-              <span>Our Frequently asked questions</span>
-
-              <CancelSvg />
-            </button>
-
-            <p className={"leading-9 mt-3 font-[500] text-gray-600"}>
-              The customer is responsible for the selection and specifications
-              of the goods. Under no circumstance shall RMFL accept the return
-              or replacement of the materials selected by the customer or be
-              liable for the selection made by the customer. Claims in respect
-              of shortages shall be made in writing, immediately upon receipt of
-              the consignment in respect of which a shortage is alleged.
-            </p>
-          </li>
+          />
+          <FaqItem
+            title={"Can someone pay by installments?"}
+            desc={
+              "Our clients can pay at their own convenience and clear before delivery. Failing to Plan is planning to fail. Purchase your roofing material as early as possible to prevent last minute rush and changes in prices. We will deliver on your request."
+            }
+          />
         </ul>
       </div>
     </div>

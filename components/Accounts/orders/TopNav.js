@@ -5,7 +5,7 @@ const OrdersTopNav = ({ currentNav, setCurrent, reset }) => {
     <div className={"px-5 pt-2 flex gap-x-6 border-b border-gray-300 "}>
       <NavItem
         isCurrent={currentNav === 0}
-        title={`Pending Orders`}
+        title={`Unpaid Orders`}
         handlePress={() => {
           setCurrent(0);
           reset();
@@ -13,9 +13,18 @@ const OrdersTopNav = ({ currentNav, setCurrent, reset }) => {
       />
       <NavItem
         isCurrent={currentNav === 1}
-        title={`Closed Orders`}
+        title={`Installments`}
         handlePress={() => {
           setCurrent(1);
+          reset();
+        }}
+      />
+
+      <NavItem
+        isCurrent={currentNav === 2}
+        title={`Paid Orders`}
+        handlePress={() => {
+          setCurrent(2);
           reset();
         }}
       />

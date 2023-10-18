@@ -4,6 +4,7 @@ import OrdersTopNav from "../../../../components/Accounts/orders/TopNav";
 import OrderFilters from "../../../../components/Accounts/orders/OrderFilters";
 import PendingOrders from "../../../../components/Accounts/orders/PendingOrders";
 import ClosedOrders from "../../../../components/Accounts/orders/ClosedOrders";
+import Installments from "../../../../components/Accounts/orders/Installments";
 
 const Page = () => {
   const [currentNav, setCurrent] = useState(0);
@@ -29,20 +30,24 @@ const Page = () => {
       {/*    body*/}
       <div className={"p-3"}>
         {/*    filters      */}
-        <OrderFilters
-          setDate={setDate}
-          date={date}
-          reset={() => {
-            setDate({
-              start: "",
-              end: "",
-            });
-          }}
-        />
+        {currentNav !== 1 && (
+          <OrderFilters
+            setDate={setDate}
+            date={date}
+            reset={() => {
+              setDate({
+                start: "",
+                end: "",
+              });
+            }}
+          />
+        )}
 
         {/*    Order List     */}
         {currentNav === 0 ? (
           <PendingOrders dates={date} current={currentNav} />
+        ) : currentNav === 1 ? (
+          <Installments />
         ) : (
           <ClosedOrders dates={date} current={currentNav} />
         )}

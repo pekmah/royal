@@ -8,7 +8,7 @@ const Contact = () => {
   return (
     <div
       className={
-        "about-contact py-10 px-[5vw] text-white flex flex-col md:flex-row"
+        "gradient-bg py-10 px-[5vw] text-white flex flex-col md:flex-row"
       }
     >
       <div className={"flex-1"}>

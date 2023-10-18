@@ -5,6 +5,9 @@ import AboutVarieties from "./Varieties";
 import AboutMedia from "./OurMedia";
 import AboutContact from "./Contact";
 import AboutFooter from "./Footer";
+import AboutNavbar from "./Navbar";
+
+import FaqItem from "./faqs/FaqItem";
 
 export {
   AboutCarousel,
@@ -14,4 +17,6 @@ export {
   AboutMedia,
   AboutContact,
   AboutFooter,
+  FaqItem,
+  AboutNavbar,
 };
