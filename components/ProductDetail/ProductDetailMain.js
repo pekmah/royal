@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Barlow } from "next/font/google";
 import StarRating from "./StarRating";
 import ColorSelector from "./ColorSelector";
@@ -32,6 +32,13 @@ const barlowMedium = Barlow({
 });
 
 export default function ProductDetailMain({ product }) {
+  // refs
+  const gaugeRef = useRef();
+  const finishRef = useRef();
+  const measurementsRef = useRef();
+  const lengthRef = useRef();
+  const widthRef = useRef();
+
   // const {addToCart} = useCartContext()
   const { status } = useSession();
   const router = useRouter();
@@ -203,10 +210,22 @@ export default function ProductDetailMain({ product }) {
     quantity,
   ]);
 
+  const focusNext = (next) => {
+    switch (next) {
+      case "gauge":
+        return gaugeRef.current?.focus();
+      case "finish":
+        return finishRef.current?.focus();
+      case "measurements":
+        return measurementsRef.current?.focus();
+    }
+  };
+
+  useEffect(() => {
+    focusNext("gauge");
+  }, []);
+
   const handleAddToCart = () => {
-    // validate form
-    // handleValidateRequiredFields();
-    // Check if user is authenticated
     if (status === "unauthenticated") {
       router.push("/auth/login");
       toast("Please login to continue", {});
@@ -401,13 +420,15 @@ export default function ProductDetailMain({ product }) {
                   </div>
 
                   <select
-                    className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
+                    className={`flex-1 text-gray-500 w-full bg-white border border-gray-300  py-3 px-2 rounded-lg font-barlow text-base focus:outline-blue`}
                     placeholder={"Choose Finish"}
                     onChange={(e) => {
                       // @ts-ignore
                       setActiveGauge(e.target.value);
                       setActiveFinish({});
+                      focusNext("finish");
                     }}
+                    ref={gaugeRef}
                   >
                     <option className={`px-2 py-3 bg-white text-gray-500 `}>
                       Select
@@ -429,8 +450,9 @@ export default function ProductDetailMain({ product }) {
                 <div className={"flex-1 w-full md:w-auto"}>
                   <label className="text-sm font-semibold mb-1">Finish:</label>
                   <select
-                    className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
+                    className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-blue py-3 px-2 rounded-lg font-barlow text-base`}
                     placeholder={"Choose Finish"}
+                    ref={finishRef}
                     onChange={(e) => {
                       // @ts-ignore
                       setActiveFinish(
@@ -439,6 +461,7 @@ export default function ProductDetailMain({ product }) {
                             parseInt(item.id) === parseInt(e.target.value),
                         ),
                       );
+                      focusNext("measurements");
                     }}
                   >
                     <option className={`px-2 py-3 bg-white text-gray-500 `}>
@@ -471,18 +494,19 @@ export default function ProductDetailMain({ product }) {
                 />
               </div>
               <select
-                className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
-                placeholder={"Choose Finish"}
+                className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-blue py-3 px-2 rounded-lg font-barlow text-base`}
                 onChange={(e) => {
                   setActiveMeasurement(e.target.value);
                   if (e.target.value?.toLocaleLowerCase() !== "custom") {
                     setActiveLength(e.target.value);
                   }
                 }}
+                ref={measurementsRef}
               >
                 <option className={`px-2 py-3 bg-white text-gray-500 `}>
                   Select
                 </option>
+
                 {[...length, "Custom"]?.map((item) => (
                   <option
                     key={item}
@@ -504,7 +528,7 @@ export default function ProductDetailMain({ product }) {
                 </div>
 
                 <input
-                  className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
+                  className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-blue py-3 px-2 rounded-lg font-barlow text-base`}
                   placeholder={"Length"}
                   onChange={(e) => setActiveLength(e.target.value)}
                 />
@@ -515,7 +539,7 @@ export default function ProductDetailMain({ product }) {
                 {/*<div*/}
                 {/*    className="bg-[#FCC2C0] text-primary_red px-4 text-xs py-1 my-1 rounded-3xl">{`Default Width is !000mm, Select Custom for more`}</div>*/}
                 <select
-                  className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-none py-3 px-2 rounded-lg font-barlow text-base`}
+                  className={`flex-1 text-gray-500 w-full bg-white border border-gray-300 focus:outline-blue py-3 px-2 rounded-lg font-barlow text-base`}
                   placeholder={"Choose Finish"}
                   value={activeWidth}
                   onChange={(e) => setActiveWidth(e.target.value)}

@@ -1,13 +1,18 @@
 import React from "react";
 import DownloadSvg from "../../public/svg/DownloadSvg";
 
-const DownloadCardItem = ({ title, handleClick }) => {
+const DownloadCardItem = ({ title, url, fileName }) => {
+  const handleDownloadFile = async () => {
+    window.open(url);
+  };
+
   return (
-    <button
+    <a
       className={
         "text-sm font-inter flex items-center justify-between py-1.5 px-1 hover:bg-gray-100 rounded-lg mb-1"
       }
-      onClick={handleClick}
+      href={url}
+      download={fileName}
     >
       <span>{title}</span>
       <div
@@ -17,7 +22,7 @@ const DownloadCardItem = ({ title, handleClick }) => {
       >
         <DownloadSvg />
       </div>
-    </button>
+    </a>
   );
 };
 

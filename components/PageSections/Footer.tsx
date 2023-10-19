@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import TwitterSvg from "@/public/svg/Twitter";
+import YoutubeSvg from "@/public/svg/YoutubeSvg";
 
 const barlow = Barlow({
   style: "normal",
@@ -85,7 +86,12 @@ export default function Footer() {
             DOWNLOAD THE ROYAL MABATI APP FOR FREE
           </h3>
 
-          <div className={`flex-col mt-6`}>
+          <a
+            href={
+              "https://play.google.com/store/apps/details?id=com.royalmabati.limited"
+            }
+            className={`flex-col mt-6`}
+          >
             <Image
               src={"/playstore.png"}
               priority
@@ -93,7 +99,7 @@ export default function Footer() {
               height={40}
               alt="Playstore icon link"
             />
-          </div>
+          </a>
 
           <div className={`flex-col mt-6`}>
             <h5 className={`${barlowSemi.className}`}>CONNECT WITH US</h5>
@@ -132,6 +138,14 @@ export default function Footer() {
               >
                 <TwitterSvg h={"26"} stroke={"2"} />
                 <p className="text-sm">Twitter</p>
+              </a>
+
+              <a
+                href={"https://www.youtube.com/@royalmabatifactorylimited3201"}
+                className="flex gap-4 mt-3"
+              >
+                <YoutubeSvg />
+                <p className="text-sm">Youtube</p>
               </a>
             </div>
           </div>
