@@ -17,27 +17,18 @@ const DownloadCard = ({ showCard }) => {
 
         <DownloadCardItem
           title={"Company Profile"}
-          handleClick={() => {
-            window.open(
-              "https://drive.google.com/file/d/1vnFXT214oaDqDLzlfNL-qMIjQgsoQHWa/view?usp=drive_link",
-            );
-          }}
+          url={"/downloads/coating.pdf"}
+          fileName={"coating.pdf"}
         />
         <DownloadCardItem
           title={"Coating Analysis"}
-          handleClick={() => {
-            window.open(
-              "https://drive.google.com/file/d/1kjN3yMe5AU_GFXJ7jf1_pi3KQ9XAThIO/view?usp=drive_link",
-            );
-          }}
+          url={"/downloads/company profile.pdf"}
+          fileName={"company profile.pdf"}
         />
         <DownloadCardItem
           title={"Corporate Social Responsibility"}
-          handleClick={() => {
-            window.open(
-              "https://drive.google.com/file/d/1s09hBkqAz5ONzCFvV8fcGee9OpZY3VgV/view?usp=drive_link",
-            );
-          }}
+          url={"/downloads/cooperate social responsibility.pdf"}
+          fileName={"cooperate social responsibility.pdf"}
         />
       </div>
     </div>
