@@ -17,13 +17,13 @@ const DownloadCard = ({ showCard }) => {
 
         <DownloadCardItem
           title={"Company Profile"}
-          url={"/downloads/coating.pdf"}
-          fileName={"coating.pdf"}
+          url={"/downloads/company profile.pdf"}
+          fileName={"company profile.pdf"}
         />
         <DownloadCardItem
           title={"Coating Analysis"}
-          url={"/downloads/company profile.pdf"}
-          fileName={"company profile.pdf"}
+          url={"/downloads/coating.pdf"}
+          fileName={"coating.pdf"}
         />
         <DownloadCardItem
           title={"Corporate Social Responsibility"}
