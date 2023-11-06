@@ -7,7 +7,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ["royalapis.glitexsolutions.co.ke"],
+    domains: ["api.royalmabati.com"],
     minimumCacheTTL: 3600,
   },
 };

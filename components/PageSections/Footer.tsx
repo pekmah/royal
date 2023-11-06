@@ -4,7 +4,6 @@ import { Barlow } from "next/font/google";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import TwitterSvg from "@/public/svg/Twitter";
 import YoutubeSvg from "@/public/svg/YoutubeSvg";
 
 const barlow = Barlow({
@@ -43,10 +42,10 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className={`flex-col mt-6`}>
+          <button className={`flex-col mt-6`}>
             <h5 className={`${barlowSemi.className}`}>Telephone:</h5>
-            <p className={`text-sm mt-3`}>0722 638 383</p>
-          </div>
+            <p className={`text-sm mt-3`}>+254 722 638 383</p>
+          </button>
 
           <div className={`flex-col mt-6`}>
             <h5 className={`${barlowSemi.className}`}>Email:</h5>
@@ -69,17 +68,9 @@ export default function Footer() {
             <p className={`text-sm mt-3`}>Privacy Policy</p>
           </Link>
 
-          <div className={`flex-col mt-6`}>
-            <p className={`text-sm mt-3`}>Shipping</p>
-          </div>
-
           <Link href={"/about/faq"} className={`flex-col mt-6`}>
             <p className={`text-sm mt-3`}>FAQs</p>
           </Link>
-
-          <div className={`flex-col mt-6`}>
-            <p className={`text-sm mt-3`}>Careers</p>
-          </div>
         </div>
         <div className="mb-3">
           <h3 className={`${barlowSemi.className}`}>
@@ -130,14 +121,6 @@ export default function Footer() {
                   alt="Playstore icon link"
                 />
                 <p className="text-sm">Instagram</p>
-              </a>
-
-              <a
-                href={"https://twitter.com/RoyalMabati"}
-                className="flex gap-4 mt-3"
-              >
-                <TwitterSvg h={"26"} stroke={"2"} />
-                <p className="text-sm">Twitter</p>
               </a>
 
               <a

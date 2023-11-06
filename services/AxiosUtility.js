@@ -4,7 +4,7 @@ import {getSession} from "next-auth/react";
 import dayjs from "dayjs";
 // import dayjs from "dayjs";
 
-export const ENDPOINT = "https://royalapis.glitexsolutions.co.ke";
+export const ENDPOINT = "https://api.royalmabati.com";
 
 export const PrivateAxiosUtility = axios.create({
   baseURL: `${ENDPOINT}`,
