@@ -1,11 +1,14 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 
-import Media1 from "../../public/media-1.jpg";
-import Media2 from "../../public/media-2.png";
-import Media3 from "../../public/media-3.png";
+import Media1 from "../../public/zee_tile.jpg";
+import Media2 from "../../public/euro_tile.jpg";
+import Media3 from "../../public/roman_long_tile.jpg";
+import { useRouter } from "next/navigation";
 
 const OurMedia = () => {
+  const router = useRouter();
   return (
     <div className={"bg-white pb-10 flex  flex-col px-[5vw]"}>
       <div className={"flex"}>
@@ -24,20 +27,23 @@ const OurMedia = () => {
           subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media1}
+          onClick={() => router.push("products?category=7")}
         />
 
         <MediaItem
-          title={"Zee Matte Tiles"}
+          title={"Roman Long Tile"}
           subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media3}
+          onClick={() => router.push("products?category=4")}
         />
 
         <MediaItem
-          title={"Zee Matte Tiles"}
+          title={"Euro Tile"}
           subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media2}
+          onClick={() => router.push("products?category=6")}
         />
       </div>
     </div>
@@ -45,7 +51,7 @@ const OurMedia = () => {
 };
 
 export default OurMedia;
-const MediaItem = ({ image, title, subtext, date }) => (
+const MediaItem = ({ image, title, subtext, handleClick }) => (
   <div className={"w-full md:w-[30%] "}>
     {/*    image  */}
     <div
@@ -69,9 +75,12 @@ const MediaItem = ({ image, title, subtext, date }) => (
     >
       <span className={"font-barlow font-[500] text-gray-500"}>{subtext}</span>
 
-      <a href={"/"} className={"text-primary_red font-[600] text-sm"}>
+      <button
+        onClick={handleClick}
+        className={"text-primary_red font-[600] text-sm"}
+      >
         Shop Now
-      </a>
+      </button>
     </div>
   </div>
 );
