@@ -24,7 +24,6 @@ export default function Header({ setIsSidebarOpen, isSidebarOpen }) {
 
   const handleAccountNavigation = () => {
     if (innerWidth < 768) {
-      console.log(path, showAccountNav);
       if (path.startsWith("/account")) {
         setShowAccountNav(!showAccountNav);
       } else {

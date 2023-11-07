@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Varieties = () => {
+  const router = useRouter();
   return (
     <div className={"bg-white pb-10 flex flex-col "}>
       <div className={"mx-auto flex flex-col"}>
@@ -32,6 +36,7 @@ const Varieties = () => {
             className={
               "bg-[#F3F3F3] px-4 py-2 rounded-md text-sm font-[600] text-blue mt-1"
             }
+            onClick={() => router.push("/products?category=4")}
           >
             Find in Shop
           </button>

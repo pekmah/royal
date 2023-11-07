@@ -6,6 +6,7 @@ import OurStoryImg from "../../public/our-story-1.jpg";
 const OurStory = () => {
   return (
     <div className={"bg-white py-10 flex flex-col px-[5vw]"}>
+      <div className={"h-14 w-full"} />
       <div className={"flex"}>
         <div className={" flex flex-col"}>
           <h3 className="text-red-600 text-2xl font-[600] tracking-wide about-h3">

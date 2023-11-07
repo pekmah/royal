@@ -1,7 +1,6 @@
 import { Barlow } from "next/font/google";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 import Link from "next/link";
-import TwitterSvg from "@/public/svg/Twitter";
 import YoutubeSvg from "@/public/svg/YoutubeSvg";
 
 const barlow = Barlow({
@@ -24,7 +23,6 @@ const navSocials = [
     path: "https://www.instagram.com/royalmabati/",
     icon: <BsInstagram size={15} />,
   },
-  { path: "https://twitter.com/RoyalMabati", icon: <TwitterSvg /> },
   {
     path: "https://www.youtube.com/@royalmabatifactorylimited3201",
     icon: <YoutubeSvg />,
