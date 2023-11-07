@@ -5,7 +5,6 @@ import {
   AboutFooter,
   AboutMedia,
   AboutNavbar,
-  AboutTrustedBy,
   AboutVarieties,
 } from "@/components/About";
 import OurStory from "@/components/About/OurStory";
@@ -18,9 +17,6 @@ const Page = () => {
 
       {/*  Carousel image  */}
       <AboutCarousel />
-
-      {/*    Trusted by section */}
-      <AboutTrustedBy />
 
       <div className={"w-full h-12 md:hidden"} />
 
