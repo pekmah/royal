@@ -27,7 +27,7 @@ const OurMedia = () => {
           subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media1}
-          onClick={() => router.push("products?category=7")}
+          handleClick={() => router.push("products?category=7")}
         />
 
         <MediaItem
@@ -35,7 +35,7 @@ const OurMedia = () => {
           subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media3}
-          onClick={() => router.push("products?category=4")}
+          handleClick={() => router.push("products?category=4")}
         />
 
         <MediaItem
@@ -43,7 +43,7 @@ const OurMedia = () => {
           subtext={"Gauge 32"}
           date={"12 Aug 2023"}
           image={Media2}
-          onClick={() => router.push("products?category=6")}
+          handleClick={() => router.push("products?category=6")}
         />
       </div>
     </div>
