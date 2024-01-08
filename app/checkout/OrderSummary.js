@@ -49,7 +49,9 @@ const OrderSummary = ({ className }) => {
       return await cartServices.makePayment(data?.body);
     },
     {
-      onSuccess: (res, { order }) => {
+      onSuccess: async (res, { order }) => {
+        await AsyncStorageService.removeData("_cart");
+        setCart([]);
         showSuccessToast("Payment Initiated.");
 
         router.push(`/checkout/payment?order_id=${order?.id}&index=${0}`);
@@ -61,8 +63,7 @@ const OrderSummary = ({ className }) => {
     onSuccess: async (order) => {
       showSuccessToast("Order Created.");
       setOrderId(order?.order);
-      await AsyncStorageService.removeData("_cart");
-      setCart([]);
+
       //
       const paymentObj =
         order?.order?.payment_plan === "FULL_PAYMENT"
