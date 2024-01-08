@@ -81,6 +81,9 @@ const AddressForm = () => {
     if (!state?.county) {
       handleError("County required!");
     }
+    if (!state?.landmark) {
+      handleError("Landmard required!");
+    }
 
     mutation.mutate();
   };
