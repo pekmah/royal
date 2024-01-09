@@ -28,7 +28,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
         isSidebarOpen={isSidebarOpen}
       />
 
-      {path.startsWith("/about") ? (
+      {path.startsWith("/about") || path.startsWith("/contact") ? (
         <main className={` overflow-x-hidden w-screen bg-[#fbfbff]`}>
           {children}
         </main>
@@ -43,6 +43,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
           {!path.startsWith("/auth") &&
           !path.startsWith("/about") &&
           !path.startsWith("/account") &&
+          !path.startsWith("/contact") &&
           !path.startsWith("/checkout") ? (
             <section
               className={`${

@@ -48,6 +48,8 @@ const Page = ({ params }) => {
     };
   }, [paidInstallments, unpaidInstallments]);
 
+  console.log("CALCULATIONS: ",calculations)
+
   return (
     <div className={"py-3 relative"}>
       <div className="gap-4 flex flex-col items-center px-6 justify-center w-full border-b h-14 border-b-gray-200">

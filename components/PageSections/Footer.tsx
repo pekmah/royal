@@ -33,7 +33,9 @@ export default function Footer() {
     >
       <div className={`md:flex md:justify-evenly`}>
         <div className="mb-3">
-          <h3 className={`${barlowSemi.className}`}>CONTACT US</h3>
+          <Link href={"/contact"}>
+            <h3 className={`${barlowSemi.className}`}>CONTACT US</h3>
+          </Link>
 
           <div className={`flex-col mt-6`}>
             <h5 className={`${barlowSemi.className}`}>Location</h5>
